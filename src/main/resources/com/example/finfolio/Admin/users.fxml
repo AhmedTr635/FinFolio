@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="users_container" stylesheets="@../../../../Styles/Users.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Admin.UsersAdController">
+    <children>
+      <VBox fillWidth="false" layoutX="497.0" layoutY="494.0" prefHeight="236.0" prefWidth="366.0" styleClass="box1">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre des crédits" />
+            <TextField fx:id="nbrCredits_fld" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Role" />
+            <ChoiceBox fx:id="role_chbx" prefHeight="26.0" prefWidth="207.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Note" />
+            <TextField fx:id="note_fld" />
+         </children>
+      </VBox>
+        <Text layoutX="414.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Utilisateurs" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="14.0" />
+      <VBox layoutX="6.0" layoutY="44.8" prefHeight="411.0" prefWidth="820.0" styleClass="result_box" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="45.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="820.0" styleClass="search_box">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Chercher l'utilisateur" />
+                  <TextField fx:id="cherecher_fld" />
+                  <Button fx:id="chercher_btn" mnemonicParsing="false" text="Chercher">
+                     <graphic>
+                        <FontAwesomeIconView fill="#faf8f8" glyphName="SEARCH" size="20" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <ListView fx:id="users_listview" prefHeight="316.0" prefWidth="820.0" />
+         </children>
+      </VBox>
+      <VBox fillWidth="false" layoutX="92.0" layoutY="494.0" prefHeight="200.0" prefWidth="290.0" styleClass="box1">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" />
+            <TextField fx:id="nom_fld" prefHeight="33.0" prefWidth="256.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom" />
+            <TextField fx:id="prenom_fld" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro de telephone" />
+            <TextField fx:id="numtel_fld" />
+         </children>
+      </VBox>
+      <Button fx:id="confiermer_btn" layoutX="305.0" layoutY="694.0" mnemonicParsing="false" text="Confirmer">
+         <graphic>
+            <FontAwesomeIconView fill="#faf7f7" glyphName="CHECK" selectionFill="#faf9f9" size="20" />
+         </graphic>
+      </Button>
+      <Text layoutX="372.0" layoutY="480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier" />
+    </children>
+</AnchorPane>
