@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -25,6 +26,7 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         user_name.setText("Salut , "+ Model.getInstance().getUser().getPrenom());
+        login_date.setText("Aujourd'hui ,"+ LocalDate.now());
 
     }
 }

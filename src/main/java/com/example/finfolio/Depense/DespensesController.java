@@ -1,14 +1,11 @@
-package com.example.finfolio.UsrController;
+package com.example.finfolio.Depense;
 
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CreditsController implements Initializable {
-    public ListView credits_listview;
-
+public class DespensesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

@@ -29,6 +29,7 @@ public class login2Controller implements Initializable {
     public Label capcthaError;
 
     public Button inscri_button;
+    public Button mdp_btn;
     @FXML
     private ImageView imgCaptcha;
 
@@ -56,6 +57,7 @@ public class login2Controller implements Initializable {
             }
         });
         inscri_button.setOnAction(e->OnInscription());
+        mdp_btn.setOnAction(e->mdpOublie());
     }
 public void OnInscription()
 {
@@ -64,8 +66,21 @@ public void OnInscription()
     Model.getInstance().getViewFactory().showSignUpWindow();
 
 }
+public void mdpOublie()
+{
+    Stage st = (Stage) error_label.getScene().getWindow();
+    Model.getInstance().getViewFactory().closeStage(st);
+    Model.getInstance().getViewFactory().showMotDepasseOublieWindow();
+
+
+}
     public void onLogin() throws NoSuchAlgorithmException, SQLException {
 
+       /*Stage st2 = (Stage) error_label.getScene().getWindow();
+        Model.getInstance().getViewFactory().closeStage(st2);
+
+        Model.getInstance().getViewFactory().showAdminWindow();
+        Model.getInstance().getViewFactory().showUserWindow();*/
 
         UserService userS = new UserService();
         String enteredCaptcha = captchaField.getText();
@@ -121,12 +136,7 @@ public void OnInscription()
 
         }
     }
-    /*QSqlQueryModel * Client::recherche_par_cin(QString val)
-    {
-        QSqlQueryModel * model=new QSqlQueryModel;
-        model->setQuery("SELECT * FROM G_CLIENT where CIN_C Like '%"+val+"%' or NOM_C Like '%"+val+"%' or PRENOM_C Like '%"+val+"%'");
-        return model;
-    }*/
+
 
 
 }

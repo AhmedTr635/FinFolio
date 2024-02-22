@@ -67,3 +67,12 @@
  .error_lbl{
      -fx-text-fill: #FF0000;
  }
+ .bouton {
+     -fx-background-color:  #00008b;
+     -fx-text-fill: #FFFFFF;
+     -fx-pref-tile-width: 350;
+     -fx-pref-height: 30;
+     -fx-font-size: 1.2em;
+     -fx-cursor:hand;
+
+ }

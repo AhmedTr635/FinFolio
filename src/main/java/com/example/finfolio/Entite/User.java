@@ -15,8 +15,26 @@ public class User {
     private float rate;
 
     private String solde;
+    private String statut;
+    private  String image;
 
-    public User(){g};
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
+    public User(){};
 
     public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde) {
         this.id = id;
@@ -40,6 +58,16 @@ public class User {
         this.email = email;
         this.numTel=numTel;
         this.adresse = adresse;
+        this.role = role;
+        this.rate = rate;
+        this.solde=solde;
+    }
+    public User(String nom,String prenom,String email,String numTel,int nbrCredit,float rate,  String role,String solde) {
+        this.nbrCredit = nbrCredit;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.numTel=numTel;
         this.role = role;
         this.rate = rate;
         this.solde=solde;
@@ -70,24 +98,24 @@ public class User {
         this.password = password;
     }
 
-    public int getNbrCredit() {
+    public String getNumtel() {
+        return numTel;
+    }
+
+    public void setNumtel(String numtel) {
+        this.numTel = numtel;
+    }
+
+    public int getNbcredit() {
         return nbrCredit;
     }
 
-    public void setNbrCredit(int nbrCredit) {
-        this.nbrCredit = nbrCredit;
+    public void setNbcredit(int nbcredit) {
+        this.nbrCredit = nbcredit;
     }
 
     public String getNom() {
         return nom;
-    }
-
-    public String getNumTel() {
-        return numTel;
-    }
-
-    public void setNumTel(String numTel) {
-        this.numTel = numTel;
     }
 
     public void setNom(String nom) {

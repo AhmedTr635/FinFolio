@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="credits_container" stylesheets="@../../../../Styles/Credits.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.UsrController.CreditsController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="credits_container" stylesheets="@../../../../Styles/Credits.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Credits.CreditsController">
    <children>
       <Text layoutX="351.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="credits_container" text="Credits" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="14.0" />
       <ListView fx:id="credits_listview" layoutX="14.0" layoutY="66.0" prefHeight="640.0" prefWidth="830.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="5.2000000000000455" AnchorPane.topAnchor="100.0" />
