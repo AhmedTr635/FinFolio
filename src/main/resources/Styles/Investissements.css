@@ -1,0 +1,9 @@
+.investissements_container {
+    -fx-background-color: #EEEEEE;
+}
+.investissements_container Text{
+    -fx-fill: #000000;
+    -fx-font-size: 2.5em;
+    -fx-font-family: "Calibri Light";
+
+}

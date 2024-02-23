@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="50.0" prefWidth="821.0" styleClass="user_cell_container" stylesheets="@../../../../Styles/Cells.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <FontAwesomeIconView glyphName="USER" size="20" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+   <HBox layoutX="40.8" layoutY="-36.0" prefHeight="40.0" prefWidth="659.0" styleClass="user_display_lbl" AnchorPane.leftAnchor="41.0" AnchorPane.topAnchor="5.0">
+      <Label fx:id="nom_lbl" prefHeight="18.0" prefWidth="70.0" text="Trabelsi" />
+      <Label fx:id="prenom_lbl" prefHeight="18.0" prefWidth="78.0" text="Ahmed" />
+      <Label fx:id="mail_lbl" prefHeight="18.0" prefWidth="179.0" text="trabelsi.ahmed@esprit.tn" />
+      <Label fx:id="tel_lbl" prefHeight="18.0" prefWidth="94.0" text="53604045" />
+      <Label fx:id="nbcredits_lbl" text="5" />
+      <Label fx:id="note_lbl" prefHeight="18.0" prefWidth="14.0" text="2" />
+      <Label fx:id="role_lbl" prefHeight="18.0" prefWidth="50.0" text="Admin" />
+      <Label fx:id="solde_lbl" prefHeight="18.0" prefWidth="58.0" text="500" />
+   </HBox>
+   <HBox layoutX="700.0" layoutY="5.0" prefHeight="40.0" prefWidth="94.0">
+      <children>
+         <Button mnemonicParsing="false" text="Button" />
+         <Button fx:id="suppbtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="29.0" styleClass="supprimer_btn">
+            <graphic>
+               <FontAwesomeIconView glyphName="WINDOW_CLOSE_ALT" size="15" />
+            </graphic>
+         </Button>
+      </children>
+   </HBox>
+</AnchorPane>

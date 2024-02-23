@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="investissements_container" stylesheets="@../../../../Styles/Investissements.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Investissement.InvestissementsController">
+   <children>
+      <Text layoutX="402.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Investiseements" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="14.0" />
+   </children>
+</AnchorPane>
