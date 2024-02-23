@@ -56,40 +56,40 @@ public class login2Controller implements Initializable {
                 throw new RuntimeException(ex);
             }
         });
-        inscri_button.setOnAction(e->OnInscription());
-        mdp_btn.setOnAction(e->mdpOublie());
+        inscri_button.setOnAction(e -> OnInscription());
+        mdp_btn.setOnAction(e -> mdpOublie());
     }
-public void OnInscription()
-{
-    Stage st = (Stage) error_label.getScene().getWindow();
-    Model.getInstance().getViewFactory().closeStage(st);
-    Model.getInstance().getViewFactory().showSignUpWindow();
 
-}
-public void mdpOublie()
-{
-    Stage st = (Stage) error_label.getScene().getWindow();
-    Model.getInstance().getViewFactory().closeStage(st);
-    Model.getInstance().getViewFactory().showMotDepasseOublieWindow();
+    public void OnInscription() {
+        Stage st = (Stage) error_label.getScene().getWindow();
+        Model.getInstance().getViewFactory().closeStage(st);
+        Model.getInstance().getViewFactory().showSignUpWindow();
+
+    }
+
+    public void mdpOublie() {
+        Stage st = (Stage) error_label.getScene().getWindow();
+        Model.getInstance().getViewFactory().closeStage(st);
+        Model.getInstance().getViewFactory().showMotDepasseOublieWindow();
 
 
-}
+    }
+
     public void onLogin() throws NoSuchAlgorithmException, SQLException {
 
-       Stage st2 = (Stage) error_label.getScene().getWindow();
-        Model.getInstance().getViewFactory().closeStage(st2);
-        User u1=new User(7,"mimi","mimi","jdjdj@jdj.com","5555","jdjdjdj","jdjjdjd",15,0f,"role","150000");
-        Model.getInstance().setUser(u1);
-        Model.getInstance().getViewFactory().showUserWindow();
-
-
-
 /*
+        Stage st2 = (Stage) error_label.getScene().getWindow();
+*/
+/*
+        Model.getInstance().getViewFactory().closeStage(st2);
+*/
+
+      /*  Model.getInstance().getViewFactory().showUserWindow();
+
+
         Model.getInstance().getViewFactory().showAdminWindow();
-*
 
-
-   /*     UserService userS = new UserService();
+*/        UserService userS = new UserService();
         String enteredCaptcha = captchaField.getText();
         if (enteredCaptcha.equals(captchaCode)) {
             User user = userS.getUserByEmail(mail_field.getText());
@@ -118,7 +118,7 @@ public void mdpOublie()
 
                     }
                 } else {
-                   AlerteFinFolio.alerte("");
+                    AlerteFinFolio.alerte("");
                 }
 
             } else {
@@ -143,7 +143,6 @@ public void mdpOublie()
 
         }
     }
-*/
 
 
-}}
+}
