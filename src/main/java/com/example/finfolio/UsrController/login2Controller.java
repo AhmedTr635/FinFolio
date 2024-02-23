@@ -76,13 +76,20 @@ public void mdpOublie()
 }
     public void onLogin() throws NoSuchAlgorithmException, SQLException {
 
-       /*Stage st2 = (Stage) error_label.getScene().getWindow();
+       Stage st2 = (Stage) error_label.getScene().getWindow();
         Model.getInstance().getViewFactory().closeStage(st2);
+        User u1=new User(7,"mimi","mimi","jdjdj@jdj.com","5555","jdjdjdj","jdjjdjd",15,0f,"role","150000");
+        Model.getInstance().setUser(u1);
+        Model.getInstance().getViewFactory().showUserWindow();
 
+
+
+/*
         Model.getInstance().getViewFactory().showAdminWindow();
-        Model.getInstance().getViewFactory().showUserWindow();*/
+*
 
-        UserService userS = new UserService();
+
+   /*     UserService userS = new UserService();
         String enteredCaptcha = captchaField.getText();
         if (enteredCaptcha.equals(captchaCode)) {
             User user = userS.getUserByEmail(mail_field.getText());
@@ -136,7 +143,7 @@ public void mdpOublie()
 
         }
     }
+*/
 
 
-
-}
+}}
