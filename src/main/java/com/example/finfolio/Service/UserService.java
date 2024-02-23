@@ -22,9 +22,9 @@ public class UserService   {
 
     public void add(User u)throws SQLException {
         if(readAll().stream().anyMatch(us->us.getEmail().equals(u.getEmail())))
-            AlerteFinFolio.alerte("exist");
+            AlerteFinFolio.alerte("Cet utilisateur exist");
             else {
-            String req = "INSERT INTO user (nom,prenom,email,numtel,password,adresse,nbcredit,rate,role,solde) values (?,?,?,?,?,?,?,?,?,?)";
+            String req = "INSERT INTO user (nom,prenom,email,numtel,password,adresse,nbcredit,rate,role,solde,statut,image) values (?,?,?,?,?,?,?,?,?,?,?,?)";
             ps = cnx.prepareStatement(req);
             try {
 
@@ -39,6 +39,9 @@ public class UserService   {
                 ps.setFloat(8, u.getRate());
                 ps.setString(9, u.getRole());
                 ps.setString(10, u.getSolde());
+                ps.setString(11, u.getStatut());
+                ps.setString(12, u.getImage());
+
 
                 ps.executeUpdate();
             } catch (SQLException e) {
@@ -71,8 +74,11 @@ public class UserService   {
                         resultSet.getInt("nbcredit"),
                         resultSet.getFloat("rate"),
                         resultSet.getString("role") ,
-                        resultSet.getString("solde")
-                ));
+                        resultSet.getString("solde"),
+                        resultSet.getString("statut"),
+                        resultSet.getString("image")
+
+                        ));
             }}catch (SQLException e)
         {e.printStackTrace();}
 
@@ -80,7 +86,7 @@ public class UserService   {
         return list;
     }
     public int update(User user)  throws  SQLException {
-        String req = "UPDATE user SET nom = ?, prenom = ?, email = ?, numtel = ?, password = ?, adresse = ?, nbcredit = ? , rate = ? , role = ? , solde = ? WHERE id = ?";
+        String req = "UPDATE user SET nom = ?, prenom = ?, email = ?, numtel = ?, password = ?, adresse = ?, nbcredit = ? , rate = ? , role = ? , solde = ? , statut = ? , image = ? WHERE id = ?";
         ps = cnx.prepareStatement(req);
 
 
@@ -95,7 +101,9 @@ public class UserService   {
             ps.setFloat(8, user.getRate());
             ps.setString(9, user.getRole());
             ps.setString(10, user.getSolde());
-            ps.setInt(11, user.getId());
+            ps.setString(11, user.getStatut());
+            ps.setString(12, user.getImage());
+            ps.setInt(13, user.getId());
 
 
         } catch (SQLException e) {
@@ -133,10 +141,13 @@ public class UserService   {
                             resultSet.getInt("nbcredit"),
                             resultSet.getFloat("rate"),
                             resultSet.getString("role") ,
-                            resultSet.getString("solde")
+                            resultSet.getString("solde"),
+                            resultSet.getString("statut"),
+                            resultSet.getString("image")
 
 
-                    );
+
+                            );
                 }
             }
         }catch(SQLException ex){
@@ -203,8 +214,12 @@ public List<User> cellsUsers() throws SQLException {
                             resultSet.getInt("nbcredit"),
                             resultSet.getFloat("rate"),
                             resultSet.getString("role"),
-                            resultSet.getString("solde")
-                    );
+                            resultSet.getString("solde"),
+                            resultSet.getString("statut"),
+                            resultSet.getString("image")
+
+
+                            );
                     resultatsRecherche.add(utilisateur);
                 }
             }

@@ -36,7 +36,7 @@ public class User {
 
     public User(){};
 
-    public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde) {
+    public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String staut) {
         this.id = id;
         this.password = password;
         this.nbrCredit = nbrCredit;
@@ -48,9 +48,10 @@ public class User {
         this.role = role;
         this.rate = rate;
         this.solde=solde;
+        this.statut=staut;
     }
-
-    public User(String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde) {
+    public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String statut,String img) {
+        this.id = id;
         this.password = password;
         this.nbrCredit = nbrCredit;
         this.nom = nom;
@@ -61,6 +62,23 @@ public class User {
         this.role = role;
         this.rate = rate;
         this.solde=solde;
+        this.statut=statut;
+        image=img;
+    }
+
+    public User(String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String statut,String img) {
+        this.password = password;
+        this.nbrCredit = nbrCredit;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.numTel=numTel;
+        this.adresse = adresse;
+        this.role = role;
+        this.rate = rate;
+        this.solde=solde;
+        this.statut=statut;
+        image=img;
     }
     public User(String nom,String prenom,String email,String numTel,int nbrCredit,float rate,  String role,String solde) {
         this.nbrCredit = nbrCredit;

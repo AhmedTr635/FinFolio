@@ -94,7 +94,7 @@ public class SignUpController  implements Initializable {
         }
 
         if (inputcontrol()) {
-            User user = new User(nom_fld.getText(), prenom_fld.getText(), mail_fld.getText(), "+216"+numTelfld.getText(), modp_field.getText(), "Mourouj", 0, 2, role,"20000");
+            User user = new User(nom_fld.getText(), prenom_fld.getText(), mail_fld.getText(), "+216"+numTelfld.getText(), modp_field.getText(), "Mourouj", 0, 2, role,"20000","active","src");
             UserService userS = new UserService();
             userS.add(user);
             Stage st = (Stage) error_mdp.getScene().getWindow();
