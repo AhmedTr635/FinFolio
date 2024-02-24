@@ -20,6 +20,7 @@ public class UserController implements Initializable {
                 case "Investissements"->user_parent.setCenter(Model.getInstance().getViewFactory().getInvestissementsView());
                 case "Evenements"->user_parent.setCenter(Model.getInstance().getViewFactory().getEvenementsView());
                 case "Depenses"->user_parent.setCenter(Model.getInstance().getViewFactory().getDepensesView());
+                case "Profil"->user_parent.setCenter(Model.getInstance().getViewFactory().getProfilView());
                 default -> user_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
             }
 

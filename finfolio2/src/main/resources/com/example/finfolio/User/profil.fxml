@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="background_color" stylesheets="@../../../../Styles/Profil.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.UsrController.ProfilController">
+   <VBox alignment="CENTER" layoutX="14.0" layoutY="34.0" prefHeight="326.0" prefWidth="274.0">
+      <ImageView fx:id="image" fitHeight="224.0" fitWidth="208.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Pics/taswirti.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="NomLabel" prefHeight="38.0" prefWidth="144.0" text="Ahmed Trabelsi" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </VBox>
+   <VBox layoutX="277.0" layoutY="45.0" prefHeight="550.0" prefWidth="564.0">
+      <Label prefHeight="18.0" prefWidth="518.0" text="Parametres du profil" textFill="#fffafa">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+         </padding>
+      </Label>
+      <VBox prefHeight="447.0" prefWidth="538.0">
+         <padding>
+            <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+         </padding>
+         <Label prefHeight="46.0" prefWidth="414.0" text="Détails du profil" textFill="#fffafa">
+            <font>
+               <Font name="System Bold" size="18.0" />
+            </font>
+         </Label>
+         <HBox prefHeight="46.0" prefWidth="414.0">
+            <Label prefHeight="23.0" prefWidth="158.0" text="Nom" textFill="#fffafa">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nomFld" prefHeight="27.0" prefWidth="266.0" styleClass="text_input" />
+         </HBox>
+         <Label fx:id="errornom" prefHeight="20.0" prefWidth="354.0">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+         <HBox prefHeight="54.0" prefWidth="414.0">
+            <Label prefHeight="23.0" prefWidth="158.0" text="Prénom" textFill="#fffafa">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="prenomFld" prefHeight="27.0" prefWidth="266.0" styleClass="text_input" />
+         </HBox>
+         <Label fx:id="errorprenom" prefHeight="18.0" prefWidth="291.0" />
+         <HBox prefHeight="54.0" prefWidth="413.0">
+            <Label prefHeight="23.0" prefWidth="158.0" text="Email" textFill="#fffafa">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailFld" prefHeight="27.0" prefWidth="267.0" styleClass="text_input" />
+         </HBox>
+         <Label fx:id="erroremail" prefHeight="18.0" prefWidth="424.0" />
+         <HBox prefHeight="54.0" prefWidth="414.0">
+            <Label prefHeight="23.0" prefWidth="158.0" text="Numéro de telephone" textFill="#fffafa">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="numTelFld" prefHeight="27.0" prefWidth="266.0" styleClass="text_input" />
+         </HBox>
+         <Label fx:id="numTelerror" prefHeight="18.0" prefWidth="398.0" />
+         <Label fx:id="telError" textFill="#ec1010" />
+         <Label prefHeight="51.0" prefWidth="414.0" text="Changer le mot de passe" textFill="#fffafa">
+            <font>
+               <Font name="System Bold" size="18.0" />
+            </font>
+         </Label>
+         <HBox prefHeight="54.0" prefWidth="435.0">
+            <Label prefHeight="23.0" prefWidth="168.0" text="Mot de passe" textFill="#fffafa">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="mdpFld" prefHeight="27.0" prefWidth="266.0" styleClass="text_input" />
+         </HBox>
+         <Label fx:id="mdpError" prefHeight="50.0" prefWidth="463.0" />
+         <HBox prefHeight="54.0" prefWidth="435.0">
+            <Label prefHeight="23.0" prefWidth="165.0" text="Confirmer mot de passe" textFill="#fffafa">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="mdpFldC" prefHeight="27.0" prefWidth="266.0" styleClass="text_input" />
+         </HBox>
+         <Label fx:id="mdpcerror" prefHeight="18.0" prefWidth="446.0" />
+      </VBox>
+   </VBox>
+   <Button fx:id="sauvegarderBtn" layoutX="485.0" layoutY="627.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" styleClass="Button" text="Sauvegarder">
+      <graphic>
+         <FontAwesomeIconView glyphName="CHECK" selectionFill="DARKBLUE" size="20" />
+      </graphic>
+   </Button>
+</AnchorPane>

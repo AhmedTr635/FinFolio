@@ -6,13 +6,19 @@ module finfolio {
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
     requires javafx.graphics;
+    requires java.mail;
+    requires twilio;
+    requires activation;
+    requires com.google.zxing;
+    requires com.google.zxing.javase;
+
+
     opens com.example.finfolio to javafx.fxml;
     exports com.example.finfolio;
     exports com.example.finfolio.UsrController;
     opens com.example.finfolio.UsrController to javafx.fxml;
     exports com.example.finfolio.Admin;
     opens com.example.finfolio.Admin to javafx.fxml;
-
     opens com.example.finfolio.User to javafx.fxml;
     exports com.example.finfolio.Service;
     opens com.example.finfolio.Service to javafx.fxml;
@@ -20,4 +26,14 @@ module finfolio {
     opens com.example.finfolio.Entite to javafx.fxml;
     exports com.example.finfolio.util;
     opens com.example.finfolio.util to javafx.fxml;
+    exports com.example.finfolio.Depense;
+    opens com.example.finfolio.Depense to javafx.fxml;
+    exports com.example.finfolio.Evenement;
+    opens com.example.finfolio.Evenement to javafx.fxml;
+    exports com.example.finfolio.Investissement;
+    opens com.example.finfolio.Investissement to javafx.fxml;
+    exports com.example.finfolio.Credits;
+    opens com.example.finfolio.Credits to javafx.fxml;
+    exports com.example.finfolio.Portfolio;
+    opens com.example.finfolio.Portfolio to javafx.fxml;
 }

@@ -1,4 +1,4 @@
-package com.example.finfolio.Admin;
+package com.example.finfolio.Evenement;
 
 public class EvenementsAdController {
 }

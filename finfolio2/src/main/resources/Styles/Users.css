@@ -28,11 +28,19 @@ Button {
     -fx-pref-width: 200;
 
 }
+.filtreBox {
+-fx-background-color: #AAAAAA;
+    -fx-text-fill: white;
+    -fx-font-size: 1.6em;
+    -fx-font-family: "Calibri Light";
+    -fx-pref-width: 200;
+
+}
  Button:hover {
     -fx-cursor: hand;
 }
 .result_box {
-    -fx-spacing: 15;
+    -fx-spacing: 10;
 }
 .result_box .list-view {
     -fx-background-color: #EEEEEE;
@@ -42,9 +50,20 @@ Button {
     -fx-background-color: #EEEEEE;
     -fx-padding: 20 0 20 0;
 }
-.box1{
--fx-spacing: 5;
+.default-color0.chart-pie {
+    -fx-background-color: blue;
 }
+
+.default-color1.chart-pie {
+    -fx-background-color: #123499;
+}
+
+.default-color0.chart-bar {
+    -fx-background-color: blue;
+}
+
+
+
 
 
 

@@ -9,13 +9,13 @@
     -fx-fill: #00008b;
 }
 .user_cell_container HBox {
-    -fx-spacing: 14;
+    -fx-spacing: 15;
     -fx-alignment: Center_left;
 }
 .user_cell_container HBox Label{
     -fx-text-fill: #444444;
     -fx-font-family: "Calibri Light";
-    -fx-font-size: 1.3em;
+    -fx-font-size: 1.2em;
 }
 
 .user_display_lbl {
@@ -25,7 +25,8 @@
 }
 .supprimer_btn {
     -fx-text-fill: #FFFFFF;
-    -fx-background-color: #FF0000
+    -fx-background-color: #FF0000;
+
 }
 .supprimer_btn FontAwesomeIconView {
     -fx-fill: #FFFFFF;

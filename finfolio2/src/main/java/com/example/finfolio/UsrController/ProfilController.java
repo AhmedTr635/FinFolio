@@ -1,139 +1,119 @@
 package com.example.finfolio.UsrController;
 
+import Models.Model;
+import com.example.finfolio.Entite.User;
+import com.example.finfolio.Service.UserService;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import Models.Model;
-import com.example.finfolio.Entite.User;
-import com.example.finfolio.Service.UserService;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-
-public class SignUpController  implements Initializable {
-
-
+public class ProfilController implements Initializable {
+    public PasswordField mdpFldC;
+    public Label NomLabel;
+    public ImageView image;
+    public Label errornom;
+    public Label errorprenom;
+    public Label erroremail;
+    public Label numTelerror;
+    public Label telError;
+    public Label mdpError;
+    public Label mdpcerror;
 
     @FXML
-    private Button engistrez_fld;
+    private TextField emailFld;
 
     @FXML
-    private Label error_mail;
+    private TextField mdpFld;
 
     @FXML
-    private Label error_mdp;
+    private TextField nomFld;
 
     @FXML
-    private Label error_nom;
+    private TextField numTelFld;
 
     @FXML
-    private Label error_ntel;
+    private TextField prenomFld;
 
     @FXML
-    private Label error_prenom;
-
-    @FXML
-    private TextField mail_fld;
-
-    @FXML
-    private PasswordField modp_field;
-
-    @FXML
-    private TextField nom_fld;
-
-    @FXML
-    private TextField numTelfld;
-
-    @FXML
-    private TextField prenom_fld;
-    private String imagePath;
-    @FXML
-    private Button importImageBtn;
-
-
-
-
-
-
+    private Button sauvegarderBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initProfil();
 
-        addInputControlListener(nom_fld, error_nom, "Nom");
-        addInputControlListener(prenom_fld, error_prenom, "Prénom");
-        addInputControlListener(mail_fld, error_mail, "Email");
-        addInputControlListener(numTelfld, error_ntel, "Numéro de téléphone");
-        addInputControlListener(modp_field, error_mdp, "Mot de passe");
+        // Ajout d'écouteurs de changement de texte pour tous les champs de texte
+        addInputControlListener(nomFld, errornom, "Nom");
+        addInputControlListener(prenomFld, errorprenom, "Prénom");
+        addInputControlListener(emailFld, erroremail, "Email");
+        addInputControlListener(numTelFld, numTelerror, "Numéro de téléphone");
+        addInputControlListener(mdpFld, mdpError, "Mot de passe");
+        addInputControlListener(mdpFldC, mdpcerror, "Confirmation de mot de passe");
 
-
-
-        engistrez_fld.setOnAction(e -> {
+        sauvegarderBtn.setOnAction(e-> {
             try {
-                onEngistrez();
-
+                onSauvegarder();
             } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
-
-
-
-
     }
-
-    void onEngistrez() throws SQLException, IOException {
-        String imagePath = null;
-
-        if (inputcontrol()) {
-            // Check if the user has selected a new image
-            String selectedImagePath = importImage();
-
-            // If an image is selected, update the imagePath
-            if (selectedImagePath != null) {
-                imagePath = selectedImagePath;
-            }
-
-            // Insert user data along with the image path into the database
-            User user = new User(nom_fld.getText(), prenom_fld.getText(), mail_fld.getText(), "+216"+numTelfld.getText(), modp_field.getText(), "Mourouj", 0, 2, "user", "20000", "active", imagePath);
-
-            UserService userS = new UserService();
-            userS.add(user);
-
-
+    void displayImage(String imagePath) {
+        if (imagePath != null) {
+            File file = new File(imagePath);
+            Image image2 = new Image(file.toURI().toString());
+            image.setImage(image2);
+        } else {
+            image.setImage(new Image(String.valueOf(getClass().getResource("/com/example/finfolio/Pics/simpleUr.png"))));
         }
-
     }
-    private void retour() throws IOException {
-        Stage st = (Stage) error_mdp.getScene().getWindow();
-        Model.getInstance().getViewFactory().closeStage(st);
-        Model.getInstance().getViewFactory().showLoginWindow();
 
-
+    void initProfil() {
+        NomLabel.setText(Model.getInstance().getUser().getNom() + " " + Model.getInstance().getUser().getPrenom());
+        displayImage(Model.getInstance().getUser().getImage());
+        nomFld.setText(Model.getInstance().getUser().getNom());
+        prenomFld.setText(Model.getInstance().getUser().getPrenom());
+        String n = Model.getInstance().getUser().getNumtel().substring(4);
+        numTelFld.setText(n);
+        emailFld.setText(Model.getInstance().getUser().getEmail());
+        mdpFld.setText(Model.getInstance().getUser().getPassword());
+        mdpFldC.setText(Model.getInstance().getUser().getPassword());
     }
+
+    void onSauvegarder() throws SQLException {
+        if (inputcontrol()) {
+            User user = new User(Model.getInstance().getUser().getId(),nomFld.getText(), prenomFld.getText(), emailFld.getText(), "+216" + numTelFld.getText(), mdpFld.getText(), "Mourouj", 0, 2, "user", "20000", "active", "src");
+            UserService userS = new UserService();
+            userS.update(user);
+        }
+    }
+
     private void addInputControlListener(TextField textField, Label errorLabel, String fieldName) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             boolean isValid = true; // Initialise la validation à true
 
             // Vérifie chaque champ séparément
-            if (textField == nom_fld) {
+            if (textField == nomFld) {
                 isValid = validateField(textField, errorLabel, "Nom", 3, 32);
-            } else if (textField == prenom_fld) {
+            } else if (textField == prenomFld) {
                 isValid = validateField(textField, errorLabel, "Prénom", 3, 32);
-            } else if (textField == mail_fld) {
+            } else if (textField == emailFld) {
                 isValid = validateEmailField(textField, errorLabel);
-            } else if (textField == numTelfld) {
+            } else if (textField == numTelFld) {
                 isValid = validateNumTelField(textField, errorLabel);
-            } else if (textField == modp_field) {
+            } else if (textField == mdpFld) {
                 isValid = validatePassword((PasswordField) textField, errorLabel);
+            } else if (textField == mdpFldC) {
+                isValid = validatePasswordConfirmation((PasswordField) textField, mdpFld, errorLabel);
             }
 
             // Ajout de la classe error-label si le champ est invalide
@@ -144,13 +124,16 @@ public class SignUpController  implements Initializable {
             }
         });
     }
+
+
     private boolean inputcontrol() {
         boolean isValid = true;
-        isValid &= validateField(nom_fld, error_nom, "Nom", 3, 32);
-        isValid &= validateField(prenom_fld, error_prenom, "Prénom", 3, 32);
-        isValid &= validateEmailField(mail_fld, error_mail);
-        isValid &= validateNumTelField(numTelfld, error_ntel);
-        isValid &= validatePassword((PasswordField) modp_field, error_mdp);
+        isValid &= validateField(nomFld, errornom, "Nom", 3, 32);
+        isValid &= validateField(prenomFld, errorprenom, "Prénom", 3, 32);
+        isValid &= validateEmailField(emailFld, erroremail);
+        isValid &= validateNumTelField(numTelFld, numTelerror);
+        isValid &= validatePassword((PasswordField) mdpFld, mdpError);
+        isValid &= validatePasswordConfirmation(mdpFldC, mdpFld, mdpcerror);
         return isValid;
     }
 
@@ -208,7 +191,7 @@ public class SignUpController  implements Initializable {
     private boolean validatePassword(PasswordField passwordField, Label errorLabel) {
         String password = passwordField.getText();
         if (!password.matches("^(?=.*[A-Z])(?=.*[a-z]).{8,}$")) {
-            errorLabel.setText("Au moins  8 caractères et une majuscule");
+            errorLabel.setText("Mot de Passe doit être composé au moins de 8 caractères et une majuscule");
             passwordField.getStyleClass().add("error");
             errorLabel.getStyleClass().add("error-label");
             return false;
@@ -219,18 +202,20 @@ public class SignUpController  implements Initializable {
             return true;
         }
     }
-    private String importImage() throws IOException {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile != null) {
-            // An image was selected
-            return selectedFile.getAbsolutePath();
+
+    private boolean validatePasswordConfirmation(PasswordField confirmationField, TextField passwordField, Label errorLabel) {
+        String confirmation = confirmationField.getText();
+        String password = passwordField.getText();
+        if (!confirmation.equals(password)) {
+            errorLabel.setText("Les mots de passe ne correspondent pas");
+            confirmationField.getStyleClass().add("error");
+            errorLabel.getStyleClass().add("error-label");
+            return false;
         } else {
-            // No image was selected
-            return null;
+            errorLabel.setText("");
+            confirmationField.getStyleClass().removeAll("error");
+            errorLabel.getStyleClass().removeAll("error-label");
+            return true;
         }
     }
-
-
 }

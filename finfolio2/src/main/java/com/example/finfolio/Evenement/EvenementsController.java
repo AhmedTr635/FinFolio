@@ -1,4 +1,4 @@
-package com.example.finfolio.UsrController;
+package com.example.finfolio.Evenement;
 
 import javafx.fxml.Initializable;
 

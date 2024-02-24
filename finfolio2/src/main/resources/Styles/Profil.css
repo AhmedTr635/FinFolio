@@ -1,0 +1,25 @@
+.background_color {
+    -fx-background-color:#13123A ;
+}
+.text_input {
+    -fx-background-color: rgba(0,0,0,0);
+    -fx-border-width:  0 0 1 0;
+    -fx-border-width-color: #123499;
+    -fx-text-fill: white;
+
+}
+.Button {
+    -fx-pref-width: 140;
+    -fx-pref-height: 40;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #00008b;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center_left;
+    -fx-effect: dropshadow(three-pass-box,#DDDDDD,5,0,0,6);
+    -fx-cursor: hand;
+
+}
+.error-label {
+    -fx-text-fill: red;
+    -fx-font-size: 12px;
+}

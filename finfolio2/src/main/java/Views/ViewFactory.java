@@ -20,6 +20,8 @@ public class ViewFactory {
     private AnchorPane investissementsView;
     private AnchorPane evenementsView;
     private AnchorPane portfolioView;
+    private AnchorPane profilView;
+
     private final StringProperty userSelectedMenuItem;
 
     private AnchorPane signUpView;
@@ -69,6 +71,10 @@ public class ViewFactory {
 
     public void showSignUpWindow() {
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/com/example/finfolio/User/signup.fxml"));
+        createStage(loader);
+    }
+    public void showMotDepasseOublieWindow() {
+        FXMLLoader loader =new FXMLLoader(getClass().getResource("/com/example/finfolio/User/MotDePasseOublie.fxml"));
         createStage(loader);
     }
 
@@ -153,6 +159,15 @@ public class ViewFactory {
             {e.printStackTrace();}
         }
         return dashboardView;
+    }
+    public  AnchorPane getProfilView(){
+        if (profilView== null){//ki bech yemchi men fenetre lwahda okhra yokkedch yaawed yhel
+            try {
+                profilView = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/profil.fxml")).load();
+            }catch (Exception e)
+            {e.printStackTrace();}
+        }
+        return profilView;
     }
 
 

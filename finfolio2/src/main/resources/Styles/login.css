@@ -64,6 +64,38 @@
  .login_form_container Button:hover{
      -fx-cursor:hand;
  }
+ .login_form_container Label{
+     -fx-text-fill: red;
+     -fx-font-size: 12px;
+ }
  .error_lbl{
      -fx-text-fill: #FF0000;
+ }
+ .bouton {
+     -fx-background-color:  #00008b;
+     -fx-text-fill: #FFFFFF;
+     -fx-pref-tile-width: 350;
+     -fx-pref-height: 30;
+     -fx-font-size: 1.2em;
+     -fx-cursor:hand;
+
+ }
+ .importImageBtn {
+     -fx-background-color: #00008b; /* Bleu foncé */
+     -fx-border-color: #00008b; /* Bordure bleu foncé */
+     -fx-border-width: 1px;
+     -fx-border-radius: 5px;
+     -fx-background-radius: 5px;
+     -fx-text-fill: white;
+     -fx-font-size: 14px;
+     -fx-padding: 8px 16px;
+     -fx-cursor: hand;
+ }
+
+ .importImageBtn:hover {
+     -fx-background-color: #0000cd; /* Bleu plus clair sur survol */
+ }
+
+ .importImageBtn:pressed {
+     -fx-background-color: #000080; /* Bleu foncé plus sombre lorsqu'appuyé */
  }

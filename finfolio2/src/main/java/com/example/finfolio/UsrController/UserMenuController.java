@@ -31,6 +31,7 @@ public class UserMenuController implements Initializable {
         investissements_btn.setOnAction(e->onInvestissements());
         evenements_btn.setOnAction(e->onEvenements());
         depenses_btn.setOnAction(e->onDepenses());
+        profile_btn.setOnAction(e->onProfil());
         logout_btn.setOnAction(e-> {
             try {
                 onLogout();
@@ -52,6 +53,8 @@ public class UserMenuController implements Initializable {
     private void onInvestissements(){Model.getInstance().getViewFactory().getUserSelectedMenuItem().set("Investissements");}
     private void onEvenements(){Model.getInstance().getViewFactory().getUserSelectedMenuItem().set("Evenements");}
     private void onDepenses(){Model.getInstance().getViewFactory().getUserSelectedMenuItem().set("Depenses");}
+    private void onProfil(){Model.getInstance().getViewFactory().getUserSelectedMenuItem().set("Profil");}
+
     private void onLogout() throws IOException {
         Stage st = (Stage) logout_btn.getScene().getWindow();
         Model.getInstance().getViewFactory().closeStage(st);

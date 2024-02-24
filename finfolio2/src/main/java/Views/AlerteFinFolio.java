@@ -23,4 +23,15 @@ public class AlerteFinFolio {
                 else
                 alert.setContentText("Informations érronées");
             return alert.showAndWait();}
-}
+    public static Optional<ButtonType> alerteSucces(String  string){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(String.valueOf(AlerteFinFolio.class.getResource("/com/example/finfolio/Pics/icon.png"))));
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+            alert.setContentText(string);
+        return alert.showAndWait();
+    }
+    }
+
+
