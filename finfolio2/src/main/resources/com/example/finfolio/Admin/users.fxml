@@ -19,17 +19,19 @@
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Les utilisateurs selon leurs roles" />
         <PieChart fx:id="pieChart" labelLineLength="100.0" />
     </VBox>
-    <TableView fx:id="users_table" layoutX="13.0" layoutY="178.0" prefHeight="270.0" prefWidth="808.0">
+    <TableView fx:id="users_table" layoutX="13.0" layoutY="178.0" prefHeight="270.0" prefWidth="843.0">
       <columns>
           <TableColumn fx:id="id_clm" prefWidth="26.399993896484375" text="id" />
           <TableColumn fx:id="nom_clm" prefWidth="71.19997787475586" text="Nom" />
-          <TableColumn fx:id="prenom_clm" prefWidth="92.00003051757812" text="Prénom" />
-          <TableColumn fx:id="email_clm" prefWidth="160.00001525878906" text="Email" />
-          <TableColumn fx:id="numtel_clm" minWidth="8.0" prefWidth="138.4000244140625" text="Numéro Télephone" />
-          <TableColumn fx:id="nbrCredits_clm" prefWidth="96.0" text="nombre crédits" />
-          <TableColumn fx:id="note_clm" prefWidth="44.79998779296875" text="Note" />
-          <TableColumn fx:id="role_clm" prefWidth="58.4000244140625" text="Role" />
-          <TableColumn fx:id="solde_clm" prefWidth="116.800048828125" text="Solde" />
+          <TableColumn fx:id="prenom_clm" prefWidth="80.80001831054688" text="Prénom" />
+          <TableColumn fx:id="email_clm" prefWidth="152.800048828125" text="Email" />
+          <TableColumn fx:id="numtel_clm" minWidth="8.0" prefWidth="121.60003662109375" text="Numéro Télephone" />
+          <TableColumn fx:id="nbrCredits_clm" prefWidth="92.0" text="nombre crédits" />
+          <TableColumn fx:id="note_clm" prefWidth="43.20001220703125" text="Note" />
+          <TableColumn fx:id="role_clm" prefWidth="43.99993896484375" text="Role" />
+          <TableColumn fx:id="solde_clm" prefWidth="60.79998779296875" text="Solde" />
+         <TableColumn fx:id="statut_clmn" prefWidth="51.20001220703125" text="Statut" />
+         <TableColumn fx:id="actions_clmn" prefWidth="94.39995117187505" text="Actions" />
       </columns>
     </TableView>
     <HBox alignment="CENTER" layoutX="68.0" layoutY="84.0" prefHeight="60.0" prefWidth="820.0" styleClass="search_box">

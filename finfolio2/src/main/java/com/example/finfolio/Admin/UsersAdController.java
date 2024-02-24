@@ -1,5 +1,6 @@
 package com.example.finfolio.Admin;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,19 +11,34 @@ import Models.Model;
 import Views.UserCellFactory;
 import com.example.finfolio.Entite.User;
 import com.example.finfolio.Service.UserService;
+import com.example.finfolio.UsrController.ModifierUserController;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.scene.paint.Paint;
 
 public class UsersAdController implements Initializable {
     public TableView users_table;
     public PieChart pieChart;
     public BarChart barChart;
+    public TableColumn <User,Void>actions_clmn;
+    public TableColumn <User,String>statut_clmn;
 
 
     @FXML
@@ -98,7 +114,11 @@ public class UsersAdController implements Initializable {
 
 
         ObservableList<User> users= FXCollections.observableArrayList(liste);
-        initializeTableView(users);
+        try {
+            initializeTableView(users);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         users_table.setItems(FXCollections.observableArrayList(liste));
 
 
@@ -128,7 +148,7 @@ public class UsersAdController implements Initializable {
         });
 
 }
-    private void initializeTableView(ObservableList<User> users) {
+    private void initializeTableView(ObservableList<User> users) throws SQLException {
         id_clm.setCellValueFactory(new PropertyValueFactory<>("id"));
         nom_clm.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenom_clm.setCellValueFactory(new PropertyValueFactory<>("prenom"));
@@ -138,8 +158,66 @@ public class UsersAdController implements Initializable {
         nbrCredits_clm.setCellValueFactory(new PropertyValueFactory<>("nbcredit"));
         solde_clm.setCellValueFactory(new PropertyValueFactory<>("solde"));
         role_clm.setCellValueFactory(new PropertyValueFactory<>("role"));
+        statut_clmn.setCellValueFactory(new PropertyValueFactory<>("statut"));
+        actions_clmn.setCellFactory(column -> {
+            return new TableCell<>() {
+                Button deleteButton = new Button("S");
 
-    }
+
+
+                // Ajout d'une action au bouton
+                final Button modifyButton = new Button("M");
+
+                {
+                    deleteButton.setOnAction(event -> {
+                        User u = getTableView().getItems().get(getIndex());
+                        UserService us=new UserService();
+                        try {
+                            us.delete(u);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        try {
+                            refreshTableView();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+
+                    modifyButton.setOnAction(event -> {
+                        User u = getTableView().getItems().get(getIndex());
+                        System.out.println(u);
+                        ModifierUser(u);
+                        try {
+                            refreshTableView();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                    });
+                }
+
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        HBox buttonBox = new HBox(deleteButton, modifyButton);
+                        setGraphic(buttonBox);
+                    }
+                }
+            };
+        });
+
+       refreshTableView();
+
+
+    };
+
+
+
+
     public List<User> filtrerType(String role)
     {
         UserService userService = new UserService();
@@ -165,6 +243,9 @@ public class UsersAdController implements Initializable {
           };
        return filteredUsers;
     }
+
+
+
     private void initPieChart() throws SQLException {
        pieChart.setPrefSize(200, 300);
         UserService us =new UserService();
@@ -199,5 +280,44 @@ public class UsersAdController implements Initializable {
         // Ajout des données au barchart
         barChart.getData().add(series);
     }
+    private void ModifierUser(User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/modifierUser.fxml"));
+            Parent root = loader.load();
+
+            ModifierUserController controller = loader.getController();
+            controller.setUser(user);
+
+            Stage stage = new Stage();
+
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Modifier User");
+            stage.setScene(new Scene(root));
+            stage.show();
+            stage.setOnHidden(e -> {
+                try {
+                    refreshTableView();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    private void refreshTableView() throws SQLException {
+        UserService us=new UserService();
+        List<User> users = us.readAll();
+
+        // Display events in TableView
+        ObservableList<User> userList = FXCollections.observableArrayList(users);
+        users_table.setItems(userList);
+
+    }
+
+
+
 
 }

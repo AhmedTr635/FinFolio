@@ -80,10 +80,10 @@ public void mdpOublie()
         Model.getInstance().getViewFactory().closeStage(st2);
         UserService userS = new UserService();
 
-        User u1= userS.getUserByEmail("trabelsi.dali@esprit.tn");
+        /*User u1= userS.getUserByEmail("trabelsi.dali@esprit.tn");
         Model.getInstance().setUser(u1);
-        Model.getInstance().getViewFactory().showUserWindow();
-
+        Model.getInstance().getViewFactory().showUserWindow();*/
+        Model.getInstance().getViewFactory().showAdminWindow();
 
        /* UserService userS = new UserService();
         String enteredCaptcha = captchaField.getText();
