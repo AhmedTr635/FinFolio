@@ -164,7 +164,7 @@ public class AdminDashController {
 
     private void handleModifyEvent(Evennement event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/Evennement/ModiferEvent.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/Evennement/ModifierEvent.fxml"));
             Parent root = loader.load();
 
             ModifierEventController controller = loader.getController();

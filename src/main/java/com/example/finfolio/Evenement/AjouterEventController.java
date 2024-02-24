@@ -2,7 +2,6 @@ package com.example.finfolio.Evenement;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 
@@ -10,7 +9,9 @@ import com.example.finfolio.Entite.Evennement;
 import com.example.finfolio.Service.EvennementService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -30,7 +31,8 @@ public class AjouterEventController {
     private TextField event_address;
 
     @FXML
-    private TextField event_date;
+    private DatePicker event_date;
+
 
     @FXML
     private TextField event_montant;
@@ -41,7 +43,7 @@ public class AjouterEventController {
     @FXML
     void ajouter_event(ActionEvent event) {
         String nom = event_name.getText();
-        LocalDate date  = LocalDate.parse(event_date.getText());
+        LocalDate date  = event_date.getValue();
         String adresse = event_address.getText();
         Float montant = Float.valueOf(event_montant.getText());
 
@@ -53,8 +55,15 @@ public class AjouterEventController {
         stage.close();
     }
 
+
+
+
+
+    // Méthode utilitaire pour afficher une boîte de dialogue d'alerte
+
     @FXML
     void initialize() {
+
 
     }
 

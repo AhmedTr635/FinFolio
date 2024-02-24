@@ -50,7 +50,7 @@ public class DonService  {
 
 
 
-    /*    public void deleteByEventId(int eventId) {
+        public void deleteByEventId(int eventId) {
             String request = "DELETE FROM don WHERE evenement_id = ?";
             try {
                 pst = connexion.prepareStatement(request);
@@ -59,7 +59,7 @@ public class DonService  {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-        }*/
+        }
 
     public void update(Don d, int id) {
         String request="update evenement set montant_user = ?, user_id = ?, evenement_id= ? where id = ? ";

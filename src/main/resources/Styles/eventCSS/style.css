@@ -8,7 +8,7 @@
 }
 
 .searhc-button{
-    -fx-background-color: #103c65;
+    -fx-background-color: #00008b;
     -fx-background-radius: 30px;
 }
 
@@ -27,18 +27,18 @@
 
 
 .partciper-btn{
-    -fx-background-color: #103c65;
+    -fx-background-color: #00008b;
     -fx-background-radius: 100px;
 }
 
 
 .upcoming-event{
-    -fx-background-color: linear-gradient(to right, #2c3e50, #3498db);
+    -fx-background-color: linear-gradient(to right, #000248, #004e92);
     -fx-background-radius: 50px;
 }
 
 
 .chosen-event{
-    -fx-background-color: linear-gradient(to right, #2c3e50, #3498db);
+    -fx-background-color: linear-gradient(to right, #302b63, #00008b);
     -fx-background-radius: 30px;
 }

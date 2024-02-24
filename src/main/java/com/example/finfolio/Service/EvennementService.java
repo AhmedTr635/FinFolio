@@ -45,7 +45,7 @@ public class EvennementService {
         String request="delete from evenement where id = ?";
 
         try{
-            //DonService.getInstance().deleteByEventId(id);
+            DonService.getInstance().deleteByEventId(id);
             pst=connexion.prepareStatement(request);
             pst.setInt(1,id);
             pst.executeUpdate();

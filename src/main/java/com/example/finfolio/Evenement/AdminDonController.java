@@ -6,7 +6,9 @@ import java.util.ResourceBundle;
 
 
 import com.example.finfolio.Entite.Don;
+import com.example.finfolio.Entite.Evennement;
 import com.example.finfolio.Service.DonService;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -70,7 +72,15 @@ public class AdminDonController {
 
         // Associate each TableColumn with the appropriate property of the Donation object
         don_montant.setCellValueFactory(new PropertyValueFactory<>("montant_user"));
-        event_id.setCellValueFactory(new PropertyValueFactory<>("evenement_id")); // Assuming you have a method to get the event name from the donation
+        event_id.setCellValueFactory(cellData -> {
+            Don donation = cellData.getValue();
+            Evennement event = donation.getEvennement();
+            if (event != null) {
+                return new SimpleObjectProperty(String.valueOf(event.getId()));
+            } else {
+                return new SimpleObjectProperty(""); // Or any default value you want to display if there's no associated event
+            }
+        });
         user_id.setCellValueFactory(new PropertyValueFactory<>("user_id")); // Assuming you have a method to get the user ID from the donation
 
 
