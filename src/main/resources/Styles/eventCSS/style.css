@@ -1,0 +1,44 @@
+.search-box{
+    -fx-background-color: #FFFFFF ;
+    -fx-background-radius: 100px;
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.searhc-button{
+    -fx-background-color: #103c65;
+    -fx-background-radius: 30px;
+}
+
+.right-bar{
+    -fx-background-color: #D3D3D3;
+}
+
+.shadow{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0, 0.0, 0.0, 10.0);
+}
+
+.chosen-event-card{
+    -fx-background-color: white;
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);}
+
+
+.partciper-btn{
+    -fx-background-color: #103c65;
+    -fx-background-radius: 100px;
+}
+
+
+.upcoming-event{
+    -fx-background-color: linear-gradient(to right, #2c3e50, #3498db);
+    -fx-background-radius: 50px;
+}
+
+
+.chosen-event{
+    -fx-background-color: linear-gradient(to right, #2c3e50, #3498db);
+    -fx-background-radius: 30px;
+}

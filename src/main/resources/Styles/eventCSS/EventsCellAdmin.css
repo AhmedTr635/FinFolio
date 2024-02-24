@@ -1,0 +1,30 @@
+.events_cell{
+
+    -fx-background-color: white;
+    -fx-background-radius: 20px; /* Rounded corners */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+.btn_modif {
+    -fx-background-color: #1E90FF; /* Background color */
+    -fx-text-fill: #FFFFFF; /* Text color */
+    -fx-font-weight: bold; /* Font weight */
+
+
+
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-cursor: hand; /* Cursor on hover */
+}
+
+.btn_sup {
+    -fx-background-color: #315d88; /* Background color */
+    -fx-text-fill: #FFFFFF; /* Text color */
+    -fx-font-weight: bold; /* Font weight */
+
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-cursor: hand; /* Cursor on hover */
+}
+
+.btn_modif, .btn_sup {
+    -fx-padding: 5px ; /* Adjust the padding as needed */
+}

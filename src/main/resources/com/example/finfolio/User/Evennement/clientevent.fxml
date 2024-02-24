@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="admindash" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Evenement.ClientEventsController">
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <left>
+                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="360.0" styleClass="right-bar" stylesheets="@../../../../../Styles/eventCSS/style.css" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox alignment="CENTER" prefHeight="110.0" prefWidth="200.0">
+                            <children>
+                                <Label prefHeight="50.0" prefWidth="151.0" text="Evennements de " textFill="#878787">
+                                    <font>
+                                        <Font name="Cambria Bold" size="19.0" />
+                                    </font>
+                                </Label>
+                                <Label prefHeight="49.0" prefWidth="135.0" text="charité" textFill="#878787">
+                                    <font>
+                                        <Font name="Cambria" size="19.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="227.0" stylesheets="@../../../../../Styles/eventCSS/style.css">
+                            <VBox.margin>
+                                <Insets left="30.0" right="30.0" />
+                            </VBox.margin>
+                            <children>
+                                <TextField prefHeight="18.0" prefWidth="113.0" promptText="Rechercher..." styleClass="transparent" stylesheets="@../../../../../Styles/eventCSS/style.css">
+                                    <HBox.margin>
+                                        <Insets left="20.0" />
+                                    </HBox.margin>
+                                    <font>
+                                        <Font name="Cambria" size="12.0" />
+                                    </font>
+                                </TextField>
+                                <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="68.0" styleClass="searhc-button" stylesheets="@../../../../../Styles/eventCSS/style.css" text="Valider" textFill="WHITE" />
+                            </children>
+                            <styleClass>
+                                <String fx:value="search-box" />
+                                <String fx:value="shadow" />
+                            </styleClass>
+                        </HBox>
+                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="353.0" prefWidth="320.0" styleClass="chosen-event-card" stylesheets="@../../../../../Styles/eventCSS/style.css">
+                            <VBox.margin>
+                                <Insets left="20.0" right="20.0" top="100.0" />
+                            </VBox.margin>
+                        </Pane>
+                    </children>
+                </VBox>
+            </left>
+            <center>
+                <AnchorPane fx:id="bg_container" prefHeight="650.0" prefWidth="666.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane fx:id="upcoming_event_container" layoutX="43.0" layoutY="22.0" minHeight="0.0" minWidth="-Infinity" prefHeight="134.0" prefWidth="425.0" styleClass="upcoming-event" stylesheets="@../../../../../Styles/eventCSS/style.css">
+                            <children>
+                                <Label fx:id="event_name_up" layoutX="124.0" layoutY="23.0" text="Gala" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="19.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="event_date_up" layoutX="38.0" layoutY="67.0" text="2024-07-07" textFill="WHITE">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="event_address_up" layoutX="144.0" layoutY="67.0" text="Magic" textFill="WHITE">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="event_montant_up" layoutX="213.0" layoutY="64.0" text="7777" textFill="WHITE">
+                                    <font>
+                                        <Font size="19.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <Line endX="182.0" layoutX="307.0" layoutY="181.0" startX="-264.0" stroke="#b2afaf" />
+                        <ScrollPane layoutX="17.0" layoutY="190.0" prefHeight="559.0" prefWidth="470.0">
+                            <content>
+                                <VBox fx:id="event_container" minHeight="-Infinity" minWidth="-Infinity" prefHeight="176.0" prefWidth="838.0">
+                                </VBox>
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </AnchorPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

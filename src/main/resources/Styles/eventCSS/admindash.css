@@ -1,0 +1,58 @@
+
+
+
+.shadow{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0, 0.0, 0.0, 10.0);
+}
+.search-box{
+    -fx-background-color: #FFFFFF ;
+    -fx-background-radius: 100px;
+}
+
+.searhc-button{
+    -fx-background-color: #1d5691;
+    -fx-background-radius: 30px;
+}
+
+.btn_ajouter{
+    -fx-background-color: #0878c9;
+    -fx-background-radius: 10px;
+}
+
+
+.table-view {
+    -fx-background-color: #f4f4f4;
+    -fx-font-size: 14px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #3498db;
+}
+
+.table-view .column-header,
+.table-view .table-cell {
+    -fx-alignment: center;
+}
+
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #ecf0f1;
+}
+
+.table-view .table-row-cell:even {
+    -fx-background-color: #d5dbdb;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #2980b9;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header{
+    -fx-background-color: #2980b9;
+}
+
+
+.default-color0.chart-bar{
+    -fx-bar-fill: #3b3bd2  ;
+}
