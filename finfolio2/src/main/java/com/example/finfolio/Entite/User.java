@@ -1,5 +1,6 @@
 package com.example.finfolio.Entite;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class User {
@@ -17,6 +18,16 @@ public class User {
     private String solde;
     private String statut;
     private  String image;
+
+    private String datepunition;
+
+    public String getDatepunition() {
+        return datepunition;
+    }
+
+    public void setDatepunition(String datepunition) {
+        this.datepunition = datepunition;
+    }
 
     public String getImage() {
         return image;
@@ -50,7 +61,7 @@ public class User {
         this.solde=solde;
         this.statut=staut;
     }
-    public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String statut,String img) {
+    public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String statut,String img,String datepunition) {
         this.id = id;
         this.password = password;
         this.nbrCredit = nbrCredit;
@@ -64,9 +75,10 @@ public class User {
         this.solde=solde;
         this.statut=statut;
         image=img;
+        this.datepunition=datepunition;
     }
 
-    public User(String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String statut,String img) {
+    public User(String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String statut,String img,String dp) {
         this.password = password;
         this.nbrCredit = nbrCredit;
         this.nom = nom;
@@ -79,6 +91,7 @@ public class User {
         this.solde=solde;
         this.statut=statut;
         image=img;
+        datepunition=dp;
     }
     public User(String nom,String prenom,String email,String numTel,int nbrCredit,float rate,  String role,String solde) {
         this.nbrCredit = nbrCredit;

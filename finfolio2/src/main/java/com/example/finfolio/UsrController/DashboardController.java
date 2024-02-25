@@ -25,7 +25,16 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (Model.getInstance().getUser().getStatut().equals("ban"))
+        {
+            user_name.setStyle("-fx-fill: red;");
+            user_name.setText("Salut , "+ Model.getInstance().getUser().getPrenom()+" Il faut payer vos credits");
+
+        }
+            else
         user_name.setText("Salut , "+ Model.getInstance().getUser().getPrenom());
+
+         checking_bal.setText(Model.getInstance().getUser().getSolde()+"DT");
         login_date.setText("Aujourd'hui ,"+ LocalDate.now());
 
     }

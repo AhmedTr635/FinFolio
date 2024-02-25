@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ public class ModifierUserController implements Initializable {
 
     public ChoiceBox<String> statut_box;
     public ChoiceBox<String> note_box;
+    public DatePicker dateCh;
     @FXML
     private Button confirmerBtn;
     private String[] statuts = {"Statut", "Active", "Desactive", "Ban"};
@@ -75,6 +77,8 @@ public void setUser(User u)
             } else if ("5".equals(note_box.getValue())) {
                 user.setRate(5);
             }
+            String date=dateCh.getValue().toString();
+            user.setDatepunition(date);
             UserService us=new UserService();
             us.update(user);
 

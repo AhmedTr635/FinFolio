@@ -14,6 +14,8 @@ import javafx.scene.image.ImageView;
 
 import java.io.File;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -62,7 +64,7 @@ public class ProfilController implements Initializable {
         sauvegarderBtn.setOnAction(e-> {
             try {
                 onSauvegarder();
-            } catch (SQLException ex) {
+            } catch (SQLException | NoSuchAlgorithmException ex) {
                 throw new RuntimeException(ex);
             }
         });
@@ -85,13 +87,32 @@ public class ProfilController implements Initializable {
         String n = Model.getInstance().getUser().getNumtel().substring(4);
         numTelFld.setText(n);
         emailFld.setText(Model.getInstance().getUser().getEmail());
-        mdpFld.setText(Model.getInstance().getUser().getPassword());
-        mdpFldC.setText(Model.getInstance().getUser().getPassword());
+
     }
 
-    void onSauvegarder() throws SQLException {
+    void onSauvegarder() throws SQLException, NoSuchAlgorithmException {
+        String pass;
         if (inputcontrol()) {
-            User user = new User(Model.getInstance().getUser().getId(),nomFld.getText(), prenomFld.getText(), emailFld.getText(), "+216" + numTelFld.getText(), mdpFld.getText(), "Mourouj", 0, 2, "user", "20000", "active", "src");
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            byte[] hash = digest.digest(mdpFld.getText().getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+
+            if (mdpFld.getText().isEmpty())
+                pass=Model.getInstance().getUser().getPassword();
+            else
+                pass=hexString.toString();
+
+
+
+
+            User user = new User(Model.getInstance().getUser().getId(),nomFld.getText(), prenomFld.getText(), emailFld.getText(), "+216" + numTelFld.getText(), pass, "Mourouj", 0, 2, "user", Model.getInstance().getUser().getSolde(),Model.getInstance().getUser().getStatut() , Model.getInstance().getUser().getImage(),Model.getInstance().getUser().getDatepunition());
             UserService userS = new UserService();
             userS.update(user);
         }
@@ -190,12 +211,21 @@ public class ProfilController implements Initializable {
 
     private boolean validatePassword(PasswordField passwordField, Label errorLabel) {
         String password = passwordField.getText();
-        if (!password.matches("^(?=.*[A-Z])(?=.*[a-z]).{8,}$")) {
+        if (passwordField.getText().isEmpty())
+        {errorLabel.setText("");
+            passwordField.getStyleClass().removeAll("error");
+            errorLabel.getStyleClass().removeAll("error-label");
+            return true;
+        }
+        else if (!password.matches("^(?=.*[A-Z])(?=.*[a-z]).{8,}$")) {
             errorLabel.setText("Mot de Passe doit être composé au moins de 8 caractères et une majuscule");
             passwordField.getStyleClass().add("error");
             errorLabel.getStyleClass().add("error-label");
             return false;
-        } else {
+        }
+
+
+            else {
             errorLabel.setText("");
             passwordField.getStyleClass().removeAll("error");
             errorLabel.getStyleClass().removeAll("error-label");

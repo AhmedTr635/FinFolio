@@ -15,19 +15,22 @@ public class AlerteFinFolio {
             alert.setTitle("Attention");
             alert.setHeaderText(null);
             if (string=="bd")
-                alert.setContentText("compte Introuvable or desactivé ");
+                alert.setContentText("Votre compte est introuvable  ");
             else
                 if (string=="exist")
-                    alert.setContentText("compte existe");
+                    alert.setContentText("Ce compte existe");
 
                 else
+                    if (string.equals("desactive"))
+                        alert.setContentText("Votre compte est desactive");
+                    else
                 alert.setContentText("Informations érronées");
             return alert.showAndWait();}
-    public static Optional<ButtonType> alerteSucces(String  string){
+    public static Optional<ButtonType> alerteSucces(String  string,String title){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
         stage.getIcons().add(new Image(String.valueOf(AlerteFinFolio.class.getResource("/com/example/finfolio/Pics/icon.png"))));
-        alert.setTitle("Success");
+        alert.setTitle(title);
         alert.setHeaderText(null);
             alert.setContentText(string);
         return alert.showAndWait();

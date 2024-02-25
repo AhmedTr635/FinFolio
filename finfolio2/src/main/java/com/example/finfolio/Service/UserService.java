@@ -22,9 +22,9 @@ public class UserService   {
 
     public void add(User u)throws SQLException {
         if(readAll().stream().anyMatch(us->us.getEmail().equals(u.getEmail())))
-            AlerteFinFolio.alerte("Cet utilisateur exist");
+            AlerteFinFolio.alerte("exist");
             else {
-            String req = "INSERT INTO user (nom,prenom,email,numtel,password,adresse,nbcredit,rate,role,solde,statut,image) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+            String req = "INSERT INTO user (nom,prenom,email,numtel,password,adresse,nbcredit,rate,role,solde,statut,image,datepunition) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             ps = cnx.prepareStatement(req);
             try {
 
@@ -41,6 +41,8 @@ public class UserService   {
                 ps.setString(10, u.getSolde());
                 ps.setString(11, u.getStatut());
                 ps.setString(12, u.getImage());
+                ps.setString(12, u.getDatepunition());
+
 
 
                 ps.executeUpdate();
@@ -76,7 +78,8 @@ public class UserService   {
                         resultSet.getString("role") ,
                         resultSet.getString("solde"),
                         resultSet.getString("statut"),
-                        resultSet.getString("image")
+                        resultSet.getString("image"),
+                        resultSet.getString("datepunition")
 
                         ));
             }}catch (SQLException e)
@@ -86,7 +89,7 @@ public class UserService   {
         return list;
     }
     public int update(User user)  throws  SQLException {
-        String req = "UPDATE user SET nom = ?, prenom = ?, email = ?, numtel = ?, password = ?, adresse = ?, nbcredit = ? , rate = ? , role = ? , solde = ? , statut = ? , image = ? WHERE id = ?";
+        String req = "UPDATE user SET nom = ?, prenom = ?, email = ?, numtel = ?, password = ?, adresse = ?, nbcredit = ? , rate = ? , role = ? , solde = ? , statut = ? , image = ? , datepunition = ? WHERE id = ?";
         ps = cnx.prepareStatement(req);
 
 
@@ -103,7 +106,8 @@ public class UserService   {
             ps.setString(10, user.getSolde());
             ps.setString(11, user.getStatut());
             ps.setString(12, user.getImage());
-            ps.setInt(13, user.getId());
+            ps.setString(13, user.getDatepunition());
+            ps.setInt(14, user.getId());
 
 
         } catch (SQLException e) {
@@ -144,7 +148,9 @@ public class UserService   {
                             resultSet.getString("role") ,
                             resultSet.getString("solde"),
                             resultSet.getString("statut"),
-                            resultSet.getString("image")
+                            resultSet.getString("image"),
+                            resultSet.getString("datepunition")
+
 
 
 
@@ -217,7 +223,8 @@ public List<User> cellsUsers() throws SQLException {
                             resultSet.getString("role"),
                             resultSet.getString("solde"),
                             resultSet.getString("statut"),
-                            resultSet.getString("image")
+                            resultSet.getString("image"),
+                            resultSet.getString("datepunition")
 
 
                             );

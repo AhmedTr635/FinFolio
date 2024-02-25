@@ -25,7 +25,7 @@ Button {
     -fx-font-size: 1.6em;
     -fx-text-fill: #FFFFFF;
     -fx-font-family: "Calibri Light";
-    -fx-pref-width: 200;
+    -fx-pref-width: 100;
 
 }
 .filtreBox {

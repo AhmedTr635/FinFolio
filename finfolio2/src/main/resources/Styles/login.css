@@ -105,3 +105,22 @@
      -fx-font-family: "Calibri Light";
 
  }
+ .oublier_btn {
+     -fx-pref-width: 150;
+     -fx-pref-height: 40;
+     -fx-background-color: #EEEEEE; /* Couleur de fond en blanc */
+     -fx-text-fill: #00008b; /* Couleur du texte en bleu */
+     -fx-font-size: 1.1em;
+     -fx-alignment: center_left;
+ }
+
+ .oublier_btn:hover {
+     -fx-background-color: #00008b; /* Change la couleur de fond en bleu lorsque survolé */
+     -fx-text-fill: #FFFFFF; /* Change la couleur du texte en blanc lorsque survolé */
+ }
+
+ .oublier_btn:pressed {
+     -fx-background-color: #0000FF; /* Change la couleur de fond en bleu acier lorsque cliqué */
+     -fx-text-fill: #FFFFFF; /* Change la couleur du texte en blanc lorsque cliqué */
+ }
+

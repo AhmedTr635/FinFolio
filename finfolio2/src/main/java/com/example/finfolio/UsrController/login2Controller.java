@@ -15,8 +15,10 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class login2Controller implements Initializable {
@@ -76,53 +78,111 @@ public void mdpOublie()
 }
     public void onLogin() throws NoSuchAlgorithmException, SQLException {
 
-       Stage st2 = (Stage) error_label.getScene().getWindow();
+       /*Stage st2 = (Stage) error_label.getScene().getWindow();
         Model.getInstance().getViewFactory().closeStage(st2);
         UserService userS = new UserService();
 
-        /*User u1= userS.getUserByEmail("trabelsi.dali@esprit.tn");
+        User u1= userS.getUserByEmail("trabelsi.dali@esprit.tn");
         Model.getInstance().setUser(u1);
-        Model.getInstance().getViewFactory().showUserWindow();*/
+        //Model.getInstance().getViewFactory().showUserWindow();
         Model.getInstance().getViewFactory().showAdminWindow();
-
-       /* UserService userS = new UserService();
+*/
+       UserService userS = new UserService();
+       String dateString;
+       LocalDate dateFromString;
         String enteredCaptcha = captchaField.getText();
         if (enteredCaptcha.equals(captchaCode)) {
             User user = userS.getUserByEmail(mail_field.getText());
             if (user != null) {
-                Model.getInstance().setUser(user);
-
-
-                if (user.getPassword().equals(mot_de_passe_field.getText())) {
-
-                    switch (user.getRole()) {
-                        case "user":
-                            Stage st = (Stage) error_label.getScene().getWindow();
-                            Model.getInstance().getViewFactory().closeStage(st);
-                            Model.getInstance().getViewFactory().showUserWindow();
-
-
-                            break;
-                        case "admin":
-                            Stage st2 = (Stage) error_label.getScene().getWindow();
-                            Model.getInstance().getViewFactory().closeStage(st2);
-                            Model.getInstance().getViewFactory().showAdminWindow();
-
-
-                            break;
-
-
+                if (!user.getStatut().equals("desactive")) {
+                    MessageDigest digest = MessageDigest.getInstance("SHA-1");
+                    byte[] hash = digest.digest(mot_de_passe_field.getText().getBytes());
+                    StringBuilder hexString = new StringBuilder();
+                    for (byte b : hash) {
+                        String hex = Integer.toHexString(0xff & b);
+                        if (hex.length() == 1) {
+                            hexString.append('0');
+                        }
+                        hexString.append(hex);
                     }
-                } else {
-                   AlerteFinFolio.alerte("");
+
+
+                    if (user.getPassword().equals(hexString.toString())) {
+
+                        Model.getInstance().setUser(user);
+
+                        switch (user.getRole()) {
+                            case "user":
+                                if(user.getStatut().equals("active"))
+                                {Stage st = (Stage) error_label.getScene().getWindow();
+                                Model.getInstance().getViewFactory().closeStage(st);
+                                Model.getInstance().getViewFactory().showUserWindow();}
+                                else {
+                                } if(user.getStatut().equals("ban")){
+                                Stage stb = (Stage) error_label.getScene().getWindow();
+                                Model.getInstance().getViewFactory().closeStage(stb);
+                                Model.getInstance().getViewFactory().showUserBanned();
+                                AlerteFinFolio.alerteSucces("Vous avez un ban ,vous ne pouvez pas acceder aux investissements , evenements et profile","payement des credits");
+
+
+                            }
+
+
+
+
+                                break;
+                            case "admin":
+                                Stage st2 = (Stage) error_label.getScene().getWindow();
+                                Model.getInstance().getViewFactory().closeStage(st2);
+                                Model.getInstance().getViewFactory().showAdminWindow();
+
+
+                                break;
+
+
+                        }
+                    } else
+                        AlerteFinFolio.alerte("");
+
+
                 }
 
-            } else {
+                else{
+                    if (!user.getDatepunition().equals("vide"))
+                    {    dateString=user.getDatepunition();
+                        System.out.println(dateString);
+                         dateFromString = LocalDate.parse(dateString);
+                        System.out.println(dateFromString);
+
+                        // Objet LocalDate local
+                        LocalDate currentDate = LocalDate.now();
+                        System.out.println(currentDate);
+
+                        // Comparaison des dates
+                        if (dateFromString.isBefore(currentDate)) {
+                            user.setStatut("active");
+                            user.setPassword(user.getPassword());
+                            user.setDatepunition("vide");
+                            userS.update(user);
+                           Model.getInstance().getUser().setStatut("active");
+                            AlerteFinFolio.alerteSucces("Votre compte n'est plus desactive","Staut du compte");
+
+                        }
+                        else  {
+                            AlerteFinFolio.alerte("desactive");
+                            System.out.println("la date de desactivation mezelet");}
+                    }
+
+
+                    //AlerteFinFolio.alerte("desactive");
+                    }
+            } else
 
 
                 AlerteFinFolio.alerte("bd");
-            }
-        } else if (!(enteredCaptcha.equals(captchaCode))) {
+        }
+
+         else if (!(enteredCaptcha.equals(captchaCode))) {
             Canvas captchaCanvass = new Canvas(150, 70);
             captchaCode = CaptchaLogin.generateCaptchaCode(6);
             GraphicsContext gc = captchaCanvass.getGraphicsContext2D();
@@ -137,7 +197,7 @@ public void mdpOublie()
             capcthaError.setText("Code incorrecte");
 
 
-        }*/
+        }        //*/
     }
 
 

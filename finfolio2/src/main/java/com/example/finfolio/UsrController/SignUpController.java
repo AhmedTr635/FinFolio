@@ -3,10 +3,13 @@ package com.example.finfolio.UsrController;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import Models.Model;
+import Views.AlerteFinFolio;
 import com.example.finfolio.Entite.User;
 import com.example.finfolio.Service.UserService;
 import javafx.event.ActionEvent;
@@ -20,7 +23,7 @@ import javafx.stage.Stage;
 public class SignUpController  implements Initializable {
 
 
-
+    public Button retour_btn;
     @FXML
     private Button engistrez_fld;
 
@@ -82,31 +85,48 @@ public class SignUpController  implements Initializable {
                 throw new RuntimeException(ex);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
+            } catch (NoSuchAlgorithmException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        retour_btn.setOnAction(e-> {
+            try {
+                retour();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
 
-
-
     }
 
-    void onEngistrez() throws SQLException, IOException {
+    void onEngistrez() throws SQLException, IOException, NoSuchAlgorithmException {
         String imagePath = null;
 
         if (inputcontrol()) {
-            // Check if the user has selected a new image
             String selectedImagePath = importImage();
 
             // If an image is selected, update the imagePath
             if (selectedImagePath != null) {
                 imagePath = selectedImagePath;
             }
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            byte[] hash = digest.digest(modp_field.getText().getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
 
             // Insert user data along with the image path into the database
-            User user = new User(nom_fld.getText(), prenom_fld.getText(), mail_fld.getText(), "+216"+numTelfld.getText(), modp_field.getText(), "Mourouj", 0, 2, "user", "20000", "active", imagePath);
-
+            User user = new User(nom_fld.getText(), prenom_fld.getText(), mail_fld.getText(), "+216"+numTelfld.getText(), hexString.toString(), "Mourouj", 0, 2, "user", "20000", "active", imagePath,"vide");
             UserService userS = new UserService();
             userS.add(user);
+            AlerteFinFolio.alerteSucces("Votre compte a été crée avec succès","Creation du compte ");
 
 
         }

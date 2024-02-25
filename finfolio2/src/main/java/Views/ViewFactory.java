@@ -1,6 +1,7 @@
 package Views;
 
 import com.example.finfolio.Admin.AdminController;
+import com.example.finfolio.UsrController.UserBanController;
 import com.example.finfolio.UsrController.UserController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -229,6 +230,12 @@ public class ViewFactory {
     public void showUserWindow(){
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/com/example/finfolio/User/user.fxml"));
         UserController userController= new UserController();//preconstructed controller
+        loader.setController(userController);
+        createStage(loader);
+    }
+    public void showUserBanned(){
+        FXMLLoader loader =new FXMLLoader(getClass().getResource("/com/example/finfolio/User/userBan.fxml"));
+        UserBanController userController= new UserBanController();//preconstructed controller
         loader.setController(userController);
         createStage(loader);
     }

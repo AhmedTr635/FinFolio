@@ -95,6 +95,8 @@ public class MotDePasseOublieController implements Initializable {
                 throw new RuntimeException(ex);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
+            } catch (NoSuchAlgorithmException ex) {
+                throw new RuntimeException(ex);
             }
         });
     }
@@ -131,19 +133,29 @@ public class MotDePasseOublieController implements Initializable {
 
         }
         }
-        public void updatePassword() throws SQLException, IOException {
+        public void updatePassword() throws SQLException, IOException, NoSuchAlgorithmException {
             if (!(passField1.getText().equals(passField2.getText()))) {
                 emailError.setText("Mots de passes ne sont pas identiques");
 
             }
             else{
+
                 emailError.setText("");
                 UserService userService = new UserService();
-
+                MessageDigest digest = MessageDigest.getInstance("SHA-1");
+                byte[] hash = digest.digest(passField1.getText().getBytes());
+                StringBuilder hexString = new StringBuilder();
+                for (byte b : hash) {
+                    String hex = Integer.toHexString(0xff & b);
+                    if (hex.length() == 1) {
+                        hexString.append('0');
+                    }
+                    hexString.append(hex);
+                }
                 User currentUser = userService.getUserByEmail(emailField.getText());
-                currentUser.setPassword(passField2.getText());
+                currentUser.setPassword(hexString.toString());
                 userService.update(currentUser);
-                AlerteFinFolio.alerteSucces("Votre mot de passe a été changé avec succès");
+                AlerteFinFolio.alerteSucces("Votre mot de passe a été changé avec succès","Changement du mot de passe");
                 Stage st = (Stage) emailField.getScene().getWindow();
                 Model.getInstance().getViewFactory().closeStage(st);
                 Model.getInstance().getViewFactory().showLoginWindow();

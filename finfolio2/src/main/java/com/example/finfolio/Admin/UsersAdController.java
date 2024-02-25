@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import Models.Model;
-import Views.UserCellFactory;
+
+import Views.AlerteFinFolio;
 import com.example.finfolio.Entite.User;
 import com.example.finfolio.Service.UserService;
 import com.example.finfolio.UsrController.ModifierUserController;
@@ -27,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
@@ -292,6 +293,7 @@ public class UsersAdController implements Initializable {
 
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Modifier User");
+            stage.getIcons().add(new Image(String.valueOf(AlerteFinFolio.class.getResource("/com/example/finfolio/Pics/icon.png"))));
             stage.setScene(new Scene(root));
             stage.show();
             stage.setOnHidden(e -> {
