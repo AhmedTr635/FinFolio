@@ -1,0 +1,38 @@
+.root {
+    -fx-background-color: #f0f0f0; /* Set background color */
+}
+
+/* Styling for Text components */
+.text {
+    -fx-font-size: 14px; /* Set font size */
+}
+
+/* Styling for TextField components */
+.text-field {
+    -fx-font-size: 14px; /* Set font size */
+    -fx-pref-width: 150px; /* Set preferred width */
+    -fx-padding: 5px; /* Add padding */
+}
+
+/* Styling for DatePicker components */
+.date-picker {
+    -fx-font-size: 14px; /* Set font size */
+    -fx-pref-width: 150px; /* Set preferred width */
+    -fx-padding: 5px; /* Add padding */
+}
+
+/* Styling for Button components */
+.button {
+    -fx-font-size: 14px; /* Set font size */
+    -fx-padding: 5px 10px; /* Add padding (vertical padding, horizontal padding) */
+}
+
+/* Styling for TableView components */
+.table-view {
+    -fx-pref-height: 300px; /* Set preferred height */
+}
+
+/* Styling for TableColumn components */
+.table-column {
+    -fx-alignment: CENTER; /* Center-align column content */
+}

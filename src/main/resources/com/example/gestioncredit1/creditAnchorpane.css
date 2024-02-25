@@ -1,0 +1,34 @@
+.credit-anchorpane {
+    -fx-background-color: #f4f4f4; /* Background color */
+    -fx-border-color: #ddd; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-padding: 10px; /* Padding inside the anchor pane */
+}
+
+.credit-details-label {
+    -fx-font-family: "Cambria"; /* Font family */
+    -fx-font-size: 12px; /* Font size */
+    -fx-font-weight: bold; /* Font weight */
+}
+
+.credit-details-value {
+    -fx-font-family: "Cambria"; /* Font family */
+    -fx-font-size: 12px; /* Font size */
+}
+
+.credit-button {
+
+    -fx-text-fill: green; /* Text color */
+    -fx-font-family: "Arial"; /* Font family */
+    -fx-font-size: 12px; /* Font size */
+    -fx-padding: 6px 12px; /* Padding inside the button */
+    -fx-border-radius: 3px; /* Border radius */
+    -fx-border-color: transparent; /* Transparent border color */
+
+}
+
+.credit-button:hover {
+    -fx-background-color: green; /* Hover background color */
+
+}

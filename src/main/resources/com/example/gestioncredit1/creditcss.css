@@ -1,0 +1,52 @@
+/* Style for the sidebar (VBox) */
+.right-bar {
+    -fx-background-color: #D3D3D3;
+}
+
+/* Style for the title label in the sidebar */
+.sidebar-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+/* Style for input labels */
+.input-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Style for input fields */
+.input-field {
+    -fx-pref-width: 150px;
+}
+
+/* Style for navigation buttons */
+.nav-button {
+    -fx-background-color: #828282;
+    -fx-text-fill: white;
+}
+
+/* Style for submit button */
+.submit-button {
+    -fx-background-color: #828282;
+    -fx-text-fill: white;
+}
+
+/* Style for the content area (VBox) */
+.content-area {
+    -fx-spacing: 20px;
+}
+
+/* Style for the title label in the content area */
+.content-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+/* Style for the content VBox */
+.content-vbox {
+    -fx-padding: 10px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D3D3D3;
+    -fx-border-width: 1px;
+}

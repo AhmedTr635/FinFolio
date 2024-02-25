@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestioncredit1.OffreController">
+    <children>
+        <!-- Search Field and Button -->
+        <HBox prefHeight="40.0" prefWidth="1000.0" spacing="10" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <children>
+                <TextField fx:id="searchField" onKeyReleased="#search_credit" promptText="Search..." />
+            <Button fx:id="myoffres" mnemonicParsing="false" onAction="#navigateToMesOffres" text="myoffres" />
+            <Button mnemonicParsing="false" text="offres to me" />
+<!--            <Button fx:id="set_credit" mnemonicParsing="false" onAction="#offre_credit" text="set a credit" />&ndash;&gt;-->
+            </children>
+        </HBox>
+
+        <!-- Credit Information Display -->
+        <ScrollPane fx:id="creditScrollPane" prefHeight="500.0" prefWidth="1000.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="60.0">
+            <content>
+                <VBox fx:id="creditInfoVBox" alignment="CENTER" prefHeight="169.0" prefWidth="959.0" spacing="10">
+                    <VBox.margin>
+                        <Insets left="50.0" right="50.0" />
+                    </VBox.margin>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>
