@@ -90,6 +90,16 @@ public class User {
         this.rate = rate;
         this.solde=solde;
     }
+    public User(int id,String nom,String prenom,String email,String password,String adresse,int nbrCredit,int rate){
+        this.id=id;
+        this.nom=nom;
+        this.prenom=prenom;
+        this.email=email;
+        this.password=password;
+        this.adresse=adresse;
+        this.nbrCredit=nbrCredit;
+        this.rate=rate;
+    };
 
 
     public String getSolde() {
