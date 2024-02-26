@@ -56,7 +56,7 @@ public class SignUpController  implements Initializable {
 
     @FXML
     private TextField prenom_fld;
-    private String imagePath;
+    private String imagePath = "C:\\Users\\PC\\Desktop\\PI\\finfolio2\\src\\main\\resources\\com\\example\\finfolio\\Pics\\simpleUr.png";
     @FXML
     private Button importImageBtn;
 
@@ -76,7 +76,13 @@ public class SignUpController  implements Initializable {
         addInputControlListener(modp_field, error_mdp, "Mot de passe");
 
 
-
+        importImageBtn.setOnAction(e-> {
+            try {
+                onImporter();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         engistrez_fld.setOnAction(e -> {
             try {
                 onEngistrez();
@@ -100,17 +106,27 @@ public class SignUpController  implements Initializable {
 
 
     }
+    private void onImporter() throws IOException {
+
+        String selectedImagePath = importImage();
+
+        // If an image is selected, update the imagePath
+        if (selectedImagePath != null)
+            imagePath = selectedImagePath;
+
+
+    }
 
     void onEngistrez() throws SQLException, IOException, NoSuchAlgorithmException {
-        String imagePath = null;
+        //String imagePath = null;
 
         if (inputcontrol()) {
-            String selectedImagePath = importImage();
+            /*String selectedImagePath = importImage();
 
             // If an image is selected, update the imagePath
             if (selectedImagePath != null) {
                 imagePath = selectedImagePath;
-            }
+            }*/
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
             byte[] hash = digest.digest(modp_field.getText().getBytes());
             StringBuilder hexString = new StringBuilder();
@@ -125,8 +141,11 @@ public class SignUpController  implements Initializable {
             // Insert user data along with the image path into the database
             User user = new User(nom_fld.getText(), prenom_fld.getText(), mail_fld.getText(), "+216"+numTelfld.getText(), hexString.toString(), "Mourouj", 0, 2, "user", "20000", "active", imagePath,"vide");
             UserService userS = new UserService();
+            if(userS.readAll().stream().anyMatch(us->us.getEmail().equals(mail_fld.getText())))
+                AlerteFinFolio.alerte("exist");
+            else {
             userS.add(user);
-            AlerteFinFolio.alerteSucces("Votre compte a été crée avec succès","Creation du compte ");
+            AlerteFinFolio.alerteSucces("Votre compte a été crée avec succès","Creation du compte ");}
 
 
         }

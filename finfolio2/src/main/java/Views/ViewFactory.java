@@ -78,6 +78,10 @@ public class ViewFactory {
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/com/example/finfolio/User/MotDePasseOublie.fxml"));
         createStage(loader);
     }
+    public void showModeWindow() {
+        FXMLLoader loader =new FXMLLoader(getClass().getResource("/com/example/finfolio/User/modeRecuperation.fxml"));
+        createStage(loader);
+    }
 
     /*
     *Admin Views functions

@@ -11,7 +11,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -19,6 +24,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class login2Controller implements Initializable {
@@ -32,6 +38,7 @@ public class login2Controller implements Initializable {
 
     public Button inscri_button;
     public Button mdp_btn;
+    public Label mailError;
     @FXML
     private ImageView imgCaptcha;
 
@@ -39,14 +46,41 @@ public class login2Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Canvas captchaCanvas = new Canvas(150, 70);
+        //controle de saisie
+        addInputControlListener(mail_field, mailError, "Email");
+
+        mdp_btn.setVisible(false);
+        Canvas captchaCanvas = new Canvas(200, 100); // Keep the canvas size consistent
         captchaCode = CaptchaLogin.generateCaptchaCode(6);
         GraphicsContext gc = captchaCanvas.getGraphicsContext2D();
+
+        // Set background to white
         gc.setFill(Color.WHITE);
         gc.fillRect(0, 0, captchaCanvas.getWidth(), captchaCanvas.getHeight());
-        gc.setFill(Color.BLACK);
-        gc.setFont(new Font("Arial", 24));
-        gc.fillText(captchaCode, 10, 35);
+
+        // Add noise (random lines)
+        Random random = new Random();
+        gc.setStroke(Color.LIGHTBLUE); // Adjust noise color to match the interface
+        for (int i = 0; i < 10; i++) {
+            gc.strokeLine(random.nextDouble() * captchaCanvas.getWidth(), random.nextDouble() * captchaCanvas.getHeight(),
+                    random.nextDouble() * captchaCanvas.getWidth(), random.nextDouble() * captchaCanvas.getHeight());
+        }
+
+        // Randomize font attributes
+        gc.setFill(Color.DARKBLUE); // Adjust font color to match the interface
+        gc.setFont(Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 30 + random.nextInt(10)));
+
+        // Add captcha code with slight distortion
+        for (int i = 0; i < captchaCode.length(); i++) {
+            String ch = String.valueOf(captchaCode.charAt(i));
+            gc.save();
+            gc.translate(20 + i * 30 + random.nextInt(10), 50 + random.nextInt(20)); // Randomize position slightly
+            gc.rotate(random.nextInt(10) - 5); // Rotate slightly
+            gc.fillText(ch, 0, 0);
+            gc.restore();
+        }
+
+        captchaField.clear();
         imgCaptcha.setImage(captchaCanvas.snapshot(null, null));
 
         login_btn.setOnAction(e -> {
@@ -72,21 +106,21 @@ public void mdpOublie()
 {
     Stage st = (Stage) error_label.getScene().getWindow();
     Model.getInstance().getViewFactory().closeStage(st);
-    Model.getInstance().getViewFactory().showMotDepasseOublieWindow();
-
+    Model.getInstance().getViewFactory().showModeWindow();
 
 }
     public void onLogin() throws NoSuchAlgorithmException, SQLException {
 
-       /*Stage st2 = (Stage) error_label.getScene().getWindow();
+       Stage st2 = (Stage) error_label.getScene().getWindow();
         Model.getInstance().getViewFactory().closeStage(st2);
         UserService userS = new UserService();
 
-        User u1= userS.getUserByEmail("trabelsi.dali@esprit.tn");
-        Model.getInstance().setUser(u1);
+        /*User u1= userS.getUserByEmail("trabelsi.dali@esprit.tn");
+        Model.getInstance().setUser(u1);*/
         //Model.getInstance().getViewFactory().showUserWindow();
         Model.getInstance().getViewFactory().showAdminWindow();
-*/
+
+       /* if(validateEmailField(mail_field,mailError)){
        UserService userS = new UserService();
        String dateString;
        LocalDate dateFromString;
@@ -141,8 +175,10 @@ public void mdpOublie()
 
 
                         }
-                    } else
+                    } else{
                         AlerteFinFolio.alerte("");
+                    mdp_btn.setVisible(true);}
+
 
 
                 }
@@ -182,24 +218,76 @@ public void mdpOublie()
                 AlerteFinFolio.alerte("bd");
         }
 
-         else if (!(enteredCaptcha.equals(captchaCode))) {
-            Canvas captchaCanvass = new Canvas(150, 70);
+         else {
+            Canvas captchaCanvas = new Canvas(200, 100); // Keep the canvas size consistent
             captchaCode = CaptchaLogin.generateCaptchaCode(6);
-            GraphicsContext gc = captchaCanvass.getGraphicsContext2D();
+            GraphicsContext gc = captchaCanvas.getGraphicsContext2D();
+
+            // Set background to white
             gc.setFill(Color.WHITE);
-            gc.fillRect(0, 0, captchaCanvass.getWidth(), captchaCanvass.getHeight());
-            gc.setFill(Color.BLACK);
-            gc.setFont(new Font("Arial", 30));
-            gc.fillText(captchaCode, 10, 35);
+            gc.fillRect(0, 0, captchaCanvas.getWidth(), captchaCanvas.getHeight());
+
+            // Add noise (random lines)
+            Random random = new Random();
+            gc.setStroke(Color.LIGHTBLUE); // Adjust noise color to match the interface
+            for (int i = 0; i < 10; i++) {
+                gc.strokeLine(random.nextDouble() * captchaCanvas.getWidth(), random.nextDouble() * captchaCanvas.getHeight(),
+                        random.nextDouble() * captchaCanvas.getWidth(), random.nextDouble() * captchaCanvas.getHeight());
+            }
+
+            // Randomize font attributes
+            gc.setFill(Color.DARKBLUE); // Adjust font color to match the interface
+            gc.setFont(Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 30 + random.nextInt(10)));
+
+            // Add captcha code with slight distortion
+            for (int i = 0; i < captchaCode.length(); i++) {
+                String ch = String.valueOf(captchaCode.charAt(i));
+                gc.save();
+                gc.translate(20 + i * 30 + random.nextInt(10), 50 + random.nextInt(20)); // Randomize position slightly
+                gc.rotate(random.nextInt(10) - 5); // Rotate slightly
+                gc.fillText(ch, 0, 0);
+                gc.restore();
+            }
+
             captchaField.clear();
-            imgCaptcha.setStyle("-fx-border-color: black;-fx-border-width: 1px;");
-            imgCaptcha.setImage(captchaCanvass.snapshot(null, null));
-            capcthaError.setText("Code incorrecte");
+            imgCaptcha.setImage(captchaCanvas.snapshot(null, null));
+            capcthaError.setText("Code Incorrecte");
 
 
-        }        //*/
+        } }       */
     }
 
+    private boolean validateEmailField(TextField emailField, Label errorLabel) {
+        String email = emailField.getText().trim();
+        if (email.isEmpty()) {
+            errorLabel.setText("Veuillez entrer votre email.");
+            emailField.getStyleClass().add("error");
+            errorLabel.getStyleClass().add("error-label");
+            return false;
+        } else if (!email.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}")) {
+            errorLabel.setText("Email non valide");
+            return false;
+        } else {
+            errorLabel.setText("");
+            emailField.getStyleClass().removeAll("error");
+            errorLabel.getStyleClass().removeAll("error-label");
+            return true;
+        }
+    }
+    private void addInputControlListener(TextField textField, Label errorLabel, String fieldName) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            boolean isValid = true; // Initialise la validation à true
 
+
+             if (textField == mail_field)
+                isValid = validateEmailField(textField, errorLabel);
+
+            if (!isValid) {
+                errorLabel.getStyleClass().add("error-label");
+            } else {
+                errorLabel.getStyleClass().removeAll("error-label");
+            }
+        });
+    }
 
 }

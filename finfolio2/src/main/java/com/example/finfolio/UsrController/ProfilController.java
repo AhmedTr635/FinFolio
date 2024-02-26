@@ -11,8 +11,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -30,6 +32,7 @@ public class ProfilController implements Initializable {
     public Label telError;
     public Label mdpError;
     public Label mdpcerror;
+    public Button changeeBtn;
 
     @FXML
     private TextField emailFld;
@@ -48,6 +51,7 @@ public class ProfilController implements Initializable {
 
     @FXML
     private Button sauvegarderBtn;
+    private String imagePath=Model.getInstance().getUser().getImage();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -68,16 +72,15 @@ public class ProfilController implements Initializable {
                 throw new RuntimeException(ex);
             }
         });
+        changeeBtn.setOnAction(e-> {
+            try {
+                onImporter();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
-    void displayImage(String imagePath) {
-        if (imagePath != null) {
-            File file = new File(imagePath);
-            Image image2 = new Image(file.toURI().toString());
-            image.setImage(image2);
-        } else {
-            image.setImage(new Image(String.valueOf(getClass().getResource("/com/example/finfolio/Pics/simpleUr.png"))));
-        }
-    }
+
 
     void initProfil() {
         NomLabel.setText(Model.getInstance().getUser().getNom() + " " + Model.getInstance().getUser().getPrenom());
@@ -112,7 +115,7 @@ public class ProfilController implements Initializable {
 
 
 
-            User user = new User(Model.getInstance().getUser().getId(),nomFld.getText(), prenomFld.getText(), emailFld.getText(), "+216" + numTelFld.getText(), pass, "Mourouj", 0, 2, "user", Model.getInstance().getUser().getSolde(),Model.getInstance().getUser().getStatut() , Model.getInstance().getUser().getImage(),Model.getInstance().getUser().getDatepunition());
+            User user = new User(Model.getInstance().getUser().getId(),nomFld.getText(), prenomFld.getText(), emailFld.getText(), "+216" + numTelFld.getText(), pass, "Mourouj", 0, 2, "user", Model.getInstance().getUser().getSolde(),Model.getInstance().getUser().getStatut() , imagePath,Model.getInstance().getUser().getDatepunition());
             UserService userS = new UserService();
             userS.update(user);
         }
@@ -246,6 +249,39 @@ public class ProfilController implements Initializable {
             confirmationField.getStyleClass().removeAll("error");
             errorLabel.getStyleClass().removeAll("error-label");
             return true;
+        }
+    }
+    private void onImporter() throws IOException {
+
+        String selectedImagePath = importImage();
+
+        // If an image is selected, update the imagePath and the ImageView
+        if (selectedImagePath != null) {
+            imagePath = selectedImagePath;
+            displayImage(imagePath); // Update the ImageView with the new image
+        }
+
+    }
+    private String importImage() throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            // An image was selected
+            return selectedFile.getAbsolutePath();
+        } else {
+            // No image was selected
+            return null;
+        }
+    }
+    void displayImage(String imagePath) {
+        if (imagePath != null) {
+            File file = new File(imagePath);
+            Image image2 = new Image(file.toURI().toString());
+            image.setImage(image2);
+        } else {
+            // Set a default image if no image path is provided
+            image.setImage(new Image(getClass().getResource("/com/example/finfolio/Pics/simpleUr.png").toString()));
         }
     }
 }

@@ -63,7 +63,8 @@ public class MotDePasseOublieController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        //controle de saisie
+        addInputControlListener(emailField, emailError, "Email");
 
         codeEntered.setVisible(false);
         UpdateBtn.setVisible(false);
@@ -102,7 +103,8 @@ public class MotDePasseOublieController implements Initializable {
     }
 
     public void handleRecoverPassword() throws SQLException, IOException, WriterException {
-        UserService userService = new UserService();
+        if(validateEmailField(emailField,emailError))
+        {UserService userService = new UserService();
         if (userService.readAll().stream().anyMatch(u->u.getEmail().equals(emailField.getText()))) {
             emailError.setText("");
             EmailingApi e = new EmailingApi();
@@ -116,7 +118,7 @@ public class MotDePasseOublieController implements Initializable {
         } else {
             emailError.setText("Utilisateur n'existe pas");
         }
-    }
+    }}
 
     public void handleUpdateButton() throws NoSuchAlgorithmException, SQLException, IOException {
         if (!(codeEntered.getText().equals(recoveryCode))) {
@@ -161,7 +163,38 @@ public class MotDePasseOublieController implements Initializable {
                 Model.getInstance().getViewFactory().showLoginWindow();
             }
         }
+    private void addInputControlListener(TextField textField, Label errorLabel, String fieldName) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            boolean isValid = true; // Initialise la validation à true
 
+
+            if (textField == emailField)
+                isValid = validateEmailField(textField, errorLabel);
+
+            if (!isValid) {
+                errorLabel.getStyleClass().add("error-label");
+            } else {
+                errorLabel.getStyleClass().removeAll("error-label");
+            }
+        });
+    }
+    private boolean validateEmailField(TextField emailField, Label errorLabel) {
+        String email = emailField.getText().trim();
+        if (email.isEmpty()) {
+            errorLabel.setText("Veuillez entrer votre email.");
+            emailField.getStyleClass().add("error");
+            errorLabel.getStyleClass().add("error-label");
+            return false;
+        } else if (!email.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}")) {
+            errorLabel.setText("Email non valide");
+            return false;
+        } else {
+            errorLabel.setText("");
+            emailField.getStyleClass().removeAll("error");
+            errorLabel.getStyleClass().removeAll("error-label");
+            return true;
+        }
+    }
     }
 
 

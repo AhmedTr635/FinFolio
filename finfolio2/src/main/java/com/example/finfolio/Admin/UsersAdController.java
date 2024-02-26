@@ -3,6 +3,7 @@ package com.example.finfolio.Admin;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -33,6 +34,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.paint.Paint;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 
 public class UsersAdController implements Initializable {
     public TableView users_table;
@@ -40,13 +42,19 @@ public class UsersAdController implements Initializable {
     public BarChart barChart;
     public TableColumn <User,Void>actions_clmn;
     public TableColumn <User,String>statut_clmn;
-
+    public ChoiceBox<String> statut_box;
+    public ChoiceBox<String> note_box;
+    public DatePicker dateCh;
+    public Button updateBtn;
+    private String[] statuts = {"Statut", "Active", "Desactive", "Ban"};
+    private String[]notes={"Note","1","2","3","4","5"};
 
     @FXML
     private ChoiceBox<String> filtreBox;
 
     @FXML
     private TextField cherecher_fld;
+    public TableColumn <User,String>datePunition;
 
 
 
@@ -89,8 +97,83 @@ public class UsersAdController implements Initializable {
     private TableColumn<User, String> solde_clm;
 
 
+    public void getStatut(ActionEvent event) {
+
+        String statutBoxValue = statut_box.getValue();
+
+    }
+    public void getNotes(ActionEvent event) {
+
+        String notesBox = note_box.getValue();
+
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {UserService uc=new UserService();
+//choice box
+        statut_box.getItems().addAll(statuts);
+        statut_box.setOnAction(this::getStatut);
+        statut_box.setValue("Statut");
+        note_box.getItems().addAll(notes);
+        note_box.setOnAction(this::getNotes);
+        note_box.setValue("Note");
+        dateCh.setVisible(false);
+
+        statut_box.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            // Your code here to handle the change
+            if ("Active".equals(statut_box.getValue())) {
+                dateCh.setVisible(false);
+
+            } else if ("Desactive".equals(statut_box.getValue())) {
+                dateCh.setVisible(true);
+            } else if ("Ban".equals(statut_box.getValue())) {
+                dateCh.setVisible(false);
+            }
+            else                 dateCh.setVisible(false);
+
+        });
+
+        users_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                // Populate input fields with selected credit's details
+                User user = (User) users_table.getSelectionModel().getSelectedItem();
+                    switch (user.getStatut()){
+                        case "active" -> statut_box.setValue("Active");
+                        case "ban" -> statut_box.setValue("Ban");
+                        case "desactive" -> statut_box.setValue("Desactive");
+                    }
+                    switch ((int) user.getRate())
+                    {
+                    case 1 -> note_box.setValue("1");
+                    case 2 -> note_box.setValue("2");
+                    case 3 -> note_box.setValue("3");
+                    case 4 -> note_box.setValue("4");
+                    case 5-> note_box.setValue("5");
+
+                    }
+                    if (!user.getDatepunition().equals("vide"))
+                    {dateCh.setValue(LocalDate.parse(user.getDatepunition()));}
+                updateBtn.setOnAction(e-> {
+                    try {
+                        onConfirmer(user);
+
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+
+                UserService us =new UserService();
+                try {
+                    users_table.setItems(FXCollections.observableArrayList(us.readAll()));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
+
+
+
+        //Statistique
 
         try {
             initPieChart();
@@ -109,7 +192,7 @@ public class UsersAdController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        filtreBox.getItems().addAll("Utilisateur", "Admin","Filtrer");
+        filtreBox.getItems().addAll("Utilisateur", "Admin","Filtrer","Active","Ban","Desactive");
         filtreBox.setValue("Filtrer");
 
 
@@ -147,8 +230,13 @@ public class UsersAdController implements Initializable {
             users_table.setItems(FXCollections.observableArrayList(filteredUsers));
 
         });
-
-}
+        UserService us2 =new UserService();
+        try {
+            users_table.setItems(FXCollections.observableArrayList(us2.readAll()));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private void initializeTableView(ObservableList<User> users) throws SQLException {
         id_clm.setCellValueFactory(new PropertyValueFactory<>("id"));
         nom_clm.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -160,42 +248,40 @@ public class UsersAdController implements Initializable {
         solde_clm.setCellValueFactory(new PropertyValueFactory<>("solde"));
         role_clm.setCellValueFactory(new PropertyValueFactory<>("role"));
         statut_clmn.setCellValueFactory(new PropertyValueFactory<>("statut"));
+        datePunition.setCellValueFactory(new PropertyValueFactory<>("datepunition"));
+
         actions_clmn.setCellFactory(column -> {
             return new TableCell<>() {
-                Button deleteButton = new Button("S");
-
-
-
-                // Ajout d'une action au bouton
-                final Button modifyButton = new Button("M");
+                HBox buttonBox = new HBox(); // Container to hold the button and icon
+                Button deleteButton = new Button(); // Button without text
 
                 {
+                    // Create the Font Awesome icon view
+                    FontAwesomeIconView iconView = new FontAwesomeIconView();
+                    // Set the icon name
+                    iconView.setGlyphName("TRASH"); // Replace "TRASH" with the desired icon name
+                    // Set the size of the icon
+                    iconView.setSize("16"); // You can adjust the size as needed
+                    iconView.setFill(javafx.scene.paint.Color.WHITE); // Set icon color to white
+
+                    // Set button properties
+                    deleteButton.setGraphic(iconView); // Set the icon as the graphic
+                    deleteButton.setStyle("-fx-background-color: red; -fx-text-fill: white;"); // Set button style
+
+                    // Add action to the button
                     deleteButton.setOnAction(event -> {
                         User u = getTableView().getItems().get(getIndex());
-                        UserService us=new UserService();
+                        UserService us = new UserService();
                         try {
                             us.delete(u);
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-                        try {
                             refreshTableView();
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         }
                     });
 
-                    modifyButton.setOnAction(event -> {
-                        User u = getTableView().getItems().get(getIndex());
-                        System.out.println(u);
-                        ModifierUser(u);
-                        try {
-                            refreshTableView();
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-
-                    });
+                    // Add button to the HBox
+                    buttonBox.getChildren().add(deleteButton);
                 }
 
                 @Override
@@ -204,13 +290,11 @@ public class UsersAdController implements Initializable {
                     if (empty) {
                         setGraphic(null);
                     } else {
-                        HBox buttonBox = new HBox(deleteButton, modifyButton);
                         setGraphic(buttonBox);
                     }
                 }
             };
         });
-
        refreshTableView();
 
 
@@ -231,6 +315,15 @@ public class UsersAdController implements Initializable {
                 case "Admin"-> filteredUsers = userService.readAll().stream()
                             .filter(user -> "admin".equals(user.getRole()))
                             .toList();
+                case "Ban"-> filteredUsers = userService.readAll().stream()
+                        .filter(user -> "ban".equals(user.getStatut()))
+                        .toList();
+                case "Active"-> filteredUsers = userService.readAll().stream()
+                        .filter(user -> "active".equals(user.getStatut()))
+                        .toList();
+                case "Desactive"-> filteredUsers = userService.readAll().stream()
+                        .filter(user -> "desactive".equals(user.getStatut()))
+                        .toList();
                 case "Filtrer" ->filteredUsers=userService.readAll();
                 default -> filteredUsers=userService.readAll();
 
@@ -244,11 +337,39 @@ public class UsersAdController implements Initializable {
           };
        return filteredUsers;
     }
+    public void onConfirmer(User user) throws SQLException {
+        if ("Active".equals(statut_box.getValue())) {
+            user.setStatut("active");
 
+        } else if ("Desactive".equals(statut_box.getValue())) {
+            user.setStatut("desactive");
+        } else if ("Ban".equals(statut_box.getValue())) {
+            user.setStatut("ban");
+        }
+
+        if ("1".equals(note_box.getValue())) {
+            user.setRate(1);
+        } else if ("2".equals(note_box.getValue())) {
+            user.setRate(2);
+        } else if ("3".equals(note_box.getValue())) {
+            user.setRate(3);
+        } else if ("4".equals(note_box.getValue())) {
+            user.setRate(4);
+        } else if ("5".equals(note_box.getValue())) {
+            user.setRate(5);
+        }
+        if (dateCh.isVisible()&& dateCh.getValue()!=null)
+        {String date = dateCh.getValue().toString();
+        user.setDatepunition(date);}
+        UserService us = new UserService();
+        us.update(user);
+        AlerteFinFolio.alerteSucces("Utilisateur sauvegardé avec succes","Modification utilisateur");
+
+    }
 
 
     private void initPieChart() throws SQLException {
-       pieChart.setPrefSize(200, 300);
+      /* pieChart.setPrefSize(200, 300);
         UserService us =new UserService();
 
         PieChart.Data slice1 = new PieChart.Data("Utlisateurs", us.readAll().stream().filter(u -> u.getRole().equals("user")).toList().size());
@@ -260,10 +381,12 @@ public class UsersAdController implements Initializable {
         // Définir des couleurs personnalisées pour chaque tranche
         slice1.getNode().setStyle("-fx-pie-color: #123499;"); // Rouge
         slice2.getNode().setStyle("-fx-pie-color: blue;"); // Vert
-        CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis();
+        */
 
         // Création du barchart
+        UserService us =new UserService();
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
         barChart.setTitle("Nombre d'utilisateurs selon la note  ");
         xAxis.setLabel("Rating des utilisateurs");
         yAxis.setLabel("Nombre des utilisateurs");
@@ -281,32 +404,7 @@ public class UsersAdController implements Initializable {
         // Ajout des données au barchart
         barChart.getData().add(series);
     }
-    private void ModifierUser(User user) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/modifierUser.fxml"));
-            Parent root = loader.load();
 
-            ModifierUserController controller = loader.getController();
-            controller.setUser(user);
-
-            Stage stage = new Stage();
-
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Modifier User");
-            stage.getIcons().add(new Image(String.valueOf(AlerteFinFolio.class.getResource("/com/example/finfolio/Pics/icon.png"))));
-            stage.setScene(new Scene(root));
-            stage.show();
-            stage.setOnHidden(e -> {
-                try {
-                    refreshTableView();
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            });
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 
     private void refreshTableView() throws SQLException {

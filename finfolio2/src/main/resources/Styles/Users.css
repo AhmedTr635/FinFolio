@@ -29,7 +29,7 @@ Button {
 
 }
 .filtreBox {
--fx-background-color: #AAAAAA;
+-fx-background-color: #ECF39E;
     -fx-text-fill: white;
     -fx-font-size: 1.6em;
     -fx-font-family: "Calibri Light";
@@ -61,9 +61,42 @@ Button {
 .default-color0.chart-bar {
     -fx-background-color: blue;
 }
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to top right,#123499,blue);
+    -fx-background-radius: 0 0 0 0;
+    -fx-background-insets: 0 0 0;
+}
+.table-view .column-header, .filter{
+    -fx-background-color: transparent;
+    -fx-size:40 ;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #fff;
+}
 
+.account_selector{
+    -fx-background-color: #ECF39E;
 
+}
+.date-picker {
+    -fx-background-color: #123499;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+.confirmerBtn {
+    -fx-background-color: #00008b; /* Bleu foncé */
+    -fx-border-color: #00008b; /* Bordure bleu foncé */
+    -fx-pref-width: 135;
 
+    -fx-text-fill: white;
+    -fx-font-size: 1.5em;
+    -fx-font-family: "Calibri Light";
+    -fx-cursor: hand;
+}
 
-
-
+.confirmerBtn:hover {
+    -fx-background-color: #0000cd; /* Bleu plus clair sur survol */
+}
+.confirmerBtn:pressed {
+    -fx-background-color: #000080; /* Bleu foncé plus sombre lorsqu'appuyé */
+}

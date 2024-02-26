@@ -21,9 +21,7 @@ public class UserService   {
     }
 
     public void add(User u)throws SQLException {
-        if(readAll().stream().anyMatch(us->us.getEmail().equals(u.getEmail())))
-            AlerteFinFolio.alerte("exist");
-            else {
+
             String req = "INSERT INTO user (nom,prenom,email,numtel,password,adresse,nbcredit,rate,role,solde,statut,image,datepunition) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             ps = cnx.prepareStatement(req);
             try {
@@ -41,7 +39,7 @@ public class UserService   {
                 ps.setString(10, u.getSolde());
                 ps.setString(11, u.getStatut());
                 ps.setString(12, u.getImage());
-                ps.setString(12, u.getDatepunition());
+                ps.setString(13, u.getDatepunition());
 
 
 
@@ -52,7 +50,7 @@ public class UserService   {
 
         }
 
-    }
+
     public List<User> readAll()throws SQLException
     {
         String req="Select * from user ";
