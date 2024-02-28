@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.InvestissementController.InvestissementUserController">
+   <children>
+      <BorderPane layoutX="-1.0" layoutY="-1.0" prefHeight="754.0" prefWidth="851.0">
+         <center>
+            <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane fx:id="RealEstateList" prefHeight="354.0" prefWidth="500.0">
+                     <children>
+                        <VBox layoutX="22.0" layoutY="14.0" prefHeight="340.0" prefWidth="455.0">
+                           <children>
+                              <Label prefHeight="56.0" prefWidth="458.0" text="Label" />
+                              <ScrollPane prefHeight="228.0" prefWidth="455.0">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                                </content>
+                              </ScrollPane>
+                              <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="244.0" text="Investir en Immobilier" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="StatInv" prefHeight="354.0" prefWidth="350.0">
+                     <children>
+                        <VBox layoutX="-4.0" layoutY="1.0" prefHeight="356.0" prefWidth="355.0">
+                           <children>
+                              <Label prefHeight="56.0" prefWidth="357.0" text="Label" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </FlowPane>
+         </center>
+         <bottom>
+            <FlowPane prefHeight="379.0" prefWidth="851.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane fx:id="InvUserList" prefHeight="380.0" prefWidth="497.0">
+                     <children>
+                        <VBox layoutX="2.0" layoutY="-2.0" prefHeight="388.0" prefWidth="480.0">
+                           <children>
+                              <Label prefHeight="56.0" prefWidth="500.0" text="Label" />
+                              <ScrollPane prefHeight="262.0" prefWidth="466.0">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                                </content>
+                              </ScrollPane>
+                              <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="244.0" text="Consulter mes investissement" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="DigiCoinsList" prefHeight="380.0" prefWidth="348.0">
+                     <children>
+                        <VBox layoutX="5.0" layoutY="-1.0" prefHeight="382.0" prefWidth="335.0">
+                           <children>
+                              <Label prefHeight="56.0" prefWidth="350.0" text="Label" />
+                              <ScrollPane prefHeight="262.0" prefWidth="331.0">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                                </content>
+                              </ScrollPane>
+                              <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="244.0" text="Investir en Crypto et Stocks" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </FlowPane>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

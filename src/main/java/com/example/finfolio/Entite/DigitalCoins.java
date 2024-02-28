@@ -135,12 +135,12 @@ public class DigitalCoins {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DigitalCoins that = (DigitalCoins) o;
-        return Double.compare(recentValue, that.recentValue) == 0 && Double.compare(montant, that.montant) == 0 && Float.compare(leverage, that.leverage) == 0 && Double.compare(stopLoss, that.stopLoss) == 0 && Double.compare(ROI, that.ROI) == 0 && Double.compare(prixAchat, that.prixAchat) == 0 && Double.compare(tax, that.tax) == 0 && Objects.equals(code, that.code) && Objects.equals(dateAchat, that.dateAchat) && Objects.equals(dateVente, that.dateVente) && Objects.equals(user, that.user);
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, recentValue, dateAchat, dateVente, montant, leverage, stopLoss, user, ROI, prixAchat, tax);
+        return Objects.hash(id);
     }
 
     @Override

@@ -1,9 +1,6 @@
 package com.example.finfolio.Entite;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class RealEstate {
     private int id;
@@ -92,6 +89,32 @@ public class RealEstate {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "RealEstate{" +
+                "id=" + id +
+                ", emplacement='" + emplacement + '\'' +
+                ", ROI=" + ROI +
+                ", valeur=" + valeur +
+                ", nbChambres=" + nbChambres +
+                ", superficie=" + superficie +
+                ", userParticipation=" + userParticipation +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RealEstate that = (RealEstate) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
 

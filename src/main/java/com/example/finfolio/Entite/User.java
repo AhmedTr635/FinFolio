@@ -100,6 +100,10 @@ public class User {
         this.nbrCredit=nbrCredit;
         this.rate=rate;
     };
+    public User(int id,String nom){
+        this.id=id;
+        this.nom=nom;
+    }
 
 
     public String getSolde() {

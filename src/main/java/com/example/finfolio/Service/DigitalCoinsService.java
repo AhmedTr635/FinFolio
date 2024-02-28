@@ -22,20 +22,20 @@ public class DigitalCoinsService implements IService <DigitalCoins>{
     @Override
     public void add(DigitalCoins dc) {
         try {
-            String query = "INSERT INTO digital_coins (id,code,recentValue,dateAchat,dateVente,montant,leverage,stopLoss,userId,ROI,prixAchat,tax) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO digital_coins (id,recent_value,dateAchat,dateVente,montant,leverage,stoploss,userid,ROI,prixachat,tax,code) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst = cnx.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1,dc.getId() );
-            pst.setString(2,dc.getCode() );
-            pst.setDouble(3,dc.getRecentValue());
-            pst.setDate(4,Date.valueOf(dc.getDateAchat()));
-            pst.setDate(5,Date.valueOf(dc.getDateVente()));
-            pst.setDouble(6,dc.getMontant());
-            pst.setFloat(7,dc.getLeverage());
-            pst.setDouble(8,dc.getStopLoss());
-            pst.setInt(9,dc.getUser().getId());
-            pst.setDouble(10,dc.getROI());
-            pst.setDouble(11,dc.getPrixAchat() );
-            pst.setDouble(12,dc.getTax());
+            pst.setString(12,dc.getCode() );
+            pst.setDouble(2,dc.getRecentValue());
+            pst.setDate(3,Date.valueOf(dc.getDateAchat()));
+            pst.setDate(4,Date.valueOf(dc.getDateVente()));
+            pst.setDouble(5,dc.getMontant());
+            pst.setFloat(6,dc.getLeverage());
+            pst.setDouble(7,dc.getStopLoss());
+            pst.setInt(8,dc.getUser().getId());
+            pst.setDouble(9,dc.getROI());
+            pst.setDouble(10,dc.getPrixAchat() );
+            pst.setDouble(11,dc.getTax());
             pst.executeUpdate();
             ResultSet rs = pst.getGeneratedKeys();
             int id = 0;
@@ -53,7 +53,7 @@ public class DigitalCoinsService implements IService <DigitalCoins>{
     @Override
     public void delete(DigitalCoins dc) {
         try {
-            String query = "DELETE FROM digital_coin WHERE id = ?";
+            String query = "DELETE FROM digital_coins WHERE id = ?";
             PreparedStatement pst = cnx.prepareStatement(query);
             pst.setInt(1, dc.getId());
             pst.executeUpdate();
@@ -66,19 +66,19 @@ public class DigitalCoinsService implements IService <DigitalCoins>{
     @Override
     public void update(DigitalCoins dc, int id) {
         try {
-            String query = "UPDATE digital_coins SET  code=?,recentValue=?,dateAchat=?,dateVente=?,montant=?,leverage=?,stopLoss=?,userId=?,ROI=?,prixAchat=?,tax=? WHERE id = ?";
+            String query = "UPDATE digital_coins SET  recent_value=?,dateAchat=?,dateVente=?,montant=?,leverage=?,stoploss=?,userid=?,ROI=?,prixachat=?,tax=?,code=? WHERE id = ?";
             PreparedStatement pst = cnx.prepareStatement(query);
-            pst.setString(1,dc.getCode());
-            pst.setDouble(2,dc.getRecentValue());
-            pst.setDate(3,Date.valueOf(dc.getDateAchat()));
-            pst.setDate(4,Date.valueOf(dc.getDateVente()));
-            pst.setDouble(5,dc.getMontant());
-            pst.setFloat(6,dc.getLeverage());
-            pst.setDouble(7,dc.getStopLoss());
-            pst.setInt(8,dc.getUser().getId());
-            pst.setDouble(9,dc.getROI());
-            pst.setDouble(10,dc.getPrixAchat() );
-            pst.setDouble(11,dc.getTax());
+            pst.setString(11,dc.getCode());
+            pst.setDouble(1,dc.getRecentValue());
+            pst.setDate(2,Date.valueOf(dc.getDateAchat()));
+            pst.setDate(3,Date.valueOf(dc.getDateVente()));
+            pst.setDouble(4,dc.getMontant());
+            pst.setFloat(5,dc.getLeverage());
+            pst.setDouble(6,dc.getStopLoss());
+            pst.setInt(7,dc.getUser().getId());
+            pst.setDouble(8,dc.getROI());
+            pst.setDouble(9,dc.getPrixAchat() );
+            pst.setDouble(10,dc.getTax());
             pst.setDouble(12,id);
             pst.executeUpdate();
             System.out.println("Digital coin updated successfully.");
@@ -107,8 +107,8 @@ public class DigitalCoinsService implements IService <DigitalCoins>{
                 float leverage = rs.getFloat("leverage");
                 double stopLoss = rs.getDouble("stoploss");
                 int userID = rs.getInt("userid");
-                //UserService us=new UserService();
-                //User user=us.readById(userID);
+                UserService us=new UserService();
+                User user=us.readById(userID);
                 double ROI = rs.getDouble("ROI");
                 double prixAchat = rs.getDouble("prixachat");
                 double tax = rs.getDouble("tax");
@@ -127,7 +127,7 @@ public class DigitalCoinsService implements IService <DigitalCoins>{
                 */
 
 
-                dc = new DigitalCoins(id,recentValue,code,dateAchat,dateVente,montant,leverage,stopLoss,user,ROI,prixAchat,tax);
+                dc = new DigitalCoins(id,code,recentValue,dateAchat,dateVente,montant,leverage,stopLoss,user,ROI,prixAchat,tax);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -155,8 +155,8 @@ public class DigitalCoinsService implements IService <DigitalCoins>{
                 double ROI = rs.getDouble("ROI");
                 double prixAchat = rs.getDouble("prixachat");
                 double tax = rs.getDouble("tax");
-                //UserService us=new UserService();
-                //User user=us.readById(userID);
+                UserService us=new UserService();
+                User user=us.readById(userID);
                 DigitalCoins dc = new DigitalCoins( id,code,recentValue,dateAchat,dateVente,montant,leverage,stopLoss,user,ROI,prixAchat,tax);
                 digitalCoinsSet.add(dc);
             }

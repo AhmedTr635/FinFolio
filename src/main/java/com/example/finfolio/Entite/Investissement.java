@@ -94,12 +94,12 @@ public class Investissement {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Investissement that = (Investissement) o;
-        return id == that.id && Objects.equals(Re, that.Re) && Objects.equals(user, that.user);
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, Re, user);
+        return Objects.hash(id);
     }
 
     public Investissement() {
