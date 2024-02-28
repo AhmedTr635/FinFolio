@@ -7,10 +7,28 @@ public class Offre {
     private int user_id;
     private int credit_id;
 
+    public String getUserName() {
+        return userName;
+    }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    private String userName;
 
     // Constructors
     public Offre() {
+
+    }
+
+    public Offre(int id, double montant, double interet, int user_id, int credit_id, String userName) {
+        this.id = id;
+        this.montant = montant;
+        this.interet = interet;
+        this.user_id = user_id;
+        this.credit_id = credit_id;
+        this.userName = userName; // Set user name
     }
 
     public Offre(int id, double montant, double interet, int user_id, int credit_id) {

@@ -1,6 +1,7 @@
 package Service;
 
 import Entity.Credit;
+import Entity.User;
 import utile.dataSource;
 
 import java.sql.*;
@@ -33,7 +34,7 @@ public class CreditService implements ICredit<Credit> {
             preparedStatement.setDouble(4, credit.getInteretMin());
             preparedStatement.setString(5, credit.getDateD());
             preparedStatement.setString(6, credit.getDateF());
-            preparedStatement.setInt(7, credit.getUser_id());
+            preparedStatement.setInt(7, credit.getUser().getId());
 
             int rowsAffected = preparedStatement.executeUpdate();
 
@@ -55,7 +56,7 @@ public class CreditService implements ICredit<Credit> {
             preparedStatement.setDouble(3, credit.getInteretMin());
             preparedStatement.setString(4, credit.getDateD());
             preparedStatement.setString(5, credit.getDateF());
-            preparedStatement.setInt(6, credit.getUser_id());
+            preparedStatement.setInt(6, credit.getUser().getId());
 
             int rowsAffected = preparedStatement.executeUpdate();
 
@@ -175,7 +176,13 @@ public class CreditService implements ICredit<Credit> {
                     userName = "Unknown";
                 }
 
-                Credit credit = new Credit(id,montant, interetMax, interetMin, dateD, dateF, id, userName);
+                // Assuming you have a method to retrieve a User object by ID from the database
+                // Replace this with your actual implementation
+                UserService userService = new UserService();
+                User user = userService.getUserByid(resultSet.getInt("user_id"));
+
+                // Create the Credit object with the correct parameters
+                Credit credit = new Credit(id, montant, interetMax, interetMin, dateD, dateF, user, userName);
                 creditList.add(credit);
             }
         } catch (SQLException e) {
@@ -186,4 +193,53 @@ public class CreditService implements ICredit<Credit> {
     }
 
 
+    public  List<Credit> getCreditsByUserId(int userId) {
+        String query = "SELECT credit.*, user.nom FROM credit JOIN user ON credit.user_id = user.id WHERE credit.user_id = ?";
+        List<Credit> creditList = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, userId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    double montant = resultSet.getDouble("montant");
+                    double interetMax = resultSet.getDouble("interetMax");
+                    double interetMin = resultSet.getDouble("interetMin");
+
+                    // Handle dateD and dateF as strings
+                    String dateD = resultSet.getString("dateD");
+                    String dateF = resultSet.getString("dateF");
+
+                    // Retrieve the user name from the result set
+                    String userName = resultSet.getString("nom");
+
+                    // Check if userName is null and set it to a default value if it is
+                    if (userName == null) {
+                        userName = "Unknown";
+                    }
+
+                    // Assuming you have a method to retrieve a User object by ID from the database
+                    // Replace this with your actual implementation
+                    UserService userService = new UserService();
+                    User user = userService.getUserByid(resultSet.getInt("user_id"));
+
+                    // Create the Credit object with the correct parameters
+                    Credit credit = new Credit(id, montant, interetMax, interetMin, dateD, dateF, user, userName);
+                    creditList.add(credit);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error fetching credits for user ID " + userId + ": " + e.getMessage());
+        }
+
+        return creditList;
+    }
+
+    // Existing methods...
+
 }
+
+
+
+

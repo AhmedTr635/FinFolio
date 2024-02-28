@@ -17,13 +17,53 @@ import java.util.List;
 public class UserService   {
     private Statement ste;
 
-    private PreparedStatement ps;
-    private Connection cnx;
+    private static PreparedStatement ps;
+    private static Connection cnx;
 
     public UserService() {
 
         cnx= dataSource.getInstance().getCnx();
     }
+
+    public static User getUserByid(int userId) {
+
+        String request = "SELECT * FROM user WHERE id = ?";
+
+        try {
+
+            ps=cnx.prepareStatement(request);
+            ps.setInt(1,userId);
+            ResultSet rs= ps.executeQuery();
+
+            while (rs.next())
+            {
+                int Id = rs.getInt("id");
+                String password = rs.getString("password");
+                int nbrCredit = rs.getInt("nbcredit");
+                String nom = rs.getString("nom");
+                String prenom = rs.getString("prenom");
+                String email = rs.getString("email");
+                String adresse = rs.getString("adresse");
+/*
+                String numTel = rs.getString("numTel");
+*/
+                String role = rs.getString("role");
+                float rate = rs.getFloat("rate");
+             /*   String solde = rs.getString("solde");
+                String statut = rs.getString("statut");
+                String image = rs.getString("image");*/
+
+                // Create and return the User object
+                return new User(userId, nom, prenom, email,password, adresse, nbrCredit, rate);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null; // Return null if no user with the specified ID is found
+    }
+
+
 
     public void add(User u)throws SQLException {
         if(readAll().stream().anyMatch(us->us.getEmail().equals(u.getEmail())))

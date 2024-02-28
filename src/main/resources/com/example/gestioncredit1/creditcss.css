@@ -1,52 +1,56 @@
-/* Style for the sidebar (VBox) */
+/* Sidebar Styles */
 .right-bar {
-    -fx-background-color: #D3D3D3;
+    -fx-background-color: #EEEEEE; /* Match the background color of login container */
 }
 
-/* Style for the title label in the sidebar */
+/* Title Label in Sidebar */
 .sidebar-title {
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
+    -fx-font-size: 1.1em; /* Adjust font size */
+    -fx-font-weight: normal; /* Remove bold weight */
+    -fx-text-fill: #00008b; /* Match text color of login form labels */
 }
 
-/* Style for input labels */
+/* Input Labels */
 .input-label {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
+    -fx-font-size: 1.1em; /* Match font size */
+    -fx-font-weight: bold; /* Keep bold weight */
+    -fx-text-fill: #00008b; /* Match text color of login form labels */
 }
 
-/* Style for input fields */
+/* Input Fields */
 .input-field {
-    -fx-pref-width: 150px;
+    -fx-background-color: #FFFFFF; /* Match background color of login form input fields */
+    -fx-pref-height: 35; /* Match preferred height of login form input fields */
+    -fx-font-size: 1.2em; /* Adjust font size */
 }
 
-/* Style for navigation buttons */
-.nav-button {
-    -fx-background-color: #828282;
-    -fx-text-fill: white;
+/* Navigation Buttons */
+.nav-button, .submit-button, .bouton {
+    -fx-background-color:  #00008b; /* Match background color of login form buttons */
+    -fx-text-fill: #FFFFFF; /* Match text color of login form buttons */
+    -fx-pref-tile-width: 350; /* Match preferred width of login form buttons */
+    -fx-pref-height: 30; /* Match preferred height of login form buttons */
+    -fx-font-size: 1.2em; /* Adjust font size */
+    -fx-cursor: hand; /* Add hand cursor */
 }
 
-/* Style for submit button */
-.submit-button {
-    -fx-background-color: #828282;
-    -fx-text-fill: white;
-}
-
-/* Style for the content area (VBox) */
+/* Content Area Styles */
 .content-area {
-    -fx-spacing: 20px;
+    -fx-spacing: 15px; /* Adjust spacing */
+    -fx-background-color: #EEEEEE; /* Match background color of login container */
 }
 
-/* Style for the title label in the content area */
+/* Title Label in Content Area */
 .content-title {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
+    -fx-font-size: 1.3em; /* Adjust font size */
+    -fx-font-weight: bold; /* Keep bold weight */
+    -fx-text-fill: #00008b; /* Match text color of login form labels */
 }
 
-/* Style for the content VBox */
+/* Content VBox Styles */
 .content-vbox {
-    -fx-padding: 10px;
-    -fx-background-color: #FFFFFF;
-    -fx-border-color: #D3D3D3;
-    -fx-border-width: 1px;
+    -fx-padding: 10px; /* Adjust padding */
+    -fx-background-color: #FFFFFF; /* Match background color of login form input fields */
+    -fx-border-color: #D3D3D3; /* Match border color of login form input fields */
+    -fx-border-width: 1px; /* Match border width of login form input fields */
 }

@@ -1,20 +1,42 @@
 package com.example.gestioncredit1;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+import org.w3c.dom.events.MouseEvent;
+import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
+import javafx.stage.FileChooser;
+import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
+//import static jdk.jpackage.internal.WixAppImageFragmentBuilder.ShortcutsFolder.Desktop;
+
+//import static jdk.jpackage.internal.WixAppImageFragmentBuilder.ShortcutsFolder.Desktop;
+
+//import static jdk.jpackage.internal.WixAppImageFragmentBuilder.ShortcutsFolder.Desktop;
 
 public class CreditAnchorpane {
 
     @FXML
     private Label nameLabel;
+    @FXML
+    private Label labedpdf;
+    @FXML
+    private Label idLabeluser;
 
     @FXML
     private Label idLabel;
@@ -40,17 +62,25 @@ public class CreditAnchorpane {
     @FXML
     private Button sendButton;
     private String creditID;
+    private int userId;
 
-    public void initialize(String id, String montant, String interetMax, String interetMin, String dateDebut, String dateFin, String creditID, String userName) {
+
+    public void initialize(String id, String montant, String interetMax, String interetMin, String dateDebut, String dateFin, String userId, String userName, String creditID, String name) {
         this.creditID = creditID; // Set credit ID
-        idLabel.setText("ID: " + id);
+        this.userId = Integer.parseInt(userId);
+
+        idLabel.setText("ID: " + id); // Set the credit ID label
         montantLabel.setText("Montant: " + montant);
         interetMaxLabel.setText("Intérêt Max: " + interetMax);
         interetMinLabel.setText("Intérêt Min: " + interetMin);
         dateDebutLabel.setText("Date Début: " + dateDebut);
         dateFinLabel.setText("Date Fin: " + dateFin);
         nameLabel.setText("Nom: " + userName); // Set the user name label
+        idLabeluser.setText("User ID: " + userId); // Set the user ID label
     }
+
+
+
 
 
     @FXML
@@ -69,6 +99,8 @@ public class CreditAnchorpane {
 
             // Set the creditID in the SendOffreController
             sendOffreController.setCreditID(creditID);
+            ;
+            sendOffreController.setUserID(userId);
 
             // Create a new stage
             Stage stage = new Stage();
@@ -82,4 +114,51 @@ public class CreditAnchorpane {
         }
     }
 
-}
+
+
+
+
+    public void generatepdfclick(ActionEvent actionEvent) {
+
+        try {
+            List<Label> creditDetails = Arrays.asList(montantLabel, interetMaxLabel, interetMinLabel, dateDebutLabel, dateFinLabel, idLabeluser);
+
+            // Prompt user to choose a download location
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save PDF");
+            fileChooser.setInitialFileName("credit_details.pdf");
+            File file = fileChooser.showSaveDialog(new Stage());
+
+            if (file != null) {
+                String filePath = file.getAbsolutePath();
+                PDFGenerator.generatePDF(filePath, creditDetails, nameLabel.getText());
+
+                // Handle opening file using platform-specific method
+                openFile(file);
+            }
+        } catch (IOException ex) {
+            System.err.println("Error generating or opening PDF: " + ex.getMessage());
+        }
+    }
+
+    // Platform-specific file opening method
+    private void openFile(File file) {
+        try {
+            String os = System.getProperty("os.name").toLowerCase();
+            if (os.contains("win")) {
+                // For Windows
+                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + file.getAbsolutePath());
+            } else if (os.contains("mac")) {
+                // For macOS
+                Runtime.getRuntime().exec("open " + file.getAbsolutePath());
+            } else {
+                // For Linux/Unix
+                Runtime.getRuntime().exec("xdg-open " + file.getAbsolutePath());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    }
+
+

@@ -7,15 +7,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestioncredit1.OffreController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@offre.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestioncredit1.OffreController">
     <children>
         <!-- Search Field and Button -->
-        <HBox prefHeight="40.0" prefWidth="1000.0" spacing="10" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+        <HBox fx:id="hbox_1" alignment="CENTER" layoutX="40.0" prefHeight="40.0" prefWidth="926.0" spacing="10" style="-fx-background-radius: 10;" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="10.0">
             <children>
-                <TextField fx:id="searchField" onKeyReleased="#search_credit" promptText="Search..." />
-            <Button fx:id="myoffres" mnemonicParsing="false" onAction="#navigateToMesOffres" text="myoffres" />
-            <Button mnemonicParsing="false" text="offres to me" />
+                <TextField fx:id="searchField" onKeyReleased="#search_credit" promptText="Search..." style="-fx-background-radius: 10;" />
+            <Button fx:id="myoffres" mnemonicParsing="false" onAction="#navigateToMesOffres" style="-fx-background-radius: 10;" text="myoffres">
+               <font>
+                  <Font name="Cambria Bold" size="12.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" style="-fx-background-radius: 10;" text="offres to me">
+               <font>
+                  <Font name="Cambria Bold" size="12.0" />
+               </font></Button>
+            <Button fx:id="ajouterCredit" mnemonicParsing="false" onAction="#ajouterCredit" style="-fx-background-radius: 10;" text="ajouterCredit" />
 <!--            <Button fx:id="set_credit" mnemonicParsing="false" onAction="#offre_credit" text="set a credit" />&ndash;&gt;-->
             </children>
         </HBox>

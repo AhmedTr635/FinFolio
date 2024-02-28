@@ -1,9 +1,7 @@
 package com.example.gestioncredit1;
 
 import Entity.Offre;
-import Entity.User;
 import Service.OffreService;
-import Service.UserService;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +26,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OffreController {
+    @FXML
+    private Button ajouterCredit;
+
 
     @FXML
     private TextField Montant_offre_toadd;
@@ -110,8 +111,8 @@ public class OffreController {
         credits = creditList.toArray(new Credit[0]);
     }
 
-      User s1 = new User();
-      UserService s11 = new UserService();
+//      User s1 = new User(resultSet.getInt("user_id"));
+//      UserService s11 = new UserService();
 
     public void refreshTable() {
         OffreService of = new OffreService();
@@ -145,7 +146,8 @@ public class OffreController {
                 CreditAnchorpane controller = loader.getController();
 
                 // Fetch the user name from the Credit object
-                String userName = credit.getUserName(); // Assuming you have a method to get user name from Credit
+                String userName = credit.getUserName();
+                String user_id = String.valueOf(credit.getUser().getId());// Assuming you have a method to get user name from Credit
 
                 // Initialize the CreditAnchorpane with data, including the user name
                 controller.initialize(
@@ -155,8 +157,10 @@ public class OffreController {
                         String.valueOf(credit.getInteretMin()),
                         credit.getDateD(),
                         credit.getDateF(),
-                        String.valueOf(credit.getId()), // Pass creditID
-                        userName // Pass user name
+                        String.valueOf(credit.getUser().getId()), // Fetch user ID from User object associated with Credit
+                        userName, // Pass creditID
+                        String.valueOf(credit.getId()),
+                        user_id// Pass user name
                 );
 
                 // Set layout position for the current anchor pane
@@ -172,7 +176,6 @@ public class OffreController {
             }
         }
     }
-
 
 
     @FXML
@@ -292,6 +295,8 @@ public class OffreController {
                 CreditAnchorpane controller = loader.getController();
 
                 // Fetch the user name from the Credit object
+                int user_id = credit.getUser().getId();
+
                 String userName = credit.getUserName(); // Assuming you have a method to get user name from Credit
 
                 // Initialize the CreditAnchorpane with data, including the user name
@@ -302,9 +307,11 @@ public class OffreController {
                         String.valueOf(credit.getInteretMin()),
                         credit.getDateD(),
                         credit.getDateF(),
-                        String.valueOf(credit.getId()), // Pass creditID
-                        userName // Pass user name
-                );
+                        String.valueOf(credit.getUser().getId()), // Fetch user ID from User object associated with Credit
+                        userName, // Pass creditID
+                        String.valueOf(credit.getId()),
+                        String.valueOf(user_id)
+                );// Pass user name
 
                 // Add the credit anchor pane to the VBox (creditInfoVBox)
                 creditInfoVBox.getChildren().add(creditAnchorPane);
@@ -324,5 +331,21 @@ public class OffreController {
 
         // Update the display with the search results
         updateDisplay(searchResults);
+    }
+
+    public void ajouterCredit(ActionEvent actionEvent) {
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("ajouterCredit.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ajouterCredit.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 }

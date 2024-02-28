@@ -7,40 +7,40 @@ public class Credit {
     private double interetMin;
     private String dateD;
     private String dateF;
-    private int user_id;
+    private User user;
     private String userName; // New field for the user's name
 
     // Constructors, getters, and setters
 
-    public Credit(int id, double montant, double interetMax, double interetMin, String dateD, String dateF, int user_id, String userName) {
+    public Credit(int id, double montant, double interetMax, double interetMin, String dateD, String dateF, User user_id, String userName) {
         this.id = id;
         this.montant = montant;
         this.interetMax = interetMax;
         this.interetMin = interetMin;
         this.dateD = dateD;
         this.dateF = dateF;
-        this.user_id = user_id;
+        this.user = user_id;
         this.userName = userName;
     }
 
-    public Credit(double montant, double interetMax, double interetMin, String dateD, String dateF, int user_id) {
+    public Credit(double montant, double interetMax, double interetMin, String dateD, String dateF, User user_id) {
         this.id = id;
         this.montant = montant;
         this.interetMax = interetMax;
         this.interetMin = interetMin;
         this.dateD = dateD;
         this.dateF = dateF;
-        this.user_id = user_id;
+        this.user = user_id;
     }
 
-    public Credit(double montant, double interetMax, double interetMin, String dateD, String dateF, int user_id,String userName) {
+    public Credit(double montant, double interetMax, double interetMin, String dateD, String dateF, User user_id,String userName) {
         this.id = id;
         this.montant = montant;
         this.interetMax = interetMax;
         this.interetMin = interetMin;
         this.dateD = dateD;
         this.dateF = dateF;
-        this.user_id = user_id;
+        this.user = user_id;
         this.userName=userName;
     }
 
@@ -92,12 +92,12 @@ public class Credit {
         this.dateF = dateF;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getUserName() {
@@ -117,7 +117,7 @@ public class Credit {
                 ", interetMin=" + interetMin +
                 ", dateD='" + dateD + '\'' +
                 ", dateF='" + dateF + '\'' +
-                ", user_id=" + user_id +
+                ", user_id=" + user +
                 ", userName='" + userName + '\'' +
                 '}';
     }

@@ -1,7 +1,9 @@
 package com.example.gestioncredit1;
 
 import Entity.Credit;
+import Entity.User;
 import Service.CreditService;
+import Service.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,7 +15,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
@@ -106,13 +107,19 @@ public class CreditController {
 
     public void refreshTable() {
         CreditService cr = new CreditService();
+        int userId = 1;
         observableList.clear();
-        observableList.addAll(cr.readAllCredits());
+        observableList.addAll(cr.getCreditsByUserId(userId ));
     }
 
     public void initialize() {
         CreditService cr = new CreditService();
-        observableList = FXCollections.observableList(cr.readAllCredits());
+
+
+
+        // Replace 1 with the ID of the currently logged-in user
+        int userId = 1;
+        observableList = FXCollections.observableList(cr.getCreditsByUserId(userId));
 
         tableau.setItems(observableList);
 
@@ -127,7 +134,8 @@ public class CreditController {
             if (newSelection != null) {
                 // Populate input fields with selected credit's details
                 Credit selectedCredit = tableau.getSelectionModel().getSelectedItem();
-                tf_iduser.setText(String.valueOf(selectedCredit.getUser_id()));
+
+                tf_iduser.setText(String.valueOf(selectedCredit.getUser().getId()));
                 tf_date_D.setValue(LocalDate.parse(selectedCredit.getDateD()));
                 tf_date_F.setValue(LocalDate.parse(selectedCredit.getDateF()));
                 tf_montant.setText(String.valueOf(selectedCredit.getMontant()));
@@ -164,23 +172,36 @@ public class CreditController {
 //    }
 
 
+
     @FXML
     void ajouterButton(ActionEvent event) {
-
         try {
-            int id = Integer.parseInt(tf_iduser.getText());
+            int userId = 1; // Set user ID to 1
             LocalDate dateD = tf_date_D.getValue(); // Get the selected start date
             LocalDate dateF = tf_date_F.getValue(); // Get the selected end date
             double montant = Double.parseDouble(tf_montant.getText());
             double intM = Double.parseDouble(itf_intret_Ma.getText());
             double intMi = Double.parseDouble(tf_intretMin.getText());
+                  UserService userService = new UserService();
+            // Retrieve the User object corresponding to the provided ID
+            User user = userService.getUserByid(userId);
+            if (user == null) {
+                // Handle case where user is not found
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Utilisateur non trouvé.");
+                alert.showAndWait();
+                return;
+            }
 
+            // Assuming Credit class has a constructor that accepts these parameters
+            Credit c1 = new Credit(montant, intM, intMi, dateD.toString(), dateF.toString(), user);
             CreditService cs = new CreditService();
-            Credit c1 = new Credit(montant, intM, intMi, dateD.toString(), dateF.toString(), id);
             cs.addi(c1);
 
             // Show alert after successful addition
-            Alert alert = new Alert(AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
             alert.setHeaderText(null);
             alert.setContentText("Crédit ajouté avec succès à votre compte. Vous pouvez désormais recevoir des offres de crédit d'autres clients. Merci!!");
@@ -188,16 +209,15 @@ public class CreditController {
             refreshTable();
         } catch (NumberFormatException e) {
             // Handle the case where the input fields are not valid numbers
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("Veuillez entrer des valeurs numériques valides.");
             alert.showAndWait(); // Wait for the user to close the alert
             refreshTable();
         }
-
-
     }
+
 
 
     @FXML

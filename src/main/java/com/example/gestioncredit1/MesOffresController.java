@@ -2,7 +2,9 @@ package com.example.gestioncredit1;
 
 import Entity.Credit;
 import Entity.Offre;
+import Service.CreditService;
 import Service.OffreService;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -10,12 +12,21 @@ import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 
-import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class MesOffresController {
-
+    public Label montantErrorMessageLabel;
+    public Label intretErrorMessageLabel;
+    public Label interetErrorMessageLabel;
+    private Map<Integer, String> userIdToNameMap;
+    @FXML
+    public TableColumn user_name_offre;
     @FXML
     private Button Update_offre;
 
@@ -58,6 +69,15 @@ public class MesOffresController {
 
     public void initialize() {
         OffreService offreService = new OffreService();
+        CreditService creditService = new CreditService();
+
+        // Fetch all credits and build a map of user IDs to user names
+        List<Credit> allCredits = creditService.readAllCredits();
+        Map<Integer, String> userIdToNameMap = new HashMap<>();
+        for (Credit credit : allCredits) {
+            userIdToNameMap.put(credit.getUser().getId(), credit.getUserName());
+        }
+
         observableList2 = FXCollections.observableList(offreService.getAllOffres());
 
         tableau_Offre.setItems(observableList2);
@@ -67,6 +87,15 @@ public class MesOffresController {
         intret_offre.setCellValueFactory(new PropertyValueFactory<>("interet"));
         user_id_offre.setCellValueFactory(new PropertyValueFactory<>("user_id"));
         credit_id_offre1.setCellValueFactory(new PropertyValueFactory<>("credit_id"));
+
+        // Add a new TableColumn for user name
+        TableColumn<Offre, String> user_name_offre = new TableColumn<>("User Name");
+        user_name_offre.setCellValueFactory(cellData -> {
+            int userId = cellData.getValue().getUser_id();
+            String userName = userIdToNameMap.getOrDefault(userId, "Unknown"); // Get user name from the map
+            return new SimpleStringProperty(userName);
+        });
+        tableau_Offre.getColumns().add(user_name_offre);
 
         tableau_Offre.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -136,8 +165,6 @@ public class MesOffresController {
     }
 
 
-
-
     @FXML
     void delete_offre(ActionEvent event) {
         Offre selectedOffre = tableau_Offre.getSelectionModel().getSelectedItem();
@@ -177,8 +204,45 @@ public class MesOffresController {
     }
 
 
+    @FXML
+    void montantinput(KeyEvent event) {
+        handleNumericInput(montantInput, montantErrorMessageLabel, event);
+    }
 
+    @FXML
+    void intretinput(KeyEvent event) {
+        handleNumericInput(interetInput, intretErrorMessageLabel, event);
+    }
 
-
+    private void handleNumericInput(TextField textField, Label montantErrorMessageLabel, KeyEvent event) {
+        String character = event.getCharacter();
+        if (!character.matches("[0-9]")) {
+            event.consume(); // Consume the event to prevent the character from being entered
+            textField.setStyle("-fx-border-color: red;");
+            textField.setStyle("-fx-text-fill: red;");
+            switch (textField.getId()) {
+                case "montantInput":
+                    this.montantErrorMessageLabel.setTextFill(Color.RED);
+                    this.montantErrorMessageLabel.setText("Veuillez entrer un numéro valide.");
+                    break;
+                case "interetInput":
+                    interetErrorMessageLabel.setTextFill(Color.RED);
+                    interetErrorMessageLabel.setText("Veuillez entrer un numéro valide.");
+                    break;
+            }
+        } else {
+            textField.setStyle("-fx-border-color: blue;");
+            textField.setStyle("-fx-text-fill: black;");
+            switch (textField.getId()) {
+                case "montantInput":
+                    this.montantErrorMessageLabel.setText("");
+                    break;
+                case "interetInput":
+                    interetErrorMessageLabel.setText("");
+                    break;
+            }
+        }
+    }
 }
+
 

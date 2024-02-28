@@ -1,6 +1,7 @@
 package com.example.gestioncredit1;
 
 import Entity.Offre;
+import Entity.User;
 import Service.OffreService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +23,9 @@ public class SendOffre {
     private TextField userIdTextField;
 
     private String creditID;
+    private int userId;
+
+
 
     public void initialize() {
         // Initialize the creditID text field with the passed creditID
@@ -86,5 +90,13 @@ public class SendOffre {
         alert.setHeaderText(headerText);
         alert.setContentText(contentText);
         alert.showAndWait();
-    }}
+    }
+
+    public void setUserID(int userId) {
+
+           this.userId=userId;
+         userIdTextField.setText(String.valueOf(userId));
+
+    }
+}
 
