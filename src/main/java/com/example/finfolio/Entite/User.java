@@ -18,6 +18,9 @@ public class User {
     private String statut;
     private  String image;
 
+    public User(int userId, String nom, String prenom, String email) {
+    }
+
     public String getImage() {
         return image;
     }
@@ -223,4 +226,7 @@ public class User {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
+
 }

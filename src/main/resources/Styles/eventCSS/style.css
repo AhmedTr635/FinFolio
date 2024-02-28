@@ -34,11 +34,20 @@
 
 .upcoming-event{
     -fx-background-color: linear-gradient(to right, #000248, #004e92);
-    -fx-background-radius: 50px;
+    -fx-background-radius: 35px;
 }
 
 
 .chosen-event{
     -fx-background-color: linear-gradient(to right, #302b63, #00008b);
     -fx-background-radius: 30px;
+}
+
+.side_bar{
+    -fx-background-color: #00008b;
+}
+
+.btn_annuler, .btn_don{
+    -fx-background-color: #00008b;
+
 }

@@ -22,7 +22,7 @@ public class EvennementService {
 
 
     public void add(Evennement ev) {
-        String request="insert into evenement (nom,montant,date,adresse) values(?,?,?,?)";
+        String request="insert into evenement (nom_event,montant,date,adresse) values(?,?,?,?)";
 
         try {
             pst=connexion.prepareStatement(request);
@@ -60,7 +60,7 @@ public class EvennementService {
 
 
     public void update(Evennement ev, int id) {
-        String request="update evenement set nom = ?, montant = ?, date= ?, adresse= ? where id = ? ";
+        String request="update evenement set nom_event = ?, montant = ?, date= ?, adresse= ? where id = ? ";
 
         try{
             pst=connexion.prepareStatement(request);
@@ -127,7 +127,7 @@ public class EvennementService {
 
 
     public List<Evennement> rechercherEvent(String evnt) throws SQLException {
-        String requeteSQL = "SELECT * FROM evenement WHERE nom LIKE ? OR montant LIKE ? OR date LIKE ? OR adresse LIKE ?";
+        String requeteSQL = "SELECT * FROM evenement WHERE nom_event LIKE ? OR montant LIKE ? OR date LIKE ? OR adresse LIKE ?";
 
 
 
@@ -225,6 +225,9 @@ public class EvennementService {
         return upcomingEvent;
 
     }
+
+
+
 
     public static EvennementService getInstance() {
         if (instance == null) {

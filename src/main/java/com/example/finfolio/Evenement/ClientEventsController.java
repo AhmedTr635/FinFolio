@@ -4,6 +4,7 @@ package com.example.finfolio.Evenement;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.List;
@@ -17,8 +18,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
@@ -72,7 +75,11 @@ public class ClientEventsController {
     private Label event_name_up;
 
     @FXML
-    private GridPane calendar;
+    private TextField searchfield;
+
+
+    @FXML
+    private Button btnsearch;
 
     /*   @FXML
        private AnchorPane event_container;
@@ -163,47 +170,43 @@ public class ClientEventsController {
 
 
 
-
-
-
-    }
-
-
-/*    @FXML
-    void search_event(ActionEvent event) {
-        String searchTerm = search_field.getText();
+    @FXML
+    void searchEvent(ActionEvent event) throws SQLException {
+        String searchTerm = searchfield.getText();
 
         // Fetch events from EvennementService based on the search term
-        List<Evennement> events = EvennementService.getInstance().searchByName(searchTerm);
+        List<Evennement> events = EvennementService.getInstance().rechercherEvent(searchTerm);
 
-        // Display filtered events in TableView
-        ObservableList<Evennement> eventList = FXCollections.observableArrayList(events);
-        events_table.setItems(eventList);
-    }*/
+        // Clear existing content in the event container
+        event_container.getChildren().clear();
 
+        // Load matching events into the event container
+        for (Evennement evnt : events) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/Evennement/eventCell.fxml"));
+                AnchorPane eventCell = fxmlLoader.load();
 
+                // Set event data to the cell's controllers here.
+                // You might need to get the controller from the loader and then
+                // set the properties individually, like event name, date, place, etc.
+                EventCellController controller = fxmlLoader.getController();
+                controller.setEventData(evnt);
 
-    // Other setter methods for date, place, etc.
+                // Add the cell to the container.
+                event_container.getChildren().add(eventCell);
 
-    // EvennementService evs = new EvennementService();
-
-    //   List<Evennement> events = evs.readAll();
-
-
-     /*  for (Evennement event : events) {
-                // Pass the values to the DepenseCellController
-                event_date.setText(event.getDate().toString());
-                event_name.setText(event.getNom());
-                event_montant.setText(String.valueOf(event.getMontant()));
-                event_address.setText((event.getAdresse()));
-
-
-                // Ajoute la cellule au conteneur
-
-
-
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle the exception
+            }
+        }
     }
-       event_container.getChildren().addAll(event_date,event_name,event_montant,event_address);
-*/
+
+
+
+
+}
+
+
 
 

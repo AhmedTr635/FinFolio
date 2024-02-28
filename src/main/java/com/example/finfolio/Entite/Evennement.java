@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Evennement {
     private int id;
 
-    private String nom;
+    private String nom_event;
 
     private float montant;
 
@@ -17,20 +17,23 @@ public class Evennement {
     }
 
 
-    public Evennement(int id, String nom, float montant, LocalDate date, String adresse) {
+    public Evennement(int id, String nom_event, float montant, LocalDate date, String adresse) {
         this.id = id;
-        this.nom = nom;
+        this.nom_event = nom_event;
         this.montant = montant;
         this.date = date;
         this.adresse= adresse;
 
     }
 
-    public Evennement(String nom, float montant, LocalDate date, String adresse) {
-        this.nom = nom;
+    public Evennement(String nom_event, float montant, LocalDate date, String adresse) {
+        this.nom_event = nom_event;
         this.montant = montant;
         this.date = date;
         this.adresse=adresse;
+    }
+
+    public Evennement(String nomEvenemment, LocalDate dateEvenemment) {
     }
 
     public int getId() {
@@ -42,7 +45,7 @@ public class Evennement {
     }
 
     public String getNom() {
-        return nom;
+        return nom_event;
     }
 
     public String getAdresse() {
@@ -53,8 +56,8 @@ public class Evennement {
         this.adresse = adresse;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNom(String nom_event) {
+        this.nom_event = nom_event;
     }
 
     public float getMontant() {

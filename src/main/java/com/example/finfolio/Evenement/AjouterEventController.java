@@ -53,64 +53,55 @@ public class AjouterEventController {
 
     @FXML
     void initialize() {
-        inputcontrol();
+
 
     }
 
     @FXML
     void ajouter_event(ActionEvent event) {
+        // Récupérer les valeurs saisies dans les champs
         String nom = event_name.getText();
         LocalDate date = event_date.getValue();
         String adresse = event_address.getText();
-        Float montant = Float.valueOf(event_montant.getText());
+        String montantText = event_montant.getText();
 
+        // Vérifier si tous les champs sont remplis
+        if (nom.isEmpty() || date == null || adresse.isEmpty() || montantText.isEmpty()) {
+            showAlert("Erreur", "Veuillez remplir tous les champs.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Vérifier si le montant est un nombre valide
+        Float montant;
+        try {
+            montant = Float.valueOf(montantText);
+        } catch (NumberFormatException e) {
+            showAlert("Erreur", "Le montant doit être un nombre valide.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Créer un nouvel événement
         Evennement e = new Evennement(nom, montant, date, adresse);
         EvennementService evs = new EvennementService();
         evs.add(e);
 
+        // Fermer la fenêtre actuelle
         Stage stage = (Stage) btn_ajouter.getScene().getWindow();
         stage.close();
 
-
-
-        // Méthode utilitaire pour afficher une boîte de dialogue d'alerte
+        // Afficher un message de succès
+        showAlert("Succès", "Événement ajouté avec succès.", Alert.AlertType.INFORMATION);
     }
-    private boolean inputcontrol(){
-        if(event_name.getText().isEmpty()){
-            saisie_nom.setText("Veuillez entrer le nom de l'evennement");
-            event_name.setStyle("-fx-text-inner-color: red;-fx-border-color: red");
-            saisie_nom.setStyle("-fx-text-fill: red;");
 
-            return false;
-        }
-        if(event_name.getText().length()<3 || event_name.getText().length()>32  ){
-            saisie_nom.setText("Nom doit être entre 3 et 32 caractères");
-            return false;
-        }
-        if(event_date.getValue()==null){
-            saisie_date.setText("Veuillez entrer la date");
-            event_date.setStyle("-fx-text-inner-color: red;-fx-border-color: red");
-            saisie_date.setStyle("-fx-text-fill: red;");
-
-            return false;
-        }
-
-        if(event_address.getText().isEmpty()){
-            saisie_addresse.setText("Veuillez entrer l'adresse.");
-            event_address.setStyle("-fx-text-inner-color: red;-fx-border-color: red");
-            saisie_addresse.setStyle("-fx-text-fill: red;");
-
-            return false;}
-
-        if(!event_montant.getText().matches("^\\d+(\\.\\d{1,2})?$")){
-            saisie_montant.setStyle("-fx-text-inner-color: red;-fx-border-color: red");
-            saisie_montant.setText("Numéro de téléphone doit être exactement 8 chiffres");
-            event_montant.setStyle("-fx-text-fill: red;");
-            return false;}
+    // Méthode utilitaire pour afficher une boîte de dialogue d'alerte
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }}
 
 
 
-        return true;
-    }
-}
 

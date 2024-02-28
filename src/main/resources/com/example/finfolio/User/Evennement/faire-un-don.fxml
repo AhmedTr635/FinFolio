@@ -6,28 +6,34 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="312.0" prefWidth="468.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Evenement.AjouterDonController">
     <children>
-        <Button fx:id="btnAdd" layoutX="247.0" layoutY="193.0" mnemonicParsing="false" onAction="#faireundon" text="Faire un don" />
-        <Button fx:id="btn_annuler" layoutX="352.0" layoutY="193.0" mnemonicParsing="false" onAction="#annuler" text="Annuler" />
-        <Label layoutX="203.0" layoutY="71.0" text="Veuillez entrer votre montant:" textFill="#4a487c">
+        <Button fx:id="btnAdd" layoutX="247.0" layoutY="193.0" mnemonicParsing="false" onAction="#faireundon" styleClass="btn_don" stylesheets="@../../../../../Styles/eventCSS/style.css" text="Faire un don" textFill="WHITE" />
+        <Button fx:id="btn_annuler" layoutX="352.0" layoutY="193.0" mnemonicParsing="false" onAction="#annuler" styleClass="btn_annuler" stylesheets="@../../../../../Styles/eventCSS/style.css" text="Annuler" textFill="WHITE" />
+        <Label layoutX="203.0" layoutY="71.0" text="Veuillez entrer votre montant:" textFill="#1b1797">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="94.0" layoutY="14.0" text="Donner en toute confiance !" textFill="#292975">
+        <Label layoutX="189.0" layoutY="15.0" text="Donner en toute confiance !" textFill="#0d0d6f">
             <font>
-                <Font name="System Bold" size="24.0" />
+                <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../Pics/EventPics/charity.png" />
-            </image></ImageView>
         <TextField fx:id="montant_field" layoutX="256.0" layoutY="144.0" />
         <Label fx:id="event_id" layoutX="203.0" layoutY="210.0" text="id" textFill="#fff6f6" />
       <Label fx:id="user_id" layoutX="199.0" layoutY="136.0" text="iduser" textFill="#fff6f6" />
+      <Pane layoutY="-2.0" prefHeight="320.0" prefWidth="164.0" styleClass="side_bar" stylesheets="@../../../../../Styles/eventCSS/style.css">
+         <children>
+            <ImageView fitHeight="109.0" fitWidth="96.0" layoutX="34.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Pics/EventPics/partager.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
     </children>
 </AnchorPane>

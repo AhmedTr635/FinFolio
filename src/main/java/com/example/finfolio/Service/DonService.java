@@ -2,11 +2,12 @@ package com.example.finfolio.Service;
 
 import com.example.finfolio.Entite.Don;
 import com.example.finfolio.Entite.Evennement;
+import com.example.finfolio.Entite.User;
 import com.example.finfolio.util.DataSource;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 
 
 public class DonService  {
@@ -135,6 +136,104 @@ public class DonService  {
 
         return null;
     }
+
+    public List<Don> getDonationsWithDetails() {
+        List<Don> donations = new ArrayList<>();
+        String query = "SELECT d.user_id, d.montant_user, d.evenement_id, u.nom, u.prenom, u.email, e.*  " +
+                "FROM don d " +
+                "JOIN user u ON d.user_id = u.id " +
+                "JOIN evenement e ON d.evenement_id = e.id";
+        try (
+                PreparedStatement pst = connexion.prepareStatement(query);
+                ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                int userId = rs.getInt("user_id");
+                int eventId =rs.getInt("evenement_id");
+                float montant = rs.getFloat("montant_user");
+                String nom = rs.getString("nom");
+                String prenom = rs.getString("prenom");
+                String email = rs.getString("email");
+                String nomEvenemment = rs.getString("nom_event");
+                LocalDate dateEvenemment = rs.getDate("date").toLocalDate();
+
+                // Créer un objet User avec les détails de l'utilisateur
+                UserService us = new UserService();
+                EvennementService ev = new EvennementService();
+                User u =  us.readById(userId);
+                Evennement event= ev.readById(eventId);
+/*
+                System.out.println(event);
+*/
+               event.setNom(nomEvenemment);
+                System.out.println(nomEvenemment);
+                event.setDate(dateEvenemment);
+                u.setEmail(email);
+                u.setNom(nom);
+
+
+
+                // Créer un objet Don avec les détails récupérés et l'ajouter à la liste
+                Don donation = new Don(montant, u, event);
+                donations.add(donation);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Gérer l'exception selon vos besoins
+        }
+        return donations;
+    }
+
+
+
+
+
+
+
+/*
+    public List<Don> getDonationsWithDetails(int eventId) {
+        List<Don> donations = new ArrayList<>();
+        String query = "SELECT d.user_id, d.montant_user, d.evenement_id, u.nom, u.prenom, u.email, e.nom, e.date " +
+                "FROM don d " +
+                "JOIN user u ON d.user_id = u.id " +
+                "JOIN evenement e ON d.evenement_id = e.id " +
+                "WHERE d.evenement_id = ?";
+        try (
+             PreparedStatement pst = connexion.prepareStatement(query)) {
+            pst.setInt(1, eventId);
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    int userId = rs.getInt("user_id");
+                    float montant = rs.getFloat("montant_user");
+                    String nom = rs.getString("nom");
+                    String prenom = rs.getString("prenom");
+                    String email = rs.getString("email");
+                    String nomEvenemment = rs.getString("nom");
+                    LocalDate dateEvenemment = rs.getDate("date").toLocalDate();
+
+
+                    // Créer un objet User avec les détails de l'utilisateur
+                   UserService us = new UserService();
+                   EvennementService ev = new EvennementService();
+                  User u =  us.readById(userId);
+                  Evennement event= ev.readById(eventId);
+                  event.setNom(nomEvenemment);
+                  event.setDate(dateEvenemment);
+                  u.setEmail(email);
+
+                  u.setNom(nom);
+                    // Créer un objet Don avec les détails récupérés et l'ajouter à la liste
+                    Don donation = new Don(montant,u ,event);
+                    donations.add(donation);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Gérer l'exception selon vos besoins
+        }
+        return donations;
+    }
+*/
+
 
 
     public static DonService getInstance() {

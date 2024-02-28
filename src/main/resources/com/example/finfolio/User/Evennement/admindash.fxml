@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane fx:id="big_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionevenemet.AdminDashController">
+<AnchorPane fx:id="big_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1072.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionevenemet.AdminDashController">
     <children>
         <HBox fx:id="top_container" layoutY="1.0" prefHeight="107.0" prefWidth="749.0">
             <children>
@@ -28,14 +28,16 @@
                     </children>
                 </AnchorPane>
             </children></HBox>
-        <TableView fx:id="events_table" layoutY="117.0" prefHeight="284.0" prefWidth="830.0" styleClass="table" stylesheets="@../../../CSS/admindash.css">
+        <TableView fx:id="events_table" layoutX="25.0" layoutY="108.0" prefHeight="284.0" prefWidth="456.0" styleClass="table" stylesheets="@../../../CSS/admindash.css">
             <columns>
-                <TableColumn fx:id="event_name" prefWidth="321.0" text="Evennements" />
-                <TableColumn fx:id="event_date" prefWidth="81.0" text="Date" />
-                <TableColumn fx:id="event_address" prefWidth="116.0" text="Adresse" />
-                <TableColumn fx:id="event_montant" prefWidth="120.0" text="Montant" />
-                <TableColumn fx:id="event_action" prefWidth="191.0" text="Action" />
+                <TableColumn fx:id="event_name" prefWidth="99.0" text="Evennements" />
+                <TableColumn fx:id="event_date" prefWidth="63.0" text="Date" />
+                <TableColumn fx:id="event_address" text="Adresse" />
+                <TableColumn fx:id="event_montant" minWidth="0.0" prefWidth="73.0" text="Montant" />
+                <TableColumn fx:id="event_action" prefWidth="139.0" text="Action" />
             </columns>
         </TableView>
+
+
     </children>
 </AnchorPane>

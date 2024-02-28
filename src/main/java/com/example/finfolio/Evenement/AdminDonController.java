@@ -23,11 +23,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class AdminDonController {
 
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private TableColumn<Don, Float> don_montant;
@@ -54,38 +49,13 @@ public class AdminDonController {
 
     @FXML
     void initialize() {
-        loadDonations();
+      //  loadDonations();
         loadDonationsChart();
     }
 
 
-    private void loadDonations() {
-        // Fetch donations from DonService
-        Don d = new Don();
-        List<Don> donations = DonService.getInstance().readAll();
-
-        // Create an ObservableList from the list of donations
-        ObservableList<Don> donationList = FXCollections.observableArrayList(donations);
-
-        // Set the items of the TableView to the ObservableList of donations
-        don_table.setItems(donationList);
-
-        // Associate each TableColumn with the appropriate property of the Donation object
-        don_montant.setCellValueFactory(new PropertyValueFactory<>("montant_user"));
-        event_id.setCellValueFactory(cellData -> {
-            Don donation = cellData.getValue();
-            Evennement event = donation.getEvennement();
-            if (event != null) {
-                return new SimpleObjectProperty(String.valueOf(event.getId()));
-            } else {
-                return new SimpleObjectProperty(""); // Or any default value you want to display if there's no associated event
-            }
-        });
-        user_id.setCellValueFactory(new PropertyValueFactory<>("user_id")); // Assuming you have a method to get the user ID from the donation
 
 
-
-    }
 
 
     private void loadDonationsChart() {
