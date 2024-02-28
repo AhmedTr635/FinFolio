@@ -121,12 +121,7 @@ public class SignUpController  implements Initializable {
         //String imagePath = null;
 
         if (inputcontrol()) {
-            /*String selectedImagePath = importImage();
 
-            // If an image is selected, update the imagePath
-            if (selectedImagePath != null) {
-                imagePath = selectedImagePath;
-            }*/
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
             byte[] hash = digest.digest(modp_field.getText().getBytes());
             StringBuilder hexString = new StringBuilder();

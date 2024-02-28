@@ -25,7 +25,10 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="changeeBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" styleClass="Button" text="Changer la photo de profil" />
+      <Button fx:id="changeeBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" styleClass="ButtonImage" text="Changer la photo ">
+         <graphic>
+            <FontAwesomeIconView glyphName="CAMERA" size="17" />
+         </graphic></Button>
    </VBox>
    <VBox layoutX="277.0" layoutY="45.0" prefHeight="550.0" prefWidth="564.0">
       <Label prefHeight="18.0" prefWidth="518.0" text="Parametres du profil" textFill="#fffafa">
@@ -111,7 +114,7 @@
          <Label fx:id="mdpcerror" prefHeight="18.0" prefWidth="446.0" />
       </VBox>
    </VBox>
-   <Button fx:id="sauvegarderBtn" layoutX="485.0" layoutY="627.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" styleClass="Button" text="Sauvegarder">
+   <Button fx:id="sauvegarderBtn" layoutX="485.0" layoutY="627.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" styleClass="ButtonImage" text="Sauvegarder">
       <graphic>
          <FontAwesomeIconView glyphName="CHECK" selectionFill="DARKBLUE" size="20" />
       </graphic>

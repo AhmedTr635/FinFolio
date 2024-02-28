@@ -111,16 +111,16 @@ public void mdpOublie()
 }
     public void onLogin() throws NoSuchAlgorithmException, SQLException {
 
-       Stage st2 = (Stage) error_label.getScene().getWindow();
+       /*Stage st2 = (Stage) error_label.getScene().getWindow();
         Model.getInstance().getViewFactory().closeStage(st2);
         UserService userS = new UserService();
 
         /*User u1= userS.getUserByEmail("trabelsi.dali@esprit.tn");
-        Model.getInstance().setUser(u1);*/
+        Model.getInstance().setUser(u1);
         //Model.getInstance().getViewFactory().showUserWindow();
-        Model.getInstance().getViewFactory().showAdminWindow();
+        Model.getInstance().getViewFactory().showAdminWindow();*/
 
-       /* if(validateEmailField(mail_field,mailError)){
+       if(validateEmailField(mail_field,mailError)){
        UserService userS = new UserService();
        String dateString;
        LocalDate dateFromString;
@@ -254,7 +254,7 @@ public void mdpOublie()
             capcthaError.setText("Code Incorrecte");
 
 
-        } }       */
+        } }
     }
 
     private boolean validateEmailField(TextField emailField, Label errorLabel) {

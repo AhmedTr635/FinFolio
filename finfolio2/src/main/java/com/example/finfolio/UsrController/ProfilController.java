@@ -1,6 +1,7 @@
 package com.example.finfolio.UsrController;
 
 import Models.Model;
+import Views.AlerteFinFolio;
 import com.example.finfolio.Entite.User;
 import com.example.finfolio.Service.UserService;
 import javafx.fxml.FXML;
@@ -118,6 +119,7 @@ public class ProfilController implements Initializable {
             User user = new User(Model.getInstance().getUser().getId(),nomFld.getText(), prenomFld.getText(), emailFld.getText(), "+216" + numTelFld.getText(), pass, "Mourouj", 0, 2, "user", Model.getInstance().getUser().getSolde(),Model.getInstance().getUser().getStatut() , imagePath,Model.getInstance().getUser().getDatepunition());
             UserService userS = new UserService();
             userS.update(user);
+            AlerteFinFolio.alerteSucces("Vos données sont modifiées","Modification des données");
         }
     }
 

@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="create_user_container" stylesheets="@../../../../Styles/CreateUser.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Admin.CreateUserController">
-   <Text layoutX="66.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer un nouveau utilisateur" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+   <Text layoutX="66.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer un nouveau admin" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
    <VBox fillWidth="false" layoutX="24.0" layoutY="62.0" prefHeight="700.0" prefWidth="600.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="40.0">
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" />
-      <TextField fx:id="nom_fld" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom" />
-      <TextField fx:id="prenom_fld" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe" />
-      <TextField fx:id="mdp_fld" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-      <TextField fx:id="email_fld" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro de telephone" />
-      <TextField fx:id="tel_fld" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Role" />
-      <ChoiceBox fx:id="role_box" prefWidth="150.0" styleClass="role_selector" />
+      <TextField fx:id="nom_fld" promptText="Nom" />
+      <Label fx:id="error_nom" styleClass="error_lbl" />
+      <TextField fx:id="prenom_fld" promptText="Prénom" />
+      <Label fx:id="error_prenom" styleClass="error_lbl" />
+      <TextField fx:id="email_fld" promptText="Email" />
+      <Label fx:id="error_mail" styleClass="error_lbl" />
+      <PasswordField fx:id="mdp_fld" promptText="Mot de passe" />
+      <Label fx:id="error_mdp" styleClass="error_lbl" />
+      <TextField fx:id="tel_fld" promptText="Numéro de telepĥone" />
+      <Label fx:id="error_ntel" styleClass="error_lbl" />
       <Button fx:id="creer_btn" mnemonicParsing="false" text="Créer " />
-      <Label fx:id="error_lbl" styleClass="error_lbl" text="error" />
    </VBox>
 </AnchorPane>

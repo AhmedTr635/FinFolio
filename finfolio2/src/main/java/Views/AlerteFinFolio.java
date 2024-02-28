@@ -35,6 +35,15 @@ public class AlerteFinFolio {
             alert.setContentText(string);
         return alert.showAndWait();
     }
+    public static Optional<ButtonType> alertechoix(String  string,String title){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(String.valueOf(AlerteFinFolio.class.getResource("/com/example/finfolio/Pics/icon.png"))));
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(string);
+        return alert.showAndWait();
+    }
     }
 
 

@@ -18,6 +18,14 @@
     -fx-font-size: 1.3em;
     -fx-effect: dropshadow(three-pass-box,#AAAAAA,3,0,0,3);
  }
+.create_user_container PasswordField {
+    -fx-pref-width: 250;
+    -fx-pref-height: 35;
+
+    -fx-background-color: #FFFFFF;
+    -fx-font-size: 1.3em;
+    -fx-effect: dropshadow(three-pass-box,#AAAAAA,3,0,0,3);
+}
  .create_user_container Button {
      -fx-background-color: linear-gradient(to right,#00008b,#123499);
      -fx-effect: dropshadow(three-pass-box,#AAAAAA,3,0,0,3);

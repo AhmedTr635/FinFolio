@@ -131,42 +131,44 @@ public class UsersAdController implements Initializable {
             else                 dateCh.setVisible(false);
 
         });
-
+        try {
+            refreshTableView();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         users_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 // Populate input fields with selected credit's details
                 User user = (User) users_table.getSelectionModel().getSelectedItem();
-                    switch (user.getStatut()){
-                        case "active" -> statut_box.setValue("Active");
-                        case "ban" -> statut_box.setValue("Ban");
-                        case "desactive" -> statut_box.setValue("Desactive");
-                    }
-                    switch ((int) user.getRate())
-                    {
+                switch (user.getStatut()){
+                    case "active" -> statut_box.setValue("Active");
+                    case "ban" -> statut_box.setValue("Ban");
+                    case "desactive" -> statut_box.setValue("Desactive");
+                }
+                switch ((int) user.getRate())
+                {
                     case 1 -> note_box.setValue("1");
                     case 2 -> note_box.setValue("2");
                     case 3 -> note_box.setValue("3");
                     case 4 -> note_box.setValue("4");
                     case 5-> note_box.setValue("5");
 
-                    }
-                    if (!user.getDatepunition().equals("vide"))
-                    {dateCh.setValue(LocalDate.parse(user.getDatepunition()));}
+                }
+                if (!user.getDatepunition().equals("vide"))
+                {dateCh.setValue(LocalDate.parse(user.getDatepunition()));}
                 updateBtn.setOnAction(e-> {
                     try {
                         onConfirmer(user);
+                        refreshTableView();
+
 
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
+
                 });
 
-                UserService us =new UserService();
-                try {
-                    users_table.setItems(FXCollections.observableArrayList(us.readAll()));
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+
 
             }
         });
@@ -222,12 +224,12 @@ public class UsersAdController implements Initializable {
             users_table.setItems(FXCollections.observableArrayList(resultatsRecherche));
 
 
-    });
+        });
         filtreBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             UserService userService = new UserService();
-            List<User> filteredUsers = null;
-            filteredUsers=filtrerType(newValue);
-            users_table.setItems(FXCollections.observableArrayList(filteredUsers));
+            ObservableList<User> filteredUsers = FXCollections.observableArrayList(filtrerType(newValue));
+            users_table.setItems(filteredUsers);
+
 
         });
         UserService us2 =new UserService();
@@ -287,7 +289,7 @@ public class UsersAdController implements Initializable {
                 @Override
                 protected void updateItem(Void item, boolean empty) {
                     super.updateItem(item, empty);
-                    if (empty) {
+                    if (empty ) {
                         setGraphic(null);
                     } else {
                         setGraphic(buttonBox);
@@ -295,7 +297,7 @@ public class UsersAdController implements Initializable {
                 }
             };
         });
-       refreshTableView();
+        //refreshTableView();
 
 
     };
@@ -310,11 +312,11 @@ public class UsersAdController implements Initializable {
         try {
             switch (role) {
                 case "Utilisateur" ->filteredUsers = userService.readAll().stream()
-                            .filter(user -> "user".equals(user.getRole()))
-                            .toList();
+                        .filter(user -> "user".equals(user.getRole()))
+                        .toList();
                 case "Admin"-> filteredUsers = userService.readAll().stream()
-                            .filter(user -> "admin".equals(user.getRole()))
-                            .toList();
+                        .filter(user -> "admin".equals(user.getRole()))
+                        .toList();
                 case "Ban"-> filteredUsers = userService.readAll().stream()
                         .filter(user -> "ban".equals(user.getStatut()))
                         .toList();
@@ -328,16 +330,19 @@ public class UsersAdController implements Initializable {
                 default -> filteredUsers=userService.readAll();
 
             }
-            }
+        }
 
 
 
-     catch (SQLException e) {
+        catch (SQLException e) {
             throw new RuntimeException(e);
-          };
-       return filteredUsers;
+        };
+        return filteredUsers;
     }
     public void onConfirmer(User user) throws SQLException {
+        if (user.getRole().equals("admin"))
+        AlerteFinFolio.alertechoix("Tu ne peux pas punir un admin !","Modifier un admin");
+        else {
         if ("Active".equals(statut_box.getValue())) {
             user.setStatut("active");
 
@@ -360,12 +365,13 @@ public class UsersAdController implements Initializable {
         }
         if (dateCh.isVisible()&& dateCh.getValue()!=null)
         {String date = dateCh.getValue().toString();
-        user.setDatepunition(date);}
+            user.setDatepunition(date);}
         UserService us = new UserService();
         us.update(user);
         AlerteFinFolio.alerteSucces("Utilisateur sauvegardé avec succes","Modification utilisateur");
+        refreshTableView();
 
-    }
+    }}
 
 
     private void initPieChart() throws SQLException {
