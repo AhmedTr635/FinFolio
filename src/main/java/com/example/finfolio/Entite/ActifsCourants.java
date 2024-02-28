@@ -1,4 +1,4 @@
-package entite;
+package com.example.finfolio.Entite;
 
 public class ActifsCourants {
     private int id;

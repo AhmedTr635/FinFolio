@@ -1,7 +1,8 @@
-package entite;
+package com.example.finfolio.Entite;
 
 public class ActifsNonCourants {
     private int id;
+    String name;
     private String type;
     private float valeur;
     private float prix_achat;
@@ -10,19 +11,29 @@ public class ActifsNonCourants {
     public ActifsNonCourants() {
     }
 
-    public ActifsNonCourants(String type, float valeur, float prix_achat, int user_id) {
+    public ActifsNonCourants(String type, String name,float valeur, float prix_achat, int user_id) {
         this.type = type;
         this.valeur = valeur;
         this.prix_achat = prix_achat;
         this.user_id = user_id;
+        this.name=name;
     }
 
-    public ActifsNonCourants(int id, String type, float valeur, float prix_achat, int user_id) {
+    public ActifsNonCourants(int id, String name,String type, float valeur, float prix_achat, int user_id) {
         this.id = id;
         this.type = type;
         this.valeur = valeur;
         this.prix_achat = prix_achat;
         this.user_id = user_id;
+        this.name=name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getId() {
