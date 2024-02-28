@@ -2,12 +2,15 @@ package com.example.finfolio.Evenement;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
 
+import com.example.finfolio.Entite.Don;
 import com.example.finfolio.Entite.Evennement;
+import com.example.finfolio.Service.DonService;
 import com.example.finfolio.Service.EvennementService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -55,6 +59,18 @@ public class AdminDashController {
     @FXML
     private TableView<Evennement> events_table;
 
+    @FXML
+    private BarChart<String, Float> bar_chart_event;
+
+    @FXML
+    private CategoryAxis xAxis;
+
+    @FXML
+    private NumberAxis yAxis;
+
+
+    @FXML
+    private PieChart pi_chart_event;
     @FXML
     private HBox top_container;
 
@@ -112,6 +128,7 @@ public class AdminDashController {
 
         loadEventsFromDatabase();
 
+
     }
 
 
@@ -141,6 +158,7 @@ public class AdminDashController {
             stage.setOnHidden(e -> refreshTableView());
 
             stage.show();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -187,15 +205,19 @@ public class AdminDashController {
 
 
     @FXML
-    void search_event(ActionEvent event) {
+    void search_event(ActionEvent event) throws SQLException {
         String searchTerm = search_field.getText();
 
         // Fetch events from EvennementService based on the search term
-        List<Evennement> events = EvennementService.getInstance().searchByName(searchTerm);
+        List<Evennement> events = EvennementService.getInstance().rechercherEvent(searchTerm);
 
         // Display filtered events in TableView
         ObservableList<Evennement> eventList = FXCollections.observableArrayList(events);
         events_table.setItems(eventList);
     }
+
+
+
+
 
 }

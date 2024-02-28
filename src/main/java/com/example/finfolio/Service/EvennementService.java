@@ -4,6 +4,7 @@ package com.example.finfolio.Service;
 
 
 import com.example.finfolio.Entite.Evennement;
+import com.example.finfolio.Entite.User;
 import com.example.finfolio.util.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
@@ -97,7 +98,9 @@ public class EvennementService {
         return list;
     }
 
-    public List<Evennement> searchByName(String name) {
+
+
+/*    public List<Evennement> searchByName(String name) {
         List<Evennement> events = new ArrayList<>();
         String request="select * from evenement where nom like ?";
         try (PreparedStatement pst = connexion.prepareStatement(request)) {
@@ -118,6 +121,46 @@ public class EvennementService {
         }
 
         return events;
+    }*/
+
+
+
+
+    public List<Evennement> rechercherEvent(String evnt) throws SQLException {
+        String requeteSQL = "SELECT * FROM evenement WHERE nom LIKE ? OR montant LIKE ? OR date LIKE ? OR adresse LIKE ?";
+
+
+
+        // Ajoutez le joker % pour correspondre à n'importe quelle partie de la chaîne
+        evnt= "%" + evnt + "%";
+
+
+        List<Evennement> resultatsRecherche = new ArrayList<>();
+        try (PreparedStatement statement = connexion.prepareStatement(requeteSQL)) {
+
+            statement.setString(1, evnt);
+            statement.setString(2, evnt);
+            statement.setString(3, evnt);
+            statement.setString(4, evnt);
+
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Evennement evennement = new Evennement(
+                            resultSet.getInt(1),
+                            resultSet.getString(2),
+                            resultSet.getFloat(3),
+                            resultSet.getDate(4).toLocalDate(),
+                            resultSet.getString(5));
+
+
+
+                    resultatsRecherche.add(evennement);
+                }
+            }
+        }
+
+        return resultatsRecherche;
     }
 
 

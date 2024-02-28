@@ -120,6 +120,10 @@ public class AjouterDonController {
             confirmationStage.setScene(confirmationScene);
             confirmationStage.show();
 
+EmailController ec = new EmailController();
+            ec.sendEmail("benouaghrem.miriam@gmail.com", "Invitation à l'événement", "Bonjour, vous êtes invité à participer à notre événement. Cordialement, Votre nom");
+
+
             // Optionally, display a success message or close the window
         }
     }

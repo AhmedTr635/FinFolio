@@ -8,6 +8,12 @@
             <id>central</id>
             <url>https://repo.maven.apache.org/maven2</url>
         </repository>
+
+<!--
+        <repository>
+            <id>oss-sonatype-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>-->
     </repositories>
   <groupId>com.example</groupId>
   <artifactId>finfolio</artifactId>
@@ -66,6 +72,8 @@
       <artifactId>javax.mail</artifactId>
       <version>1.6.2</version> <!-- Or the latest version available -->
     </dependency>
+
+
       <dependency>
           <groupId>com.twilio.sdk</groupId>
           <artifactId>twilio</artifactId>
@@ -89,7 +97,11 @@
           <version>3.4.1</version>
       </dependency>
 
-
+      <dependency>
+          <groupId>com.jfoenix</groupId>
+          <artifactId>jfoenix</artifactId>
+          <version>9.0.10</version>
+      </dependency>
 
 
   </dependencies>

@@ -4,6 +4,8 @@ package com.example.finfolio.Evenement;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -29,6 +31,9 @@ public class ClientEventsController {
     public AnchorPane imnida_pane;
     @FXML
     private ResourceBundle resources;
+
+    @FXML
+    private ScrollPane scroll;
 
     @FXML
     private URL location;
@@ -66,6 +71,9 @@ public class ClientEventsController {
     @FXML
     private Label event_name_up;
 
+    @FXML
+    private GridPane calendar;
+
     /*   @FXML
        private AnchorPane event_container;
 
@@ -77,7 +85,10 @@ public class ClientEventsController {
        @FXML
        private Label event_montant;
        @FXML
+
        private Label event_date;*/
+
+
     @FXML
     private VBox event_container;
 
@@ -90,6 +101,7 @@ public class ClientEventsController {
 
     @FXML
     void initialize() {
+
         upcomingEvent();
         loadEvents();
 
@@ -109,6 +121,8 @@ public class ClientEventsController {
             // Add UI components to the container
             upcoming_event_container.getChildren().addAll();}
     }
+
+
 
 
 
@@ -145,7 +159,13 @@ public class ClientEventsController {
                 e.printStackTrace();
                 // Handle the exception
             }
-        }
+        }}
+
+
+
+
+
+
     }
 
 
@@ -186,4 +206,4 @@ public class ClientEventsController {
        event_container.getChildren().addAll(event_date,event_name,event_montant,event_address);
 */
 
-}
+
