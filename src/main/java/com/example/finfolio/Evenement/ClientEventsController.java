@@ -28,39 +28,9 @@ import javafx.scene.text.Text;
 
 
 public class ClientEventsController {
-
+@FXML
     public AnchorPane bg_container;
-    @FXML
-    public AnchorPane imnida_pane;
-    @FXML
-    private ResourceBundle resources;
 
-    @FXML
-    private ScrollPane scroll;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private AnchorPane admindash;
-
-    @FXML
-    private VBox chosen_event;
-
-    @FXML
-    private Label chosen_event_address;
-
-    @FXML
-    private Label chosen_event_date;
-
-    @FXML
-    private Label chosen_event_montant;
-
-    @FXML
-    private Label chosen_event_name;
-
-    @FXML
-    private ImageView chosen_event_pic;
 
     @FXML
     private Label event_address_up;
@@ -76,25 +46,6 @@ public class ClientEventsController {
 
     @FXML
     private TextField searchfield;
-
-
-    @FXML
-    private Button btnsearch;
-
-    /*   @FXML
-       private AnchorPane event_container;
-
-       @FXML
-       private Label event_address;
-
-       @FXML
-       private Label event_name;
-       @FXML
-       private Label event_montant;
-       @FXML
-
-       private Label event_date;*/
-
 
     @FXML
     private VBox event_container;
@@ -137,27 +88,15 @@ public class ClientEventsController {
 
     private void loadEvents() {
 
-
-
-        // Suppose getEventsFromDatabase is a method to fetch event data from database.
         List<Evennement> events = EvennementService.getInstance().readAll();
-
-        // Clear existing content.
-
 
         for (Evennement event : events) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/Evennement/eventCell.fxml"));
                 AnchorPane eventCell = fxmlLoader.load();
 
-                // Set event data to the cell's controllers here.
-                // You might need to get the controller from the loader and then
-                // set the properties individually, like event name, date, place, etc.
                 EventCellController controller = fxmlLoader.getController();
                 controller.setEventData(event);
-                //   controller.setEvnt(event);
-
-                // ... Set other event details ...
 
                 // Add the cell to the container.
                 event_container.getChildren().addAll(eventCell);
@@ -186,9 +125,6 @@ public class ClientEventsController {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/Evennement/eventCell.fxml"));
                 AnchorPane eventCell = fxmlLoader.load();
 
-                // Set event data to the cell's controllers here.
-                // You might need to get the controller from the loader and then
-                // set the properties individually, like event name, date, place, etc.
                 EventCellController controller = fxmlLoader.getController();
                 controller.setEventData(evnt);
 
@@ -197,7 +133,7 @@ public class ClientEventsController {
 
             } catch (IOException e) {
                 e.printStackTrace();
-                // Handle the exception
+
             }
         }
     }

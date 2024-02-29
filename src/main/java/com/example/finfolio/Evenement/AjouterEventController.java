@@ -15,11 +15,6 @@ import javafx.stage.Stage;
 
 public class AjouterEventController {
 
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button btn_ajouter;
@@ -36,18 +31,6 @@ public class AjouterEventController {
 
     @FXML
     private TextField event_name;
-
-    @FXML
-    private Label saisie_addresse;
-
-    @FXML
-    private Label saisie_date;
-
-    @FXML
-    private Label saisie_montant;
-
-    @FXML
-    private Label saisie_nom;
 
 
 

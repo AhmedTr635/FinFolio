@@ -217,6 +217,7 @@ public class AdminDashController {
         EvennementService.getInstance().delete(eventId);
 
         refreshTableView();
+        loadDonsFromDatabase();
     }
 
 
@@ -234,7 +235,10 @@ public class AdminDashController {
             stage.setTitle("Modifier Evennement");
             stage.setScene(new Scene(root));
             stage.show();
-            stage.setOnHidden(e -> refreshTableView());
+            stage.setOnHidden(e -> {
+                refreshTableView();
+                loadDonsFromDatabase();
+            });
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -51,3 +51,53 @@
     -fx-background-color: #00008b;
 
 }
+
+.preced_btn{
+    -fx-background-color: #00008b;
+}
+
+.desc {
+    -fx-background-color: #f0f0f0; /* Background color */
+    -fx-border-color: #bfbfbf; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 3px; /* Border radius */
+
+}
+
+.desc:hover {
+    -fx-border-color: #666; /* Border color on hover */
+}
+
+.desc:focused {
+    -fx-border-color: #007bff; /* Border color when focused */
+}
+
+.scrollpane {
+    -fx-background-color: #f0f0f0; /* Background color */
+    -fx-border-color: #bfbfbf; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Border radius */
+}
+
+.scrollpane .viewport {
+    -fx-background-color: transparent; /* Transparent background for viewport */
+}
+
+.scrollpane .scroll-bar {
+    -fx-background-color: #d9d9d9; /* Scrollbar background color */
+    -fx-background-insets: 0, 1, 2; /* Scrollbar background insets */
+    -fx-background-radius: 3px; /* Scrollbar background radius */
+}
+
+.scrollpane .scroll-bar-thumb {
+    -fx-background-color: #a6a6a6; /* Scrollbar thumb color */
+    -fx-background-radius: 3px; /* Scrollbar thumb radius */
+}
+
+.scrollpane .scroll-bar-thumb:hover {
+    -fx-background-color: #8c8c8c; /* Scrollbar thumb color on hover */
+}
+
+.scrollpane .scroll-bar-thumb:pressed {
+    -fx-background-color: #666; /* Scrollbar thumb color when pressed */
+}

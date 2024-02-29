@@ -17,23 +17,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class EventCellController {
-    private Evennement evnt;
-
-    public Evennement getEvnt() {
-        return evnt;
-    }
-
-    public void setEvnt(Evennement evnt) {
-        this.evnt = evnt;
-    }
 
     @FXML
     public AnchorPane events_pane;
-    @FXML
-    private ResourceBundle resources;
 
-    @FXML
-    private URL location;
 
     @FXML
     private Button btnpart;
@@ -51,91 +38,34 @@ public class EventCellController {
     private Label event_id;
 
     @FXML
-    private Label event_per;
-
-    @FXML
     private Label event_place;
 
-    public ResourceBundle getResources() {
-        return resources;
-    }
+    @FXML
+    private Button preced_btn;
 
-    public void setResources(ResourceBundle resources) {
-        this.resources = resources;
-    }
-
-    public URL getLocation() {
-        return location;
-    }
-
-    public void setLocation(URL location) {
-        this.location = location;
-    }
-
-    public Button getBtnpart() {
-        return btnpart;
-    }
-
-    public void setBtnpart(Button btnpart) {
-        this.btnpart = btnpart;
-    }
-
-    public Label getEvent_date() {
-        return event_date;
-    }
-
-    public void setEvent_date(Label event_date) {
-        this.event_date = event_date;
-    }
-
-    public Label getEvent_goal() {
-        return event_goal;
-    }
-
-    public void setEvent_goal(Label event_goal) {
-        this.event_goal = event_goal;
-    }
-
-    public Label getEvent_name() {
-        return event_name;
-    }
-
-    public void setEvent_name(Label event_name) {
-        this.event_name = event_name;
-    }
-
-    public Label getEvent_per() {
-        return event_per;
-    }
-
-    public void setEvent_per(Label event_per) {
-        this.event_per = event_per;
-    }
-
-    public Label getEvent_place() {
-        return event_place;
-    }
-
-    public void setEvent_place(Label event_place) {
-        this.event_place = event_place;
-    }
-
-
-    public Label getEvent_id() {
-        return event_id;
-    }
-
-    public void setEvent_id(Label event_id) {
-        this.event_id = event_id;
-    }
-
-
-    private Evennement eventData;
+    @FXML
+    private AnchorPane description_pane;
 
 
     @FXML
     void initialize() {
         btnpart.setOnAction(e -> participer_event());
+        // Hide the description pane initially
+
+        description_pane.setVisible(false);
+
+        // Handle click on the event cell
+        events_pane.setOnMouseClicked(event -> {
+            // Show the description pane and hide the event pane
+            description_pane.setVisible(!description_pane.isVisible());
+        });
+
+        // Handle click on the precedent button
+        preced_btn.setOnAction(event -> {
+            // Show the event pane and hide the description pane
+            description_pane.setVisible(false);
+            events_pane.setVisible(true);
+        });
 
     }
 
@@ -169,4 +99,5 @@ public class EventCellController {
         event_id.setText(String.valueOf(event.getId()));
 
     }
+
 }

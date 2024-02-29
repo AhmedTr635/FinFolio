@@ -14,14 +14,7 @@ import javafx.scene.control.TextField;
 
 public class ModifierEventController {
 
-    @FXML
-    private ResourceBundle resources;
 
-    @FXML
-    private URL location;
-
-    @FXML
-    private Button btn_ajouter;
 
     @FXML
     private TextField event_address_modif;
