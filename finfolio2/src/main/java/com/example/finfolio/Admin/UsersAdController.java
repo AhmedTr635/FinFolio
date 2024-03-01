@@ -46,6 +46,7 @@ public class UsersAdController implements Initializable {
     public ChoiceBox<String> note_box;
     public DatePicker dateCh;
     public Button updateBtn;
+    public Label dateError;
     private String[] statuts = {"Statut", "Active", "Desactive", "Ban"};
     private String[]notes={"Note","1","2","3","4","5"};
 
@@ -117,7 +118,7 @@ public class UsersAdController implements Initializable {
         note_box.setOnAction(this::getNotes);
         note_box.setValue("Note");
         dateCh.setVisible(false);
-
+        addDatePickerListener(dateCh,dateError,"date");
         statut_box.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             // Your code here to handle the change
             if ("Active".equals(statut_box.getValue())) {
@@ -239,6 +240,7 @@ public class UsersAdController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    //Initialization de la table view
     private void initializeTableView(ObservableList<User> users) throws SQLException {
         id_clm.setCellValueFactory(new PropertyValueFactory<>("id"));
         nom_clm.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -274,12 +276,15 @@ public class UsersAdController implements Initializable {
                     deleteButton.setOnAction(event -> {
                         User u = getTableView().getItems().get(getIndex());
                         UserService us = new UserService();
+                        if(u.getRole()!="user")
+                            AlerteFinFolio.alertechoix("Vous ne pouvez pas supprimer un admin","Suppression admin");
+                        else {
                         try {
                             us.delete(u);
                             refreshTableView();
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
-                        }
+                        }}
                     });
 
                     // Add button to the HBox
@@ -345,11 +350,13 @@ public class UsersAdController implements Initializable {
         else {
         if ("Active".equals(statut_box.getValue())) {
             user.setStatut("active");
+            user.setDatepunition("vide");
 
         } else if ("Desactive".equals(statut_box.getValue())) {
             user.setStatut("desactive");
         } else if ("Ban".equals(statut_box.getValue())) {
             user.setStatut("ban");
+            user.setDatepunition("vide");
         }
 
         if ("1".equals(note_box.getValue())) {
@@ -363,15 +370,44 @@ public class UsersAdController implements Initializable {
         } else if ("5".equals(note_box.getValue())) {
             user.setRate(5);
         }
-        if (dateCh.isVisible()&& dateCh.getValue()!=null)
+        if (dateCh.isVisible()&& dateCh.getValue()!=null )
         {String date = dateCh.getValue().toString();
             user.setDatepunition(date);}
-        UserService us = new UserService();
+        if( validateDatePicker(dateCh,dateError))
+        {UserService us = new UserService();
         us.update(user);
         AlerteFinFolio.alerteSucces("Utilisateur sauvegardé avec succes","Modification utilisateur");
-        refreshTableView();
+        refreshTableView();}
 
     }}
+//controle de saisie date
+private boolean validateDatePicker(DatePicker datePicker, Label errorLabel) {
+    LocalDate selectedDate = datePicker.getValue();
+    LocalDate currentDate = LocalDate.now();
+if (!datePicker.isVisible())
+    return true;
+    if (selectedDate == null) {
+        errorLabel.setText("Veuillez sélectionner une date.");
+        datePicker.getStyleClass().add("error");
+        errorLabel.getStyleClass().add("error-label");
+        return false;
+    } else if (selectedDate.isBefore(currentDate)) {
+        errorLabel.setText("La date doit être ultérieure à aujourd'hui.");
+        datePicker.getStyleClass().add("error");
+        errorLabel.getStyleClass().add("error-label");
+        return false;
+    } else {
+        errorLabel.setText("");
+        datePicker.getStyleClass().removeAll("error");
+        errorLabel.getStyleClass().removeAll("error-label");
+        return true;
+    }
+}
+    private void addDatePickerListener(DatePicker datePicker, Label errorLabel, String fieldName) {
+        datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            validateDatePicker(datePicker, errorLabel);
+        });
+    }
 
 
     private void initPieChart() throws SQLException {

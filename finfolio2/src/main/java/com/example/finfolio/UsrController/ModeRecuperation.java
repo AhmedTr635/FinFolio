@@ -40,8 +40,11 @@ public class ModeRecuperation implements Initializable {
 
     }
     public void onConfirmer()  {
-        if ("SMS".equals(modechx.getValue()))
-            System.out.println("SMS");
+        if ("SMS".equals(modechx.getValue())) {
+            Stage st = (Stage) modechx.getScene().getWindow();
+            Model.getInstance().getViewFactory().closeStage(st);
+            Model.getInstance().getViewFactory().showSMSWindow();
+        }
             else
         {
             Stage st = (Stage) modechx.getScene().getWindow();

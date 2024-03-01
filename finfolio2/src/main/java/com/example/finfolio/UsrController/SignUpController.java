@@ -140,7 +140,12 @@ public class SignUpController  implements Initializable {
                 AlerteFinFolio.alerte("exist");
             else {
             userS.add(user);
-            AlerteFinFolio.alerteSucces("Votre compte a été crée avec succès","Creation du compte ");}
+            AlerteFinFolio.alerteSucces("Votre compte a été crée avec succès","Creation du compte ");
+                Stage st = (Stage) error_mdp.getScene().getWindow();
+                Model.getInstance().getViewFactory().closeStage(st);
+                Model.getInstance().getViewFactory().showLoginWindow();
+                Model.getInstance().setUser(user);
+            }
 
 
         }

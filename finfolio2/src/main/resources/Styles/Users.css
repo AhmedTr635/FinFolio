@@ -100,3 +100,12 @@ Button {
 .confirmerBtn:pressed {
     -fx-background-color: #000080; /* Bleu foncé plus sombre lorsqu'appuyé */
 }
+.error_lbl{
+    -fx-text-fill: #FF0000;
+}
+.title{
+    -fx-fill: #000000;
+    -fx-font-size: 2.5em;
+    -fx-font-family: "Calibri Light";
+
+}

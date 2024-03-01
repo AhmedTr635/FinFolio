@@ -5,9 +5,7 @@ import Views.AlerteFinFolio;
 import com.example.finfolio.Entite.User;
 import com.example.finfolio.Service.UserService;
 import com.google.zxing.WriterException;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -22,34 +20,19 @@ import java.sql.SQLException;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-
-
-public class MotDePasseOublieController implements Initializable {
+public class SMSController implements Initializable {
+    public TextField emailField;
+    public Label emailError;
+    
+    public Button recoverPasswordBtn;
+    public Label PasswordError;
+    public Button UpdateBtn;
+    public PasswordField passField1;
+    public PasswordField passField2;
+    public Button upadtePassword;
     public TextField codeEntered;
+    public Label mailerror;
     public Label errormdc;
-    @FXML
-    private Label PasswordError;
-
-    @FXML
-    private Button UpdateBtn;
-
-    @FXML
-    private Label emailError;
-
-    @FXML
-    private TextField emailField;
-
-    @FXML
-    private PasswordField passField1;
-
-    @FXML
-    private PasswordField passField2;
-
-    @FXML
-    private Button recoverPasswordBtn;
-
-    @FXML
-    private Button upadtePassword;
     private  String recoveryCode="";
 
 
@@ -107,29 +90,28 @@ public class MotDePasseOublieController implements Initializable {
     public void handleRecoverPassword() throws SQLException, IOException, WriterException {
         if(validateEmailField(emailField,emailError))
         {UserService userService = new UserService();
-        if (userService.readAll().stream().anyMatch(u->u.getEmail().equals(emailField.getText()))) {
-            emailError.setText("");
-            EmailingApi e = new EmailingApi();
-            recoveryCode = generateRecoveryCode(5);
-            QRCodeApi qr=new QRCodeApi();
-            qr.GenereQrCode(recoveryCode);
-            e.sendEmailWithAttachment(emailField.getText(),"Authentification","Scanner le QrCode", QRCodeApi.getPath());
-
-            codeEntered.setVisible(true);
-            UpdateBtn.setVisible(true);
-            emailField.setVisible(false);
-            recoverPasswordBtn.setVisible(false);
-        } else {
-            emailError.setText("Utilisateur n'existe pas");
-        }
-    }}
+            if (userService.readAll().stream().anyMatch(u->u.getEmail().equals(emailField.getText()))) {
+                User u=userService.getUserByEmail(emailField.getText());
+                String sous_chaine = u.getNumtel().substring(8, 12);
+                AlerteFinFolio.alerteSucces("Un code est envoyé à ****"+sous_chaine,"Récupération par SMS");
+                emailError.setText("");
+               /*TwilioAPI tp=new TwilioAPI();
+                recoveryCode = generateRecoveryCode(5);
+                tp.sendSMS(u.getNumtel(),recoveryCode);*/
+                recoveryCode = generateRecoveryCode(5);
+                System.out.println(recoveryCode);
+                codeEntered.setVisible(true);
+                UpdateBtn.setVisible(true);
+            } else {
+                emailError.setText("Utilisateur n'existe pas");
+            }
+        }}
 
     public void handleUpdateButton() throws NoSuchAlgorithmException, SQLException, IOException {
         if (!(codeEntered.getText().equals(recoveryCode))) {
-            emailError.setText("Code Invalide");
+            PasswordError.setText("Code Invalide");
         }else {
             PasswordError.setText("");
-            emailError.setText("");
             recoverPasswordBtn.setVisible(false);
             codeEntered.setVisible(false);
             UpdateBtn.setVisible(false);
@@ -139,8 +121,8 @@ public class MotDePasseOublieController implements Initializable {
             upadtePassword.setVisible(true);
 
         }
-        }
-        public void updatePassword() throws SQLException, IOException, NoSuchAlgorithmException {
+    }
+    public void updatePassword() throws SQLException, IOException, NoSuchAlgorithmException {
         if (validatePassword(passField1,emailError))
         {
 
@@ -186,21 +168,6 @@ public class MotDePasseOublieController implements Initializable {
             }
         });
     }
-    private void addInputControlListenerPassword(TextField textField, Label errorLabel, String fieldName) {
-        textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            boolean isValid = true; // Initialise la validation à true
-
-
-            if (textField == passField1)
-                isValid = validatePassword((PasswordField) textField, errorLabel);
-
-            if (!isValid) {
-                errorLabel.getStyleClass().add("error-label");
-            } else {
-                errorLabel.getStyleClass().removeAll("error-label");
-            }
-        });
-    }
     private boolean validateEmailField(TextField emailField, Label errorLabel) {
         String email = emailField.getText().trim();
         if (email.isEmpty()) {
@@ -232,8 +199,20 @@ public class MotDePasseOublieController implements Initializable {
             return true;
         }
     }
+    private void addInputControlListenerPassword(TextField textField, Label errorLabel, String fieldName) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            boolean isValid = true; // Initialise la validation à true
+
+
+            if (textField == passField1)
+                isValid = validatePassword((PasswordField) textField, errorLabel);
+
+            if (!isValid) {
+                errorLabel.getStyleClass().add("error-label");
+            } else {
+                errorLabel.getStyleClass().removeAll("error-label");
+            }
+        });
     }
-
-
-
+}
 
