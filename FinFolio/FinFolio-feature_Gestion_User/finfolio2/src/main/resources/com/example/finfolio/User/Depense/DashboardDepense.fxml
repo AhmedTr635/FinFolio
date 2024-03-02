@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1131.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Depense.DashboardDepenseController">
+    <children>
+        <VBox>
+            <children>
+                <AnchorPane prefHeight="150.0" prefWidth="470.0" styleClass="AnchorPane" stylesheets="@../../../../../Styles/Depense/DashboardDepense.css">
+                    <children>
+                        <ComboBox fx:id="monthComboBox" layoutX="315.0" layoutY="80.0" prefHeight="30.0" prefWidth="74.0" promptText="Mois" styleClass="monthComboBox" stylesheets="@../../../../../Styles/Depense/DashboardDepense.css" />
+                        <TextField fx:id="searchField" layoutX="14.0" layoutY="81.0" promptText="Search expenses" stylesheets="@../../../../../Styles/Depense/DashboardDepense.css"/>
+
+                        <!--
+                                                <Button fx:id="submitButton" layoutX="182.0" layoutY="83.0" onAction="#searchExpenses" stylesheets="@../../../CSS/DepenseDash.css" text="Submit" />
+                        -->
+                        <Button fx:id="AddDepense" layoutX="425.0" layoutY="76.0" mnemonicParsing="false" onAction="#OnAddDepense" prefHeight="37.0" prefWidth="58.0" text="add" />
+                    </children>
+                </AnchorPane>
+
+                <TableView fx:id="depenseTableView"  stylesheets="@../../../../../Styles/Depense/DashboardDepense.css"/>
+            </children>
+        </VBox>
+        <VBox prefHeight="638.0" prefWidth="653.0">
+            <children>
+                <AnchorPane prefHeight="638.0" prefWidth="522.0">
+                    <children>
+                        <Rectangle fx:id="amount_depense" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="158.0" layoutX="51.0" layoutY="48.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="258.0" />
+                        <Label layoutX="71.0" layoutY="73.0" text="totale dépense " textFill="WHITE">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="total_depense_card" layoutX="114.0" layoutY="127.0" text="50.000$" textFill="WHITE">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+        <VBox xmlns:fx="http://javafx.com/fxml/1" prefWidth="800" prefHeight="600" spacing="10" alignment="CENTER" >
+
+            <!-- Header Label -->
+            <Label text="Monthly Expenses Dashboard" style="-fx-font-size: 20px;" />
+
+            <!-- Placeholder for the Chart -->
+            <VBox fx:id="chartContainer" prefWidth="600" prefHeight="400" stylesheets="@../../../../../Styles/Depense/DashboardDepense.css"/>
+
+        </VBox>
+    </children>
+</HBox>

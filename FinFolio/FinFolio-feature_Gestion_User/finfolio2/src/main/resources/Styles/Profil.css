@@ -1,0 +1,55 @@
+.background_color {
+    -fx-background-color:#13123A ;
+}
+.text_input {
+    -fx-background-color: rgba(0,0,0,0);
+    -fx-border-width:  0 0 1 0;
+    -fx-border-width-color: #123499;
+    -fx-text-fill: white;
+
+}
+.Button {
+    -fx-pref-width: 140;
+    -fx-pref-height: 40;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #00008b;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center_left;
+    -fx-effect: dropshadow(three-pass-box,#DDDDDD,5,0,0,6);
+    -fx-cursor: hand;
+
+}
+.ButtonImage {
+    -fx-pref-width: 145;
+    -fx-pref-height: 40;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #00008b;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center_left;
+    -fx-effect: dropshadow(three-pass-box,#DDDDDD,5,0,0,6);
+    -fx-cursor: hand;
+
+}
+.error-label {
+    -fx-text-fill: red;
+    -fx-font-size: 12px;
+}
+.ButtonImage:hover {
+    -fx-cursor: hand; /* Définit le curseur de la souris en main lors du survol */
+    -fx-background-color: #00008b; /* Change la couleur de fond en bleu lorsque survolé */
+    -fx-text-fill: #FFFFFF; /* Change la couleur du texte en blanc lorsque survolé */
+}
+
+.ButtonImage:pressed {
+    -fx-background-color: #123499; /* Change la couleur de fond en bleu acier lorsque cliqué */
+    -fx-text-fill: #FFFFFF; /* Change la couleur du texte en blanc lorsque cliqué */
+}
+
+.ButtonImage  FontAwesomeIconView {
+    -fx-fill: #00008b; /* Couleur de remplissage des icônes en bleu */
+}
+
+.ButtonImage:hover FontAwesomeIconView,
+.ButtonImage:pressed FontAwesomeIconView {
+    -fx-fill: #FFFFFF; /* Change la couleur de remplissage des icônes en blanc lorsqu'elles sont survolées ou cliquées */
+}

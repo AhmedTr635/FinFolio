@@ -1,0 +1,47 @@
+#dateErrorLabel {
+    -fx-text-alignment: left; /* Align text to the left */
+    -fx-padding: 0 0 5 0; /* Add some padding below the label */
+}
+
+.labelField{
+    -fx-text-fill: blue;
+    -fx-font-size: 12;
+}
+.label .title{
+    -fx-text-fill: #646465;
+}
+/* Styling for text field */
+.text-field {
+    -fx-background-color: #f4f4f4; /* Background color */
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-border-color: #b7b7b7; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-padding: 8px; /* Padding */
+    -fx-font-size: 14px; /* Font size */
+    -fx-font-family: "Arial"; /* Font family */
+    -fx-text-fill: #333; /* Text color */
+}
+.text-field:hover{
+   -fx-border-color: blue;
+}
+
+.titleA{
+    -fx-text-fill: #000000;
+
+   }
+
+.buttonAjouter {
+    -fx-background-color: #00008b; /* Change button background color */
+    -fx-text-fill: white; /* Change button text color */
+    -fx-font-size: 12px; /* Change button font size */
+    -fx-padding: 5px 10px; /* Change button padding */
+    -fx-background-radius: 5px; /* Round button corners */
+}
+.buttonAnnuler {
+    -fx-background-color: #ffffff; /* Change button background color */
+    -fx-text-fill: #00008b; /* Change button text color */
+    -fx-font-size: 12px; /* Change button font size */
+    -fx-padding: 5px 10px; /* Change button padding */
+    -fx-background-radius: 5px; /* Round button corners */
+}
