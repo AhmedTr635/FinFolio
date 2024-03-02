@@ -31,3 +31,6 @@
 .table-column {
     -fx-alignment: CENTER; /* Match alignment */
 }
+.default-color0.chart-bar{
+    -fx-bar-fill: #3b3bd2  ;
+}

@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -23,6 +24,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.example.gestioncredit1.PDFGenerator.generatePDF;
+
 //import static jdk.jpackage.internal.WixAppImageFragmentBuilder.ShortcutsFolder.Desktop;
 
 //import static jdk.jpackage.internal.WixAppImageFragmentBuilder.ShortcutsFolder.Desktop;
@@ -33,6 +36,10 @@ public class CreditAnchorpane {
 
     @FXML
     private Label nameLabel;
+
+    @FXML
+    private Button contactButton;
+
     @FXML
     private Label labedpdf;
     @FXML
@@ -56,8 +63,7 @@ public class CreditAnchorpane {
     @FXML
     private Label dateFinLabel;
 
-    @FXML
-    private Button contactButton;
+
 
     @FXML
     private Button sendButton;
@@ -77,6 +83,8 @@ public class CreditAnchorpane {
         dateFinLabel.setText("Date Fin: " + dateFin);
         nameLabel.setText("Nom: " + userName); // Set the user name label
         idLabeluser.setText("User ID: " + userId); // Set the user ID label
+
+
     }
 
 
@@ -121,7 +129,7 @@ public class CreditAnchorpane {
     public void generatepdfclick(ActionEvent actionEvent) {
 
         try {
-            List<Label> creditDetails = Arrays.asList(montantLabel, interetMaxLabel, interetMinLabel, dateDebutLabel, dateFinLabel, idLabeluser);
+            List<Label> creditDetails = Arrays.asList(montantLabel, interetMaxLabel, interetMinLabel, dateDebutLabel, dateFinLabel,nameLabel);
 
             // Prompt user to choose a download location
             FileChooser fileChooser = new FileChooser();
@@ -131,7 +139,7 @@ public class CreditAnchorpane {
 
             if (file != null) {
                 String filePath = file.getAbsolutePath();
-                PDFGenerator.generatePDF(filePath, creditDetails, nameLabel.getText());
+                generatePDF(filePath, getLabelTexts(creditDetails),nameLabel.getText());
 
                 // Handle opening file using platform-specific method
                 openFile(file);
@@ -139,6 +147,13 @@ public class CreditAnchorpane {
         } catch (IOException ex) {
             System.err.println("Error generating or opening PDF: " + ex.getMessage());
         }
+    }
+
+    // Method to extract text from JavaFX Labels
+    private List<String> getLabelTexts(List<Label> labels) {
+        return labels.stream()
+                .map(Label::getText)
+                .toList();
     }
 
     // Platform-specific file opening method
@@ -159,6 +174,38 @@ public class CreditAnchorpane {
             e.printStackTrace();
         }
     }
+
+
+    @FXML
+    void contacterbutton(ActionEvent event) {
+        try {
+            // Load the FXML file of the chat room UI
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("chatroom.fxml"));
+            Parent root = loader.load();
+
+            Chatroom chatroomController = loader.getController();
+
+            // Pass the creditID and userId to the ChatroomController
+            chatroomController.setCreditID(creditID);
+           // chatroomController.setUserID(userId);
+
+            // Create a new stage for the chat room
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Chat Room"); // Set the title of the stage
+
+            // Show the chat room stage
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+
+
+    }
+
+
+
     }
 
 

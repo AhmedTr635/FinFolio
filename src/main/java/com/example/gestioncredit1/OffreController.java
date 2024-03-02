@@ -1,6 +1,7 @@
 package com.example.gestioncredit1;
 
 import Entity.Offre;
+import Service.MessageService;
 import Service.OffreService;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,10 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -29,7 +29,11 @@ public class OffreController {
     @FXML
     private Button ajouterCredit;
 
+    @FXML
+    private Label amessagesLabel;
 
+    @FXML
+    private Button offres_to_me;
     @FXML
     private TextField Montant_offre_toadd;
     @FXML
@@ -100,16 +104,38 @@ public class OffreController {
     @FXML
     private Button set_credit;
 
+    @FXML
+    private BarChart<?, ?> dali12;
+
     private ObservableList<Credit> observableList;
     private ObservableList<Offre> observableList2;
     private Credit[] credits;
+
+
+    private MessageService messageService = new MessageService();
+
 
 
     private void loadCredits() {
         CreditService creditService = new CreditService();
         List<Credit> creditList = creditService.readAllCredits();
         credits = creditList.toArray(new Credit[0]);
+
     }
+    private void updateReceivedMessageCountLabel() {
+
+
+            // Get the user ID of the current user (replace 1 with the actual user ID)
+            int userId = 1; // Assuming user ID 1 for demonstration purposes
+
+            // Call the MessageService to get the count of received messages for the user
+            int receivedMessageCount = messageService.countReceivedMessagesByUserId(userId);
+            System.out.println(receivedMessageCount);
+            // Update the messagesLabel with the count of received messages
+            amessagesLabel.setText("" + receivedMessageCount);
+
+
+        }
 
 //      User s1 = new User(resultSet.getInt("user_id"));
 //      UserService s11 = new UserService();
@@ -121,6 +147,7 @@ public class OffreController {
     }
     @FXML
     void initialize() {
+        updateReceivedMessageCountLabel();
         loadCredits(); // Initialize the credits array
         loadCreditAnchorpane(); // Load the initial display of credits
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -128,7 +155,11 @@ public class OffreController {
             List<Credit> searchResults = performSearch(newValue);
             // Update the display with the search results
             updateDisplay(searchResults);
+
         });
+
+        updateReceivedMessageCountLabel();
+        //updateBarChart();
     }
 
     private void loadCreditAnchorpane() {
@@ -136,8 +167,13 @@ public class OffreController {
         List<Credit> credits = creditService.readAllCredits();
 
         double layoutY = 10; // Initial Y position
+        int currentUserId=1;
 
         for (Credit credit : credits) {
+            // Check if the credit belongs to the current user
+            if (credit.getUser().getId() == currentUserId) {
+                continue; // Skip this credit
+            }
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("creditAnchorpane.fxml"));
                 AnchorPane creditAnchorPane = loader.load();
@@ -321,7 +357,6 @@ public class OffreController {
         }
     }
 
-
     @FXML
     void search_credit(KeyEvent event) {
         String query = searchField.getText(); // Get the search query from the text field
@@ -332,6 +367,7 @@ public class OffreController {
         // Update the display with the search results
         updateDisplay(searchResults);
     }
+
 
     public void ajouterCredit(ActionEvent actionEvent) {
 
@@ -348,4 +384,57 @@ public class OffreController {
 
 
     }
+
+    @FXML
+    void offres_to_me(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("offrespourvos.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("offres pour moi"); // Set the title of the stage
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+//    private void updateBarChart() {
+//        CreditService creditService = new CreditService();
+//        List<Credit> credits = creditService.readAllCredits();
+//
+//        int countGreaterThan5000 = 0;
+//        int countGreaterThan10000 = 0;
+//        int countGreaterThan150000 = 0;
+//
+//        // Count the number of credits with montant > 5000, 10000, and 150000
+//        for (Credit credit : credits) {
+//            if (credit.getMontant() > 5000) {
+//                countGreaterThan5000++;
+//            }
+//            if (credit.getMontant() > 10000) {
+//                countGreaterThan10000++;
+//            }
+//            if (credit.getMontant() > 150000) {
+//                countGreaterThan150000++;
+//            }
+//        }
+//
+//        // Create series for the bar chart
+//        XYChart.Series series = new XYChart.Series<>();
+//        series.getData().add(new XYChart.Data<>("Montant > 5000", countGreaterThan5000));
+//        series.getData().add(new XYChart.Data<>("Montant > 10000", countGreaterThan10000));
+//        series.getData().add(new XYChart.Data<>("Montant > 150000", countGreaterThan150000));
+//
+//        // Clear previous data and add new series to the bar chart
+//        dali12.getData().clear();
+//        dali12.getData().addAll(series);
+//    }
+
+
 }

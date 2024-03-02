@@ -3,6 +3,7 @@ package com.example.gestioncredit1;
 import Entity.Credit;
 import Entity.User;
 import Service.CreditService;
+import Service.MessageService;
 import Service.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -129,6 +130,23 @@ public class CreditController {
         intretMin.setCellValueFactory(new PropertyValueFactory<>("interetMin"));
         dateD.setCellValueFactory(new PropertyValueFactory<>("dateD"));
         dateF.setCellValueFactory(new PropertyValueFactory<>("dateF"));
+
+        tf_date_D.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(empty || date.isBefore(LocalDate.now())); // Disable dates before today
+            }
+        });
+
+        tf_date_F.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(empty || date.isBefore(LocalDate.now())); // Disable dates before today
+            }
+        });
+
 
         tableau.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -317,6 +335,7 @@ public class CreditController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("ajouterCredit.fxml"));
             ajouterCredit.getScene().setRoot(root);
+
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
@@ -325,6 +344,11 @@ public class CreditController {
     @FXML
     void OffreScene(ActionEvent event) {
         try {
+            OffreController offreController = new OffreController();
+
+// Set the MessageService for OffreController
+
+
             Parent root = FXMLLoader.load(getClass().getResource("ajouterOffre.fxml"));
             ajouterCredit.getScene().setRoot(root);
         } catch (IOException ex) {

@@ -236,6 +236,22 @@ public class CreditService implements ICredit<Credit> {
         return creditList;
     }
 
+    public int getReceiverUserIdByCreditId(String creditId) {
+        String query = "SELECT user_id FROM credit WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, creditId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("user_id");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error fetching receiver user ID for credit ID " + creditId + ": " + e.getMessage());
+        }
+        return -1; // Return -1 if credit ID is not found or if an error occurs
+    }
+
+
     // Existing methods...
 
 }

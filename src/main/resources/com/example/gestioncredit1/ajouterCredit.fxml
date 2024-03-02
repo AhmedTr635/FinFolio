@@ -21,7 +21,7 @@
             <HBox alignment="CENTER" prefHeight="63.0" prefWidth="312.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="50.0" />
-                  <TextField fx:id="tf_iduser" onKeyTyped="#user_id_input" style="-fx-background-radius: 10;" visible="false"/>
+                  <TextField fx:id="tf_iduser" onKeyTyped="#user_id_input" style="-fx-background-radius: 10;" visible="false" />
                </children>
             </HBox>
             <Label fx:id="idErrorMessageLabel" />
@@ -122,11 +122,11 @@
             <Button fx:id="ajouter_offre" mnemonicParsing="false" onAction="#OffreScene" prefHeight="26.0" prefWidth="123.0" style="-fx-background-radius: 10;" text="ajouterOffre" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="335.0" layoutY="105.0" prefHeight="447.0" prefWidth="614.0" style="-fx-background-color: #e2e2e2; -fx-background-radius: 50;">
+      <HBox alignment="CENTER" layoutX="393.0" layoutY="124.0" prefHeight="447.0" prefWidth="497.0" style="-fx-background-color: #e2e2e2; -fx-background-radius: 50;">
          <children>
-            <TableView fx:id="tableau" prefHeight="445.0" prefWidth="454.0" style="-fx-background-radius: 10;">
+            <TableView fx:id="tableau" prefHeight="458.0" prefWidth="382.0" style="-fx-background-radius: 10;">
                <columns>
-                  <TableColumn fx:id="id_user" prefWidth="75.0" text="id_user" visible="false"/>
+                  <TableColumn fx:id="id_user" prefWidth="75.0" text="id_user" visible="false" />
                   <TableColumn fx:id="Montant" prefWidth="75.0" text="Montant" />
                   <TableColumn fx:id="intretMax" prefWidth="75.0" text="intretMax" />
                   <TableColumn fx:id="intretMin" prefWidth="75.0" text="intretMin" />
@@ -136,10 +136,11 @@
             </TableView>
          </children>
       </HBox>
-      <Label layoutX="499.0" layoutY="50.0" prefHeight="27.0" prefWidth="286.0" style="-fx-background-color: #00008b; -fx-background-radius: 10;" text="Recent additions to your credits" textFill="WHITE">
+      <Label layoutX="498.0" layoutY="22.0" prefHeight="27.0" prefWidth="286.0" style="-fx-background-color: #00008b; -fx-background-radius: 10;" text="Recent additions to your credits" textFill="WHITE">
          <font>
             <Font name="Cambria Bold" size="18.0" />
          </font>
       </Label>
+      <TextField layoutX="553.0" layoutY="70.0" prefHeight="32.0" prefWidth="160.0" promptText="rechercher" />
    </children>
 </AnchorPane>

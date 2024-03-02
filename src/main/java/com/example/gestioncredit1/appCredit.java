@@ -10,7 +10,7 @@ import java.io.IOException;
 public class appCredit extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(appCredit.class.getResource("ajouterCredit.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(appCredit.class.getResource("ajouterOffre.fxml"));
         Scene scene = new Scene(fxmlLoader.load(),906,550);
         stage.setTitle("gestionCredit");
 
