@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Depense.depenseController">
+    <stylesheets>
+        <URL value="@../../../../../Styles/Depense/AjouterDepense.css" />
+    </stylesheets>
+    <AnchorPane layoutX="1.0" layoutY="-1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="527.0">
+        <children>
+            <Label fx:id="titleA" layoutX="231.0" layoutY="14.0" styleClass="titleA" text="Nouvelle dépense ">
+            <font>
+               <Font size="30.0" />
+            </font>
+            </Label>
+            <Label fx:id="TitleB" layoutX="240.0" layoutY="60.0" styleClass="titleA" text="Veillez remplir les champs suivants" textFill="#474747ee">
+                <font>
+                    <Font size="13.0" />
+                </font>
+            </Label>
+            <Label layoutX="217.0" layoutY="92.0" prefHeight="21.0" prefWidth="46.0" styleClass="labelField" text="Type " textOverrun="CLIP" />
+            <Label layoutX="215.0" layoutY="270.0" prefHeight="21.0" prefWidth="46.0" styleClass="labelField" text="Date ">
+            <font>
+               <Font size="10.0" />
+            </font>
+            </Label>
+            <Label layoutX="216.0" layoutY="177.0" prefHeight="25.0" prefWidth="74.0" styleClass="labelField" text="Montant ">
+                <font>
+                    <Font size="10.0" />
+                </font>
+            </Label>
+            <TextField fx:id="txtType" layoutX="218.0" layoutY="118.0" prefHeight="30.0" prefWidth="258.0" promptText=" Type de la dépense" styleClass="l" stylesheets="@../../../../../Styles/Depense/AjouterDepense.css" />
+            <Label fx:id="typeErrorLabel" layoutX="221.0" layoutY="156.0" prefHeight="18.0" prefWidth="238.0" style="-fx-text-fill: red;" text="" />
+            <TextField fx:id="txtMontant" layoutX="221.0" layoutY="203.0" prefHeight="30.0" prefWidth="258.0" promptText="montant de la dépense " />
+            <Label fx:id="montantErrorLabel" layoutX="222.0" layoutY="243.0" prefHeight="18.0" prefWidth="246.0" style="-fx-text-fill: red;" text="" />
+            <Button fx:id="btnAdd" layoutX="401.0" layoutY="378.0" mnemonicParsing="false" onAction="#onClickAdd" prefHeight="34.0" prefWidth="74.0" styleClass="buttonAjouter" text="Ajouter" textFill="DARKBLUE">
+                <font>
+                    <Font size="15.0" />
+                </font>
+            </Button>
+            <Button fx:id="btnAnnuler" layoutX="266.0" layoutY="377.0" mnemonicParsing="false" onAction="#onClickAnnuler" prefHeight="34.0" prefWidth="88.0" style="-fx-background-color: #ffffff;" styleClass="buttonAnnuler" text="Annuler" textFill="#1e7fcb">
+                <font>
+                    <Font size="15.0" />
+                </font>
+            </Button>
+            <DatePicker fx:id="txtDate" layoutX="222.0" layoutY="297.0" prefHeight="26.0" prefWidth="258.0" promptText="date de la dépense" />
+            <Label fx:id="dateErrorLabel" layoutX="226.0" layoutY="336.0" prefHeight="22.0" prefWidth="215.0" style="-fx-text-fill: red;" text="" />
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DARKBLUE" height="446.0" layoutX="-5.0" layoutY="-4.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="194.0" />
+         <ImageView fitHeight="112.0" fitWidth="122.0" layoutX="36.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../Pics/Depense/give-money.png" />
+            </image>
+         </ImageView>
+        </children>
+    </AnchorPane>
+</AnchorPane>

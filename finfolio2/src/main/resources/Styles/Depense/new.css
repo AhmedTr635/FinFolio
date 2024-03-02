@@ -1,0 +1,29 @@
+/* Define custom styles for the dialog */
+/*.custom-dialog {
+    -fx-background-color: #f0f0f0; !* Set background color *!
+}
+
+!* Define styles for the header text *!
+.custom-dialog .header-panel {
+    -fx-background-color: #007bff; !* Set header background color *!
+}
+
+.custom-dialog .header-panel .label {
+    -fx-text-fill: white; !* Set header text color *!
+}
+
+!* Define styles for the content text *!
+.custom-dialog .content {
+    -fx-font-size: 14px; !* Set content text font size *!
+}
+
+!* Define styles for the buttons *!
+.custom-dialog .button {
+    -fx-font-size: 14px; !* Set button text font size *!
+    -fx-background-color: #007bff; !* Set button background color *!
+    -fx-text-fill: white; !* Set button text color *!
+}
+
+.custom-dialog .button:hover {
+    -fx-background-color: #0056b3; !* Set button background color on hover *!
+}*/

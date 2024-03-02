@@ -1,0 +1,248 @@
+.filterContainers{
+    -fx-background-color: #00008b; /* Background color */
+    -fx-text-fill: white; /* Text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-padding: 8px 16px; /* Padding */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-background-radius: 5px; /* Background radius */
+    -fx-border-color: transparent; /* Border color */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0); /* Shadow effect */
+}
+.monthComboBox {
+    -fx-background-color: #ffffff; /* Background color */
+    -fx-text-fill: #00008b; /* Text color */
+    -fx-font-weight: bold; /* Font weight */
+    /*
+    -fx-padding: 5px 10px; !* Padding *!
+    */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-cursor: hand; /* Cursor on hover */
+
+}
+
+.combo-box:hover {
+    -fx-border-color: #999;
+}
+
+.combo-box .arrow {
+    -fx-background-color: transparent;
+    -fx-padding: 0px;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0px;
+}
+
+.combo-box .arrow-button:hover {
+    -fx-background-color: transparent;
+}
+
+.combo-box .arrow .arrow-icon {
+    -fx-background-color: #333;
+    -fx-shape: "M 0 0 L 5 5 L 10 0 Z";
+    -fx-padding: 5px;
+    -fx-opacity: 0.6;
+}
+
+.combo-box .arrow:hover .arrow-icon {
+    -fx-opacity: 1.0;
+}
+#searchField{
+    -fx-prompt-text-fill: #808080; /* Color of the prompt text */
+    -fx-background-color: #FFFFFF; /* Background color */
+    -fx-border-color: #CCCCCC; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-padding: 5px;
+}
+/*#submitButton{
+    -fx-background-color: #00008b; !* Background color *!
+    -fx-text-fill: #FFFFFF; !* Text color *!
+    -fx-font-weight: bold; !* Font weight *!
+    !*
+    -fx-padding: 5px 10px; !* Padding *!
+    *!
+    -fx-border-radius: 5px; !* Border radius *!
+    -fx-cursor: hand; !* Cursor on hover *!
+}*/
+.total_depense_card{
+    -fx-border-radius: 40;
+}
+.oneCell {
+    -fx-spacing: 15px; /* Adjust the spacing value as needed */
+    -fx-border-radius: 25px;
+
+}
+/* CSS code to customize scroll bars in a ScrollPane */
+
+#AddDepense{
+    -fx-background-color: #ffffff; /* Background color */
+    -fx-text-fill: #00008b; /* Text color */
+    -fx-font-weight: bold; /* Font weight */
+    /*
+    -fx-padding: 5px 10px; !* Padding *!
+    */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-cursor: hand; /* Cursor on hover */
+
+}
+.AnchorPane{
+    -fx-border-radius: 25px;
+    -fx-spacing-bottom: 15px; /* Adjust the spacing value as needed */
+
+}
+.scroll-pane {
+    -fx-background-color: transparent; /* Set background color */
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent; /* Set viewport background color */
+}
+
+.scroll-pane .scroll-bar {
+    -fx-background-color: transparent; /* Set scroll bar background color */
+}
+
+
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-padding: 0 2px; /* Adjust padding for vertical scroll bar */
+    -fx-width: 10px; /* Set width for vertical scroll bar */
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #999999; /* Set vertical scroll bar thumb color */
+}
+
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: #DDDDDD; /* Set vertical scroll bar track color */
+}
+/* Style for TableView */
+.table-view {
+    -fx-background-color: #ecc926;
+    -fx-border-radius: 25px;
+}
+
+/* Style for Table Header */
+.table-view .column-header {
+    -fx-background-color: #00008b
+}
+/* Styles for column headers */
+.table-view .column-header-background .label {
+    -fx-text-fill: #ffffff; /* Set column header text color to white */
+}
+
+/* Style for Table Row */
+.table-row-cell {
+    -fx-background-color: #efefef;
+}
+
+/* Style for Even Rows */
+.table-row-cell:even {
+    -fx-background-color: #ffffff;
+}
+
+/* Style for Selected Row */
+.table-row-cell:selected {
+    -fx-background-color: #00008b;
+}
+
+/* Style for Table Cell */
+/* Styles for TableView */
+.custom-table-view {
+    -fx-background-color: #ffffff;
+}
+
+/* Styles for individual columns */
+.type-column {
+    -fx-font-size: 14px;
+    -fx-pref-width: 200px; /* Définissez la largeur préférée de la colonne */
+    -fx-min-width: 200px;
+}
+
+.date-column {
+    -fx-font-size: 14px;
+    -fx-pref-width: 200px; /* Définissez la largeur préférée de la colonne */
+    -fx-min-width: 200px;
+}
+
+.montant-column {
+    -fx-font-size: 14px;
+    -fx-pref-width: 200px; /* Définissez la largeur préférée de la colonne */
+    -fx-min-width: 200px;
+}
+
+.action-column {
+    -fx-font-size: 14px;
+    -fx-pref-width: 200px; /* Définissez la largeur préférée de la colonne */
+    -fx-min-width: 200px;
+
+    -fx-alignment: CENTER;
+}
+
+/* Styles for buttons within action column */
+.action-column .button {
+    -fx-background-color: #00008b; /* Change button background color */
+    -fx-text-fill: white; /* Change button text color */
+    -fx-font-size: 12px; /* Change button font size */
+    -fx-padding: 5px 10px; /* Change button padding */
+    -fx-background-radius: 5px; /* Round button corners */
+}
+
+.VBox{
+    -fx-background-color: pink;
+}
+.bar-chart .bar {
+    -fx-bar-fill: blue; /* Set the color of the bars */
+}
+.submit  {
+    -fx-background-color: #c20e0e; /* Change button background color */
+    -fx-text-fill: white; /* Change button text color */
+    -fx-font-size: 12px; /* Change button font size */
+    -fx-padding: 5px 10px; /* Change button padding */
+    -fx-background-radius: 5px; /* Round button corners */
+}
+.chart-line-symbol {
+    -fx-background-color: #0066cc, white;
+}
+
+.chart-series-line {
+    -fx-stroke: #0066cc;
+}
+
+.chart-line-symbol.default-color0.chart-line-symbol {
+    -fx-background-color: #0066cc, white;
+}
+
+.chart-area-symbol {
+    -fx-background-color: #0066cc, white;
+}
+
+.default-color0.chart-series-line {
+    -fx-stroke: #0066cc;
+}
+
+.default-color0.chart-line-symbol {
+    -fx-background-color: #0066cc, white;
+}
+
+.default-color0.chart-area-symbol {
+    -fx-background-color: #0066cc, white;
+}
+.numAxe{
+    -fx-font-size: 5px;
+}
+
+.monthAxe{
+    -fx-font-size: 5px;
+}
+#downloadButton{
+    -fx-background-color: #0a941b; /* Change button background color */
+    -fx-text-fill: white; /* Change button text color */
+    -fx-font-size: 12px; /* Change button font size */
+    -fx-padding: 5px 10px; /* Change button padding */
+    -fx-background-radius: 5px;
+}
+
+

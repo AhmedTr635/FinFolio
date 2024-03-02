@@ -1,0 +1,94 @@
+
+
+
+.shadow{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0, 0.0, 0.0, 10.0);
+}
+.search-box{
+    -fx-background-color: #FFFFFF ;
+    -fx-background-radius: 100px;
+}
+
+.searhc-button{
+    -fx-background-color: #00008b;
+    -fx-background-radius: 30px;
+}
+
+.btn_ajouter{
+    -fx-background-color: #e0e0e0;
+    -fx-background-radius: 10px;
+
+}
+
+
+.table-view {
+    -fx-background-color: #f4f4f4;
+    -fx-font-size: 14px;
+}
+
+
+
+.table-view .column-header,
+.table-view .table-cell {
+    -fx-alignment: center;
+}
+
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #ecf0f1;
+}
+
+.table-view .table-row-cell:even {
+    -fx-background-color: #d5dbdb;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #2980b9;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header{
+    -fx-background-color: #00008b;
+    -fx-text-fill: white;
+}
+
+.table-view .scroll-bar:vertical {
+    -fx-background: #d5dbdb; /* Scroll bar track color */
+}
+
+.table-view .scroll-bar:horizontal {
+    -fx-background: #d5dbdb; /* Scroll bar track color */
+}
+
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background: #3498db; /* Scroll bar thumb color */
+    -fx-background-insets: 0; /* Remove any insets */
+}
+
+.table-view .scroll-bar:horizontal .thumb {
+    -fx-background: #3498db; /* Scroll bar thumb color */
+    -fx-background-insets: 0; /* Remove any insets */
+}
+
+.default-color0.chart-bar{
+    -fx-bar-fill: #3b3bd2  ;
+}
+
+.table-view .column-header-background .label {
+    -fx-text-fill: white; /* Set column header text color to white */
+}
+
+
+.side_bar{
+    -fx-background-color: #00008b ;
+
+}
+
+#xAxis{
+    -fx-font-size: 5px;
+}
+
+#yAxis{
+    -fx-font-size: 5px;
+
+}

@@ -11,6 +11,9 @@ module finfolio {
     requires activation;
     requires com.google.zxing;
     requires com.google.zxing.javase;
+    requires org.apache.poi.poi;
+    requires org.apache.poi.ooxml;
+    requires java.desktop;
 
 
     opens com.example.finfolio to javafx.fxml;
