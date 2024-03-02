@@ -132,7 +132,7 @@ public class ViewFactory {
     public AnchorPane getEvenementsAdminView() {
         if (evenementsAdminView==null)
             try {
-                evenementsAdminView = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/evenements.fxml")).load();
+                evenementsAdminView = new FXMLLoader(getClass().getResource("/com/example/finfolio/Admin/evenementsAdmin.fxml")).load();
             }catch (Exception e)
             {e.printStackTrace();}
         return evenementsAdminView;
