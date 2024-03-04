@@ -1,0 +1,9 @@
+.pane {
+    -fx-background-color: linear-gradient(to right, #83EAF1, #63A4FF); /* Pastel blue gradient */
+    -fx-background-radius: 20px; /* Rounded corners */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+    -fx-background-position: 200px;
+}
+
+
+

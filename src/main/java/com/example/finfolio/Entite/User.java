@@ -18,6 +18,9 @@ public class User {
     private String statut;
     private  String image;
 
+    public User(int userId, String nom, String prenom, String email) {
+    }
+
     public String getImage() {
         return image;
     }
@@ -91,6 +94,17 @@ public class User {
         this.solde=solde;
     }
 
+
+    public User(int userId, String nom, String prenom, String email, String password, String adresse, int nbrCredit, float rate) {
+        this.id=userId;
+        this.nom=nom;
+        this.prenom=prenom;
+        this.email=email;
+        this.password=password;
+        this.adresse=adresse;
+        this.nbrCredit=nbrCredit;
+        this.rate=rate;
+    }
 
     public String getSolde() {
         return solde;
@@ -212,4 +226,7 @@ public class User {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
+
 }
