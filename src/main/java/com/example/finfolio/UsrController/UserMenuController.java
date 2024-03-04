@@ -1,6 +1,8 @@
 package com.example.finfolio.UsrController;
 
 import Models.Model;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -56,6 +58,13 @@ public class UserMenuController implements Initializable {
         Stage st = (Stage) logout_btn.getScene().getWindow();
         Model.getInstance().getViewFactory().closeStage(st);
         Model.getInstance().getViewFactory().showLoginWindow();
+
+    }
+
+
+    @FXML
+    void signaler(ActionEvent event) {
+
 
     }
 
