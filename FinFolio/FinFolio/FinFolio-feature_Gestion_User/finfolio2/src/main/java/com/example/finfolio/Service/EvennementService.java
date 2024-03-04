@@ -1,9 +1,11 @@
 package com.example.finfolio.Service;
 
 
-import com.example.finfolio.Entite.Evennement;
-import com.example.finfolio.util.DataSource;
 
+
+import com.example.finfolio.Entite.Evennement;
+import com.example.finfolio.Entite.User;
+import com.example.finfolio.util.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ public class EvennementService {
 
 
     public void add(Evennement ev) {
-        String request="insert into evenement (nom_event,montant,date,adresse) values(?,?,?,?)";
+        String request="insert into evenement (nom_event,montant,date,adresse,description) values(?,?,?,?,?)";
 
         try {
             pst=connexion.prepareStatement(request);
@@ -28,6 +30,7 @@ public class EvennementService {
             pst.setFloat(2,ev.getMontant());
             pst.setDate(3, Date.valueOf(ev.getDate()));
             pst.setString(4,ev.getAdresse());
+            pst.setString(5,ev.getDescription());
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -58,7 +61,7 @@ public class EvennementService {
 
 
     public void update(Evennement ev, int id) {
-        String request="update evenement set nom_event = ?, montant = ?, date= ?, adresse= ? where id = ? ";
+        String request="update evenement set nom_event = ?, montant = ?, date= ?, adresse= ?, description=? where id = ? ";
 
         try{
             pst=connexion.prepareStatement(request);
@@ -66,6 +69,7 @@ public class EvennementService {
             pst.setFloat(2, ev.getMontant());
             pst.setDate(3, Date.valueOf(ev.getDate()));
             pst.setString(4, ev.getAdresse());
+            pst.setString(5, ev.getDescription());
             pst.setInt(5, id);
             pst.executeUpdate();
         } catch (SQLException e) {
@@ -87,7 +91,8 @@ public class EvennementService {
                         rs.getString(2),
                         rs.getFloat(3),
                         rs.getDate(4).toLocalDate(),
-                        rs.getString(5)));
+                        rs.getString(5),
+                        rs.getString(6)));
 
             }
         } catch (SQLException e) {
@@ -98,34 +103,12 @@ public class EvennementService {
 
 
 
-/*    public List<Evennement> searchByName(String name) {
-        List<Evennement> events = new ArrayList<>();
-        String request="select * from evenement where nom like ?";
-        try (PreparedStatement pst = connexion.prepareStatement(request)) {
-            pst.setString(1, "%" + name + "%");
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String nom = rs.getString("nom");
-                float montant = rs.getFloat("montant");
-                LocalDate date = rs.getDate("date").toLocalDate();
-                String adresse = rs.getString("adresse");
-                Evennement event = new Evennement(id, nom, montant, date, adresse);
-                events.add(event);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to search events by name");
-        }
-
-        return events;
-    }*/
 
 
 
 
     public List<Evennement> rechercherEvent(String evnt) throws SQLException {
-        String requeteSQL = "SELECT * FROM evenement WHERE nom_event LIKE ? OR montant LIKE ? OR date LIKE ? OR adresse LIKE ?";
+        String requeteSQL = "SELECT * FROM evenement WHERE nom_event LIKE ? OR montant LIKE ? OR date LIKE ? OR adresse LIKE ? OR description LIKE ? ";
 
 
 
@@ -140,6 +123,7 @@ public class EvennementService {
             statement.setString(2, evnt);
             statement.setString(3, evnt);
             statement.setString(4, evnt);
+            statement.setString(5,evnt);
 
 
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -149,7 +133,8 @@ public class EvennementService {
                             resultSet.getString(2),
                             resultSet.getFloat(3),
                             resultSet.getDate(4).toLocalDate(),
-                            resultSet.getString(5));
+                            resultSet.getString(5),
+                            resultSet.getString(6));
 
 
 
@@ -174,9 +159,10 @@ public class EvennementService {
                 float montantev = rs.getFloat(3);
                 LocalDate date = rs.getObject(4, LocalDate.class);
                 String adresse = rs.getString(5);
+                String description= rs.getString(6);
 
 
-                return new Evennement(evid,nom,montantev,date,adresse);
+                return new Evennement(evid,nom,montantev,date,adresse,description);
 
 
             }
@@ -203,7 +189,7 @@ public class EvennementService {
             // Check if there are any rows returned
             if (rs.next()) {
                 // Retrieve the date from the result set
-                Date sqlDate = rs.getDate("date");
+                java.sql.Date sqlDate = rs.getDate("date");
 
                 // Convert the java.sql.Date to LocalDate
                 LocalDate date = sqlDate.toLocalDate();
@@ -224,6 +210,37 @@ public class EvennementService {
 
     }
 
+
+
+    public void updateRating(int eventId, int rating) {
+        String request = "UPDATE evenement SET rating = ? WHERE id = ?";
+        try{
+            pst=connexion.prepareStatement(request);
+            pst.setInt(1, rating);
+            pst.setInt(2, eventId);
+
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+    public int getRating(int eventId) {
+        String query = "SELECT rating FROM evenement WHERE id = ?";
+        try (PreparedStatement statement = connexion.prepareStatement(query)) {
+            statement.setInt(1, eventId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("rating");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        // Return a default value if the rating is not found
+        return 0;
+    }
 
 
 

@@ -22,44 +22,44 @@
             <center>
                <AnchorPane fx:id="bg_container" prefHeight="650.0" prefWidth="666.0" BorderPane.alignment="CENTER">
                   <children>
-                     <AnchorPane fx:id="upcoming_event_container" layoutX="348.0" layoutY="68.0" minHeight="0.0" minWidth="-Infinity" prefHeight="93.0" prefWidth="462.0" styleClass="upcoming-event" stylesheets="@../../../../Styles/eventCSS/style.css">
+                     <AnchorPane fx:id="upcoming_event_container" layoutX="303.0" layoutY="67.0" minHeight="0.0" minWidth="-Infinity" prefHeight="94.0" prefWidth="422.0" styleClass="upcoming-event" stylesheets="@../../../../Styles/eventCSS/style.css">
                         <children>
-                           <Label fx:id="event_name_up" layoutX="117.0" layoutY="19.0" prefHeight="32.0" prefWidth="339.0" text="Gala" textFill="WHITE">
+                           <Label fx:id="event_name_up" layoutX="92.0" layoutY="19.0" prefHeight="32.0" prefWidth="339.0" text="Gala" textFill="WHITE">
                               <font>
                                  <Font name="System Bold" size="20.0" />
                               </font>
                            </Label>
-                           <Label fx:id="event_date_up" layoutX="128.0" layoutY="63.0" text="2024-07-07" textFill="WHITE">
+                           <Label fx:id="event_date_up" layoutX="100.0" layoutY="63.0" text="2024-07-07" textFill="WHITE">
                               <font>
                                  <Font size="15.0" />
                               </font>
                            </Label>
-                           <Label fx:id="event_address_up" layoutX="247.0" layoutY="62.0" text="Magic" textFill="WHITE">
+                           <Label fx:id="event_address_up" layoutX="220.0" layoutY="62.0" text="Magic" textFill="WHITE">
                               <font>
                                  <Font size="15.0" />
                               </font>
                            </Label>
-                           <Label fx:id="event_montant_up" layoutX="358.0" layoutY="58.0" text="7777" textFill="WHITE">
+                           <Label fx:id="event_montant_up" layoutX="308.0" layoutY="58.0" text="7777" textFill="WHITE">
                               <font>
                                  <Font size="19.0" />
                               </font>
                            </Label>
-                           <ImageView fitHeight="47.0" fitWidth="48.0" layoutX="64.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                           <ImageView fitHeight="47.0" fitWidth="48.0" layoutX="32.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                               <image>
                                  <Image url="@../Pics/EventPics/partager.png" />
                               </image>
                            </ImageView>
-                           <ImageView fitHeight="32.0" fitWidth="21.0" layoutX="102.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+                           <ImageView fitHeight="32.0" fitWidth="21.0" layoutX="75.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
                               <image>
                                  <Image url="@../Pics/EventPics/evenement.png" />
                               </image>
                            </ImageView>
-                           <ImageView fitHeight="32.0" fitWidth="21.0" layoutX="221.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+                           <ImageView fitHeight="32.0" fitWidth="21.0" layoutX="195.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                               <image>
                                  <Image url="@../Pics/EventPics/emplacement.png" />
                               </image>
                            </ImageView>
-                           <ImageView fitHeight="23.0" fitWidth="28.0" layoutX="330.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                           <ImageView fitHeight="23.0" fitWidth="28.0" layoutX="282.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
                               <image>
                                  <Image url="@../Pics/EventPics/objectif-de-profit.png" />
                               </image>
@@ -86,7 +86,7 @@
                            </VBox>
                         </content>
                      </ScrollPane>
-                     <HBox alignment="CENTER" layoutX="74.0" layoutY="85.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="209.0" stylesheets="@../../../../Styles/eventCSS/style.css">
+                     <HBox alignment="CENTER" layoutX="62.0" layoutY="85.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="209.0" stylesheets="@../../../../Styles/eventCSS/style.css">
                         <children>
                            <TextField fx:id="searchfield" prefHeight="18.0" prefWidth="113.0" promptText="Rechercher..." styleClass="transparent" stylesheets="@../../../../Styles/eventCSS/style.css">
                               <HBox.margin>
@@ -104,6 +104,7 @@
                         </styleClass>
                      </HBox>
                      <Line endX="622.6666870117188" layoutX="224.0" layoutY="180.0" startX="-192.0" stroke="#b2afaf" />
+                     <Button fx:id="calendar" layoutX="759.0" layoutY="95.0" mnemonicParsing="false" onAction="#open_calendar" text="Calendrier" />
                   </children>
                </AnchorPane>
             </center>

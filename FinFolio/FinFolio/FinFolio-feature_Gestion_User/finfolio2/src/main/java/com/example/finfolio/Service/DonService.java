@@ -187,55 +187,37 @@ public class DonService  {
 
 
 
+    public List<Don> getDonationsForMonth(LocalDate monthDate) {
+        List<Don> allDonations = readAll();
+        List<Don> donationsForMonth = new ArrayList<>();
 
+        int year = monthDate.getYear();
+        int month = monthDate.getMonthValue();
 
+        for (Don donation : allDonations) {
+            LocalDate donationDate = donation.getEvennement().getDate();
 
-
-/*
-    public List<Don> getDonationsWithDetails(int eventId) {
-        List<Don> donations = new ArrayList<>();
-        String query = "SELECT d.user_id, d.montant_user, d.evenement_id, u.nom, u.prenom, u.email, e.nom, e.date " +
-                "FROM don d " +
-                "JOIN user u ON d.user_id = u.id " +
-                "JOIN evenement e ON d.evenement_id = e.id " +
-                "WHERE d.evenement_id = ?";
-        try (
-             PreparedStatement pst = connexion.prepareStatement(query)) {
-            pst.setInt(1, eventId);
-            try (ResultSet rs = pst.executeQuery()) {
-                while (rs.next()) {
-                    int userId = rs.getInt("user_id");
-                    float montant = rs.getFloat("montant_user");
-                    String nom = rs.getString("nom");
-                    String prenom = rs.getString("prenom");
-                    String email = rs.getString("email");
-                    String nomEvenemment = rs.getString("nom");
-                    LocalDate dateEvenemment = rs.getDate("date").toLocalDate();
-
-
-                    // Créer un objet User avec les détails de l'utilisateur
-                   UserService us = new UserService();
-                   EvennementService ev = new EvennementService();
-                  User u =  us.readById(userId);
-                  Evennement event= ev.readById(eventId);
-                  event.setNom(nomEvenemment);
-                  event.setDate(dateEvenemment);
-                  u.setEmail(email);
-
-                  u.setNom(nom);
-                    // Créer un objet Don avec les détails récupérés et l'ajouter à la liste
-                    Don donation = new Don(montant,u ,event);
-                    donations.add(donation);
-                }
+            if (donationDate.getYear() == year && donationDate.getMonthValue() == month) {
+                donationsForMonth.add(donation);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Gérer l'exception selon vos besoins
         }
-        return donations;
-    }
-*/
 
+        return donationsForMonth;
+    }
+
+
+
+    public float getTotalDonationsForEvent(int eventId) {
+        float totalDonations = 0;
+        List<Don> allDonations = readAll();
+        // Loop through all donations and sum up the amounts for the given event
+        for (Don donation : allDonations) {
+            if (donation.getEvennement().getId() == eventId) {
+                totalDonations += donation.getMontant_user();
+            }
+        }
+        return totalDonations;
+    }
 
 
     public static DonService getInstance() {

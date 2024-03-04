@@ -101,3 +101,34 @@
 .scrollpane .scroll-bar-thumb:pressed {
     -fx-background-color: #666; /* Scrollbar thumb color when pressed */
 }
+
+/* calendar_styles.css */
+
+/* Calendar Pane */
+.calendar-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
+
+/* Navigation Button */
+.navigation-button {
+    -fx-background-color: #007bff;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 15px;
+}
+
+/* Date Text */
+.date-text {
+    -fx-fill: #007bff;
+    -fx-font-size: 22px;
+}
+
+/* Day Text */
+.day-text {
+    -fx-fill: #000000;
+    -fx-font-size: 14px;
+}
