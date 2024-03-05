@@ -47,7 +47,12 @@ public class User {
 
     public User(){};
 
-    public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String staut) {
+    public User(int id, String nom) {
+        this.id = id;
+        this.nom = nom;
+    }
+
+    public User(int id, String nom, String prenom, String email, String numTel, String password, String adresse, int nbrCredit, float rate, String role, String solde, String staut) {
         this.id = id;
         this.password = password;
         this.nbrCredit = nbrCredit;
