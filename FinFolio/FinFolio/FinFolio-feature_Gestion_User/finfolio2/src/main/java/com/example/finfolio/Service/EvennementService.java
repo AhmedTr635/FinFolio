@@ -24,6 +24,7 @@ public class EvennementService {
     public void add(Evennement ev) {
         String request="insert into evenement (nom_event,montant,date,adresse,description) values(?,?,?,?,?)";
 
+
         try {
             pst=connexion.prepareStatement(request);
             pst.setString(1,ev.getNom());
@@ -107,6 +108,7 @@ public class EvennementService {
 
 
 
+
     public List<Evennement> rechercherEvent(String evnt) throws SQLException {
         String requeteSQL = "SELECT * FROM evenement WHERE nom_event LIKE ? OR montant LIKE ? OR date LIKE ? OR adresse LIKE ? OR description LIKE ? ";
 
@@ -163,6 +165,8 @@ public class EvennementService {
 
 
                 return new Evennement(evid,nom,montantev,date,adresse,description);
+
+
 
 
             }

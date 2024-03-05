@@ -23,8 +23,7 @@ public class Evennement {
 
 
 
-    public Evennement() {
-    }
+
 
     public Evennement(int id, String nom_event, float montant, LocalDate date, String adresse, String description) {
         this.id = id;
@@ -42,6 +41,9 @@ public class Evennement {
         this.adresse = adresse;
         this.description = description;
     }
+    public Evennement() {
+    }
+
 
     public Evennement(int id, String nom_event, float montant, LocalDate date, String adresse) {
         this.id = id;
@@ -51,8 +53,7 @@ public class Evennement {
         this.adresse = adresse;
     }
 
-    public Evennement(String nomEvenemment, LocalDate dateEvenemment) {
-    }
+
 
     public Evennement(String nom_event, float montant, LocalDate date, String adresse) {
         this.nom_event = nom_event;
@@ -64,6 +65,10 @@ public class Evennement {
     public Evennement(int id, int rating) {
         this.id = id;
         this.rating = rating;
+        this.adresse=adresse;
+    }
+
+    public Evennement(String nomEvenemment, LocalDate dateEvenemment) {
     }
 
     public int getId() {
@@ -135,4 +140,7 @@ public class Evennement {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+
+
 }

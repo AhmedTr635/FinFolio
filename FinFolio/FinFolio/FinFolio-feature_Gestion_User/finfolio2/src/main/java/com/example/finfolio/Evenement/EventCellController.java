@@ -21,6 +21,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class EventCellController {
 
@@ -140,25 +142,11 @@ public class EventCellController {
 
     }
 
-    public void refreshEventDetails() {
-        Evennement event = EvennementService.getInstance().readById(eventId);
-        if (event != null) {
-            event_name.setText(event.getNom());
-            event_date.setText(event.getDate().toString());
-            event_place.setText(event.getAdresse());
-            event_goal.setText(String.format("$%,.2f", event.getMontant()));
-            description_event.setText(event.getDescription());
 
-            float totalDonations = DonService.getInstance().getTotalDonationsForEvent(event.getId());
-            float progressPercentage = (totalDonations / event.getMontant()) * 100;
-            progress_bar.setProgress(progressPercentage / 100);
-
-            int rating = RatingApi.loadRating(eventId);
-            event_rating.setRating(rating);
-
-        }
     }
 
 
 
-}
+
+
+

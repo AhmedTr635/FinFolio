@@ -2,6 +2,13 @@ package com.example.finfolio.Evenement;
 
 import Models.Model;
 import com.example.finfolio.Entite.Don;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
+
+import com.example.finfolio.Entite.Don;
+import com.example.finfolio.Entite.Evennement;
 import com.example.finfolio.Service.DonService;
 import com.example.finfolio.Service.EvennementService;
 import com.example.finfolio.Service.UserService;
@@ -14,6 +21,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 
 public class AjouterDonController {
@@ -74,6 +88,9 @@ public class AjouterDonController {
             alert.setHeaderText(null);
             alert.setContentText("Don fait avec succès");
             alert.showAndWait();
+
+            EventCellController evc = new EventCellController();
+            evc.refreshEventDetails(es.readById(eventId));
 
 EmailController ec = new EmailController();
             ec.sendEmail("siwarbouali27@gmail.com", "Invitation à l'événement", "Bonjour, vous êtes invité à participer à notre événement. Cordialement, Finfolio");

@@ -234,4 +234,41 @@ public List<User> cellsUsers() throws SQLException {
         return resultatsRecherche;
     }
 
+
+    public User readById(int id) throws SQLException {
+        String request = "SELECT * FROM user WHERE id = ?";
+
+        try {
+
+            ps=cnx.prepareStatement(request);
+            ps.setInt(1,id);
+            ResultSet rs= ps.executeQuery();
+
+            while (rs.next())
+            {
+                int userId = rs.getInt("id");
+                String password = rs.getString("password");
+                int nbrCredit = rs.getInt("nbcredit");
+                String nom = rs.getString("nom");
+                String prenom = rs.getString("prenom");
+                String email = rs.getString("email");
+                String adresse = rs.getString("adresse");
+/*
+                String numTel = rs.getString("numTel");
+*/
+                String role = rs.getString("role");
+                float rate = rs.getFloat("rate");
+             /*   String solde = rs.getString("solde");
+                String statut = rs.getString("statut");
+                String image = rs.getString("image");*/
+
+                // Create and return the User object
+                return new User(userId, nom, prenom, email,  password, adresse, nbrCredit, rate);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null; // Return null if no user with the specified ID is found
+    }
 }

@@ -23,7 +23,7 @@ public class EmailController {
 
         // Création d'une session pour l'envoi d'email
         Session session = Session.getInstance(props,
-                new Authenticator() {
+                new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(username, password);
                     }
@@ -47,4 +47,4 @@ public class EmailController {
             throw new RuntimeException(e);
         }
     }
-}
+    }
