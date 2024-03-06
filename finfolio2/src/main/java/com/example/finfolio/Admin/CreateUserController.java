@@ -3,10 +3,15 @@ package com.example.finfolio.Admin;
 import Views.AlerteFinFolio;
 import com.example.finfolio.Entite.User;
 import com.example.finfolio.Service.UserService;
+import javafx.animation.*;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +19,7 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CreateUserController implements Initializable {
@@ -25,6 +31,7 @@ public class CreateUserController implements Initializable {
     public ChoiceBox role_box;
     public Button creer_btn;
     public Label error_lbl;
+    public PieChart pieChart;
     @FXML
     private Label error_mail;
 
@@ -42,13 +49,13 @@ public class CreateUserController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
+        initPieChart();
         addInputControlListener(nom_fld, error_nom, "Nom");
         addInputControlListener(prenom_fld, error_prenom, "Prénom");
         addInputControlListener(email_fld, error_mail, "Email");
         addInputControlListener(tel_fld, error_ntel, "Numéro de téléphone");
         addInputControlListener(mdp_fld, error_mdp, "Mot de passe");
-        creer_btn.setOnAction(e-> {
+        creer_btn.setOnAction(e -> {
             try {
                 onEngistrez();
             } catch (SQLException ex) {
@@ -87,6 +94,7 @@ public class CreateUserController implements Initializable {
             }
         });
     }
+
     private boolean inputcontrol() {
         boolean isValid = true;
         isValid &= validateField(nom_fld, error_nom, "Nom", 3, 32);
@@ -162,6 +170,7 @@ public class CreateUserController implements Initializable {
             return true;
         }
     }
+
     private String importImage() throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
@@ -174,6 +183,7 @@ public class CreateUserController implements Initializable {
             return null;
         }
     }
+
     void onEngistrez() throws SQLException, IOException, NoSuchAlgorithmException {
         //String imagePath = null;
 
@@ -191,17 +201,70 @@ public class CreateUserController implements Initializable {
             }
 
             // Insert user data along with the image path into the database
-            User user = new User(nom_fld.getText(), prenom_fld.getText(), email_fld.getText(), "+216"+tel_fld.getText(), hexString.toString(), "Mourouj", 0, 0, "admin", "20000", "active", "ss","vide");
+            User user = new User(nom_fld.getText(), prenom_fld.getText(), email_fld.getText(), "+216" + tel_fld.getText(), hexString.toString(), "Mourouj", 0, 0, "admin", "20000", "active", "ss", "vide");
             UserService userS = new UserService();
-            if(userS.readAll().stream().anyMatch(us->us.getEmail().equals(email_fld.getText())))
+            if (userS.readAll().stream().anyMatch(us -> us.getEmail().equals(email_fld.getText())))
                 AlerteFinFolio.alerte("exist");
             else {
                 userS.add(user);
-                AlerteFinFolio.alerteSucces("Le compte d'admin a été crée avec succès","Creation du compte ");}
+                AlerteFinFolio.alerteSucces("Le compte d'admin a été crée avec succès", "Creation du compte ");
+            }
 
 
         }
 
     }
 
+    private void initPieChart() {
+        try {
+            pieChart.setPrefSize(300, 300);
+            UserService us = new UserService();
+            pieChart.setTitle("Pourcentage d'admins et utilisateurs");
+
+            List<User> allUsers = us.readAll();
+            long totalUsers = allUsers.size();
+            long userCount = allUsers.stream().filter(u -> u.getRole().equals("user")).count();
+            long adminCount = allUsers.stream().filter(u -> u.getRole().equals("admin")).count();
+
+            double userPercentage = ((double) userCount / totalUsers) * 100;
+            double adminPercentage = ((double) adminCount / totalUsers) * 100;
+
+            PieChart.Data slice1 = new PieChart.Data("Utilisateurs " + userCount + " - " + String.format("%.2f", userPercentage) + "%", userCount);
+            PieChart.Data slice2 = new PieChart.Data("Administrateurs " + adminCount + " - " + String.format("%.2f", adminPercentage) + "%", adminCount);
+
+            pieChart.getData().addAll(slice1, slice2);
+
+            // Set custom colors for each slice
+            slice1.getNode().setStyle("-fx-pie-color: #123499;"); // Blue
+            slice2.getNode().setStyle("-fx-pie-color: #00FF00;"); // Green
+
+            // Create a ParallelTransition to animate separation and expansion
+            ParallelTransition parallelTransition = new ParallelTransition();
+
+            // Animate separation of slices in opposite directions
+            TranslateTransition slice1Translate = new TranslateTransition(Duration.seconds(1), slice1.getNode());
+            slice1Translate.setToX(-20); // Adjust separation distance for slice 1 (opposite direction)
+            parallelTransition.getChildren().add(slice1Translate);
+
+            TranslateTransition slice2Translate = new TranslateTransition(Duration.seconds(1), slice2.getNode());
+            slice2Translate.setToX(20); // Adjust separation distance for slice 2 (opposite direction)
+            parallelTransition.getChildren().add(slice2Translate);
+
+            // Animate expansion of slices
+            ScaleTransition slice1Scale = new ScaleTransition(Duration.seconds(1), slice1.getNode());
+            slice1Scale.setToX(1.1); // Adjust expansion factor
+            slice1Scale.setToY(1.1); // Adjust expansion factor
+            parallelTransition.getChildren().add(slice1Scale);
+
+            ScaleTransition slice2Scale = new ScaleTransition(Duration.seconds(1), slice2.getNode());
+            slice2Scale.setToX(1.1); // Adjust expansion factor
+            slice2Scale.setToY(1.1); // Adjust expansion factor
+            parallelTransition.getChildren().add(slice2Scale);
+
+            parallelTransition.play();
+        } catch (SQLException e) {
+            // Handle the exception gracefully, like logging it or showing an error message
+            e.printStackTrace(); // This is just a placeholder, replace it with your actual handling
+        }
+    }
 }

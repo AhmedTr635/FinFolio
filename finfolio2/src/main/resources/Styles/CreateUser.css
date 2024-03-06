@@ -43,3 +43,10 @@
  .error_lbl {
      -fx-text-fill: #FF0000;
  }
+.default-color0.chart-pie {
+    -fx-background-color: blue;
+}
+
+.default-color1.chart-pie {
+    -fx-background-color: #123499;
+}

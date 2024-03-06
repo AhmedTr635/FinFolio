@@ -1,5 +1,7 @@
 package com.example.finfolio.Admin;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -10,11 +12,13 @@ import java.util.ResourceBundle;
 
 
 import Views.AlerteFinFolio;
+import com.example.finfolio.Entite.Depense;
 import com.example.finfolio.Entite.User;
 import com.example.finfolio.Service.UserService;
 import com.example.finfolio.UsrController.ModifierUserController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -35,6 +39,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.paint.Paint;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class UsersAdController implements Initializable {
     public TableView users_table;
@@ -47,6 +55,10 @@ public class UsersAdController implements Initializable {
     public DatePicker dateCh;
     public Button updateBtn;
     public Label dateError;
+    public Label labDes;
+    public Label labBan;
+    public Label labAct;
+    public Button downloadButton;
     private String[] statuts = {"Statut", "Active", "Desactive", "Ban"};
     private String[]notes={"Note","1","2","3","4","5"};
 
@@ -110,7 +122,18 @@ public class UsersAdController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {UserService uc=new UserService();
-//choice box
+
+        //compter type
+        try {
+            compterType();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        //Excel
+        downloadButton.setOnAction(e->exportToExcel());
+
+        //choice box
         statut_box.getItems().addAll(statuts);
         statut_box.setOnAction(this::getStatut);
         statut_box.setValue("Statut");
@@ -132,11 +155,8 @@ public class UsersAdController implements Initializable {
             else                 dateCh.setVisible(false);
 
         });
-        try {
-            refreshTableView();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+
         users_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 // Populate input fields with selected credit's details
@@ -276,11 +296,12 @@ public class UsersAdController implements Initializable {
                     deleteButton.setOnAction(event -> {
                         User u = getTableView().getItems().get(getIndex());
                         UserService us = new UserService();
-                        if(u.getRole()!="user")
+                        if(u.getRole().equals("admin"))
                             AlerteFinFolio.alertechoix("Vous ne pouvez pas supprimer un admin","Suppression admin");
                         else {
                         try {
                             us.delete(u);
+                            compterType();
                             refreshTableView();
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
@@ -346,7 +367,7 @@ public class UsersAdController implements Initializable {
     }
     public void onConfirmer(User user) throws SQLException {
         if (user.getRole().equals("admin"))
-        AlerteFinFolio.alertechoix("Tu ne peux pas punir un admin !","Modifier un admin");
+        AlerteFinFolio.alertechoix("Tu ne peux pas modifier un admin !","Modifier un admin");
         else {
         if ("Active".equals(statut_box.getValue())) {
             user.setStatut("active");
@@ -377,7 +398,8 @@ public class UsersAdController implements Initializable {
         {UserService us = new UserService();
         us.update(user);
         AlerteFinFolio.alerteSucces("Utilisateur sauvegardé avec succes","Modification utilisateur");
-        refreshTableView();}
+        refreshTableView();
+        compterType();}
 
     }}
 //controle de saisie date
@@ -411,19 +433,6 @@ if (!datePicker.isVisible())
 
 
     private void initPieChart() throws SQLException {
-      /* pieChart.setPrefSize(200, 300);
-        UserService us =new UserService();
-
-        PieChart.Data slice1 = new PieChart.Data("Utlisateurs", us.readAll().stream().filter(u -> u.getRole().equals("user")).toList().size());
-        PieChart.Data slice2 = new PieChart.Data("Administrateurs", us.readAll().stream().filter(u -> u.getRole().equals("admin")).toList().size());
-
-        // Créez le PieChart
-        pieChart.getData().addAll(slice1, slice2);
-
-        // Définir des couleurs personnalisées pour chaque tranche
-        slice1.getNode().setStyle("-fx-pie-color: #123499;"); // Rouge
-        slice2.getNode().setStyle("-fx-pie-color: blue;"); // Vert
-        */
 
         // Création du barchart
         UserService us =new UserService();
@@ -458,8 +467,77 @@ if (!datePicker.isVisible())
         users_table.setItems(userList);
 
     }
+    private void compterType() throws SQLException {
+        UserService us=new UserService();
+        labDes.setText("Nombre des comptes desactivés: "+us.readAll().stream().filter(u->u.getStatut().equals("desactive")).toList().size());
+        labBan.setText("Nombre des comptes qui ont un ban: "+us.readAll().stream().filter(u->u.getStatut().equals("ban")).toList().size());
+        labAct.setText("Nombre des comptes activés: "+us.readAll().stream().filter(u->u.getStatut().equals("active")).toList().size());
+
+    }
+
+    public void exportToExcel() {
+        List<User> userList = users_table.getItems();
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Liste des utilisateurs");
+
+        // Create headers
+        Row headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("ID");
+        headerRow.createCell(1).setCellValue("Nom");
+        headerRow.createCell(2).setCellValue("Prénom");
+        headerRow.createCell(3).setCellValue("Num teléphone");
+        headerRow.createCell(4).setCellValue("Nbr crédit");
+        headerRow.createCell(5).setCellValue("Note");
+        headerRow.createCell(6).setCellValue("Role");
+        headerRow.createCell(7).setCellValue("Solde");
+        headerRow.createCell(8).setCellValue("Dte punition");
 
 
+
+
+        // Add data
+        int rowNum = 1;
+        for (User user : userList) {
+            Row row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(user.getId());
+            row.createCell(1).setCellValue(user.getNom());
+            row.createCell(2).setCellValue(user.getPrenom());
+            row.createCell(3).setCellValue(user.getNumtel());
+            row.createCell(4).setCellValue(user.getNbcredit());
+            row.createCell(5).setCellValue(user.getRate());
+            row.createCell(6).setCellValue(user.getRole());
+            row.createCell(7).setCellValue(user.getSolde());
+            row.createCell(8).setCellValue(user.getDatepunition());
+
+
+
+        }
+
+        // Write the workbook content to a file
+        try (FileOutputStream fileOut = new FileOutputStream("Users.xlsx")) {
+            workbook.write(fileOut);
+
+            // Open the Excel file
+            File file = new File("Users.xlsx");
+            Platform.runLater(() -> {
+                try {
+                    java.awt.Desktop.getDesktop().open(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle exception
+        } finally {
+            try {
+                workbook.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
 }

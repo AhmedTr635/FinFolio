@@ -95,9 +95,9 @@ public class SMSController implements Initializable {
                 String sous_chaine = u.getNumtel().substring(8, 12);
                 AlerteFinFolio.alerteSucces("Un code est envoyé à ****"+sous_chaine,"Récupération par SMS");
                 emailError.setText("");
-               /*TwilioAPI tp=new TwilioAPI();
+               TwilioAPI tp=new TwilioAPI();
                 recoveryCode = generateRecoveryCode(5);
-                tp.sendSMS(u.getNumtel(),recoveryCode);*/
+                tp.sendSMS(u.getNumtel(),recoveryCode);
                 recoveryCode = generateRecoveryCode(5);
                 System.out.println(recoveryCode);
                 codeEntered.setVisible(true);

@@ -115,8 +115,7 @@ public void mdpOublie()
         Model.getInstance().getViewFactory().closeStage(st2);
         UserService userS = new UserService();
 
-        /*User u1= userS.getUserByEmail("trabelsi.dali@esprit.tn");
-        Model.getInstance().setUser(u1);
+
         //Model.getInstance().getViewFactory().showUserWindow();
         Model.getInstance().getViewFactory().showAdminWindow();*/
 
@@ -254,7 +253,7 @@ public void mdpOublie()
             capcthaError.setText("Code Incorrecte");
 
 
-        } }
+        } }//*/
     }
 
     private boolean validateEmailField(TextField emailField, Label errorLabel) {

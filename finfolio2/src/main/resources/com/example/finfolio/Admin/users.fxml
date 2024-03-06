@@ -14,10 +14,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="750.0" prefWidth="950.0" styleClass="users_container" stylesheets="@../../../../Styles/Users.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Admin.UsersAdController">
-    <Text layoutX="414.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Utilisateurs" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="14.0" />
+    <Text layoutX="366.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Utilisateurs" AnchorPane.leftAnchor="366.0" AnchorPane.topAnchor="14.5" />
     <TableView fx:id="users_table" layoutX="13.0" layoutY="178.0" prefHeight="270.0" prefWidth="851.0">
       <columns>
           <TableColumn fx:id="id_clm" prefWidth="26.399993896484375" text="id" />
@@ -34,9 +35,8 @@
          <TableColumn fx:id="datePunition" prefWidth="86.39990234375" text="Date punition" />
       </columns>
     </TableView>
-    <HBox alignment="CENTER" layoutX="68.0" layoutY="84.0" prefHeight="60.0" prefWidth="820.0" styleClass="search_box">
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Chercher l'utilisateur" />
-        <TextField fx:id="cherecher_fld" />
+    <HBox alignment="CENTER" layoutX="277.0" layoutY="74.0" prefHeight="60.0" prefWidth="561.0" styleClass="search_box">
+        <TextField fx:id="cherecher_fld" promptText="Chercher " />
         <ChoiceBox fx:id="filtreBox" prefHeight="30.0" prefWidth="150.0" styleClass="filtreBox" />
     </HBox>
     <VBox fillWidth="false" layoutX="434.0" layoutY="456.0" prefHeight="288.0" prefWidth="433.0" styleClass="box1">
@@ -59,4 +59,14 @@
       </graphic>
    </Button>
    <Label fx:id="dateError" layoutX="79.0" layoutY="665.0" styleClass="error_lbl" />
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eef3f7" height="85.0" layoutX="15.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangle" width="301.0" />
+   <FontAwesomeIconView fill="#ece8e8" glyphName="USERS" layoutX="281.0" layoutY="75.0" size="30" wrappingWidth="41.65713024139404" />
+   <Label fx:id="labDes" layoutX="30.0" layoutY="74.0" styleClass="label_rectangle" text="Nombre des comptes désactivés" />
+   <Label fx:id="labBan" layoutX="30.0" layoutY="94.0" styleClass="label_rectangle" text="Nombre des comptes qui ont un ban" />
+   <Label fx:id="labAct" layoutX="30.0" layoutY="112.0" styleClass="label_rectangle" text="Nombre des comptes activés" />
+   <Button fx:id="downloadButton" layoutX="687.0" layoutY="134.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="126.0" styleClass="downloadButton" text="Ouvrir sur Excel">
+      <graphic>
+         <FontAwesomeIconView fill="#fffafa" glyphName="DOWNLOAD" />
+      </graphic>
+   </Button>
 </AnchorPane>
