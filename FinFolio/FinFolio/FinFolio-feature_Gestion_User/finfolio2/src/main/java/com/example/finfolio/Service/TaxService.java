@@ -13,6 +13,9 @@ public class TaxService {
     private Connection connexion;
     private Statement ste;
     private PreparedStatement pst;
+    private static TaxService instance;
+
+
 
     public TaxService() {
         connexion= DataSource.getInstance().getCnx();

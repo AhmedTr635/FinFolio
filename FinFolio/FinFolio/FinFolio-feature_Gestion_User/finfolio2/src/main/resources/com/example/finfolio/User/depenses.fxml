@@ -30,8 +30,8 @@
                      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="874.0" styleClass="AnchorPane" stylesheets="@../../../../Styles/Depense/DashboardDepense.css">
                         <children>
                            <ComboBox fx:id="monthComboBox" layoutX="302.0" layoutY="11.0" prefHeight="30.0" prefWidth="74.0" promptText="     Mois" styleClass="monthComboBox" stylesheets="@../../../../Styles/Depense/DashboardDepense.css" />
-                           <TextField fx:id="searchField" layoutX="47.0" layoutY="14.0" promptText="Search expenses" stylesheets="@../../../../Styles/Depense/DashboardDepense.css" />
-                           <Button fx:id="AddDepense" layoutX="397.0" layoutY="8.0" mnemonicParsing="false" onAction="#OnAddDepense" prefHeight="37.0" prefWidth="58.0" styleClass="submit" text="add" />
+                           <TextField fx:id="searchField" layoutX="47.0" layoutY="14.0" prefHeight="34.0" prefWidth="206.0" promptText="Rechercher une dépense" stylesheets="@../../../../Styles/Depense/DashboardDepense.css" />
+                           <Button fx:id="AddDepense" layoutX="397.0" layoutY="8.0" mnemonicParsing="false" onAction="#OnAddDepense" prefHeight="38.0" prefWidth="82.0" styleClass="submit" text="Ajouter" />
                            <VBox layoutX="677.0" layoutY="-9.0" prefHeight="50.0" prefWidth="108.0">
                               <children>
                                  <Button fx:id="downloadButton" mnemonicParsing="false" prefHeight="58.0" prefWidth="108.0" text="Ouvrir sur Excel" />
@@ -106,6 +106,40 @@
                </Label>
             </children>
          </AnchorPane>
+         <Rectangle fx:id="amount_depense1" arcHeight="5.0" arcWidth="5.0" height="77.0" layoutX="18.0" layoutY="517.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="135.0">
+            <fill>
+               <LinearGradient endX="0.7499999855503892" endY="0.8295454500299512" startX="0.16287879058808993" startY="0.1363636869372743">
+                  <stops>
+                     <Stop>
+                        <color>
+                           <Color red="0.021052632480859756" green="0.03368420898914337" blue="0.21052631735801697" />
+                        </color>
+                     </Stop>
+                     <Stop offset="0.414535666218035">
+                        <color>
+                           <Color red="0.021052632480859756" green="0.03368420898914337" blue="0.21052631735801697" />
+                        </color>
+                     </Stop>
+                     <Stop offset="0.8209959623149392">
+                        <color>
+                           <Color red="0.015087719075381756" green="0.015087719075381756" blue="0.4526315927505493" />
+                        </color>
+                     </Stop>
+                     <Stop offset="1.0">
+                        <color>
+                           <Color red="0.015087719075381756" green="0.015087719075381756" blue="0.4526315927505493" />
+                        </color>
+                     </Stop>
+                  </stops>
+               </LinearGradient>
+            </fill>
+         </Rectangle>
+         <Label layoutX="25.0" layoutY="528.0" text="Tax dépense" textFill="WHITE" />
+         <Label fx:id="tax_depense" layoutX="26.0" layoutY="552.0" text="50.000$" textFill="WHITE">
+            <font>
+               <Font size="23.0" />
+            </font>
+         </Label>
 
       </AnchorPane>
    </children>

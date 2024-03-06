@@ -57,7 +57,7 @@
          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DARKBLUE" height="446.0" layoutX="-5.0" layoutY="-4.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="194.0" />
          <ImageView fitHeight="112.0" fitWidth="122.0" layoutX="36.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../Pics/Depense/give-money.png" />
+                <Image url="@../../Pics/depenses.png" />
             </image>
          </ImageView>
         </children>

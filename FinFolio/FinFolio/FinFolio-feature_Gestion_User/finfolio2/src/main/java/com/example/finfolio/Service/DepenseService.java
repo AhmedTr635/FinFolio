@@ -84,7 +84,6 @@ public class DepenseService {
                 String type = rs.getString("type");
                 int montant = rs.getInt("montant");
                 // Assuming the type of the user column is int
-                int user_id = rs.getInt("user_id");
                 TaxService ts=new TaxService();
                 UserService us=new UserService();
 
@@ -111,9 +110,7 @@ public class DepenseService {
                 LocalDate sqlDate = rs.getDate("date").toLocalDate();
                 String type = rs.getString("type");
                 int montant = rs.getInt("montant");
-                // Assuming the type of the user column is int
-                int user_id = rs.getInt("user_id");
-                UserService us=new UserService();
+
                 TaxService ts = new TaxService();
 
                 // Create and return the User object

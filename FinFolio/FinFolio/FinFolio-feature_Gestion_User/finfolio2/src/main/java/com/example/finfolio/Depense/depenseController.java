@@ -4,6 +4,7 @@ package com.example.finfolio.Depense;
 import Models.Model;
 import com.example.finfolio.Entite.Depense;
 import com.example.finfolio.Entite.Tax;
+import com.example.finfolio.Entite.User;
 import com.example.finfolio.Service.DepenseService;
 import com.example.finfolio.Service.TaxService;
 import com.example.finfolio.Service.UserService;
@@ -93,6 +94,9 @@ public class depenseController  implements Initializable {
 
         depenseService.add(dep);
 
+        Model.getInstance().getUser().setTotal_tax( Tax.calculateTotalTax(ts.readAll()));
+        UserService us =new UserService();
+        us.updatewTax( Model.getInstance().getUser());
         Stage stage = (Stage) btnAdd.getScene().getWindow();
 
         stage.close();

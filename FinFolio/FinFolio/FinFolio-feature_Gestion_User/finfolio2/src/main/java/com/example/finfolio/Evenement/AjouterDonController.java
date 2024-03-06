@@ -1,7 +1,9 @@
 package com.example.finfolio.Evenement;
 
 import Models.Model;
+import com.example.finfolio.Depense.DashboardDepenseController;
 import com.example.finfolio.Entite.Don;
+import com.example.finfolio.Entite.Tax;
 import com.example.finfolio.Service.DonService;
 import com.example.finfolio.Service.EvennementService;
 import com.example.finfolio.Service.TaxService;
@@ -16,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.util.List;
 
 
 public class AjouterDonController {
@@ -60,23 +63,39 @@ public class AjouterDonController {
             int userId = Integer.parseInt(String.valueOf(1));
             EvennementService es =new EvennementService();
             UserService us = new UserService();
+            TaxService ts=new TaxService();
+          /* double new_total_tax= Tax.calculateTotalTax( ts.readAll())-montant;
+            Model.getInstance().getUser().setTotal_tax(new_total_tax );
+            us.updatewTax( Model.getInstance().getUser());
+           if (new_total_tax<0) {
 
-            // Create a new Don object
 
+               DashboardDepenseController.getInstance().tax_depense.setText(String.format("%.2f", 0.0));
+               // Create a new Don object
+           }
+           else{
+               DashboardDepenseController.getInstance().tax_depense.setText(String.valueOf(new_total_tax));
+           }*/
             Don donation = new Don(montant, Model.getInstance().getUser(), es.readById(eventId));
 
             // Save the donation using the DonService
             DonService.getInstance().add(donation);
             TaxService taxC = new TaxService();
             double sommetaxDep = taxC.sommeTaxByDepense();
-            DashboardController dash =new DashboardController();
-
-            Model.getInstance().getUser().setTotal_tax(sommetaxDep-montant);
+            double new_total_tax= Tax.calculateTotalTax( ts.readAll())-montant;
+            Model.getInstance().getUser().setTotal_tax(ts.sommeTaxByDepense()-montant);
             us.updatewTax(Model.getInstance().getUser());
-            System.out.println("new montant "+Model.getInstance().getUser().setTotal_tax(sommetaxDep-montant));
-/*
-            dash.refreshDashboard();
-*/
+
+            if (new_total_tax<0) {
+
+
+                DashboardDepenseController.getInstance().tax_depense.setText(String.format("%.2f", 0.0));
+                // Create a new Don object
+            }
+            else{
+                DashboardDepenseController.getInstance().tax_depense.setText(String.format("%.2f", new_total_tax));
+            }
+
             Stage currentStage = (Stage) btnAdd.getScene().getWindow();
             currentStage.close();
 
@@ -96,46 +115,9 @@ EmailController ec = new EmailController();
 
         }
     }
-    /*public void makeDonation(double donation) {
-        String montantText = montant_field.getText();
 
-        double montant = Float.parseFloat(montantText);
-
-        TaxService taxC = new TaxService();
-        double sommetaxDep = taxC.sommeTaxByDepense();
-        Model.getInstance().setTax(sommetaxDep-donation);
-        System.out.println("hiiii"+Model.getInstance().getTax());
-        DashboardController dash =new DashboardController();
-        //System.out.println(dash.getExpense_lbl());
-        dash.setExpense_lbl(Double.toString(Model.getInstance().getTax()));
-        System.out.println(("ghghg"+Model.getInstance().getTax()));
-        dash.refreshDashboard(montant);
-    }*/
-
-   /* public void makeDonation(double donation) {
-        // ... votre code pour faire un don
-
-        // Mettre à jour la taxe dans le modèle
-        TaxService taxC = new TaxService();
-        double sommetaxDep = taxC.sommeTaxByDepense();
-        Model.getInstance().setTax(sommetaxDep - donation);
-        DashboardController dash =new DashboardController();
-
-        // Appeler refreshDashboard pour mettre à jour l'affichage
-        dash.refreshDashboard(mont);
-    }*/
     // Méthode appelée lorsque le don est effectué
-    public void handleDonation() {
-        System.out.println("hyy");
-        DashboardController dashboardController=new DashboardController();
 
-        String montantText = montant_field.getText();
-        System.out.println(montantText);
-        double montant = Double.parseDouble(montantText);
-        System.out.println(montant);
-
-        // Par exemple, le montant du don est de 200 $
-    }
 
 
 

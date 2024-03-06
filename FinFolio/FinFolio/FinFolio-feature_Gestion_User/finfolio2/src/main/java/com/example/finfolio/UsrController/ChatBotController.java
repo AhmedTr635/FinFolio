@@ -8,10 +8,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -19,7 +16,6 @@ import javafx.stage.Stage;
 import okhttp3.*;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 public class ChatBotController {
@@ -89,7 +85,5 @@ public class ChatBotController {
 
     public void onBack(ActionEvent event) {
         Stage stage = (Stage) btn_Back.getScene().getWindow();
-
-
         stage.close();
 }}

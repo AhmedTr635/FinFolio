@@ -1,5 +1,7 @@
 package com.example.finfolio.Entite;
 
+import java.util.List;
+
 public class Tax {
 
     private int id;
@@ -60,7 +62,13 @@ public class Tax {
         this.type = type;
         this.optimisation = optimisation;
     }
-
+    public static double calculateTotalTax(List<Tax> taxs) {
+        double total = 0;
+        for (Tax tax : taxs) {
+            total += tax.getmontantTax();
+        }
+        return total;
+    }
     public void setOptimisation(String optimisation) {
         this.optimisation = optimisation;
     }
