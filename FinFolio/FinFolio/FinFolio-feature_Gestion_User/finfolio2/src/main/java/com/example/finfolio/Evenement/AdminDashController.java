@@ -84,8 +84,7 @@ public class AdminDashController {
     @FXML
     public TableColumn<Don, String> userNameColumn;
 
-    @FXML
-    public TableColumn<Don, String> userPrenomColumn;
+
 
     @FXML
     public TableColumn<Don, String> userEmailColumn;
@@ -122,7 +121,6 @@ public class AdminDashController {
 
 
         userNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUser().getNom()));
-        userPrenomColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUser().getPrenom()));
         userEmailColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUser().getEmail()));
         eventNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEvennement().getNom()));
         eventDateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEvennement().getDate()));

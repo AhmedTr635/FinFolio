@@ -71,7 +71,7 @@ public class EvennementService {
             pst.setDate(3, Date.valueOf(ev.getDate()));
             pst.setString(4, ev.getAdresse());
             pst.setString(5, ev.getDescription());
-            pst.setInt(5, id);
+            pst.setInt(6, id);
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
