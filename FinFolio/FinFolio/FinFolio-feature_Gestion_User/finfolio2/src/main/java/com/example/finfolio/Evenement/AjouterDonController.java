@@ -4,7 +4,9 @@ import Models.Model;
 import com.example.finfolio.Entite.Don;
 import com.example.finfolio.Service.DonService;
 import com.example.finfolio.Service.EvennementService;
+import com.example.finfolio.Service.TaxService;
 import com.example.finfolio.Service.UserService;
+import com.example.finfolio.UsrController.DashboardController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -30,6 +32,7 @@ public class AjouterDonController {
 
     @FXML
     private Label user_id;
+
     @FXML
     void annuler(ActionEvent event) {
 
@@ -64,7 +67,16 @@ public class AjouterDonController {
 
             // Save the donation using the DonService
             DonService.getInstance().add(donation);
+            TaxService taxC = new TaxService();
+            double sommetaxDep = taxC.sommeTaxByDepense();
+            DashboardController dash =new DashboardController();
 
+            Model.getInstance().getUser().setTotal_tax(sommetaxDep-montant);
+            us.updatewTax(Model.getInstance().getUser());
+            System.out.println("new montant "+Model.getInstance().getUser().setTotal_tax(sommetaxDep-montant));
+/*
+            dash.refreshDashboard();
+*/
             Stage currentStage = (Stage) btnAdd.getScene().getWindow();
             currentStage.close();
 
@@ -73,15 +85,56 @@ public class AjouterDonController {
             alert.setTitle("Confirmation");
             alert.setHeaderText(null);
             alert.setContentText("Don fait avec succès");
-            alert.showAndWait();
+            alert.showAndWait();/*
 
 EmailController ec = new EmailController();
             ec.sendEmail("siwarbouali27@gmail.com", "Invitation à l'événement", "Bonjour, vous êtes invité à participer à notre événement. Cordialement, Finfolio");
 
-
+*//*
+*/
             // Optionally, display a success message or close the window
 
         }
+    }
+    /*public void makeDonation(double donation) {
+        String montantText = montant_field.getText();
+
+        double montant = Float.parseFloat(montantText);
+
+        TaxService taxC = new TaxService();
+        double sommetaxDep = taxC.sommeTaxByDepense();
+        Model.getInstance().setTax(sommetaxDep-donation);
+        System.out.println("hiiii"+Model.getInstance().getTax());
+        DashboardController dash =new DashboardController();
+        //System.out.println(dash.getExpense_lbl());
+        dash.setExpense_lbl(Double.toString(Model.getInstance().getTax()));
+        System.out.println(("ghghg"+Model.getInstance().getTax()));
+        dash.refreshDashboard(montant);
+    }*/
+
+   /* public void makeDonation(double donation) {
+        // ... votre code pour faire un don
+
+        // Mettre à jour la taxe dans le modèle
+        TaxService taxC = new TaxService();
+        double sommetaxDep = taxC.sommeTaxByDepense();
+        Model.getInstance().setTax(sommetaxDep - donation);
+        DashboardController dash =new DashboardController();
+
+        // Appeler refreshDashboard pour mettre à jour l'affichage
+        dash.refreshDashboard(mont);
+    }*/
+    // Méthode appelée lorsque le don est effectué
+    public void handleDonation() {
+        System.out.println("hyy");
+        DashboardController dashboardController=new DashboardController();
+
+        String montantText = montant_field.getText();
+        System.out.println(montantText);
+        double montant = Double.parseDouble(montantText);
+        System.out.println(montant);
+
+        // Par exemple, le montant du don est de 200 $
     }
 
 

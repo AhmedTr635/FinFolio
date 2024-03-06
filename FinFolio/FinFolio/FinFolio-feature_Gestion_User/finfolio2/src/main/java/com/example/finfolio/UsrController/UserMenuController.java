@@ -43,6 +43,7 @@ public class UserMenuController implements Initializable {
     }
     private void onDashboard(){
         Model.getInstance().getViewFactory().getUserSelectedMenuItem().set("Dashboard");
+        DashboardController dash=new DashboardController();
     }
     private void onCredits(){
         Model.getInstance().getViewFactory().getUserSelectedMenuItem().set("Credits");

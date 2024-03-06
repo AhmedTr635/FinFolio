@@ -14,6 +14,8 @@ module finfolio {
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
     requires java.desktop;
+    requires com.google.gson;
+    requires okhttp3;
 
 
     opens com.example.finfolio to javafx.fxml;

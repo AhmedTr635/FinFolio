@@ -56,7 +56,7 @@
       </HBox>
       <VBox layoutX="736.0" layoutY="128.0" prefHeight="180.0" prefWidth="210.0" styleClass="summary_view" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="acc_summary_container">
+            <VBox fx:id="vboxDep" prefHeight="200.0" prefWidth="100.0" styleClass="acc_summary_container">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Revenues" />
                   <Label fx:id="income_lbl" styleClass="income_amount" text="+ 500DT" />
@@ -78,7 +78,7 @@
             <TextField fx:id="amount_fld" />
             <Label text="Message(optionel)" />
             <TextArea fx:id="message_fld" prefHeight="70.0" prefWidth="200.0" />
-            <Button fx:id="send_btn" mnemonicParsing="false" text="Envoyer" />
+            <Button fx:id="send_btn" mnemonicParsing="false" onAction="#onSend" text="Envoyer" />
          </children>
       </VBox>
    </children>

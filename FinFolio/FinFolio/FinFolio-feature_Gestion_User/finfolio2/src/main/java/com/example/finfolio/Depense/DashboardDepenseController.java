@@ -54,6 +54,7 @@ public class DashboardDepenseController {
     @FXML
     private TableView<Depense> depenseTableView;
 
+
 //Initilisation du dashboard
     @FXML
     public void initialize() throws SQLException {
@@ -69,6 +70,7 @@ public class DashboardDepenseController {
         displayMonthlyExpensesChart(monthlyExpenses);
         downloadButton.setOnAction(event -> exportToExcel());
         searchExpenses(new ActionEvent());
+        System.out.println("hello");
         totalDpense();
         showInit();
         loadTableView();
@@ -252,13 +254,24 @@ public class DashboardDepenseController {
         };
     }
 
+public void refDep(){
 
+}
     //methode qui calcule la somme totale des dépense
-    public void totalDpense()  {
+    public Double totalDpense()  {
         List<Depense> depenses = DepenseService.getInstance().readAll();
         double totalDepenses = Depense.calculateTotalDepenses(depenses);
+        System.out.println("hyyyyy");
         total_depense_card.setText(String.format("%.2f", totalDepenses));
+       /* DashboardController dash =new DashboardController();
+        dash.expense_lbl.setText(Double.toString(totalDepenses));*/
+        System.out.println("hello");
+        return totalDepenses;
     }
+
+
+
+
 //methode de filtre par mois
     private void filterByMonth(Month selectedMonth) throws SQLException {
         // Clear existing depense cells from the container

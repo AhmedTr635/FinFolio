@@ -14,10 +14,21 @@ public class Model {
     private final ViewFactory vf;
     private User user;
     ObservableList<User> users ;
+    private double tax;
+
+
+    public double getTax() {
+        return tax;
+    }
+
+    public void setTax(double tax) {
+        this.tax = tax;
+    }
 
     private Model(){
         this.vf=new ViewFactory();
         user=new User();
+        tax=user.getTotal_tax();
         users=FXCollections.observableArrayList();
     }
     public static  synchronized Model getInstance(){

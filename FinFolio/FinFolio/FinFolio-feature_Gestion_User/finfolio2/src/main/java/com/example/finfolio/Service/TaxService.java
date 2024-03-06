@@ -128,4 +128,18 @@ public class TaxService {
         // Return -1 if auto-generated ID couldn't be retrieved
         return -1;
     }
+
+
+    public double sommeTaxByDepense(){
+        TaxService ts= new TaxService();
+        List<Tax> taxes = ts.readAll();
+        double somme = taxes.stream()
+                .filter(tax -> tax.getType().equals("depense"))
+                .mapToDouble(Tax::getmontantTax)
+                .sum();
+        return somme;
+
+
+    }
+
 }

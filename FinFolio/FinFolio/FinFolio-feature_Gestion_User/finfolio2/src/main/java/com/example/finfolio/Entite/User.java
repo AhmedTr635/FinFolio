@@ -1,6 +1,5 @@
 package com.example.finfolio.Entite;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 public class User {
@@ -18,8 +17,34 @@ public class User {
     private String solde;
     private String statut;
     private  String image;
+    private  double total_tax ;
 
     private String datepunition;
+
+    public User(int id, String nom, String prenom, String email, String numtel, String password, String adresse, int nbcredit, float rate, String role, String solde, String statut, String image, String datepunition, double totalTax) {
+        this.id = id;
+        this.password = password;
+        this.nbrCredit = nbcredit;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.numTel=numtel;
+        this.adresse = adresse;
+        this.role = role;
+        this.rate = rate;
+        this.solde=solde;
+        this.statut=statut;
+        this.total_tax=totalTax;
+    }
+
+    public double getTotal_tax() {
+        return total_tax;
+    }
+
+    public double setTotal_tax(double total_tax) {
+        this.total_tax = total_tax;
+        return total_tax;
+    }
 
     public String getDatepunition() {
         return datepunition;
@@ -104,6 +129,23 @@ public class User {
         this.solde=solde;
     }
 
+    public User(int id, String password, int nbrCredit, String nom, String prenom, String email, String adresse, String numTel, String role, float rate, String solde, String statut, String image, String datepunition, double total_tax) {
+        this.id = id;
+        this.password = password;
+        this.nbrCredit = nbrCredit;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.adresse = adresse;
+        this.numTel = numTel;
+        this.role = role;
+        this.rate = rate;
+        this.solde = solde;
+        this.statut = statut;
+        this.image = image;
+        this.datepunition = datepunition;
+        this.total_tax = total_tax;
+    }
 
     public String getSolde() {
         return solde;
@@ -206,10 +248,15 @@ public class User {
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", email='" + email + '\'' +
-                ", numero de telephone='" + numTel + '\'' +
                 ", adresse='" + adresse + '\'' +
+                ", numTel='" + numTel + '\'' +
                 ", role='" + role + '\'' +
                 ", rate=" + rate +
+                ", solde='" + solde + '\'' +
+                ", statut='" + statut + '\'' +
+                ", image='" + image + '\'' +
+                ", datepunition='" + datepunition + '\'' +
+                ", total_tax=" + total_tax +
                 '}';
     }
 

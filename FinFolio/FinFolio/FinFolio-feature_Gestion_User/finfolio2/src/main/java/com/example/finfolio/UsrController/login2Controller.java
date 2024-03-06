@@ -3,6 +3,7 @@ package com.example.finfolio.UsrController;
 import Models.Model;
 import Views.AlerteFinFolio;
 import com.example.finfolio.Entite.User;
+import com.example.finfolio.Service.TaxService;
 import com.example.finfolio.Service.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -150,6 +151,12 @@ public void mdpOublie()
                                 if(user.getStatut().equals("active"))
                                 {Stage st = (Stage) error_label.getScene().getWindow();
                                 Model.getInstance().getViewFactory().closeStage(st);
+                                    TaxService taxC = new TaxService();
+                                    double sommetaxDep = taxC.sommeTaxByDepense();
+
+                                    Model.getInstance().setTax(Model.getInstance().getUser().setTotal_tax(sommetaxDep));
+
+
                                 Model.getInstance().getViewFactory().showUserWindow();}
                                 else {
                                 } if(user.getStatut().equals("ban")){

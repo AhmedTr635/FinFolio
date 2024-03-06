@@ -7,6 +7,7 @@ import com.example.finfolio.Entite.Tax;
 import com.example.finfolio.Service.DepenseService;
 import com.example.finfolio.Service.TaxService;
 import com.example.finfolio.Service.UserService;
+import com.example.finfolio.UsrController.DashboardController;
 import com.google.zxing.qrcode.decoder.Mode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -85,8 +86,6 @@ public class depenseController  implements Initializable {
         int taxId = ts.addAndGetId(t); // Assuming addAndGetId returns the auto-generated ID after insertion
 
 
-
-        UserService us=new UserService();
         // Check if a date is selected
         Depense dep = new Depense(ts.readById(taxId), selectedDate,type,  montant, Model.getInstance().getUser());
         // Call a method in your service class to add the data to the database
@@ -94,13 +93,9 @@ public class depenseController  implements Initializable {
 
         depenseService.add(dep);
 
-
-
         Stage stage = (Stage) btnAdd.getScene().getWindow();
 
         stage.close();
-        TaxesAdController ta =new TaxesAdController();
-        System.out.println(ta.sommeTaxByDepense());
     }
 
 
