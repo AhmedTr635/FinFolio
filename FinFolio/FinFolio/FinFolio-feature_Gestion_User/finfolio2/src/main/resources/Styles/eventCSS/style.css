@@ -132,3 +132,9 @@
     -fx-fill: #000000;
     -fx-font-size: 14px;
 }
+
+#calendar{
+    -fx-background-color: #00008b;
+    -fx-background-radius: 30px;
+
+}

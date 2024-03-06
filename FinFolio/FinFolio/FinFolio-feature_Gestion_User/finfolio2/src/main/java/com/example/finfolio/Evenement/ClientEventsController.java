@@ -103,7 +103,7 @@ public class ClientEventsController {
 
 
 
-    private void loadEvents() {
+    public void loadEvents() {
 
         List<Evennement> events = EvennementService.getInstance().readAll();
 
@@ -114,6 +114,7 @@ public class ClientEventsController {
 
                 EventCellController controller = fxmlLoader.getController();
                 controller.setEventData(event);
+
 
                 // Add the cell to the container.
                 event_container.getChildren().addAll(eventCell);

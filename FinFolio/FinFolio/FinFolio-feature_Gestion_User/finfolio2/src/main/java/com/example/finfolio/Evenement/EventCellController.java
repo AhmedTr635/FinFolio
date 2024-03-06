@@ -112,6 +112,7 @@ public class EventCellController {
             adc.setEventId(id);
 
 
+
             // Create a new stage for the AjouterDon interface
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
@@ -141,6 +142,9 @@ public class EventCellController {
         event_rating.setRating(rating);
 
     }
+
+
+
 
 
     }

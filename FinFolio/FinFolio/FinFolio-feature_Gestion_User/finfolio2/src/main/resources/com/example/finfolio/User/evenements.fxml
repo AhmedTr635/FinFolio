@@ -104,7 +104,7 @@
                         </styleClass>
                      </HBox>
                      <Line endX="622.6666870117188" layoutX="224.0" layoutY="180.0" startX="-192.0" stroke="#b2afaf" />
-                     <Button fx:id="calendar" layoutX="759.0" layoutY="95.0" mnemonicParsing="false" onAction="#open_calendar" text="Calendrier" />
+                     <Button fx:id="calendar" layoutX="757.0" layoutY="91.0" mnemonicParsing="false" onAction="#open_calendar" prefHeight="36.0" prefWidth="80.0" stylesheets="@../../../../Styles/eventCSS/style.css" text="Calendrier" textFill="WHITE" />
                   </children>
                </AnchorPane>
             </center>

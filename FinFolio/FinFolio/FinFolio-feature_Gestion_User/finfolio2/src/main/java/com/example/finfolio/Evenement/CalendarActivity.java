@@ -13,6 +13,11 @@ public class CalendarActivity {
         this.eventName = eventName;
     }
 
+
+    public CalendarActivity(String eventName) {
+        this.eventName = eventName;
+    }
+
     public ZonedDateTime getDate() {
         return date;
     }

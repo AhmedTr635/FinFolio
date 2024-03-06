@@ -2,12 +2,9 @@ package com.example.finfolio.Evenement;
 
 import Models.Model;
 import com.example.finfolio.Entite.Don;
-import java.net.URL;
+import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
-
-import com.example.finfolio.Entite.Don;
 import com.example.finfolio.Entite.Evennement;
 import com.example.finfolio.Service.DonService;
 import com.example.finfolio.Service.EvennementService;
@@ -20,14 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.sql.SQLException;
-
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 
 public class AjouterDonController {
@@ -44,6 +33,12 @@ public class AjouterDonController {
 
     @FXML
     private Label user_id;
+    private Evennement evnt; // Add this field
+
+    public void setEventData(Evennement evnt) {
+        this.evnt = evnt;
+    }
+
     @FXML
     void annuler(ActionEvent event) {
 
@@ -54,13 +49,12 @@ public class AjouterDonController {
 
 
     @FXML
-    void faireundon(ActionEvent event) throws SQLException {
+    void faireundon(ActionEvent event) throws SQLException, IOException {
 
         // Get the donation amount from the TextField
         String montantText = montant_field.getText();
         String eventIdText = event_id.getText();
         String userIdText = user_id.getText();
-
 
 
         // Check if the montantText is not empty
@@ -69,7 +63,7 @@ public class AjouterDonController {
             float montant = Float.parseFloat(montantText);
             int eventId = Integer.parseInt(String.valueOf(eventIdText));
             int userId = Integer.parseInt(String.valueOf(1));
-            EvennementService es =new EvennementService();
+            EvennementService es = new EvennementService();
             UserService us = new UserService();
 
             // Create a new Don object
@@ -78,6 +72,8 @@ public class AjouterDonController {
 
             // Save the donation using the DonService
             DonService.getInstance().add(donation);
+
+
 
             Stage currentStage = (Stage) btnAdd.getScene().getWindow();
             currentStage.close();
@@ -89,20 +85,25 @@ public class AjouterDonController {
             alert.setContentText("Don fait avec succès");
             alert.showAndWait();
 
-            EventCellController evc = new EventCellController();
-            evc.refreshEventDetails(es.readById(eventId));
-
-EmailController ec = new EmailController();
-            ec.sendEmail("siwarbouali27@gmail.com", "Invitation à l'événement", "Bonjour, vous êtes invité à participer à notre événement. Cordialement, Finfolio");
 
 
-            // Optionally, display a success message or close the window
+
+
+
+            Evennement evnt = es.readById(eventId);
+            String eventInfo = "Nom: " + evnt.getNom() +"Date: " + evnt.getDate() + ", Location: " + evnt.getAdresse();
+            EmailController.sendInvitationEmail("siwarbouali27@gmail.com", "Invitation à l'événement", eventInfo);
+
+
+
+
+
+
 
         }
+
+
     }
-
-
-
 
 
 }
