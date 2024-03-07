@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="762.0" prefWidth="950.0" styleClass="credits_container" stylesheets="@../../../../Styles/modif.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Credits.CreditController">
+   <children>
+      <Text layoutX="351.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="credits_container" text="Credits" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="14.0" />
+      <TextField fx:id="tf_iduser" onKeyTyped="#user_id_input" style="-fx-background-radius: 10;" visible="false" />
+   </children>
+
+   <Label fx:id="idErrorMessageLabel" layoutX="158.0" layoutY="191.0" prefHeight="18.0" prefWidth="123.0" />
+
+   <HBox alignment="CENTER" layoutX="33.0" layoutY="210.0" prefHeight="63.0" prefWidth="312.0">
+      <children>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Montant" wrappingWidth="61.96954345703125">
+            <font>
+               <Font name="Cambria Bold Italic" size="14.0" />
+            </font>
+         </Text>
+         <TextField fx:id="tf_montant" onKeyTyped="#Montant_input" style="-fx-background-radius: 10;">
+            <HBox.margin>
+               <Insets left="10.0" />
+            </HBox.margin>
+         </TextField>
+      </children>
+   </HBox>
+   <Label fx:id="montantErrorMessageLabel" layoutX="158.0" layoutY="275.0" prefHeight="18.0" prefWidth="142.0" />
+
+   <HBox alignment="CENTER" layoutX="34.0" layoutY="284.0" prefHeight="63.0" prefWidth="312.0">
+      <children>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="IntretMax" wrappingWidth="65.1695556640625">
+            <font>
+               <Font name="Cambria Bold Italic" size="14.0" />
+            </font>
+         </Text>
+         <TextField fx:id="itf_intret_Ma" onKeyTyped="#intretMax_input" style="-fx-background-radius: 10;">
+            <HBox.margin>
+               <Insets left="10.0" />
+            </HBox.margin>
+         </TextField>
+      </children>
+   </HBox>
+   <Label fx:id="intretMaxErrorMessageLabel" layoutX="149.0" layoutY="338.0" prefHeight="18.0" prefWidth="142.0" />
+
+   <HBox alignment="CENTER" layoutX="34.0" layoutY="356.0" prefHeight="63.0" prefWidth="312.0">
+      <children>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="IntretMin" wrappingWidth="61.96954345703125">
+            <font>
+               <Font name="Cambria Bold Italic" size="14.0" />
+            </font>
+         </Text>
+         <TextField fx:id="tf_intretMin" onKeyTyped="#intretMin_input" style="-fx-background-radius: 10;">
+            <HBox.margin>
+               <Insets left="10.0" />
+            </HBox.margin>
+         </TextField>
+      </children>
+   </HBox>
+   <Label fx:id="intretMinErrorMessageLabel" layoutX="163.0" layoutY="415.0" prefHeight="18.0" prefWidth="131.0" />
+
+   <HBox alignment="CENTER" layoutX="33.0" layoutY="444.0" prefHeight="63.0" prefWidth="312.0">
+      <children>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date debut" wrappingWidth="69.96954345703125">
+            <font>
+               <Font name="Cambria Bold Italic" size="14.0" />
+            </font>
+         </Text>
+         <DatePicker fx:id="tf_date_D" prefHeight="26.0" prefWidth="155.0" promptText="Entre a date" style="-fx-background-radius: 10;">
+            <HBox.margin>
+               <Insets left="10.0" right="10.0" />
+            </HBox.margin>
+         </DatePicker>
+      </children>
+   </HBox>
+
+   <HBox alignment="CENTER" layoutX="33.0" layoutY="524.0" prefHeight="63.0" prefWidth="312.0">
+      <children>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date fin" wrappingWidth="70.76955786347389">
+            <font>
+               <Font name="Cambria Bold Italic" size="14.0" />
+            </font>
+         </Text>
+         <DatePicker fx:id="tf_date_F" prefHeight="26.0" prefWidth="160.0" promptText="Entre a date" style="-fx-background-radius: 10;" />
+      </children>
+   </HBox>
+
+   <HBox alignment="CENTER" layoutX="56.0" layoutY="598.0" prefHeight="100.0" prefWidth="268.0">
+      <children>
+         <Button fx:id="ButtonAj" mnemonicParsing="false" onAction="#ajouterButton" prefHeight="26.0" prefWidth="62.0" style="-fx-background-radius: 10;" text="Add">
+            <HBox.margin>
+               <Insets left="10.0" right="10.0" />
+            </HBox.margin>
+         </Button>
+         <Button fx:id="update" mnemonicParsing="false" onAction="#update_button" prefHeight="32.0" prefWidth="75.0" style="-fx-background-radius: 10;" text="Update">
+            <HBox.margin>
+               <Insets left="10.0" right="10.0" />
+            </HBox.margin>
+         </Button>
+         <Button fx:id="delete" mnemonicParsing="false" onAction="#delete_button" prefHeight="33.0" prefWidth="67.0" style="-fx-background-radius: 10;" text="Delete">
+            <HBox.margin>
+               <Insets left="10.0" right="10.0" />
+            </HBox.margin>
+         </Button>
+      </children>
+   </HBox>
+
+   <HBox alignment="CENTER" layoutX="22.0" layoutY="88.0" prefHeight="100.0" prefWidth="312.0">
+      <children>
+         <Button fx:id="ajouterCredit" mnemonicParsing="false" onAction="#CreditScene" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 10;" text="ajouter credit" />
+         <Button fx:id="ajouter_offre" mnemonicParsing="false" onAction="#OffreScene" prefHeight="26.0" prefWidth="123.0" style="-fx-background-radius: 10;" text="ajouterOffre" />
+      </children>
+   </HBox>
+
+   <HBox alignment="CENTER" layoutX="346.0" layoutY="200.0" prefHeight="447.0" prefWidth="497.0" style="-fx-background-color: #e2e2e2; -fx-background-radius: 50;">
+      <children>
+         <TableView fx:id="tableau" prefHeight="498.0" prefWidth="382.0" style="-fx-background-radius: 10;">
+            <columns>
+               <TableColumn fx:id="id_user" prefWidth="75.0" text="id_user" visible="false" />
+               <TableColumn fx:id="Montant" prefWidth="75.0" text="Montant" />
+               <TableColumn fx:id="intretMax" prefWidth="75.0" text="intretMax" />
+               <TableColumn fx:id="intretMin" prefWidth="75.0" text="intretMin" />
+               <TableColumn fx:id="dateD" prefWidth="75.0" text="date debut" />
+               <TableColumn fx:id="dateF" prefWidth="75.0" text="date fin" />
+            </columns>
+         </TableView>
+      </children>
+   </HBox>
+
+   <Label layoutX="497.0" layoutY="70.0" prefHeight="27.0" prefWidth="286.0" style="-fx-background-color: #00008b; -fx-background-radius: 10;" text="Recent additions to your credits" textFill="WHITE">
+      <font>
+         <Font name="Cambria Bold" size="18.0" />
+      </font>
+   </Label>
+
+   <TextField layoutX="553.0" layoutY="120.0" prefHeight="32.0" prefWidth="160.0" promptText="rechercher" />
+</AnchorPane>

@@ -1,0 +1,272 @@
+package com.example.finfolio.Service;
+
+import Views.AlerteFinFolio;
+import com.example.finfolio.util.DataSource;
+import com.example.finfolio.Entite.User;
+import javafx.collections.ObservableList;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class UserService   {
+    private Statement ste;
+
+    private PreparedStatement ps;
+    private Connection cnx;
+
+    public UserService() {
+
+        cnx= DataSource.getInstance().getCnx();
+    }
+
+    public void add(User u)throws SQLException {
+
+            String req = "INSERT INTO user (nom,prenom,email,numtel,password,adresse,nbcredit,rate,role,solde,statut,image,datepunition) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            ps = cnx.prepareStatement(req);
+            try {
+
+
+                ps.setString(1, u.getNom());
+                ps.setString(2, u.getPrenom());
+                ps.setString(3, u.getEmail());
+                ps.setString(4, u.getNumtel());
+                ps.setString(5, u.getPassword());
+                ps.setString(6, u.getAdresse());
+                ps.setInt(7, u.getNbcredit());
+                ps.setFloat(8, u.getRate());
+                ps.setString(9, u.getRole());
+                ps.setString(10, u.getSolde());
+                ps.setString(11, u.getStatut());
+                ps.setString(12, u.getImage());
+                ps.setString(13, u.getDatepunition());
+
+
+
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+
+    public List<User> readAll()throws SQLException
+    {
+        String req="Select * from user ";
+        List<User>list=new ArrayList<>();
+        ste= cnx.createStatement();
+        try {
+
+
+            ResultSet resultSet= ste.executeQuery(req);
+
+            while (resultSet.next())
+            {
+                list.add(new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("nom"),
+                        resultSet.getString("prenom"),
+                        resultSet.getString("Email"),
+                        resultSet.getString("numtel"),
+                        resultSet.getString("password"),
+                        resultSet.getString("adresse"),
+                        resultSet.getInt("nbcredit"),
+                        resultSet.getFloat("rate"),
+                        resultSet.getString("role") ,
+                        resultSet.getString("solde"),
+                        resultSet.getString("statut"),
+                        resultSet.getString("image"),
+                        resultSet.getString("datepunition")
+
+                        ));
+            }}catch (SQLException e)
+        {e.printStackTrace();}
+
+
+        return list;
+    }
+    public int update(User user)  throws  SQLException {
+        String req = "UPDATE user SET nom = ?, prenom = ?, email = ?, numtel = ?, password = ?, adresse = ?, nbcredit = ? , rate = ? , role = ? , solde = ? , statut = ? , image = ? , datepunition = ? WHERE id = ?";
+        ps = cnx.prepareStatement(req);
+
+
+        try {
+            ps.setString(1, user.getNom());
+            ps.setString(2, user.getPrenom());
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getNumtel());
+            ps.setString(5, user.getPassword());
+            ps.setString(6, user.getAdresse());
+            ps.setInt(7, user.getNbcredit());
+            ps.setFloat(8, user.getRate());
+            ps.setString(9, user.getRole());
+            ps.setString(10, user.getSolde());
+            ps.setString(11, user.getStatut());
+            ps.setString(12, user.getImage());
+            ps.setString(13, user.getDatepunition());
+            ps.setInt(14, user.getId());
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("updated");
+        return ps.executeUpdate();
+
+    }
+    public void delete(User user) throws SQLException {
+        String req = "DELETE FROM user WHERE id = ?";
+        ps = cnx.prepareStatement(req);
+        try {
+            ps.setInt(1, user.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error deleting user: " + e.getMessage());
+            throw e;
+        }
+    }
+    public User getUserByEmail(String email) throws SQLException {
+        User user = null;
+        String sql = "SELECT * FROM user WHERE Email = ?";
+        try (PreparedStatement statement = cnx.prepareStatement(sql)) {
+            statement.setString(1, email);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    user = new User(
+                           resultSet.getInt("id"),
+                            resultSet.getString("nom"),
+                            resultSet.getString("prenom"),
+                            resultSet.getString("Email"),
+                            resultSet.getString("numtel"),
+                            resultSet.getString("password"),
+                            resultSet.getString("adresse"),
+                            resultSet.getInt("nbcredit"),
+                            resultSet.getFloat("rate"),
+                            resultSet.getString("role") ,
+                            resultSet.getString("solde"),
+                            resultSet.getString("statut"),
+                            resultSet.getString("image"),
+                            resultSet.getString("datepunition")
+
+
+
+
+                            );
+                }
+            }
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+            throw ex;
+        }
+
+        return user;
+    }
+public List<User> cellsUsers() throws SQLException {
+    String req="Select * from user ";
+    List<User>list=new ArrayList<>();
+    ste= cnx.createStatement();
+    try {
+
+
+        ResultSet resultSet= ste.executeQuery(req);
+
+        while (resultSet.next())
+        {
+            list.add(new User(
+                    resultSet.getString("nom"),
+                    resultSet.getString("prenom"),
+                    resultSet.getString("Email"),
+                    resultSet.getString("numtel"),
+                    resultSet.getInt("nbcredit"),
+                    resultSet.getFloat("rate"),
+                    resultSet.getString("role") ,
+                    resultSet.getString("solde")
+            ));
+        }}catch (SQLException e)
+    {e.printStackTrace();}
+
+
+    return list;
+}
+    public List<User> rechercherUtilisateurs(String user) throws SQLException {
+        String requeteSQL = "SELECT * FROM user WHERE nom LIKE ? OR prenom LIKE ? OR email LIKE ? OR numtel LIKE ?";
+
+
+
+        // Ajoutez le joker % pour correspondre à n'importe quelle partie de la chaîne
+        user= "%" + user + "%";
+
+
+        List<User> resultatsRecherche = new ArrayList<>();
+        try (PreparedStatement statement = cnx.prepareStatement(requeteSQL)) {
+            statement.setString(1, user);
+            statement.setString(2, user);
+            statement.setString(3, user);
+            statement.setString(4, user);
+
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    User utilisateur = new User(
+                            resultSet.getInt("id"),
+                            resultSet.getString("nom"),
+                            resultSet.getString("prenom"),
+                            resultSet.getString("email"),
+                            resultSet.getString("numtel"),
+                            resultSet.getString("password"),
+                            resultSet.getString("adresse"),
+                            resultSet.getInt("nbcredit"),
+                            resultSet.getFloat("rate"),
+                            resultSet.getString("role"),
+                            resultSet.getString("solde"),
+                            resultSet.getString("statut"),
+                            resultSet.getString("image"),
+                            resultSet.getString("datepunition")
+
+
+                            );
+                    resultatsRecherche.add(utilisateur);
+                }
+            }
+        }
+
+        return resultatsRecherche;
+    }
+    public User getUserByid(int userId) {
+        String request = "SELECT * FROM user WHERE id = ?";
+        try {
+            // Prepare the statement
+            ps = cnx.prepareStatement(request);
+            // Set the ID parameter
+            ps.setInt(1, userId);
+            // Execute the query
+            ResultSet rs = ps.executeQuery();
+            // Check if any result is returned
+            if (rs.next()) {
+                // Extract user data from the result set
+                String password = rs.getString("password");
+                int nbrCredit = rs.getInt("nbcredit");
+                String nom = rs.getString("nom");
+                String prenom = rs.getString("prenom");
+                String email = rs.getString("email");
+                String adresse = rs.getString("adresse");
+                String numTel = rs.getString("numTel");
+                String role = rs.getString("role");
+                float rate = rs.getFloat("rate");
+                String solde = rs.getString("solde");
+                String statut = rs.getString("statut");
+                String image = rs.getString("image");
+                String datepunition = rs.getString("datepunition");
+                // Create and return the User object
+                return new User(userId, nom, prenom, email, numTel, password, adresse, nbrCredit, rate, role, solde, statut, image, datepunition);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        // Return null if no user with the specified ID is found
+        return null;
+    }
+
+
+}

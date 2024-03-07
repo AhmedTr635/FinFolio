@@ -1,0 +1,126 @@
+ .login_container
+ {
+     -fx-background-color: #EEEEEE;
+ }
+ /* LOGO CONTAINER STYLES*/
+ .logo_container
+ {
+    -fx-background-color: #00008b;
+     -fx-alignment: center ;
+
+ }
+ .logo_container Text
+ {
+     -fx-font-size: 3em;
+     -fx-fill:#FFFFFF;
+ }
+ .logo_container FontAwesomeIconView {
+     -fx-fill: #ECF39E;
+
+ }
+ /* CHOICE BOX*/
+ .account_selector{
+     -fx-background-color: #ECF39E;
+ }
+ .account_selector .label{
+     -fx-text-fill: #00008b;
+     -fx-font-size: 1.1em;
+ }
+ .account_selector .arrow{
+     -fxbackground-color:#00008b ;
+ }
+ #choice-box-popupmenu
+ {
+     -fx-background-color:ECF39E ;
+ }
+ /* login form style*/
+ #choice-prompt_text{
+     -fx-font-weight: 400;
+ }
+
+
+ .login_form_container{
+     -fx-spacing: 15;
+     -fx-alignment: top_left;
+ }
+ .login_form_container Label{
+     -fx-font-size: 1.1em;
+     -fx-font-weight: bold;
+ }
+ .input_field
+ {
+     -fx-background-color: #FFFFFF;
+     -fx-pref-height: 35;
+     -fx-font-size: 1.2em;
+ }
+ .login_form_container Button
+ {
+     -fx-background-color:  #00008b;
+     -fx-text-fill: #FFFFFF;
+     -fx-pref-tile-width: 350;
+     -fx-pref-height: 30;
+     -fx-font-size: 1.2em;
+ }
+ .login_form_container Button:hover{
+     -fx-cursor:hand;
+ }
+ .login_form_container Label{
+     -fx-text-fill: red;
+     -fx-font-size: 12px;
+ }
+ .error_lbl{
+     -fx-text-fill: #FF0000;
+ }
+ .bouton {
+     -fx-background-color:  #00008b;
+     -fx-text-fill: #FFFFFF;
+     -fx-pref-tile-width: 350;
+     -fx-pref-height: 30;
+     -fx-font-size: 1.2em;
+     -fx-cursor:hand;
+
+ }
+ .importImageBtn {
+     -fx-background-color: #00008b; /* Bleu foncé */
+     -fx-border-color: #00008b; /* Bordure bleu foncé */
+     -fx-border-width: 1px;
+     -fx-border-radius: 5px;
+     -fx-background-radius: 5px;
+     -fx-text-fill: white;
+     -fx-font-size: 14px;
+     -fx-padding: 8px 16px;
+     -fx-cursor: hand;
+ }
+
+ .importImageBtn:hover {
+     -fx-background-color: #0000cd; /* Bleu plus clair sur survol */
+ }
+
+ .importImageBtn:pressed {
+     -fx-background-color: #000080; /* Bleu foncé plus sombre lorsqu'appuyé */
+ }
+ .title{
+     -fx-fill: #000000;
+     -fx-font-size: 2.5em;
+     -fx-font-family: "Calibri Light";
+
+ }
+ .oublier_btn {
+     -fx-pref-width: 150;
+     -fx-pref-height: 40;
+     -fx-background-color: #EEEEEE; /* Couleur de fond en blanc */
+     -fx-text-fill: #00008b; /* Couleur du texte en bleu */
+     -fx-font-size: 1.1em;
+     -fx-alignment: center_left;
+ }
+
+ .oublier_btn:hover {
+     -fx-background-color: #00008b; /* Change la couleur de fond en bleu lorsque survolé */
+     -fx-text-fill: #FFFFFF; /* Change la couleur du texte en blanc lorsque survolé */
+ }
+
+ .oublier_btn:pressed {
+     -fx-background-color: #0000FF; /* Change la couleur de fond en bleu acier lorsque cliqué */
+     -fx-text-fill: #FFFFFF; /* Change la couleur du texte en blanc lorsque cliqué */
+ }
+

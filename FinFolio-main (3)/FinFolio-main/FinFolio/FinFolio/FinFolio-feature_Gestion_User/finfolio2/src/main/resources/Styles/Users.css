@@ -1,0 +1,111 @@
+.users_container {
+    -fx-background-color: #EEEEEE;
+    -fx-padding: 20;
+}
+.search_box {
+
+    -fx-spacing: 10;
+    -fx-border-color: #AAAAAA;
+    -fx-border-width: 0 0 1 0;
+}
+ Text {
+    -fx-font-family: "Calibri Light";
+    -fx-font-size: 1.6em;
+    -fx-text-fill: #555555;
+}
+TextField {
+    -fx-pref-width: 200;
+    -fx-pref-height: 35;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box,#AAAAAA,3,0,0,3);
+}
+Button {
+    -fx-background-color: linear-gradient(to right,#00008b,#123499);
+    -fx-effect: dropshadow(three-pass-box,#AAAAAA,3,0,0,3);
+    -fx-font-size: 1.6em;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Calibri Light";
+    -fx-pref-width: 100;
+
+}
+.filtreBox {
+-fx-background-color: #ECF39E;
+    -fx-text-fill: white;
+    -fx-font-size: 1.6em;
+    -fx-font-family: "Calibri Light";
+    -fx-pref-width: 200;
+
+}
+ Button:hover {
+    -fx-cursor: hand;
+}
+.result_box {
+    -fx-spacing: 10;
+}
+.result_box .list-view {
+    -fx-background-color: #EEEEEE;
+}
+
+.result_box .list-cell {
+    -fx-background-color: #EEEEEE;
+    -fx-padding: 20 0 20 0;
+}
+.default-color0.chart-pie {
+    -fx-background-color: blue;
+}
+
+.default-color1.chart-pie {
+    -fx-background-color: #123499;
+}
+
+.default-color0.chart-bar {
+    -fx-background-color: blue;
+}
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to top right,#123499,blue);
+    -fx-background-radius: 0 0 0 0;
+    -fx-background-insets: 0 0 0;
+}
+.table-view .column-header, .filter{
+    -fx-background-color: transparent;
+    -fx-size:40 ;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #fff;
+}
+
+.account_selector{
+    -fx-background-color: #ECF39E;
+
+}
+.date-picker {
+    -fx-background-color: #123499;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+.confirmerBtn {
+    -fx-background-color: #00008b; /* Bleu foncé */
+    -fx-border-color: #00008b; /* Bordure bleu foncé */
+    -fx-pref-width: 135;
+
+    -fx-text-fill: white;
+    -fx-font-size: 1.5em;
+    -fx-font-family: "Calibri Light";
+    -fx-cursor: hand;
+}
+
+.confirmerBtn:hover {
+    -fx-background-color: #0000cd; /* Bleu plus clair sur survol */
+}
+.confirmerBtn:pressed {
+    -fx-background-color: #000080; /* Bleu foncé plus sombre lorsqu'appuyé */
+}
+.error_lbl{
+    -fx-text-fill: #FF0000;
+}
+.title{
+    -fx-fill: #000000;
+    -fx-font-size: 2.5em;
+    -fx-font-family: "Calibri Light";
+
+}
