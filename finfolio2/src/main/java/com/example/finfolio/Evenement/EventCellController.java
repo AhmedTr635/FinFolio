@@ -1,16 +1,28 @@
 package com.example.finfolio.Evenement;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+
 import com.example.finfolio.Entite.Evennement;
+import com.example.finfolio.Service.DonService;
+import com.example.finfolio.Service.EvennementService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
+import org.controlsfx.control.Rating;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class EventCellController {
 
@@ -42,6 +54,24 @@ public class EventCellController {
     @FXML
     private AnchorPane description_pane;
 
+    @FXML
+    private ProgressBar progress_bar;
+
+    @FXML
+    private Rating event_rating;
+
+    private int eventId;
+
+    @FXML
+    private TextArea description_event;
+
+    public ProgressBar getProgress_bar() {
+        return progress_bar;
+    }
+
+    public void setProgress_bar(ProgressBar progress_bar) {
+        this.progress_bar = progress_bar;
+    }
 
     @FXML
     void initialize() {
@@ -63,6 +93,12 @@ public class EventCellController {
             events_pane.setVisible(true);
         });
 
+
+
+        event_rating.ratingProperty().addListener((observable, oldValue, newValue) -> {
+            // Save the new rating to the database when the user selects the number of stars
+            RatingApi.saveRating(eventId, newValue.intValue());
+        });
     }
 
     @FXML
@@ -74,6 +110,7 @@ public class EventCellController {
             AjouterDonController adc = loader.getController();
             String id = event_id.getText();
             adc.setEventId(id);
+
 
 
             // Create a new stage for the AjouterDon interface
@@ -93,7 +130,27 @@ public class EventCellController {
         event_place.setText(event.getAdresse());
         event_goal.setText(String.format("$%,.2f", event.getMontant()));
         event_id.setText(String.valueOf(event.getId()));
+        description_event.setText(event.getDescription());
+        float totalDonations = DonService.getInstance().getTotalDonationsForEvent(event.getId());
+        float progressPercentage = (totalDonations / event.getMontant()) * 100;
+        progress_bar.setProgress(progressPercentage / 100);
+
+        eventId = event.getId();
+
+        // Load ratings from the file
+        int rating = RatingApi.loadRating(eventId);
+        event_rating.setRating(rating);
 
     }
 
+
+
+
+
 }
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="cellkbira" onMouseClicked="#zoom" prefHeight="160.0" prefWidth="489.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Investissement.Controller.RealEstateCellController">
+    <children>
+        <Pane fx:id="cell" layoutY="-2.0" onMouseClicked="#ZoomRE" onMouseEntered="#details" prefHeight="162.0" prefWidth="490.0" styleClass="border-pane" stylesheets="">
+            <children>
+            <Button fx:id="investir" layoutX="331.0" layoutY="61.0" mnemonicParsing="false" onAction="#invest" onMouseClicked="#Investissement" prefHeight="25.0" prefWidth="148.0" stylesheets="" text="Investir" />
+            <Label fx:id="name" layoutX="14.0" layoutY="20.0" prefHeight="26.0" prefWidth="128.0" stylesheets="" text="Label" />
+            <Label fx:id="Roi" layoutX="14.0" layoutY="78.0" prefHeight="41.0" prefWidth="128.0" stylesheets="" text="Label" />
+            <Label fx:id="emplacement" layoutX="157.0" layoutY="20.0" prefHeight="41.0" prefWidth="128.0" stylesheets="" text="Label" />
+            <Label fx:id="valeur" layoutX="157.0" layoutY="77.0" prefHeight="43.0" prefWidth="128.0" stylesheets="" text="Label" />
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

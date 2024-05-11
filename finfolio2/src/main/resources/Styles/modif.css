@@ -1,0 +1,65 @@
+/* Root Styles */
+.root {
+    -fx-background-color: #EEEEEE; /* Match background color of .login_container */
+}
+
+/* Text Field Styles */
+.text-field, .input_field {
+    -fx-background-color: #FFFFFF; /* Match background color */
+    -fx-pref-height: 35px; /* Match preferred height */
+    -fx-font-size: 1.2em; /* Match font size */
+    -fx-padding: 5px; /* Match padding */
+}
+
+/* Button Styles */
+.button, .bouton {
+    -fx-background-color:  #00008b; /* Match background color */
+    -fx-text-fill: #FFFFFF; /* Match text color */
+    -fx-pref-tile-width: 350px; /* Match preferred width */
+    -fx-pref-height: 30px; /* Match preferred height */
+    -fx-font-size: 1.2em; /* Match font size */
+    -fx-padding: 5px 10px; /* Match padding */
+    -fx-cursor: hand; /* Add cursor */
+}
+
+/* Table View Styles */
+.table-view {
+    -fx-pref-height: 300px; /* Match preferred height */
+}
+
+/* Table Column Styles */
+.table-column {
+    -fx-alignment: CENTER; /* Match alignment */
+}
+.default-color0.chart-bar{
+    -fx-bar-fill: #3b3bd2  ;
+}
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to top right,#123499,blue);
+    -fx-background-radius: 0 0 0 0;
+    -fx-background-insets: 0 0 0;
+}
+.table-view .column-header, .filter{
+    -fx-background-color: transparent;
+    -fx-size:40 ;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #fff;
+}
+.confirmerBtn {
+    -fx-background-color: #00008b; /* Bleu foncé */
+    -fx-border-color: #00008b; /* Bordure bleu foncé */
+    -fx-pref-width: 135;
+
+    -fx-text-fill: white;
+    -fx-font-size: 1.5em;
+    -fx-font-family: "Calibri Light";
+    -fx-cursor: hand;
+}
+
+.confirmerBtn:hover {
+    -fx-background-color: #0000cd; /* Bleu plus clair sur survol */
+}
+.confirmerBtn:pressed {
+    -fx-background-color: #000080; /* Bleu foncé plus sombre lorsqu'appuyé */
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Investissement.Controller.AdminDashboardController">
+   <children>
+      <TableView fx:id="topRE" layoutX="7.0" layoutY="59.0" onMouseClicked="#RealEstateAdmin" prefHeight="186.0" prefWidth="488.0">
+        <columns>
+          <TableColumn fx:id="idRE" prefWidth="51.73331832885742" text="ID" />
+          <TableColumn fx:id="name" prefWidth="73.59997177124023" text="Nom" />
+            <TableColumn fx:id="emplacement" prefWidth="93.06672668457031" text="Emplacement" />
+            <TableColumn fx:id="ROI" prefWidth="78.66664123535156" text="ROI" />
+            <TableColumn fx:id="valeur" prefWidth="65.33334350585938" text="Valeur" />
+            <TableColumn fx:id="totalParticipation" prefWidth="127.46661376953125" text="Total Participation" />
+        </columns>
+      </TableView>
+      <BarChart fx:id="clickROI" layoutX="505.0" layoutY="59.0" prefHeight="303.0" prefWidth="360.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <PieChart fx:id="secteurInvestissement" layoutX="533.0" layoutY="394.0" prefHeight="325.0" prefWidth="303.0" />
+      <TableView fx:id="listeDigi" layoutX="6.0" layoutY="294.0" onMouseClicked="#DigiDash" prefHeight="200.0" prefWidth="490.0">
+        <columns>
+          <TableColumn fx:id="code" prefWidth="75.0" text="Code" />
+          <TableColumn fx:id="iduser" prefWidth="98.666748046875" text="ID User" />
+            <TableColumn fx:id="montant" prefWidth="105.33323669433594" text="Montant" />
+            <TableColumn fx:id="dateAchat" prefWidth="90.39997863769531" text="Date Achat" />
+            <TableColumn fx:id="ROIDigital" prefWidth="119.4666748046875" text="ROI" />
+        </columns>
+      </TableView>
+      <LineChart fx:id="digiCoins" layoutX="4.0" layoutY="498.0" prefHeight="222.0" prefWidth="495.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <Label layoutX="20.0" layoutY="20.0" prefHeight="30.0" prefWidth="162.0" text="Data Immobilier : " />
+      <Label layoutX="20.0" layoutY="264.0" prefHeight="18.0" prefWidth="142.0" text="Data Crypto : " />
+   </children>
+</AnchorPane>

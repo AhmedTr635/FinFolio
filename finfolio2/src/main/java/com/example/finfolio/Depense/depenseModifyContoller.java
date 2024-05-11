@@ -54,10 +54,6 @@ public class depenseModifyContoller implements Initializable {
     public TextField montant;
     @FXML
     public Label iddep;
-
-
-
-    // Depense object to hold the data
     private Depense depense;
     private DepenseValidation validation;
 
@@ -81,7 +77,7 @@ public class depenseModifyContoller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-    validation();
+        validation();
         Modifier.setOnAction(event -> {
             if (validation.isAllValid()) {
 
@@ -96,7 +92,6 @@ public class depenseModifyContoller implements Initializable {
     }
 
 
-    // Method to initialize data
     public void initData(Depense depense) {
         try{
             iddep.setText(Double.toString(depense.getId()));
@@ -111,7 +106,6 @@ public class depenseModifyContoller implements Initializable {
         }
     }
 
-    // Method to handle modification and close the window
 
 
     public void onClickAnnuler(ActionEvent actionEvent) {
@@ -129,7 +123,6 @@ public class depenseModifyContoller implements Initializable {
         String type = txtType.getText();
         float montant = (float) Double.parseDouble(txtMontant.getText()); // Assuming montant is a numeric value
         LocalDate selectedDate = txtDate.getValue();
-        UserService us =new UserService();
         double montantTax=    montant*0.14;
         int taxid=dep.getTax().getId();
         Tax t =new Tax (taxid,montantTax,"depense","jdjd");

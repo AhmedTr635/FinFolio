@@ -1,6 +1,6 @@
 .user_cell_container
 {
--fx-background-color: #FFFFFF;
+    -fx-background-color: linear-gradient(to right, whitesmoke, #23B2EE);
     -fx-background-radius: 10;
     -fx-effect: dropshadow(three-pass-box,#DDDDDD,5,0,0,7);
 }
@@ -17,6 +17,11 @@
     -fx-font-family: "Calibri Light";
     -fx-font-size: 1.2em;
 }
+.label{
+    -fx-background-color:  antiquewhite;
+    -fx-border-radius: 30;
+    -fx-border-color: darkgray;
+}
 
 .user_display_lbl {
     -fx-font-family: Calibri;
@@ -24,8 +29,8 @@
     -fx-font-size: 1.1em;
 }
 .supprimer_btn {
-    -fx-text-fill: #FFFFFF;
-    -fx-background-color: #FF0000;
+    -fx-text-fill: dark;
+    -fx-background-color: #5adbb5;
 
 }
 .supprimer_btn FontAwesomeIconView {
@@ -34,3 +39,17 @@
 .supprimer_btn:hover {
     -fx-cursor: hand;
 }
+.confirm-btn{
+    -fx-text-fill: white;
+    -fx-background-color: #008080;
+
+}
+.label-error{
+    -fx-background-color: antiquewhite;
+    -fx-border-radius: 30;
+    -fx-border-color: darkgray;
+    /* Teal text color for the themed label */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="154.0" prefWidth="600.0" styleClass="user_cell_container" stylesheets="@../../../../Styles/Cells.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.UsrController.ErrorAddController">
+   <children>
+      <Button fx:id="add_error" layoutX="446.0" layoutY="97.0" mnemonicParsing="false" onAction="#addError" styleClass="confirm-btn" text="Enregistrer">
+         <graphic>
+            <FontAwesomeIconView glyphName="CHECK" />
+         </graphic>
+      </Button>
+      <TextArea fx:id="error_text" layoutX="177.0" layoutY="47.0" prefHeight="36.0" prefWidth="132.0" />
+   </children>
+</AnchorPane>

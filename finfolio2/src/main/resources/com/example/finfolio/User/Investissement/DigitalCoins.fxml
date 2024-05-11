@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Investissement.Controller.DigitalCoinsController">
+    <children>
+        <Pane layoutX="-1.0" layoutY="-2.0" prefHeight="750.0" prefWidth="850.0">
+            <children>
+                <VBox layoutX="4.0" layoutY="-1.0" prefHeight="751.0" prefWidth="850.0">
+                    <children>
+                        <HBox prefHeight="628.0" prefWidth="850.0">
+                            <children>
+                                <Pane prefHeight="628.0" prefWidth="37.0" />
+                        <VBox prefHeight="625.0" prefWidth="809.0">
+                           <children>
+                              <Pane prefHeight="98.0" prefWidth="810.0">
+                                 <children>
+                                    <ChoiceBox fx:id="code" layoutX="51.0" layoutY="37.0" prefWidth="150.0" stylesheets="@../../../DigitalCoins.css" />
+                                    <ChoiceBox fx:id="intervalle" layoutX="236.0" layoutY="29.0" prefHeight="40.0" prefWidth="150.0" />
+                                 </children>
+                              </Pane>
+                              <WebView fx:id="chart" prefHeight="522.0" prefWidth="781.0" stylesheets="@../../../DigitalCoins.css" />
+                           </children>
+                        </VBox>
+                            </children>
+                        </HBox>
+                        <VBox prefHeight="129.0" prefWidth="850.0">
+                            <children>
+                                <HBox prefHeight="70.0" prefWidth="850.0">
+                                    <children>
+                              <Pane prefHeight="70.0" prefWidth="40.0" />
+                                        <TextField fx:id="montant" prefHeight="29.0" prefWidth="153.0" promptText="Montant ..." stylesheets="@../../../DigitalCoins.css" />
+                                        <Pane prefHeight="70.0" prefWidth="157.0">
+                                 <children>
+                                    <Label fx:id="warn1" layoutX="16.0" layoutY="6.0" prefHeight="58.0" prefWidth="154.0" />
+                                 </children></Pane>
+                                        <TextField fx:id="leverage" prefHeight="29.0" prefWidth="153.0" promptText="Leverage ..." stylesheets="@../../../DigitalCoins.css" />
+                                        <Pane prefHeight="70.0" prefWidth="149.0">
+                                 <children>
+                                    <Label fx:id="warn2" layoutX="16.0" layoutY="5.0" prefHeight="58.0" prefWidth="150.0" />
+                                 </children></Pane>
+                                        <TextField fx:id="stoploss" prefHeight="29.0" prefWidth="153.0" promptText="Stop Loss ..." stylesheets="@../../../DigitalCoins.css" />
+                                    </children>
+                                </HBox>
+                                <HBox prefHeight="57.0" prefWidth="850.0">
+                                    <children>
+                                        <Pane prefHeight="58.0" prefWidth="226.0" />
+                                        <Button fx:id="buy" mnemonicParsing="false" onMouseClicked="#addDigiWithoutDateVente" prefHeight="34.0" prefWidth="163.0" stylesheets="@../../../DigitalCoins.css" text="Buy" />
+                                        <Pane prefHeight="58.0" prefWidth="133.0" />
+                                        <Button fx:id="sell" mnemonicParsing="false" onMouseClicked="#addDigiDateVente" prefHeight="34.0" prefWidth="163.0" stylesheets="@../../../DigitalCoins.css" text="Sell" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

@@ -1,9 +1,13 @@
 package com.example.finfolio.Evenement;
 
 import Models.Model;
+import com.example.finfolio.Depense.DashboardDepenseController;
 import com.example.finfolio.Entite.Don;
+import com.example.finfolio.Entite.Evennement;
+import com.example.finfolio.Entite.Tax;
 import com.example.finfolio.Service.DonService;
 import com.example.finfolio.Service.EvennementService;
+import com.example.finfolio.Service.TaxService;
 import com.example.finfolio.Service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,9 +34,16 @@ public class AjouterDonController {
 
     @FXML
     private Label user_id;
+
+
+
+
     @FXML
     void annuler(ActionEvent event) {
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
+        // Close the stage
+        stage.close();
     }
     public void setEventId(String id) {
         event_id.setText(id);
@@ -62,8 +73,23 @@ public class AjouterDonController {
 
             Don donation = new Don(montant, Model.getInstance().getUser(), es.readById(eventId));
 
+
             // Save the donation using the DonService
             DonService.getInstance().add(donation);
+            TaxService ts=new TaxService();
+            double new_total_tax= Tax.calculateTotalTax( ts.readAll())-montant;
+            Model.getInstance().getUser().setTotal_tax(ts.sommeTaxByDepense()-montant);
+            us.updatewTax(Model.getInstance().getUser());
+
+            if (new_total_tax<0) {
+
+
+                DashboardDepenseController.getInstance().tax_depense.setText(String.format("%.2f", 0.0));
+                // Create a new Don object
+            }
+            else{
+                DashboardDepenseController.getInstance().tax_depense.setText(String.format("%.2f", new_total_tax));
+            }
 
             Stage currentStage = (Stage) btnAdd.getScene().getWindow();
             currentStage.close();
@@ -75,11 +101,11 @@ public class AjouterDonController {
             alert.setContentText("Don fait avec succès");
             alert.showAndWait();
 
-EmailController ec = new EmailController();
-            ec.sendEmail("siwarbouali27@gmail.com", "Invitation à l'événement", "Bonjour, vous êtes invité à participer à notre événement. Cordialement, Finfolio");
+            Evennement evnt = es.readById(eventId);
+            String eventInfo = "L'evennement: " + evnt.getNom() +"Date: " + evnt.getDate() + ", Adresse: " + evnt.getAdresse();
+            EmailController.sendInvitationEmail("siwarbouali27@gmail.com", "Invitation à l'événement", eventInfo);
 
 
-            // Optionally, display a success message or close the window
 
         }
     }

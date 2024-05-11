@@ -1,0 +1,27 @@
+.pane {
+    -fx-background-color: #f0f0f0; /* Light gray background */
+    -fx-padding: 20px; /* Add some padding */
+}
+
+.label {
+    -fx-font-size: 16px; /* Increase font size */
+    -fx-text-fill: #333; /* Dark gray text color */
+    -fx-font-weight: bold; /* Make text bold */
+    -fx-padding: 5px 0; /* Add vertical padding */
+}
+.pdf-button {
+    -fx-font-size: 14px; /* Set the font size */
+    -fx-background-color: #007bff; /* Blue background color */
+    -fx-text-fill: #fff; /* White text color */
+    -fx-border-color: transparent; /* No border */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-padding: 10px 20px; /* Add padding */
+}
+
+.pdf-button:hover {
+    -fx-background-color: #0056b3; /* Darker blue on hover */
+}
+
+.pdf-button:pressed {
+    -fx-background-color: #003366; /* Dark blue when pressed */
+}

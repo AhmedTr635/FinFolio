@@ -33,7 +33,7 @@ public class SMSController implements Initializable {
     public TextField codeEntered;
     public Label mailerror;
     public Label errormdc;
-    private  String recoveryCode="";
+    private  String recoveryCode;
 
 
     public  String generateRecoveryCode(int length) {

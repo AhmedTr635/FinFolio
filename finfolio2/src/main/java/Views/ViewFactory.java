@@ -22,6 +22,11 @@ public class ViewFactory {
     private AnchorPane evenementsView;
     private AnchorPane portfolioView;
     private AnchorPane profilView;
+    private AnchorPane offreView;
+    private  AnchorPane dataview;
+    private AnchorPane tradingview;
+    private AnchorPane immoview;
+
 
     private final StringProperty userSelectedMenuItem;
 
@@ -132,7 +137,7 @@ public class ViewFactory {
     public AnchorPane getEvenementsAdminView() {
         if (evenementsAdminView==null)
             try {
-                evenementsAdminView = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/Evennement/admindash.fxml")).load();
+                evenementsAdminView = new FXMLLoader(getClass().getResource("/com/example/finfolio/Admin/evenementsAdmin.fxml")).load();
             }catch (Exception e)
             {e.printStackTrace();}
         return evenementsAdminView;
@@ -141,7 +146,7 @@ public class ViewFactory {
     public AnchorPane getInvestissementsAdminView() {
         if (investissementsAdminView==null)
             try {
-                investissementsAdminView = new FXMLLoader(getClass().getResource("/com/example/finfolio/Admin/investissementAdmin.fxml")).load();
+                investissementsAdminView = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/Investissement/RealEstateAdmin.fxml")).load();
             }catch (Exception e)
             {e.printStackTrace();}
         return investissementsAdminView;
@@ -215,7 +220,7 @@ public class ViewFactory {
     public AnchorPane getInvestissementsView() {
         if (investissementsView==null)
             try {
-                investissementsView = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/investissements.fxml")).load();
+                investissementsView = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/Investissement/InvestissementUser.fxml")).load();
             }catch (Exception e)
             {e.printStackTrace();}
         return investissementsView;
@@ -228,6 +233,14 @@ public class ViewFactory {
             }catch (Exception e)
             {e.printStackTrace();}
         return portfolioView;
+    }
+    public AnchorPane getOffreView() {
+        if (offreView==null)
+            try {
+                offreView = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/ajouterOffre.fxml")).load();
+            }catch (Exception e)
+            {e.printStackTrace();}
+        return offreView;
     }
 
 
@@ -247,9 +260,35 @@ public class ViewFactory {
         loader.setController(userController);
         createStage(loader);
     }
+
 public void closeStage(Stage stage)
 {
     stage.close();
 }
+    public AnchorPane gettradingview() {
+        if (tradingview==null)
+            try {
+                tradingview= new FXMLLoader(getClass().getResource("/com/example/finfolio/User/Investissement/DigitalCoins.fxml")).load();
+            }catch (Exception e){e.printStackTrace();
+            }
+        return tradingview;
+    }
+    public AnchorPane getImmobiler() {
+        if (immoview==null)
+            try {
+                immoview= new FXMLLoader(getClass().getResource("/com/example/finfolio/User/Investissement/RealEstateUser.fxml")).load();
+            }catch (Exception e){e.printStackTrace();
+            }
+        return immoview;
+    }
+    public AnchorPane getDataview() {
+        if (dataview==null)
+            try {
+                dataview= new FXMLLoader(getClass().getResource("/com/example/finfolio/User/Investissement/AdminDashboard.fxml")).load();
+            }catch (Exception e){e.printStackTrace();
+            }
+        return dataview;
+    }
+
 
 }

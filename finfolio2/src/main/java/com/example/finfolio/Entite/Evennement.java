@@ -1,6 +1,9 @@
 package com.example.finfolio.Entite;
 
+
+
 import java.time.LocalDate;
+
 
 public class Evennement {
     private int id;
@@ -13,6 +16,32 @@ public class Evennement {
 
     private String adresse;
 
+
+    private String description;
+
+    private int rating;
+
+
+
+
+
+
+    public Evennement(int id, String nom_event, float montant, LocalDate date, String adresse, String description) {
+        this.id = id;
+        this.nom_event = nom_event;
+        this.montant = montant;
+        this.date = date;
+        this.adresse = adresse;
+        this.description = description;
+    }
+
+    public Evennement(String nom_event, float montant, LocalDate date, String adresse, String description) {
+        this.nom_event = nom_event;
+        this.montant = montant;
+        this.date = date;
+        this.adresse = adresse;
+        this.description = description;
+    }
     public Evennement() {
     }
 
@@ -22,14 +51,21 @@ public class Evennement {
         this.nom_event = nom_event;
         this.montant = montant;
         this.date = date;
-        this.adresse= adresse;
-
+        this.adresse = adresse;
     }
+
+
 
     public Evennement(String nom_event, float montant, LocalDate date, String adresse) {
         this.nom_event = nom_event;
         this.montant = montant;
         this.date = date;
+        this.adresse = adresse;
+    }
+
+    public Evennement(int id, int rating) {
+        this.id = id;
+        this.rating = rating;
         this.adresse=adresse;
     }
 
@@ -77,14 +113,35 @@ public class Evennement {
     }
 
 
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
     @Override
     public String toString() {
         return "Evennement{" +
                 "id=" + id +
-                ", montant='" + montant + '\'' +
-                ", date='" + date + '\'' +
+                ", nom_event='" + nom_event + '\'' +
+                ", montant=" + montant +
+                ", date=" + date +
+                ", adresse='" + adresse + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
+
 
 
 }

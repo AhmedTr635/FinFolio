@@ -1,0 +1,34 @@
+.popup-container {
+    -fx-background-radius: 20; /* Make the pane round with a border radius */
+    -fx-background-color: #add8e6;
+    -fx-border-color: linear-gradient(to top right,#123499,blue); /* Border color for the pane */
+    -fx-border-width: 6; /* Border width for the pane */
+}
+
+.label {
+    -fx-text-fill: #008080; /* Lighter greenish text color for labels */
+    -fx-font-size: 14px; /* Larger font size for labels */
+    -fx-font-weight: bold;
+}
+
+.textfield {
+    -fx-background-color: #FFFFFF; /* White background color for text fields */
+    -fx-border-color: #006400; /* Dark greenish border color for text fields */
+    -fx-border-radius: 3;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 0);
+}
+
+.button {
+    -fx-background-color: #008080; /* Dark green background color for buttons */
+    -fx-text-fill: #FFFFFF; /* White text color for buttons */
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 15;
+    -fx-border-radius: 3;
+    -fx-border-color: #004d00; /* Darker green border color for buttons */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 8, 0, 0, 0);
+}
+
+.button:hover {
+    -fx-background-color: #ADD8E6; /* Lighter blue background color for buttons on hover */
+}

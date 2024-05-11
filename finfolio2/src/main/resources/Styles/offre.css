@@ -1,0 +1,73 @@
+/* AnchorPane Styles */
+.anchor-pane {
+    -fx-background-color: #f0f0f0; /* Match background color */
+}
+.credit-anchorpane {
+    -fx-background-color: #f4f4f4; /* Background color */
+    -fx-border-color: #ddd; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-padding: 10px; /* Padding inside the anchor pane */
+}
+
+/* TextField Styles */
+.text-field {
+    -fx-font-size: 14px; /* Set font size */
+    -fx-pref-width: 150px; /* Set preferred width */
+    -fx-padding: 5px; /* Add padding */
+}
+
+/* Button Styles */
+
+/* Button Styles */
+.button {
+    -fx-font-size: 10px; /* Set font size */
+    -fx-padding: 4px 9px; /* Add padding (vertical padding, horizontal padding) */
+    -fx-background-color: #00008b; /* Set background color */
+    -fx-text-fill: #ffffff; /* Set text color */
+}
+#hbox_1{
+    -fx-background-color: white; /* Set background color to gray */
+    -fx-border-radius: 10px; /* Set border radius to make it rounded */
+    -fx-padding: 5px; /* Add padding */
+
+
+}
+#searchField{
+
+
+}
+
+/* ScrollPane Styles */
+.scroll-pane {
+    -fx-pref-height: 500px; /* Set preferred height */
+    -fx-pref-width: 1000px; /* Set preferred width */
+}
+
+/* VBox Styles */
+.v-box {
+    -fx-alignment: center; /* Center align content */
+    -fx-spacing: 10px; /* Set spacing between children */
+}
+
+/* HBox Styles */
+.h-box {
+    -fx-spacing: 10px; /* Set spacing between children */
+}
+.confirmerBtn {
+    -fx-background-color: #00008b; /* Bleu foncé */
+    -fx-border-color: #00008b; /* Bordure bleu foncé */
+    -fx-pref-width: 135;
+
+    -fx-text-fill: white;
+    -fx-font-size: 1.5em;
+    -fx-font-family: "Calibri Light";
+    -fx-cursor: hand;
+}
+
+.confirmerBtn:hover {
+    -fx-background-color: #0000cd; /* Bleu plus clair sur survol */
+}
+.confirmerBtn:pressed {
+    -fx-background-color: #000080; /* Bleu foncé plus sombre lorsqu'appuyé */
+}

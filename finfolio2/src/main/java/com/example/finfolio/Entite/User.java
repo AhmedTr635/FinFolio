@@ -20,6 +20,8 @@ public class User {
     private  String image;
 
     private String datepunition;
+    private  double total_tax ;
+
 
     public String getDatepunition() {
         return datepunition;
@@ -46,8 +48,25 @@ public class User {
     }
 
     public User(){};
+    public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,String role,String solde,String statut,String img,String datepunition,double total_tax){
+        this.id=id;
+        this.password=password;
+        this.nbrCredit=nbrCredit;
+        this.nom=nom;
+        this.prenom=prenom;
+        this.email=email;
+        this.numTel=numTel;
+        this.adresse=adresse;
+        this.role=role;
+        this.rate=rate;
+        this.solde=solde;
+        this.statut=statut;
+        image=img;
+        this.datepunition=datepunition;
+        this.total_tax=total_tax;
+    }
 
-    public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String staut) {
+    public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String staut,double totalTax) {
         this.id = id;
         this.password = password;
         this.nbrCredit = nbrCredit;
@@ -60,6 +79,8 @@ public class User {
         this.rate = rate;
         this.solde=solde;
         this.statut=staut;
+        this.total_tax=totalTax;
+
     }
     public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String statut,String img,String datepunition) {
         this.id = id;
@@ -104,6 +125,14 @@ public class User {
         this.solde=solde;
     }
 
+    public double getTotal_tax() {
+        return total_tax;
+    }
+
+    public double setTotal_tax(double total_tax) {
+        this.total_tax = total_tax;
+        return total_tax;
+    }
 
     public String getSolde() {
         return solde;

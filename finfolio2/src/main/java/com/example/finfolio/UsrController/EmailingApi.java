@@ -93,5 +93,32 @@ public class EmailingApi {
         attachmentBodyPart.setFileName(new File(filePath).getName());
         multipart.addBodyPart(attachmentBodyPart);
     }
+    public void sendProbleme(String userEmail, String verificationCode) {
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.auth", "true");
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("finfoliofinfolio@gmail.com", "bsmkekkpxfjfkzie");
+            }
+        });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("finfoliofinfolio@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userEmail));
+            message.setSubject("Réclammation ");
+            message.setText(" A propos de votre reclamation: " + verificationCode);
+
+            Transport.send(message);
+            System.out.println("Email notification sent to " + userEmail);
+        } catch (Exception e) {
+            System.out.println("Error sending email notification: " + e.getMessage());
+        }
+    }
 }
 

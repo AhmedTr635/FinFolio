@@ -18,7 +18,7 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FinFollio" />
                </children>
             </VBox>
-            <VBox prefHeight="400.0" prefWidth="160.0" styleClass="menu_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+            <VBox layoutY="55.2" prefHeight="522.0" prefWidth="194.0" styleClass="menu_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
                <children>
                   <Button fx:id="dashboard_btn" mnemonicParsing="false" text="Dashbord">
                      <graphic>
@@ -40,6 +40,16 @@
                         <FontAwesomeIconView glyphName="BUILDING" size="20" />
                      </graphic>
                   </Button>
+                  <Button fx:id="trading" mnemonicParsing="false" text="Trading">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="BANK" size="20" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="immobilier" mnemonicParsing="false" text="Immobilier">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="BUILDING" size="20" />
+                     </graphic>
+                  </Button>
                   <Button fx:id="evenements_btn" mnemonicParsing="false" text="Evenements">
                      <graphic>
                         <FontAwesomeIconView glyphName="CALENDAR" size="20" />
@@ -49,7 +59,7 @@
                      <graphic>
                         <FontAwesomeIconView glyphName="DOLLAR" size="20" />
                      </graphic></Button>
-                  <Button mnemonicParsing="false" text="Offres">
+                  <Button fx:id="offreBtn" mnemonicParsing="false" text="Offres">
                      <graphic>
                         <FontAwesomeIconView glyphName="MONEY" size="20" />
                      </graphic>
@@ -70,7 +80,7 @@
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Signaler un bug/suggestion ?" />
                   <Label text="Cliquer ici pour signaler une erreur" />
-                  <Button fx:id="signaler_btn" mnemonicParsing="false" text="Siganler">
+                  <Button fx:id="signaler_btn" mnemonicParsing="false" prefHeight="22.0" styleClass="alt_menu_btn2" text="Siganler">
                      <graphic>
                         <FontAwesomeIconView glyphName="PLUS" />
                      </graphic>

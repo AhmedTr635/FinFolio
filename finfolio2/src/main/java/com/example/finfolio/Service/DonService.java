@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class DonService  {
 
 
@@ -53,16 +54,16 @@ public class DonService  {
 
 
 
-        public void deleteByEventId(int eventId) {
-            String request = "DELETE FROM don WHERE evenement_id = ?";
-            try {
-                pst = connexion.prepareStatement(request);
-                pst.setInt(1, eventId);
-                pst.executeUpdate();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+    public void deleteByEventId(int eventId) {
+        String request = "DELETE FROM don WHERE evenement_id = ?";
+        try {
+            pst = connexion.prepareStatement(request);
+            pst.setInt(1, eventId);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+    }
 
     public void update(Don d, int id) {
         String request="update evenement set montant_user = ?, user_id = ?, evenement_id= ? where id = ? ";
@@ -93,7 +94,6 @@ public class DonService  {
                 float amount = rs.getFloat(2);
                 int userId = rs.getInt(3);
                 int eventId = rs.getInt(4);
-                // Assuming you have a method to retrieve an Evenement by its ID
                 EvennementService evs = new EvennementService();
                 UserService us = new UserService();
 
@@ -107,9 +107,7 @@ public class DonService  {
     }
 
 
-    public List<Evennement> searchByName(String name) {
-        return null;
-    }
+
 
 
     public Don readById(int id) {
@@ -139,6 +137,9 @@ public class DonService  {
         return null;
     }
 
+
+
+
     public List<Don> getDonationsWithDetails() {
         List<Don> donations = new ArrayList<>();
         String query = "SELECT d.user_id, d.montant_user, d.evenement_id, u.nom, u.prenom, u.email, e.*  " +
@@ -150,7 +151,7 @@ public class DonService  {
                 ResultSet rs = pst.executeQuery()) {
             while (rs.next()) {
                 int userId = rs.getInt("user_id");
-                int eventId =rs.getInt("evenement_id");
+                int eventId = rs.getInt("evenement_id");
                 float montant = rs.getFloat("montant_user");
                 String nom = rs.getString("nom");
                 String prenom = rs.getString("prenom");
@@ -158,84 +159,114 @@ public class DonService  {
                 String nomEvenemment = rs.getString("nom_event");
                 LocalDate dateEvenemment = rs.getDate("date").toLocalDate();
 
-                // Créer un objet User avec les détails de l'utilisateur
-                UserService us = new UserService();
-                EvennementService ev = new EvennementService();
-                User u = Model.getInstance().getUser();
-                Evennement event= ev.readById(eventId);
-/*
-                System.out.println(event);
-*/
-               event.setNom(nomEvenemment);
-                System.out.println(nomEvenemment);
-                event.setDate(dateEvenemment);
-                u.setEmail(email);
+                // Create a new User object with the retrieved details
+                User u = new User();
+                u.setId(userId);
                 u.setNom(nom);
+                u.setPrenom(prenom);
+                u.setEmail(email);
 
+                // Create a new Evennement object with the retrieved details
+                Evennement event = new Evennement();
+                event.setId(eventId);
+                event.setNom(nomEvenemment);
+                event.setDate(dateEvenemment);
 
-
-                // Créer un objet Don avec les détails récupérés et l'ajouter à la liste
+                // Create a new Don object with the retrieved details and add it to the list
                 Don donation = new Don(montant, u, event);
                 donations.add(donation);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer l'exception selon vos besoins
+
         }
         return donations;
     }
 
 
 
+    public List<Don> readAll1(int userId) {
+        String request = "SELECT * FROM don WHERE user_id = ?";
+        List<Don> list = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connexion.prepareStatement(request);
+            preparedStatement.setInt(1, userId);
 
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                // Assuming the type of the evennement_id column is int
+                int evennementId = rs.getInt("evenement_id");
+                Evennement evennement = EvennementService.getInstance().readById(evennementId);
+                float montant = rs.getFloat("montant_user");
+                // Assuming the type of the user_id column is int
+                int user_id = rs.getInt("user_id");
+                User user = Model.getInstance().getUser();
+
+                list.add(new Don(id, montant, user, evennement));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
+
+
+    public List<Don> getDonationsForMonth(LocalDate monthDate, int userId) {
+        List<Don> allDonations = readAll1(Model.getInstance().getUser().getId());
+        List<Don> donationsForMonth = new ArrayList<>();
+
+        int year = monthDate.getYear();
+        int month = monthDate.getMonthValue();
+
+        for (Don donation : allDonations) {
+            LocalDate donationDate = donation.getEvennement().getDate();
+
+            if (donationDate.getYear() == year && donationDate.getMonthValue() == month) {
+                donationsForMonth.add(donation);
+            }
+        }
+
+        return donationsForMonth;
+    }
 
 
 
 /*
-    public List<Don> getDonationsWithDetails(int eventId) {
-        List<Don> donations = new ArrayList<>();
-        String query = "SELECT d.user_id, d.montant_user, d.evenement_id, u.nom, u.prenom, u.email, e.nom, e.date " +
-                "FROM don d " +
-                "JOIN user u ON d.user_id = u.id " +
-                "JOIN evenement e ON d.evenement_id = e.id " +
-                "WHERE d.evenement_id = ?";
-        try (
-             PreparedStatement pst = connexion.prepareStatement(query)) {
-            pst.setInt(1, eventId);
-            try (ResultSet rs = pst.executeQuery()) {
-                while (rs.next()) {
-                    int userId = rs.getInt("user_id");
-                    float montant = rs.getFloat("montant_user");
-                    String nom = rs.getString("nom");
-                    String prenom = rs.getString("prenom");
-                    String email = rs.getString("email");
-                    String nomEvenemment = rs.getString("nom");
-                    LocalDate dateEvenemment = rs.getDate("date").toLocalDate();
+    public List<Don> getDonationsForMonth(LocalDate monthDate) {
+        List<Don> allDonations = readAll();
+        List<Don> donationsForMonth = new ArrayList<>();
 
+        int year = monthDate.getYear();
+        int month = monthDate.getMonthValue();
 
-                    // Créer un objet User avec les détails de l'utilisateur
-                   UserService us = new UserService();
-                   EvennementService ev = new EvennementService();
-                  User u =  us.readById(userId);
-                  Evennement event= ev.readById(eventId);
-                  event.setNom(nomEvenemment);
-                  event.setDate(dateEvenemment);
-                  u.setEmail(email);
+        for (Don donation : allDonations) {
+            LocalDate donationDate = donation.getEvennement().getDate();
 
-                  u.setNom(nom);
-                    // Créer un objet Don avec les détails récupérés et l'ajouter à la liste
-                    Don donation = new Don(montant,u ,event);
-                    donations.add(donation);
-                }
+            if (donationDate.getYear() == year && donationDate.getMonthValue() == month) {
+                donationsForMonth.add(donation);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Gérer l'exception selon vos besoins
         }
-        return donations;
+
+        return donationsForMonth;
     }
 */
 
+
+
+    public float getTotalDonationsForEvent(int eventId) {
+        float totalDonations = 0;
+        List<Don> allDonations = readAll();
+        // Loop through all donations and sum up the amounts for the given event
+        for (Don donation : allDonations) {
+            if (donation.getEvennement().getId() == eventId) {
+                totalDonations += donation.getMontant_user();
+            }
+        }
+        return totalDonations;
+    }
 
 
     public static DonService getInstance() {

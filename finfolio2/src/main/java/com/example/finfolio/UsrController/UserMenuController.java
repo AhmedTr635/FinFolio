@@ -1,8 +1,12 @@
 package com.example.finfolio.UsrController;
 
 import Models.Model;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +23,10 @@ public class UserMenuController implements Initializable {
     public Button profile_btn;
     public Button logout_btn;
     public Button signaler_btn;
+    public Button offreBtn;
+    public Button immobilier;
+    public Button trading;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -39,6 +47,10 @@ public class UserMenuController implements Initializable {
                 throw new RuntimeException(ex);
             }
         });
+        offreBtn.setOnAction(e->onOffre());
+        signaler_btn.setOnAction(e->openError());
+        trading.setOnAction(e->onTrading());
+        immobilier.setOnAction(e->onImmobilier());
 
     }
     private void onDashboard(){
@@ -54,6 +66,10 @@ public class UserMenuController implements Initializable {
     private void onEvenements(){Model.getInstance().getViewFactory().getUserSelectedMenuItem().set("Evenements");}
     private void onDepenses(){Model.getInstance().getViewFactory().getUserSelectedMenuItem().set("Depenses");}
     private void onProfil(){Model.getInstance().getViewFactory().getUserSelectedMenuItem().set("Profil");}
+    private void onOffre(){Model.getInstance().getViewFactory().getUserSelectedMenuItem().set("Offre");}
+    private void onTrading(){Model.getInstance().getViewFactory().getUserSelectedMenuItem().set("Trading");}
+    private void onImmobilier(){Model.getInstance().getViewFactory().getUserSelectedMenuItem().set("Immobilier");}
+
 
     private void onLogout() throws IOException {
         Stage st = (Stage) logout_btn.getScene().getWindow();
@@ -61,6 +77,19 @@ public class UserMenuController implements Initializable {
         Model.getInstance().getViewFactory().showLoginWindow();
 
     }
+    void openError() {
+        try {
 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/addError.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Votre réclamation");
+            stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/com/example/finfolio/Pics/icon.png"))));
+            stage.setScene(new Scene(root));
+            stage.setTitle("Probleme");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-}
+}}

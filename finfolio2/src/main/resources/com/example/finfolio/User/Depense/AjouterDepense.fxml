@@ -18,9 +18,9 @@
     <AnchorPane layoutX="1.0" layoutY="-1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="527.0">
         <children>
             <Label fx:id="titleA" layoutX="231.0" layoutY="14.0" styleClass="titleA" text="Nouvelle dépense ">
-            <font>
-               <Font size="30.0" />
-            </font>
+                <font>
+                    <Font size="30.0" />
+                </font>
             </Label>
             <Label fx:id="TitleB" layoutX="240.0" layoutY="60.0" styleClass="titleA" text="Veillez remplir les champs suivants" textFill="#474747ee">
                 <font>
@@ -29,9 +29,9 @@
             </Label>
             <Label layoutX="217.0" layoutY="92.0" prefHeight="21.0" prefWidth="46.0" styleClass="labelField" text="Type " textOverrun="CLIP" />
             <Label layoutX="215.0" layoutY="270.0" prefHeight="21.0" prefWidth="46.0" styleClass="labelField" text="Date ">
-            <font>
-               <Font size="10.0" />
-            </font>
+                <font>
+                    <Font size="10.0" />
+                </font>
             </Label>
             <Label layoutX="216.0" layoutY="177.0" prefHeight="25.0" prefWidth="74.0" styleClass="labelField" text="Montant ">
                 <font>
@@ -54,12 +54,12 @@
             </Button>
             <DatePicker fx:id="txtDate" layoutX="222.0" layoutY="297.0" prefHeight="26.0" prefWidth="258.0" promptText="date de la dépense" />
             <Label fx:id="dateErrorLabel" layoutX="226.0" layoutY="336.0" prefHeight="22.0" prefWidth="215.0" style="-fx-text-fill: red;" text="" />
-         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DARKBLUE" height="446.0" layoutX="-5.0" layoutY="-4.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="194.0" />
-         <ImageView fitHeight="112.0" fitWidth="122.0" layoutX="36.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../Pics/Depense/give-money.png" />
-            </image>
-         </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DARKBLUE" height="446.0" layoutX="-5.0" layoutY="-4.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="194.0" />
+            <ImageView fitHeight="112.0" fitWidth="122.0" layoutX="36.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../../Pics/depenses.png" />
+                </image>
+            </ImageView>
         </children>
     </AnchorPane>
 </AnchorPane>

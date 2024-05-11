@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="evenements_container" stylesheets="" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Investissement.Controller.RealEstateAdminController">
+    <children>
+        <AnchorPane layoutX="31.0" layoutY="168.0" prefHeight="386.0" prefWidth="852.0">
+
+            <AnchorPane fx:id="big_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+                <children>
+                    <TableView fx:id="RealEstate_table" layoutX="-5.0" layoutY="-37.0" prefHeight="284.0" prefWidth="809.0" styleClass="table" stylesheets="">
+                        <columns>
+                            <TableColumn fx:id="name" prefWidth="134.39998054504395" styleClass="event" text="Nom de l'Immobilier" />
+                            <TableColumn fx:id="emplacement" prefWidth="96.79997253417969" text="Emplacement" />
+                            <TableColumn fx:id="ROI" prefWidth="68.800048828125" text="ROI" />
+                            <TableColumn fx:id="valeur" prefWidth="93.60009765625" text="Valeur" />
+                     <TableColumn fx:id="superficie" prefWidth="115.20001220703125" text="Superficie" />
+                     <TableColumn fx:id="nbchambres" prefWidth="90.4000244140625" text="Chambres" />
+                            <TableColumn fx:id="nbclick" prefWidth="77.60003662109375" text="Clicks">
+                        <graphic>
+                           <!--<FontAwesomeIconView glyphName="TRASH" />-->
+                        </graphic></TableColumn>
+                     <TableColumn fx:id="event_action" prefWidth="128.00002441406252" text=" " />
+                        </columns>
+                    </TableView>
+                    <AnchorPane layoutX="-111.0" layoutY="-234.0" prefHeight="133.0" prefWidth="735.0">
+                        <children>
+                            <Label layoutX="475.0" layoutY="79.0" text="Immobilier">
+                                <font>
+                                    <Font size="25.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </AnchorPane>
+         
+                 <TableView fx:id="InvestissementTable" layoutX="-5.0" layoutY="332.0" prefHeight="228.0" prefWidth="810.0" stylesheets="">
+                     <columns>
+                         <TableColumn fx:id="userID" prefWidth="100.0" text="ID Utilisateur" />
+                         <TableColumn fx:id="MontantColumn" prefWidth="124.0" text="Montant" />
+                         <TableColumn fx:id="InvDateColumn" minWidth="0.0" prefWidth="128.79998779296875" text=" Date" />
+                         <TableColumn fx:id="tax" minWidth="7.7333526611328125" prefWidth="179.2000732421875" text="Tax" />
+                     </columns>
+                 </TableView>
+               <Label layoutX="14.0" layoutY="294.0" prefHeight="18.0" prefWidth="277.0" text="Participation détaillées des utilisateurs  :" />
+                </children>
+            </AnchorPane>
+        </AnchorPane>
+        <Pane layoutX="21.0" layoutY="70.0" prefHeight="34.0" prefWidth="256.0" styleClass="search-box" stylesheets="">
+            <children>
+                <TextField fx:id="search_field" layoutX="17.0" layoutY="5.0" promptText="Rechercher..." />
+                <Button fx:id="search_btn" layoutX="169.0" layoutY="5.0" mnemonicParsing="false" onAction="#search_event" styleClass="searhc-button" stylesheets="" text="Rechercher" textFill="WHITE" />
+            </children>
+        </Pane>
+        <Button fx:id="ajouter_btn" layoutX="754.0" layoutY="70.0" mnemonicParsing="false" onAction="#ajouter_RE" prefHeight="34.0" prefWidth="75.0" styleClass="btn_ajouter" stylesheets="" text="Ajouter" />
+
+    </children>
+</AnchorPane>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="error_pane" prefHeight="96.0" prefWidth="629.0" styleClass="user_cell_container" stylesheets="@../../../../Styles/Cells.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Admin.ErrorCellController">
+   <FontAwesomeIconView glyphName="USER" layoutX="51.0" layoutY="54.0" size="40" />
+   <Label fx:id="user_id" layoutX="214.0" layoutY="32.0" stylesheets="@../../../../Styles/Error.css" text="Label" />
+   <Label fx:id="user_name" layoutX="306.0" layoutY="31.0" stylesheets="@../../../../Styles/Error.css" text="Label" />
+   <Button fx:id="show_id" layoutX="487.0" layoutY="51.0" mnemonicParsing="false" onAction="#showproblem" prefHeight="35.0" prefWidth="46.0" styleClass="supprimer_btn" stylesheets="@../../../../Styles/Cells.css">
+      <graphic>
+         <FontAwesomeIconView glyphName="BELL" size="20" />
+      </graphic></Button>
+   <Label fx:id="error_date" layoutX="405.0" layoutY="32.0" stylesheets="@../../../../Styles/Error.css" text="Label" />
+   <Label fx:id="id" layoutX="142.0" layoutY="32.0" stylesheets="@../../../../Styles/Error.css" text="Label" />
+   <Button fx:id="confirmer_id" layoutX="547.0" layoutY="56.0" mnemonicParsing="false" onAction="#senEmail" styleClass="supprimer_btn" text="confirmer" />
+</AnchorPane>

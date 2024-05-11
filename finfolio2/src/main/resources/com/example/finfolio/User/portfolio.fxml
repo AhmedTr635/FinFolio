@@ -1,11 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="portfolio_container" stylesheets="@../../../../Styles/Portfolio.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Portfolio.PortfolioController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="portfolio_container" stylesheets="@../../../../Styles/Users.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Portfolio.Controller.ActifsCourants.Afficher">
    <children>
-      <Text layoutX="379.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Portfolio" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="14.0" />
+      <Text fill="#663c3c" layoutX="356.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title1" text="Portfolio" textAlignment="CENTER" AnchorPane.leftAnchor="356.0" AnchorPane.topAnchor="30.5">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font></Text>
+      <TableView fx:id="tab1" layoutX="192.0" layoutY="148.0" prefHeight="290.0" prefWidth="481.0" styleClass="tab">
+         <columns>
+            <TableColumn fx:id="ida" prefWidth="75.0" text="id" />
+            <TableColumn fx:id="nameid" prefWidth="103.199951171875" text="name" />
+            <TableColumn fx:id="montantid" prefWidth="86.4000244140625" text="montant" />
+            <TableColumn fx:id="typeid" text="type" />
+            <TableColumn fx:id="userid" prefWidth="137.59994506835938" text="user_id" />
+         </columns>
+      </TableView>
+      <Button fx:id="addid" layoutX="380.0" layoutY="448.0" mnemonicParsing="false" onAction="#adder" text="Ajouter" textFill="#000000ea" />
+      <Button fx:id="deleteid" layoutX="527.0" layoutY="448.0" mnemonicParsing="false" onAction="#deleteactif" text="Supprimer" />
+      <Button fx:id="updateid" layoutX="239.0" layoutY="448.0" mnemonicParsing="false" onAction="#updateactif" text="Modifier" />
+      <Button fx:id="addid1" layoutX="380.0" layoutY="473.0" mnemonicParsing="false" onAction="#adderNC" text="ajouter" textFill="#000000ea" />
+      <Button fx:id="deleteid1" layoutX="527.0" layoutY="473.0" mnemonicParsing="false" onAction="#deleteactifNC" text="supprimer" />
+      <Button fx:id="updateid1" layoutX="239.0" layoutY="473.0" mnemonicParsing="false" onAction="#updateactifNC" prefHeight="22.0" prefWidth="81.0" text="modifier" />
+      <TableView fx:id="tab11" layoutX="46.0" layoutY="148.0" prefHeight="290.0" prefWidth="734.0" styleClass="tab">
+         <columns>
+            <TableColumn fx:id="ida1" prefWidth="92.79999542236328" text="id" />
+            <TableColumn fx:id="nameid1" prefWidth="84.0" text="name" />
+            <TableColumn fx:id="typeid1" prefWidth="92.800048828125" text="type" />
+            <TableColumn fx:id="valeurid" prefWidth="80.79998779296875" text="valeur" />
+            <TableColumn fx:id="achatid" prefWidth="148.79995727539062" text="prix d'achat" />
+            <TableColumn fx:id="userid1" prefWidth="236.0" text="user" />
+         </columns>
+      </TableView>
+      <ComboBox fx:id="actifchoice" layoutX="156.0" layoutY="94.0" onAction="#handlechoice" prefWidth="150.0" promptText="Actifs Courant" style="-fx-background-color: #23B2EE;" styleClass="combo-box" />
+      <TextField fx:id="research" layoutX="581.0" layoutY="107.0" />
+      <Button fx:id="bilan_id" layoutX="383.0" layoutY="523.0" mnemonicParsing="false" onAction="#generatePDF" text="Bilan" />
+      <PieChart fx:id="piechart" layoutX="245.0" layoutY="575.0" prefHeight="226.0" prefWidth="370.0" />
    </children>
 </AnchorPane>

@@ -28,7 +28,7 @@ public class TaxService {
         }
     }
 
-    
+
     public void delete(int id) {
         String requete = "DELETE FROM tax WHERE id = ?";
         try {
@@ -40,7 +40,7 @@ public class TaxService {
         }
     }
 
-    
+
     public  void update(Tax t, int id) {
         String requete = "UPDATE tax SET montant= ?, type= ?,optimisation= ? WHERE id = ?";
         try {
@@ -55,7 +55,7 @@ public class TaxService {
         }
     }
 
-    
+
     public List<Tax> readAll() {
         String requete="SELECT * FROM tax";
         List<Tax> list=new ArrayList<>();
@@ -77,7 +77,7 @@ public class TaxService {
         }
         return list;    }
 
-    
+
     public Tax readById(int id) {
         String requete = "SELECT * FROM tax WHERE id = ?";
         try {
@@ -127,5 +127,16 @@ public class TaxService {
 
         // Return -1 if auto-generated ID couldn't be retrieved
         return -1;
+    }
+    public double sommeTaxByDepense(){
+        TaxService ts= new TaxService();
+        List<Tax> taxes = ts.readAll();
+        double somme = taxes.stream()
+                .filter(tax -> tax.getType().equals("depense"))
+                .mapToDouble(Tax::getmontantTax)
+                .sum();
+        return somme;
+
+
     }
 }

@@ -6,19 +6,46 @@ import com.example.finfolio.Service.EvennementService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.List;
+import java.util.ResourceBundle;
+
+
+import com.example.finfolio.Entite.Evennement;
+import com.example.finfolio.Service.EvennementService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.text.Text;
+
 
 public class ClientEventsController {
-@FXML
+    @FXML
     public AnchorPane bg_container;
 
 
@@ -76,7 +103,7 @@ public class ClientEventsController {
 
 
 
-    private void loadEvents() {
+    public void loadEvents() {
 
         List<Evennement> events = EvennementService.getInstance().readAll();
 
@@ -87,6 +114,7 @@ public class ClientEventsController {
 
                 EventCellController controller = fxmlLoader.getController();
                 controller.setEventData(event);
+
 
                 // Add the cell to the container.
                 event_container.getChildren().addAll(eventCell);
@@ -128,6 +156,26 @@ public class ClientEventsController {
         }
     }
 
+
+
+    @FXML
+    void open_calendar() {
+        try {
+            // Load the FXML file for AjouterDon interface
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/finfolio/User/Evennement/calendar.fxml"));
+            Parent root = loader.load();
+
+
+
+            // Create a new stage for the AjouterDon interface
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Calendrier");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 

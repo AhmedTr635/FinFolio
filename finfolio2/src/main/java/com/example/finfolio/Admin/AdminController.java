@@ -21,6 +21,8 @@ public class AdminController implements Initializable {
                 case "Evenements"->admin_parent.setCenter(Model.getInstance().getViewFactory().getEvenementsAdminView());
                 case "Taxes"->admin_parent.setCenter(Model.getInstance().getViewFactory().getTaxesAdminView());
                 case "Credits"->admin_parent.setCenter(Model.getInstance().getViewFactory().getCreditsAdminView());
+                case "Data"->admin_parent.setCenter(Model.getInstance().getViewFactory().getDataview());
+
                 default -> admin_parent.setCenter(Model.getInstance().getViewFactory().getCreateUserView());
             }
 

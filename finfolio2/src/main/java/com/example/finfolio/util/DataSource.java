@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DataSource {  private static  DataSource instance;
-    private   String  url ="jdbc:mysql://localhost:3306/finfolio";
+    private   String  url ="jdbc:mysql://localhost:3306/test";
     private  String  login ="root";
     private   String  pwd = "";
 

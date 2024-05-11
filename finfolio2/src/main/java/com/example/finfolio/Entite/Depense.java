@@ -114,11 +114,12 @@ public class Depense {
     }
 
     public static double calculateTotalDepenses(List<Depense> depenses) {
-            double total = 0;
-            for (Depense depense : depenses) {
-                total += depense.getMontant();
-            }
-            return total;
+        double total = 0;
+        for (Depense depense : depenses) {
+            total += depense.getMontant();
         }
+        return total;
     }
+}
+
 

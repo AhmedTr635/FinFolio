@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="426.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Investissement.Controller.AjouterREController">
+    <children>
+        <Label layoutX="227.0" layoutY="79.0" text="ID de l'Immobilier" textFill="#42569e">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Label>
+        <TextField fx:id="id" layoutX="252.0" layoutY="110.0" prefHeight="25.0" prefWidth="149.0" promptText="Enter l'ID..." />
+        <Label layoutX="227.0" layoutY="159.0" text="Nombre de chambres" textFill="#42569e">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="227.0" layoutY="246.0" text="Superficie" textFill="#42569e">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Label>
+        <TextField fx:id="superficie" layoutX="252.0" layoutY="273.0" promptText="Enter superficie..." />
+        <Label layoutX="355.0" layoutY="318.0" textFill="#42569e">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Label>
+        <Button fx:id="ajouterRE" layoutX="199.0" layoutY="407.0" mnemonicParsing="false" onAction="#ajouterRE" text="Ajouter" />
+        <Label fx:id="saisie_nom" layoutX="48.0" layoutY="136.0" prefHeight="17.0" prefWidth="161.0" />
+        <Label fx:id="saisie_date" layoutX="54.0" layoutY="297.0" prefHeight="17.0" prefWidth="149.0" />
+        <Label fx:id="saisie_addresse" layoutX="60.0" layoutY="226.0" prefHeight="17.0" prefWidth="137.0" />
+        <Label fx:id="saisie_montant" layoutX="54.0" layoutY="389.0" prefHeight="17.0" prefWidth="149.0" />
+      <Label layoutX="29.0" layoutY="77.0" text="Nom de l'Immobilier:" textFill="#42569e">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="name" layoutX="54.0" layoutY="108.0" prefHeight="25.0" prefWidth="149.0" promptText="Enter le nom..." />
+      <Label layoutX="29.0" layoutY="157.0" text="Emplacement" textFill="#42569e">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="244.0" text="ROI" textFill="#42569e">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="ROI" layoutX="54.0" layoutY="271.0" promptText="Enter ROI..." />
+      <Label layoutX="29.0" layoutY="324.0" text="Valeur" textFill="#42569e">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="valeur" layoutX="54.0" layoutY="349.0" promptText="Entrer valeur..." />
+      <TextField fx:id="emplacement" layoutX="54.0" layoutY="189.0" prefHeight="25.0" prefWidth="149.0" promptText="Entrer L'emplacement ..." />
+      <TextField fx:id="nbrchambre" layoutX="252.0" layoutY="197.0" prefHeight="25.0" prefWidth="149.0" promptText="Entrer nombre de chambres ..." />
+      <Label fx:id="iddd" layoutX="249.0" layoutY="136.0" prefHeight="18.0" prefWidth="138.0" />
+      <Label fx:id="chbrs" layoutX="249.0" layoutY="225.0" prefHeight="18.0" prefWidth="138.0" />
+      <Label fx:id="superf" layoutX="249.0" layoutY="305.0" prefHeight="18.0" prefWidth="138.0" />
+    </children>
+</AnchorPane>

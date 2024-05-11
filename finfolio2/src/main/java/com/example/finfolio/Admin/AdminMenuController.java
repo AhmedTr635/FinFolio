@@ -18,6 +18,9 @@ public class AdminMenuController  implements Initializable   {
     public Button taxes_btn;
     public Button credits_btn;
     public Button logout_btn;
+    public Button data_btn;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {addListeners();}
@@ -36,6 +39,8 @@ public class AdminMenuController  implements Initializable   {
             }
         });
 
+        data_btn.setOnAction(e->onData());
+
 
     }
     private void onCreateUser(){
@@ -50,6 +55,7 @@ public class AdminMenuController  implements Initializable   {
     private void onInvestissements(){Model.getInstance().getViewFactory().getAdminSelectMenuItem().set("Investissements");}
     private void onEvenements(){Model.getInstance().getViewFactory().getAdminSelectMenuItem().set("Evenements");}
     private void onUsers(){Model.getInstance().getViewFactory().getAdminSelectMenuItem().set("Users");}
+    private void onData(){Model.getInstance().getViewFactory().getAdminSelectMenuItem().set("Data");}
 
     private void onLogout() throws IOException {
         Stage st = (Stage) logout_btn.getScene().getWindow();

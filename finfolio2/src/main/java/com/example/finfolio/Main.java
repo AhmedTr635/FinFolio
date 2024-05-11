@@ -27,7 +27,7 @@ public class Main extends Application {
         @Override
         public void start(Stage stage) throws IOException, WriterException {
 
-        Model.getInstance().getViewFactory().showAdminWindow();
+        Model.getInstance().getViewFactory().showLoginWindow();
         }
 
     }

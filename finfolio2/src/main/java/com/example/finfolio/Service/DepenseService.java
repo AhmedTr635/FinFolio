@@ -40,7 +40,7 @@ public class DepenseService {
     }
 
     public void delete(int id ) {
-        String requete = "DELETE FROM depense WHERE id = ?";
+        String requete = "DELETE FROM depense WHERE id = ? ";
         try {
             PreparedStatement preparedStatement = connexion.prepareStatement(requete);
             preparedStatement.setInt(1, id);
@@ -123,7 +123,7 @@ public class DepenseService {
         }
         return null;
     }
-//recherche dynamique des depense en fonction du type et du montant
+    //recherche dynamique des depense en fonction du type et du montant
     public List<Depense> rechercherEvent(String dep) throws SQLException {
         String requeteSQL = "SELECT * FROM depense WHERE type LIKE ? OR montant LIKE ?";
 

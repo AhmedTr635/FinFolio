@@ -1,8 +1,12 @@
 package com.example.finfolio.Depense;
 
+import Models.Model;
 import com.example.finfolio.Entite.Depense;
+import com.example.finfolio.Entite.Tax;
+import com.example.finfolio.Entite.User;
 import com.example.finfolio.Service.DepenseService;
 import com.example.finfolio.Service.TaxService;
+import com.example.finfolio.Service.UserService;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,6 +40,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 public class DashboardDepenseController {
+    private static DashboardDepenseController instance;
+
+    public static DashboardDepenseController getInstance() {
+        return instance;
+    }
+
+    public DashboardDepenseController() {
+        instance = this;
+    }
 
     public ComboBox monthComboBox;
     public Button AddDepense;
@@ -50,11 +63,13 @@ public class DashboardDepenseController {
     public LineChart chartContainer;
     @FXML
     public Button downloadButton;
+    public Label tax_depense;
 
     @FXML
     private TableView<Depense> depenseTableView;
 
-//Initilisation du dashboard
+
+    //Initilisation du dashboard
     @FXML
     public void initialize() throws SQLException {
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -69,11 +84,12 @@ public class DashboardDepenseController {
         displayMonthlyExpensesChart(monthlyExpenses);
         downloadButton.setOnAction(event -> exportToExcel());
         searchExpenses(new ActionEvent());
+        tax_Dpense();
         totalDpense();
         showInit();
         loadTableView();
     }
-//filtre par mois
+    //filtre par mois
     private void showInit() {
 
         // Initialize the month ComboBox
@@ -103,7 +119,13 @@ public class DashboardDepenseController {
             // Create a new stage
             Stage newStage = new Stage();
             newStage.setScene(scene);
-            newStage.setOnHidden(e->loadDepenseFromDatabase());
+            newStage.setOnHidden(e-> {
+                try {
+                    loadDepenseFromDatabase();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
             // Show the new stage
             newStage.show();
 
@@ -111,6 +133,7 @@ public class DashboardDepenseController {
             e.printStackTrace();
         }
     }
+    //search dynamique
     @FXML
     private void searchExpenses(ActionEvent actionEvent) throws SQLException {
         String query = searchField.getText();
@@ -144,17 +167,13 @@ public class DashboardDepenseController {
         dateColumn.getStyleClass().add("date-column");
         montantColumn.getStyleClass().add("montant-column");
         actionColumn.getStyleClass().add("action-column");
-
-        // Add columns to the TableView
-
-        // Populate the TableView with data (you can implement this according to your application logic)
         populateTableView();
 
 
 
     }
     //remplir la table de dépense
-    private void populateTableView() throws SQLException {
+    private void populateTableView()  {
         // Fetch depenses from your service
         List<Depense> depenses = DepenseService.getInstance().readAll();
 
@@ -200,8 +219,18 @@ public class DashboardDepenseController {
                                 TaxService ts =new TaxService();
 
                                 ts.delete(depense.getTax().getId());
-                                    totalDpense();
-                                loadDepenseFromDatabase();
+                                totalDpense();
+                                try {
+                                    tax_Dpense();
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+
+                                try {
+                                    loadDepenseFromDatabase();
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
 
                             }
                         });
@@ -213,6 +242,10 @@ public class DashboardDepenseController {
                                 Parent root = loader.load();
                                 depenseModifyContoller dmc= loader.getController();
                                 dmc.setDepense(depense);
+                                totalDpense();
+                                tax_Dpense();
+
+
                                 // Get the controller instance
 
                                 // Pass the Depense object to the controller
@@ -221,7 +254,13 @@ public class DashboardDepenseController {
 
                                 Stage newStage = new Stage();
                                 newStage.setScene(scene);
-                                newStage.setOnHidden(e->loadDepenseFromDatabase());
+                                newStage.setOnHidden(e-> {
+                                    try {
+                                        loadDepenseFromDatabase();
+                                    } catch (SQLException ex) {
+                                        throw new RuntimeException(ex);
+                                    }
+                                });
 
                                 newStage.show();
                             } catch (Exception e) {
@@ -252,14 +291,38 @@ public class DashboardDepenseController {
         };
     }
 
-
     //methode qui calcule la somme totale des dépense
-    public void totalDpense()  {
+    public Double totalDpense()  {
         List<Depense> depenses = DepenseService.getInstance().readAll();
         double totalDepenses = Depense.calculateTotalDepenses(depenses);
         total_depense_card.setText(String.format("%.2f", totalDepenses));
+        return totalDepenses;
     }
-//methode de filtre par mois
+    public Double tax_Dpense() throws SQLException {
+        TaxService ts = new TaxService();
+        List<Tax> taxDepTotal = ts.readAll();
+        UserService us = new UserService();
+        User u =  us.getUserByEmail2(Model.getInstance().getUser().getEmail());
+        System.out.println(u);
+/*
+        Model.getInstance().getUser().setTotal_tax(ts.sommeTaxByDepense());
+*/
+/*
+        us.updatewTax(Model.getInstance().getUser());
+*/
+        double totalTax = Tax.calculateTotalTax(taxDepTotal);
+
+        double totaltax = u.getTotal_tax();
+        System.out.println(totaltax);
+        tax_depense.setText(String.format("%.2f", totaltax));
+
+        return totalTax;
+    }
+
+
+
+
+    //methode de filtre par mois
     private void filterByMonth(Month selectedMonth) throws SQLException {
         // Clear existing depense cells from the container
         depenseTableView.getItems().clear();
@@ -278,12 +341,7 @@ public class DashboardDepenseController {
 
 //methode de filre par montant et type depense
 
-
-
-
-
-
-    private void loadDepenseFromDatabase() {
+    private void loadDepenseFromDatabase() throws SQLException {
         // Fetch events from EvennementService
         List<Depense> depenses = DepenseService.getInstance().readAll();
 
@@ -291,24 +349,19 @@ public class DashboardDepenseController {
         ObservableList<Depense> eventList = FXCollections.observableArrayList(depenses);
         depenseTableView.setItems(eventList);
         totalDpense();
-/*
-        chartContainer.getData().clear();
-*/
+        tax_Dpense();
         Map<YearMonth, Double> monthlyExpenses = calculateMonthlyExpenses(depenses);
         displayMonthlyExpensesChart(monthlyExpenses);
 
 
     }
-//stat
+//statistique
 
-    // This method calculates the monthly expenses based on the list of all depenses
     private Map<YearMonth, Double> calculateMonthlyExpenses(List<Depense> allDepenses) {
         Map<YearMonth, Double> monthlyExpenses = new HashMap<>();
         for (Depense depense : allDepenses) {
-            // Get the YearMonth from the date
             YearMonth yearMonth = YearMonth.from(depense.getDate());
 
-            // Use the YearMonth as the key in the map
             double amount = depense.getMontant();
             monthlyExpenses.put(yearMonth, monthlyExpenses.getOrDefault(yearMonth, 0.0) + amount);
         }
@@ -332,12 +385,8 @@ public class DashboardDepenseController {
         for (YearMonth month : monthlyExpenses.keySet()) {
             series.getData().add(new XYChart.Data<>(month.toString(), monthlyExpenses.get(month)));
             String monthLabel = month.toString();
-
-/*
-            double expenses = monthlyExpenses.getOrDefault(month, 0.0);
-*/
-
             series.getData().add(new XYChart.Data<>(monthLabel,0));
+            series.setName("dépense par mois");
         }
         lineChart.getData().add(series);
     }
@@ -359,7 +408,6 @@ public class DashboardDepenseController {
         headerRow.createCell(2).setCellValue("Date");
         headerRow.createCell(3).setCellValue("Montant");
         headerRow.createCell(4).setCellValue("Tax");
-        headerRow.createCell(5).setCellValue("User");
 
         // Add data
         int rowNum = 1;
@@ -369,8 +417,7 @@ public class DashboardDepenseController {
             row.createCell(1).setCellValue(depense.getType());
             row.createCell(2).setCellValue(depense.getDate().toString());
             row.createCell(3).setCellValue(depense.getMontant());
-            row.createCell(4).setCellValue(depense.getTax().getmontantTax());
-            row.createCell(5).setCellValue(depense.getUser().getId());
+            row.createCell(4).setCellValue(depense.getUser().getId());
         }
 
         // Write the workbook content to a file

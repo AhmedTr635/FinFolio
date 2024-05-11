@@ -1,0 +1,42 @@
+/* Style pour les étiquettes */
+.label {
+    -fx-font-size: 16px; /* Taille de police */
+    -fx-text-fill: #333; /* Couleur du texte */
+}
+
+/* Style pour les boutons */
+.button {
+    -fx-font-size: 14px; /* Taille de police */
+    -fx-background-color: #007bff; /* Couleur de fond du bouton */
+    -fx-text-fill: #fff; /* Couleur du texte */
+    -fx-border-radius: 5px; /* Coins arrondis */
+    -fx-padding: 10px 20px; /* Rembourrage */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 0); /* Ombre */
+}
+
+/* Animation de survol pour les boutons */
+.button:hover {
+    -fx-background-color: #0056b3; /* Couleur de fond plus foncée au survol */
+}
+
+/* Animation d'enfoncement pour les boutons */
+.button:pressed {
+    -fx-background-color: #003366; /* Couleur de fond plus foncée lorsque pressé */
+}
+
+/* Style pour les VBox */
+.vbox {
+    -fx-background-color: #f8f8f8; /* Couleur de fond */
+    -fx-padding: 20px; /* Espacement intérieur */
+    -fx-border-width: 1px; /* Largeur de la bordure */
+    -fx-border-color: #ddd; /* Couleur de la bordure */
+    -fx-border-radius: 10px; /* Rayon de la bordure */
+    -fx-spacing: 20px; /* Espacement entre les enfants */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0); /* Ombre */
+}
+
+/* Style pour les étiquettes dans invList et topROI */
+#invList Label, #topROI Label {
+    -fx-font-size: 14px; /* Taille de police */
+    -fx-text-fill: #333; /* Couleur du texte */
+}

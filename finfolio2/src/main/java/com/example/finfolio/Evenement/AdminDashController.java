@@ -5,10 +5,30 @@ import com.example.finfolio.Entite.Evennement;
 import com.example.finfolio.Service.DonService;
 import com.example.finfolio.Service.EvennementService;
 import javafx.beans.property.SimpleFloatProperty;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.ResourceBundle;
+
+
+import com.example.finfolio.Entite.Don;
+import com.example.finfolio.Entite.Evennement;
+import com.example.finfolio.Entite.User;
+import com.example.finfolio.Service.DonService;
+import com.example.finfolio.Service.EvennementService;
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +40,10 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.chart.*;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -60,8 +84,7 @@ public class AdminDashController {
     @FXML
     public TableColumn<Don, String> userNameColumn;
 
-    @FXML
-    public TableColumn<Don, String> userPrenomColumn;
+
 
     @FXML
     public TableColumn<Don, String> userEmailColumn;
@@ -84,6 +107,7 @@ public class AdminDashController {
     @FXML
     private NumberAxis yAxis;
 
+    private static  AdminDashController instance;
 
 
 
@@ -98,7 +122,6 @@ public class AdminDashController {
 
 
         userNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUser().getNom()));
-        userPrenomColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUser().getPrenom()));
         userEmailColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUser().getEmail()));
         eventNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEvennement().getNom()));
         eventDateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEvennement().getDate()));
@@ -168,12 +191,12 @@ public class AdminDashController {
     }
 
 
-    private void loadDonsFromDatabase() {
+    public void loadDonsFromDatabase() {
 
-            List<Don> donations = DonService.getInstance().getDonationsWithDetails();
-            ObservableList<Don> dons = FXCollections.observableArrayList(donations);
-            donationsTable.setItems(dons);
-        }
+        List<Don> donations = DonService.getInstance().getDonationsWithDetails();
+        ObservableList<Don> dons = FXCollections.observableArrayList(donations);
+        donationsTable.setItems(dons);
+    }
 
 
 
@@ -210,6 +233,7 @@ public class AdminDashController {
 
         refreshTableView();
         loadDonsFromDatabase();
+        refreshDonationsChart();
     }
 
 
@@ -269,8 +293,23 @@ public class AdminDashController {
 
     }
 
+    private void refreshDonationsChart() {
+        // Clear existing data from the chart
+        chart_don.getData().clear();
+
+        // Load donations data from the database
+        loadDonationsChart();
+    }
 
 
+
+
+    public static AdminDashController getInstance() {
+        if (instance == null) {
+            instance = new AdminDashController();
+        }
+        return instance;
+    }
 
 
 

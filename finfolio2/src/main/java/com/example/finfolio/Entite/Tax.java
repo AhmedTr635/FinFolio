@@ -1,11 +1,37 @@
 package com.example.finfolio.Entite;
 
+import java.util.List;
+
 public class Tax {
 
     private int id;
     private double montantTax;
     private String type;
     private String optimisation;
+    private User user ;
+
+    public Tax(double montantTax, String type, String optimisation, User user) {
+        this.montantTax = montantTax;
+        this.type = type;
+        this.optimisation = optimisation;
+        this.user = user;
+    }
+
+    public double getMontantTax() {
+        return montantTax;
+    }
+
+    public void setMontantTax(double montantTax) {
+        this.montantTax = montantTax;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getId() {
         return id;
@@ -60,7 +86,13 @@ public class Tax {
         this.type = type;
         this.optimisation = optimisation;
     }
-
+    public static double calculateTotalTax(List<Tax> taxs) {
+        double total = 0;
+        for (Tax tax : taxs) {
+            total += tax.getmontantTax();
+        }
+        return total;
+    }
     public void setOptimisation(String optimisation) {
         this.optimisation = optimisation;
     }

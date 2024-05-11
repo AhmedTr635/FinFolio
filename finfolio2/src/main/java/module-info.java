@@ -14,7 +14,18 @@ module finfolio {
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
     requires java.desktop;
-
+    //requires com.google.gson;
+    requires okhttp3;
+    requires kernel;
+    requires layout;
+    requires io;
+    requires javafx.web;
+    requires com.google.gson;
+    opens com.example.finfolio.Investissement.Controller to javafx.fxml;
+    exports com.example.finfolio.Investissement.Controller;
+    opens com.example.finfolio.Investissement.Entite to javafx.base;
+    exports com.example.finfolio.Investissement;
+    opens com.example.finfolio.Investissement to javafx.fxml;
 
     opens com.example.finfolio to javafx.fxml;
     exports com.example.finfolio;
@@ -33,10 +44,14 @@ module finfolio {
     opens com.example.finfolio.Depense to javafx.fxml;
     exports com.example.finfolio.Evenement;
     opens com.example.finfolio.Evenement to javafx.fxml;
-    exports com.example.finfolio.Investissement;
-    opens com.example.finfolio.Investissement to javafx.fxml;
+
     exports com.example.finfolio.Credits;
     opens com.example.finfolio.Credits to javafx.fxml;
     exports com.example.finfolio.Portfolio;
     opens com.example.finfolio.Portfolio to javafx.fxml;
+    exports com.example.finfolio.Portfolio.Controller.ActifsNonCourants to  javafx.fxml;
+    opens com.example.finfolio.Portfolio.Controller.ActifsNonCourants to  javafx.fxml;
+    exports  com.example.finfolio.Portfolio.Controller.ActifsCourants to  javafx.fxml;
+    opens com.example.finfolio.Portfolio.Controller.ActifsCourants to  javafx.fxml;
+    opens  com.example.finfolio.Portfolio.Entite to javafx.base;
 }

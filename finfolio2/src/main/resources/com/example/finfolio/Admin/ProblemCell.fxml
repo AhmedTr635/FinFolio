@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="pane_id" prefHeight="99.0" prefWidth="403.0" styleClass="user_cell_container" stylesheets="@../../../../Styles/Cells.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finfolio.Admin.ProblemCellController">
+   <children>
+      <Label fx:id="problem_id" layoutX="64.0" layoutY="33.0" styleClass="label-error" stylesheets="@../../../../Styles/Cells.css" text="Label" />
+      <Button fx:id="confirm_id" layoutX="310.0" layoutY="59.0" mnemonicParsing="false" onAction="#sendEmail" styleClass="confirm-btn" text="confirmer" />
+   </children>
+</AnchorPane>

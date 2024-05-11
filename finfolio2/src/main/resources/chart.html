@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chart Example</title>
+  <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+  <style>
+    #chart {
+      width: 810px;
+      height: 522px;
+    }
+  </style>
+</head>
+<body>
+<div id="chart"></div>
+<div id="lastOpenPrice"></div>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const symbol = urlParams.get('symbol') || 'BTC'; // Set default symbol to BTC
+  const interval = urlParams.get('interval') || '1m'; // Set default interval to 1 minute
+
+  var chart = LightweightCharts.createChart(document.getElementById('chart'), {
+    width: 800,
+    height: 400,
+    priceScale: {
+      scaleMargins: {
+        top: 0.3,
+        bottom: 0.2
+      }
+    },
+    timeScale: {
+      visible:false,
+      timeVisible: true,
+      secondsVisible: false,
+      tickMarkType: 'timestamp' // Set tick mark type to Timestamp
+    }
+  });
+
+  var candleSeries = chart.addCandlestickSeries();
+  var lastOpenPrice = null;
+
+  function parseCandlestickData(data) {
+    const candlestickData = [];
+    for (let i = 0; i < data.length; i++) {
+      const time = new Date(data[i][0]).getTime(); // Keep timestamp format
+      const open = parseFloat(data[i][1]);
+      const high = parseFloat(data[i][2]);
+      const low = parseFloat(data[i][3]);
+      const close = parseFloat(data[i][4]);
+
+      if (!isNaN(open) && !isNaN(high) && !isNaN(low) && !isNaN(close)) {
+        candlestickData.push({ time, open, high, low, close });
+      } else {
+        console.warn("Skipping data point due to missing or invalid values:", { time, open, high, low, close });
+      }
+    }
+    return candlestickData;
+  }
+
+  function filterData(data) {
+    for (let i = 1; i < data.length; i++) {
+      if (data[i].open === null || isNaN(data[i].open)) {
+        data[i].open = data[i - 1].open;
+      }
+      if (data[i].high === null || isNaN(data[i].high)) {
+        data[i].high = data[i - 1].high;
+      }
+      if (data[i].low === null || isNaN(data[i].low)) {
+        data[i].low = data[i - 1].low;
+      }
+      if (data[i].close === null || isNaN(data[i].close)) {
+        data[i].close = data[i - 1].close;
+      }
+    }
+    return data;
+  }
+
+  function displayFilteredData(symbol, interval) {
+    fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}USDT&interval=${interval}`)
+            .then(response => response.json())
+            .then(newData => {
+              const parsedData = parseCandlestickData(newData);
+              const filteredData = filterData(parsedData);
+              candleSeries.setData(filteredData);
+
+              // Update the last open price
+              if (filteredData.length > 0) {
+                lastOpenPrice = filteredData[filteredData.length - 1].open;
+              }
+            })
+            .catch(error => {
+              console.error('Error fetching data:', error);
+            });
+  }
+
+  // Call the function initially
+  displayFilteredData(symbol, interval);
+
+  // Function to add a price line with a specified color
+  function addPriceLine(color) {
+    if (lastOpenPrice !== null) {
+      const priceLine = candleSeries.createPriceLine({ price: lastOpenPrice, color });
+    }
+  }
+
+  // Event listener for button click to add red price line
+  document.getElementById('addRedPriceLineButton').addEventListener('click', function() {
+    addPriceLine('red');
+  });
+
+  // Event listener for button click to add green price line
+  document.getElementById('addGreenPriceLineButton').addEventListener('click', function() {
+    addPriceLine('green');
+  });
+</script>
+</body>
+</html>

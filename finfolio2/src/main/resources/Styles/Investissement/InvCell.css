@@ -1,0 +1,28 @@
+/* Style pour les labels */
+.label {
+    -fx-background-color: #f8f9fa; /* Couleur de fond */
+    -fx-font-size: 14px; /* Taille de police */
+    -fx-padding: 10px 14px; /* Rembourrage avec plus d'espace */
+    -fx-border-radius: 20px; /* Coins plus arrondis */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 0); /* Ombre */
+}
+
+/* Style pour les boutons */
+.button {
+    -fx-background-color: #007bff; /* Couleur de fond */
+    -fx-text-fill: white; /* Couleur du texte */
+    -fx-font-size: 14px; /* Taille de police */
+    -fx-padding: 10px 18px; /* Rembourrage avec plus d'espace */
+    -fx-border-radius: 20px; /* Coins plus arrondis */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 0); /* Ombre */
+}
+
+/* Style pour les VBox */
+.vbox {
+    -fx-spacing: 20px; /* Espacement entre les enfants avec plus de marge */
+}
+
+/* Style pour les HBox */
+.hbox {
+    -fx-spacing: 20px; /* Espacement entre les enfants avec plus de marge */
+}

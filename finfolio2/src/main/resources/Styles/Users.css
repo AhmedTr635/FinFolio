@@ -2,13 +2,22 @@
     -fx-background-color: #EEEEEE;
     -fx-padding: 20;
 }
+.portfolio_container {
+    -fx-background-color: #F0EAD6;
+    -fx-padding: 20;
+
+}
+.combo-box{
+    --fx-background-color: #23B2EE ;                                                                                       ;
+    -fx-border-radius: 30;
+}
 .search_box {
 
     -fx-spacing: 10;
     -fx-border-color: #AAAAAA;
     -fx-border-width: 0 0 1 0;
 }
- Text {
+Text {
     -fx-font-family: "Calibri Light";
     -fx-font-size: 1.6em;
     -fx-text-fill: #555555;
@@ -29,14 +38,14 @@ Button {
 
 }
 .filtreBox {
--fx-background-color: #ECF39E;
+    -fx-background-color: #ECF39E;
     -fx-text-fill: white;
     -fx-font-size: 1.6em;
     -fx-font-family: "Calibri Light";
     -fx-pref-width: 200;
 
 }
- Button:hover {
+Button:hover {
     -fx-cursor: hand;
 }
 .result_box {
@@ -57,7 +66,11 @@ Button {
 .default-color1.chart-pie {
     -fx-background-color: #123499;
 }
+.table-view{
 
+    -fx-border-radius: 50;
+    -fx-effect: dropshadow(three-pass-box,#AAAAAA,3,0,0,3);
+}
 .default-color0.chart-bar {
     -fx-background-color: blue;
 }
@@ -109,30 +122,11 @@ Button {
     -fx-font-family: "Calibri Light";
 
 }
-.label_rectangle {
-    -fx-font-size: 1.4em;
-    -fx-text-fill: #FFFFFF;
+
+.title1{
+    -fx-fill: #663c3c;
+    -fx-font-size: 2.5em;
     -fx-font-family: "Calibri Light";
+    -fx-font-weight: bolder;
 
-}
-.rectangle {
-    -fx-fill: linear-gradient(to top right, #123499, blue);
-    -fx-stroke: white; /* Optional: border color */
-    -fx-stroke-width: 1; /* Optional: border width */
-}
-.downloadButton{
-    -fx-background-color: #0a941b; /* Change button background color */
-    -fx-text-fill: white; /* Change button text color */
-    -fx-font-size: 15px; /* Change button font size */
-
-    -fx-background-radius: 5px;
-    -fx-pref-width: 140;
-
-}
-.downloadButton:hover {
-    -fx-background-color: #0c7a17; /* Change button background color on hover */
-}
-
-.downloadButton:pressed {
-    -fx-background-color: #095e11; /* Change button background color when pressed */
 }

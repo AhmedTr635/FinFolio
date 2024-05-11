@@ -1,0 +1,31 @@
+.message-area {
+    -fx-font-size: 14;
+    -fx-background-color: #abb8c3; /* Background color for messages */
+    -fx-background-radius: 10px;
+}
+
+.message-input {
+    -fx-font-size: 14;
+    -fx-background-color: #ffffff; /* Background color for message input field */
+    -fx-background-radius: 10px;
+    -fx-border-color: #000000; /* Border color for message input field */
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+}
+
+.send-button {
+    -fx-background-color: #0693e3; /* Background color for send button */
+    -fx-text-fill: white; /* Text color for send button */
+    -fx-background-radius: 10px;
+}
+/* chatroom.css */
+.message-area {
+    -fx-font-size: 14px;
+    -fx-pref-width: 300px;
+    -fx-pref-height: 200px;
+}
+
+.message-input {
+    -fx-font-size: 14px;
+    -fx-pref-width: 200px;
+}
