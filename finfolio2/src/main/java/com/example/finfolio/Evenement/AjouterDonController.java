@@ -81,7 +81,7 @@ public class AjouterDonController {
             Model.getInstance().getUser().setTotal_tax(ts.sommeTaxByDepense()-montant);
             us.updatewTax(Model.getInstance().getUser());
 
-            if (new_total_tax<0) {
+            /*if (new_total_tax<0) {
 
 
                 DashboardDepenseController.getInstance().tax_depense.setText(String.format("%.2f", 0.0));
@@ -89,7 +89,7 @@ public class AjouterDonController {
             }
             else{
                 DashboardDepenseController.getInstance().tax_depense.setText(String.format("%.2f", new_total_tax));
-            }
+            }*/
 
             Stage currentStage = (Stage) btnAdd.getScene().getWindow();
             currentStage.close();
@@ -103,7 +103,7 @@ public class AjouterDonController {
 
             Evennement evnt = es.readById(eventId);
             String eventInfo = "L'evennement: " + evnt.getNom() +"Date: " + evnt.getDate() + ", Adresse: " + evnt.getAdresse();
-            EmailController.sendInvitationEmail("siwarbouali27@gmail.com", "Invitation à l'événement", eventInfo);
+            EmailController.sendInvitationEmail(Model.getInstance().getUser().getEmail(), "Invitation à l'événement", eventInfo);
 
 
 

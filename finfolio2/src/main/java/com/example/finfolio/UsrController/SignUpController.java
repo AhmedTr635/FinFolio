@@ -6,6 +6,7 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import Models.Model;
@@ -134,7 +135,9 @@ public class SignUpController  implements Initializable {
             }
 
             // Insert user data along with the image path into the database
-            User user = new User(nom_fld.getText(), prenom_fld.getText(), mail_fld.getText(), "+216"+numTelfld.getText(), hexString.toString(), "Mourouj", 0, 2, "user", "20000", "active", imagePath,"vide");
+            LocalDate localDate = LocalDate.of(1111, 11, 11);
+
+            User user = new User(nom_fld.getText(), prenom_fld.getText(), mail_fld.getText(), "+216"+numTelfld.getText(), hexString.toString(), "Mourouj", 0, 2, "user", "20000", "active", imagePath,localDate);
             UserService userS = new UserService();
             if(userS.readAll().stream().anyMatch(us->us.getEmail().equals(mail_fld.getText())))
                 AlerteFinFolio.alerte("exist");

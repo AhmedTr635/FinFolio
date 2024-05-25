@@ -11,6 +11,7 @@ import javafx.scene.control.DatePicker;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ModifierUserController implements Initializable {
@@ -77,7 +78,7 @@ public void setUser(User u)
             } else if ("5".equals(note_box.getValue())) {
                 user.setRate(5);
             }
-            String date=dateCh.getValue().toString();
+            LocalDate date=dateCh.getValue();
             user.setDatepunition(date);
             UserService us=new UserService();
             us.update(user);

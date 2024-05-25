@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 
@@ -175,8 +176,10 @@ public class UsersAdController implements Initializable {
                     case 5-> note_box.setValue("5");
 
                 }
-                if (!user.getDatepunition().equals("vide"))
-                {dateCh.setValue(LocalDate.parse(user.getDatepunition()));}
+                LocalDate localDate = LocalDate.of(1111, 11, 11);
+
+                if (!Objects.equals(user.getDatepunition(), localDate))
+                {dateCh.setValue((user.getDatepunition()));}
                 updateBtn.setOnAction(e-> {
                     try {
                         onConfirmer(user);
@@ -371,13 +374,17 @@ public class UsersAdController implements Initializable {
         else {
         if ("Active".equals(statut_box.getValue())) {
             user.setStatut("active");
-            user.setDatepunition("vide");
+            LocalDate localDate = LocalDate.of(1111, 11, 11);
+
+            user.setDatepunition(localDate);
 
         } else if ("Desactive".equals(statut_box.getValue())) {
             user.setStatut("desactive");
         } else if ("Ban".equals(statut_box.getValue())) {
             user.setStatut("ban");
-            user.setDatepunition("vide");
+            LocalDate localDate = LocalDate.of(1111, 11, 11);
+
+            user.setDatepunition(localDate);
         }
 
         if ("1".equals(note_box.getValue())) {
@@ -392,7 +399,9 @@ public class UsersAdController implements Initializable {
             user.setRate(5);
         }
         if (dateCh.isVisible()&& dateCh.getValue()!=null )
-        {String date = dateCh.getValue().toString();
+        {
+            dateCh.setValue(LocalDate.now());
+            LocalDate date = dateCh.getValue();
             user.setDatepunition(date);}
         if( validateDatePicker(dateCh,dateError))
         {UserService us = new UserService();

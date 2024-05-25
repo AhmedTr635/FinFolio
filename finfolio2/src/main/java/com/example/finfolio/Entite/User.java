@@ -19,15 +19,15 @@ public class User {
     private String statut;
     private  String image;
 
-    private String datepunition;
+    private LocalDate datepunition;
     private  double total_tax ;
 
 
-    public String getDatepunition() {
+    public LocalDate getDatepunition() {
         return datepunition;
     }
 
-    public void setDatepunition(String datepunition) {
+    public void setDatepunition(LocalDate datepunition) {
         this.datepunition = datepunition;
     }
 
@@ -48,7 +48,7 @@ public class User {
     }
 
     public User(){};
-    public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,String role,String solde,String statut,String img,String datepunition,double total_tax){
+    public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,String role,String solde,String statut,String img,LocalDate datepunition,double total_tax){
         this.id=id;
         this.password=password;
         this.nbrCredit=nbrCredit;
@@ -82,7 +82,7 @@ public class User {
         this.total_tax=totalTax;
 
     }
-    public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String statut,String img,String datepunition) {
+    public User(int id,String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String statut,String img,LocalDate datepunition) {
         this.id = id;
         this.password = password;
         this.nbrCredit = nbrCredit;
@@ -99,7 +99,7 @@ public class User {
         this.datepunition=datepunition;
     }
 
-    public User(String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String statut,String img,String dp) {
+    public User(String nom,String prenom,String email,String numTel,String password,String adresse,int nbrCredit,float rate,  String role,String solde,String statut,String img,LocalDate dp) {
         this.password = password;
         this.nbrCredit = nbrCredit;
         this.nom = nom;

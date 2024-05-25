@@ -201,7 +201,7 @@ public class CreateUserController implements Initializable {
             }
 
             // Insert user data along with the image path into the database
-            User user = new User(nom_fld.getText(), prenom_fld.getText(), email_fld.getText(), "+216" + tel_fld.getText(), hexString.toString(), "Mourouj", 0, 0, "admin", "20000", "active", "ss", "vide");
+            User user = new User(nom_fld.getText(), prenom_fld.getText(), email_fld.getText(), "+216" + tel_fld.getText(), hexString.toString(), "Mourouj", 0, 0, "admin", "20000", "active", "ss", null);
             UserService userS = new UserService();
             if (userS.readAll().stream().anyMatch(us -> us.getEmail().equals(email_fld.getText())))
                 AlerteFinFolio.alerte("exist");

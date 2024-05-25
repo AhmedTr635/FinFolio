@@ -25,7 +25,7 @@ public class EmailingApi {
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("finfoliofinfolio@gmail.com", "bsmkekkpxfjfkzie");
+                return new PasswordAuthentication("finfoliofinfolio@gmail.com", "txzoffvmvmoiuyzw");
             }
         });
 
@@ -52,7 +52,7 @@ public class EmailingApi {
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("finfoliofinfolio@gmail.com", "bsmkekkpxfjfkzie");
+                return new PasswordAuthentication("finfoliofinfolio@gmail.com", "txzoffvmvmoiuyzw");
             }
         });
 
@@ -103,7 +103,7 @@ public class EmailingApi {
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("finfoliofinfolio@gmail.com", "bsmkekkpxfjfkzie");
+                return new PasswordAuthentication("finfoliofinfolio@gmail.com", "txzoffvmvmoiuyzw");
             }
         });
 

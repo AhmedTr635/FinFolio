@@ -18,7 +18,7 @@ public class EmailController {
     public static void sendEmail(String to, String subject, String body, String eventInfo) {
         // Informations de connexion au serveur SMTP
         final String username = "finfoliofinfolio@gmail.com";
-        final String password = "bsmkekkpxfjfkzie";
+        final String password = "txzoffvmvmoiuyzw";
 
         // Paramètres pour le serveur SMTP de Gmail
         Properties props = new Properties();

@@ -6,6 +6,7 @@ import com.example.finfolio.Entite.User;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,8 @@ public class UserService   {
                 ps.setString(10, u.getSolde());
                 ps.setString(11, u.getStatut());
                 ps.setString(12, u.getImage());
-                ps.setString(13, u.getDatepunition());
+                ps.setDate(13, Date.valueOf(u.getDatepunition()));
+
 
 
 
@@ -79,7 +81,7 @@ public class UserService   {
                         resultSet.getString("solde"),
                         resultSet.getString("statut"),
                         resultSet.getString("image"),
-                        resultSet.getString("datepunition")
+                        resultSet.getDate("datepunition").toLocalDate()
 
                         ));
             }}catch (SQLException e)
@@ -106,7 +108,7 @@ public class UserService   {
             ps.setString(10, user.getSolde());
             ps.setString(11, user.getStatut());
             ps.setString(12, user.getImage());
-            ps.setString(13, user.getDatepunition());
+            ps.setDate(13, Date.valueOf(user.getDatepunition()));
             ps.setInt(14, user.getId());
 
 
@@ -149,7 +151,7 @@ public class UserService   {
                             resultSet.getString("solde"),
                             resultSet.getString("statut"),
                             resultSet.getString("image"),
-                            resultSet.getString("datepunition")
+                            resultSet.getDate("datepunition").toLocalDate()
 
 
 
@@ -224,7 +226,7 @@ public List<User> cellsUsers() throws SQLException {
                             resultSet.getString("solde"),
                             resultSet.getString("statut"),
                             resultSet.getString("image"),
-                            resultSet.getString("datepunition")
+                            resultSet.getDate("datepunition").toLocalDate()
 
 
                             );
@@ -253,7 +255,7 @@ public List<User> cellsUsers() throws SQLException {
             ps.setString(10, user.getSolde());
             ps.setString(11, user.getStatut());
             ps.setString(12, user.getImage());
-            ps.setString(13, user.getDatepunition());
+            ps.setDate(13, Date.valueOf(user.getDatepunition()));
             ps.setDouble(14,user.getTotal_tax());
 
             ps.setInt(15, user.getId());
@@ -297,7 +299,7 @@ public List<User> cellsUsers() throws SQLException {
                 String solde = rs.getString("solde");
                 String statut = rs.getString("statut");
                 String image = rs.getString("image");
-                String datepunition = rs.getString("datepunition");
+                LocalDate datepunition = rs.getDate("datepunition").toLocalDate();
                 // Create and return the User object
                 return new User(userId, nom, prenom, email, numTel, password, adresse, nbrCredit, rate, role, solde, statut, image, datepunition);
             }
@@ -328,7 +330,7 @@ public List<User> cellsUsers() throws SQLException {
                             resultSet.getString("solde"),
                             resultSet.getString("statut"),
                             resultSet.getString("image"),
-                            resultSet.getString("datepunition"),
+                            resultSet.getDate("datepunition").toLocalDate(),
                             resultSet.getDouble("total_tax")
 
 
@@ -363,7 +365,7 @@ public List<User> cellsUsers() throws SQLException {
             ps.setString(10, u.getSolde());
             ps.setString(11, u.getStatut());
             ps.setString(12, u.getImage());
-            ps.setString(13, u.getDatepunition());
+            ps.setDate(13, Date.valueOf(u.getDatepunition()));
             ps.setDouble(14, u.getTotal_tax());
 
 
@@ -400,7 +402,7 @@ public List<User> cellsUsers() throws SQLException {
                         resultSet.getString("solde"),
                         resultSet.getString("statut"),
                         resultSet.getString("image"),
-                        resultSet.getString("datepunition"),
+                        resultSet.getDate("datepunition").toLocalDate(),
                         resultSet.getDouble("total_tax")
 
                 ));

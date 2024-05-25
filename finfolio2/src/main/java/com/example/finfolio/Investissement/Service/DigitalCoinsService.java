@@ -23,20 +23,20 @@ public class DigitalCoinsService implements IService<DigitalCoins> {
     @Override
     public void add(DigitalCoins dc) {
         try {
-            String query = "INSERT INTO digital_coins (id,recent_value,dateAchat,dateVente,montant,leverage,stoploss/*,userid*/,ROI,prixachat,tax,code) VALUES (/*?,*/?,?,?,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO digital_coins (id,recent_value,date_achat,date_vente,montant,leverage,stop_loss,user_id,roi,prix_achat,tax,code) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst = cnx.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1,dc.getId() );
-            pst.setString(11,dc.getCode() );
+            pst.setString(12,dc.getCode() );
             pst.setDouble(2,dc.getRecentValue());
             pst.setDate(3, Date.valueOf(dc.getDateAchat()));
             pst.setString(4,dc.getDateVente());
             pst.setDouble(5,dc.getMontant());
             pst.setFloat(6,dc.getLeverage());
             pst.setDouble(7,dc.getStopLoss());
-            //pst.setInt(8,dc.getUser().getId());
-            pst.setDouble(8,dc.getROI());
-            pst.setDouble(9,dc.getPrixAchat() );
-            pst.setDouble(10,dc.getTax());
+            pst.setInt(8,106);
+            pst.setDouble(9,dc.getROI());
+            pst.setDouble(10,dc.getPrixAchat() );
+            pst.setDouble(11,dc.getTax());
             pst.executeUpdate();
             ResultSet rs = pst.getGeneratedKeys();
             int id = 0;
@@ -67,7 +67,7 @@ public class DigitalCoinsService implements IService<DigitalCoins> {
     @Override
     public void update(DigitalCoins dc, int id) {
         try {
-            String query = "UPDATE digital_coins SET  recent_value=?,dateAchat=?,dateVente=?,montant=?,leverage=?,stoploss=?/*,userid=?*/,ROI=?,prixachat=?,tax=?,code=? WHERE id = ?";
+            String query = "UPDATE digital_coins SET  recent_value=?,date_achat=?,date_vente=?,montant=?,leverage=?,stop_loss=?/*,user_id=?*/,roi=?,prix_achat=?,tax=?,code=? WHERE id = ?";
             PreparedStatement pst = cnx.prepareStatement(query);
             pst.setString(11,dc.getCode());
             pst.setDouble(1,dc.getRecentValue());
@@ -102,16 +102,16 @@ public class DigitalCoinsService implements IService<DigitalCoins> {
 
                 double recentValue = rs.getDouble("recent_value");
                 String code = rs.getString("code");
-                LocalDate dateAchat = rs.getDate("dateAchat").toLocalDate();
-                String dateVente = rs.getString("dateVente");
+                LocalDate dateAchat = rs.getDate("date_achat").toLocalDate();
+                String dateVente = rs.getString("date_vente");
                 double montant = rs.getDouble("montant");
                 float leverage = rs.getFloat("leverage");
-                double stopLoss = rs.getDouble("stoploss");
-                int userID = rs.getInt("userid");
+                double stopLoss = rs.getDouble("stop_loss");
+                int userID = rs.getInt("user_id");
                 UserService us=new UserService();
                 User user=us.readById(userID);
-                double ROI = rs.getDouble("ROI");
-                double prixAchat = rs.getDouble("prixachat");
+                double ROI = rs.getDouble("roi");
+                double prixAchat = rs.getDouble("prix_achat");
                 double tax = rs.getDouble("tax");
                 /*private int id;
     private String code;
@@ -147,15 +147,15 @@ public class DigitalCoinsService implements IService<DigitalCoins> {
                 int id = rs.getInt("id");
                 double recentValue = rs.getDouble("recent_value");
                 String code = rs.getString("code");
-                LocalDate dateAchat = rs.getDate("dateAchat").toLocalDate();
+                LocalDate dateAchat = rs.getDate("date_achat").toLocalDate();
 
-                String dateVente = rs.getString("dateVente");
+                String dateVente = rs.getString("date_vente");
                 double montant = rs.getDouble("montant");
                 float leverage = rs.getFloat("leverage");
-                double stopLoss = rs.getDouble("stoploss");
-                int userID = rs.getInt("userid");
-                double ROI = rs.getDouble("ROI");
-                double prixAchat = rs.getDouble("prixachat");
+                double stopLoss = rs.getDouble("stop_loss");
+                int userID = rs.getInt("user_id");
+                double ROI = rs.getDouble("roi");
+                double prixAchat = rs.getDouble("prix_achat");
                 double tax = rs.getDouble("tax");
                 UserService us=new UserService();
 
@@ -179,14 +179,14 @@ public class DigitalCoinsService implements IService<DigitalCoins> {
                 int id = rs.getInt("id");
                 double recentValue = rs.getDouble("recent_value");
                 String code = rs.getString("code");
-                LocalDate dateAchat = rs.getDate("dateAchat").toLocalDate();
-                String dateVente = rs.getString("dateVente");
+                LocalDate dateAchat = rs.getDate("date_achat").toLocalDate();
+                String dateVente = rs.getString("date_vente");
                 double montant = rs.getDouble("montant");
                 float leverage = rs.getFloat("leverage");
-                double stopLoss = rs.getDouble("stoploss");
-                int userID = rs.getInt("userid");
-                double ROI = rs.getDouble("ROI");
-                double prixAchat = rs.getDouble("prixachat");
+                double stopLoss = rs.getDouble("stop_loss");
+                int userID = rs.getInt("user_id");
+                double ROI = rs.getDouble("roi");
+                double prixAchat = rs.getDouble("prix_achat");
                 double tax = rs.getDouble("tax");
                 UserService us = new UserService();
                 User user = us.readById(userID);
@@ -207,9 +207,9 @@ public class DigitalCoinsService implements IService<DigitalCoins> {
                 int id = rs.getInt("id");
                 String code = rs.getString("code");
                 double montant = rs.getDouble("montant");
-                int userId = rs.getInt("userid");
-                LocalDate dateAchat = rs.getDate("dateAchat").toLocalDate();
-                double ROI = rs.getDouble("ROI");
+                int userId = rs.getInt("user_id");
+                LocalDate dateAchat = rs.getDate("date_achat").toLocalDate();
+                double ROI = rs.getDouble("roi");
 
                 // Get other fields as needed
 
@@ -230,7 +230,7 @@ public class DigitalCoinsService implements IService<DigitalCoins> {
     public Set<DigitalCoins> getDigitalCoinsByUserId(int userId) {
         Set<DigitalCoins> digitalCoinsSet = new HashSet<>();
         try {
-            String query = "SELECT * FROM digital_coins WHERE userid = ?";
+            String query = "SELECT * FROM digital_coins WHERE user_id = ?";
             PreparedStatement pst = cnx.prepareStatement(query);
             pst.setInt(1, userId);
             ResultSet rs = pst.executeQuery();
@@ -238,13 +238,13 @@ public class DigitalCoinsService implements IService<DigitalCoins> {
                 int id = rs.getInt("id");
                 double recentValue = rs.getDouble("recent_value");
                 String code = rs.getString("code");
-                LocalDate dateAchat = rs.getDate("dateAchat").toLocalDate();
-                String dateVente = rs.getString("dateVente");
+                LocalDate dateAchat = rs.getDate("date_achat").toLocalDate();
+                String dateVente = rs.getString("date_vente");
                 double montant = rs.getDouble("montant");
                 float leverage = rs.getFloat("leverage");
-                double stopLoss = rs.getDouble("stoploss");
-                double ROI = rs.getDouble("ROI");
-                double prixAchat = rs.getDouble("prixachat");
+                double stopLoss = rs.getDouble("stop_loss");
+                double ROI = rs.getDouble("roi");
+                double prixAchat = rs.getDouble("prix_achat");
                 double tax = rs.getDouble("tax");
 
                 // Assuming UserService has a method to fetch User by ID

@@ -32,7 +32,7 @@ public class InvestissementService implements IService<Investissement> {
     @Override
     public void add(Investissement inv) {
         try {
-            String query = "INSERT INTO investissement (id,montant,prixAchat,dateAchat,ROI,idRE,idUser,tax) VALUES (?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO investissement (id,montant,prix_achat,date_achat,roi,re_id,user_id,tax) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement pst = cnx.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1,inv.getId() );
             pst.setDouble(2,inv.getMontant());
@@ -71,17 +71,17 @@ public class InvestissementService implements IService<Investissement> {
     public Set<Investissement> fetchInvestissementByUserId(int userId) {
         Set<Investissement> investissements = new HashSet<>();
         try {
-            String query = "SELECT * FROM investissement WHERE idUser = ?";
+            String query = "SELECT * FROM investissement WHERE user_id = ?";
             PreparedStatement pst = cnx.prepareStatement(query);
             pst.setInt(1, userId);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
                 double montant = rs.getDouble("montant");
-                double prixAchat = rs.getDouble("prixAchat");
-                LocalDate dateAchat = rs.getDate("dateAchat").toLocalDate();
-                double ROI = rs.getDouble("ROI");
-                int reId = rs.getInt("idRE");
+                double prixAchat = rs.getDouble("prix_achat");
+                LocalDate dateAchat = rs.getDate("date_achat").toLocalDate();
+                double ROI = rs.getDouble("roi");
+                int reId = rs.getInt("re_id");
                 double tax = rs.getDouble("tax");
                 RealEstate re = new RealEstateService().readById(reId);
                 User user = new UserService().readById(Model.getInstance().getUser().getId());
@@ -98,7 +98,7 @@ public class InvestissementService implements IService<Investissement> {
     @Override
     public void update(Investissement inv, int id) {
         try {
-            String query = "UPDATE investissement SET montant=?,prixAchat=?,dateAchat=?,ROI=?,idRE=?,idUser=?,tax=? WHERE id = ?";
+            String query = "UPDATE investissement SET montant=?,prix_achat=?,date_achat=?,roi=?,re_id=?,user_id=?,tax=? WHERE id = ?";
             PreparedStatement pst = cnx.prepareStatement(query);
 
             pst.setDouble(1,inv.getMontant());
@@ -129,11 +129,11 @@ public class InvestissementService implements IService<Investissement> {
             if (rs.next()) {
 
                 double montant = rs.getDouble("montant");
-                double prixAchat = rs.getDouble("prixAchat");
-                LocalDate dateAchat = rs.getDate("dateAchat").toLocalDate();
-                double ROI = rs.getDouble("ROI");
-                int reId = rs.getInt("idRE");
-                int userId = rs.getInt("idUser");
+                double prixAchat = rs.getDouble("prix_achat");
+                LocalDate dateAchat = rs.getDate("date_achat").toLocalDate();
+                double ROI = rs.getDouble("roi");
+                int reId = rs.getInt("re_id");
+                int userId = rs.getInt("user_id");
                 double tax = rs.getDouble("tax");
                 UserService us=new UserService();
                 User user=us.readById(userId);
@@ -170,11 +170,11 @@ public class InvestissementService implements IService<Investissement> {
             while (rs.next()) {
                 int id=rs.getInt("id");
                 double montant = rs.getDouble("montant");
-                double prixAchat = rs.getDouble("prixachat");
-                LocalDate dateAchat = rs.getDate("dateachat").toLocalDate();
-                double ROI = rs.getDouble("ROI");
-                int reId = rs.getInt("idRE");
-                int userId = rs.getInt("idUser");
+                double prixAchat = rs.getDouble("prix_achat");
+                LocalDate dateAchat = rs.getDate("date_achat").toLocalDate();
+                double ROI = rs.getDouble("roi");
+                int reId = rs.getInt("re_id");
+                int userId = rs.getInt("user_id");
                 double tax = rs.getDouble("tax");
                 UserService us=new UserService();
                 User user=us.readById(userId);
@@ -191,17 +191,17 @@ public class InvestissementService implements IService<Investissement> {
     public List<Investissement> selectInvestissementByRealEstateId(int realEstateId) {
         List<Investissement> investissements = new ArrayList<>();
         try {
-            String query = "SELECT * FROM investissement WHERE idRE = ?";
+            String query = "SELECT * FROM investissement WHERE re_id = ?";
             PreparedStatement pst = cnx.prepareStatement(query);
             pst.setInt(1, realEstateId);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
                 double montant = rs.getDouble("montant");
-                double prixAchat = rs.getDouble("prixachat");
-                LocalDate dateAchat = rs.getDate("dateachat").toLocalDate();
-                double ROI = rs.getDouble("ROI");
-                int userId = rs.getInt("idUser");
+                double prixAchat = rs.getDouble("prix_achat");
+                LocalDate dateAchat = rs.getDate("date_achat").toLocalDate();
+                double ROI = rs.getDouble("roi");
+                int userId = rs.getInt("user_id");
                 double tax = rs.getDouble("tax");
                 UserService us = new UserService();
                 User user = us.readById(userId);

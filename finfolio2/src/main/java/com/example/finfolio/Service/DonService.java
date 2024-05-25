@@ -25,7 +25,7 @@ public class DonService  {
     public DonService() {connexion= DataSource.getInstance().getCnx();}
 
     public void add(Don d) {
-        String request="insert into don (montant_user,user_id,evenement_id) values(?,?,?)";
+        String request="insert into don (montant_user,user_id_id,evenement_id_id) values(?,?,?)";
 
         try {
             pst=connexion.prepareStatement(request);
@@ -55,7 +55,7 @@ public class DonService  {
 
 
     public void deleteByEventId(int eventId) {
-        String request = "DELETE FROM don WHERE evenement_id = ?";
+        String request = "DELETE FROM don WHERE evenement_id_id = ?";
         try {
             pst = connexion.prepareStatement(request);
             pst.setInt(1, eventId);
@@ -66,7 +66,7 @@ public class DonService  {
     }
 
     public void update(Don d, int id) {
-        String request="update evenement set montant_user = ?, user_id = ?, evenement_id= ? where id = ? ";
+        String request="update evenement set montant_user = ?, user_id_id = ?, evenement_id_id= ? where id = ? ";
 
         try{
             pst=connexion.prepareStatement(request);
@@ -142,16 +142,16 @@ public class DonService  {
 
     public List<Don> getDonationsWithDetails() {
         List<Don> donations = new ArrayList<>();
-        String query = "SELECT d.user_id, d.montant_user, d.evenement_id, u.nom, u.prenom, u.email, e.*  " +
+        String query = "SELECT d.user_id_id, d.montant_user, d.evenement_id_id, u.nom, u.prenom, u.email, e.*  " +
                 "FROM don d " +
-                "JOIN user u ON d.user_id = u.id " +
-                "JOIN evenement e ON d.evenement_id = e.id";
+                "JOIN user u ON d.user_id_id = u.id " +
+                "JOIN evenement e ON d.evenement_id_id = e.id";
         try (
                 PreparedStatement pst = connexion.prepareStatement(query);
                 ResultSet rs = pst.executeQuery()) {
             while (rs.next()) {
-                int userId = rs.getInt("user_id");
-                int eventId = rs.getInt("evenement_id");
+                int userId = rs.getInt("user_id_id");
+                int eventId = rs.getInt("evenement_id_id");
                 float montant = rs.getFloat("montant_user");
                 String nom = rs.getString("nom");
                 String prenom = rs.getString("prenom");
@@ -186,7 +186,7 @@ public class DonService  {
 
 
     public List<Don> readAll1(int userId) {
-        String request = "SELECT * FROM don WHERE user_id = ?";
+        String request = "SELECT * FROM don WHERE user_id_id = ?";
         List<Don> list = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connexion.prepareStatement(request);
@@ -197,11 +197,11 @@ public class DonService  {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 // Assuming the type of the evennement_id column is int
-                int evennementId = rs.getInt("evenement_id");
+                int evennementId = rs.getInt("evenement_id_id");
                 Evennement evennement = EvennementService.getInstance().readById(evennementId);
                 float montant = rs.getFloat("montant_user");
                 // Assuming the type of the user_id column is int
-                int user_id = rs.getInt("user_id");
+                int user_id = rs.getInt("user_id_id");
                 User user = Model.getInstance().getUser();
 
                 list.add(new Don(id, montant, user, evennement));

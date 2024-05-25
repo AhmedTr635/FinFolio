@@ -183,11 +183,11 @@ public void mdpOublie()
                 }
 
                 else{
-                    if (!user.getDatepunition().equals("vide"))
-                    {    dateString=user.getDatepunition();
-                        System.out.println(dateString);
-                         dateFromString = LocalDate.parse(dateString);
+                    if (user.getDatepunition() != null)
+                    {    dateFromString=user.getDatepunition();
                         System.out.println(dateFromString);
+                        // dateFromString = LocalDate.parse(dateString);
+                        //System.out.println(dateFromString);
 
                         // Objet LocalDate local
                         LocalDate currentDate = LocalDate.now();
@@ -197,7 +197,7 @@ public void mdpOublie()
                         if (dateFromString.isBefore(currentDate)) {
                             user.setStatut("active");
                             user.setPassword(user.getPassword());
-                            user.setDatepunition("vide");
+                            user.setDatepunition(null);
                             userS.update(user);
                            Model.getInstance().getUser().setStatut("active");
                             AlerteFinFolio.alerteSucces("Votre compte n'est plus desactive","Staut du compte");

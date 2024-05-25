@@ -21,7 +21,7 @@ public class EvennementService {
 
 
     public void add(Evennement ev) {
-        String request="insert into evenement (nom_event,montant,date,adresse,description) values(?,?,?,?,?)";
+        String request="insert into evennement (nom_event,montant,date,adresse,description) values(?,?,?,?,?)";
 
 
         try {
@@ -44,7 +44,7 @@ public class EvennementService {
 
     public void delete(int id) {
 
-        String request="delete from evenement where id = ?";
+        String request="delete from evennement where id = ?";
 
         try{
             DonService.getInstance().deleteByEventId(id);
@@ -61,7 +61,7 @@ public class EvennementService {
 
 
     public void update(Evennement ev, int id) {
-        String request="update evenement set nom_event = ?, montant = ?, date= ?, adresse= ?, description=? where id = ? ";
+        String request="update evennement set nom_event = ?, montant = ?, date= ?, adresse= ?, description=? where id = ? ";
 
         try{
             pst=connexion.prepareStatement(request);
@@ -80,7 +80,7 @@ public class EvennementService {
 
 
     public List<Evennement> readAll() {
-        String request="select * from evenement";
+        String request="select * from evennement";
         List<Evennement> list=new ArrayList<>();
         try {
             ste= connexion.createStatement();
@@ -109,7 +109,7 @@ public class EvennementService {
 
 
     public List<Evennement> rechercherEvent(String evnt) throws SQLException {
-        String requeteSQL = "SELECT * FROM evenement WHERE nom_event LIKE ? OR montant LIKE ? OR date LIKE ? OR adresse LIKE ? OR description LIKE ? ";
+        String requeteSQL = "SELECT * FROM evennement WHERE nom_event LIKE ? OR montant LIKE ? OR date LIKE ? OR adresse LIKE ? OR description LIKE ? ";
 
 
 
@@ -149,7 +149,7 @@ public class EvennementService {
 
 
     public Evennement readById(int id) {
-        String request = "select * from evenement where id =?";
+        String request = "select * from evennement where id =?";
         try {
             pst=connexion.prepareStatement(request);
             pst.setInt(1,id);
@@ -183,7 +183,7 @@ public class EvennementService {
 
 
     public Evennement showUpComingEvent() {
-        String requete = "SELECT * FROM evenement WHERE date > NOW() ORDER BY date ASC LIMIT 1";
+        String requete = "SELECT * FROM evennement WHERE date > NOW() ORDER BY date ASC LIMIT 1";
         Evennement upcomingEvent = null;
         try {
             ste = connexion.createStatement();
@@ -216,7 +216,7 @@ public class EvennementService {
 
 
     public void updateRating(int eventId, int rating) {
-        String request = "UPDATE evenement SET rating = ? WHERE id = ?";
+        String request = "UPDATE evennement SET rating = ? WHERE id = ?";
         try{
             pst=connexion.prepareStatement(request);
             pst.setInt(1, rating);
@@ -231,7 +231,7 @@ public class EvennementService {
 
 
     public int getRating(int eventId) {
-        String query = "SELECT rating FROM evenement WHERE id = ?";
+        String query = "SELECT rating FROM evennement WHERE id = ?";
         try (PreparedStatement statement = connexion.prepareStatement(query)) {
             statement.setInt(1, eventId);
             ResultSet resultSet = statement.executeQuery();

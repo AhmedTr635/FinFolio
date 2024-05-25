@@ -16,13 +16,13 @@
    </VBox>
    <Text layoutX="211.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Récupérer votre mot de passe" />
    <TextField fx:id="emailField" layoutX="213.0" layoutY="85.0" prefHeight="26.0" prefWidth="326.0" promptText="Entrer votre Mail" styleClass="input_field" />
-   <Label fx:id="emailError" layoutX="213.0" layoutY="132.0" prefHeight="16.0" prefWidth="326.0" styleClass="error_lbl" textFill="#ef1111" />
+   <Label fx:id="emailError" layoutX="213.0" layoutY="120.0" prefHeight="16.0" prefWidth="326.0" styleClass="error_lbl" textFill="#ef1111" />
    <Button fx:id="recoverPasswordBtn" layoutX="341.0" layoutY="151.0" mnemonicParsing="false" styleClass="importImageBtn" text="Récupérer" />
-   <Label fx:id="PasswordError" layoutX="220.0" layoutY="238.0" prefHeight="26.0" prefWidth="326.0" styleClass="error_lbl" />
+   <Label fx:id="PasswordError" layoutX="225.0" layoutY="223.0" prefHeight="26.0" prefWidth="326.0" styleClass="error_lbl" />
    <Button fx:id="UpdateBtn" layoutX="341.0" layoutY="248.0" mnemonicParsing="false" styleClass="importImageBtn" text="Confirmer" />
    <Button fx:id="upadtePassword" layoutX="331.0" layoutY="185.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="115.0" styleClass="importImageBtn" text="Mettre à jour" />
    <TextField fx:id="codeEntered" layoutX="208.0" layoutY="85.0" prefHeight="26.0" prefWidth="326.0" promptText="Entrer le code de vérification" styleClass="input_field" />
    <PasswordField fx:id="passField1" layoutX="208.0" layoutY="85.0" prefWidth="326.0" promptText="Entrer un nouveau mot de passe" styleClass="input_field" />
    <PasswordField fx:id="passField2" layoutX="213.0" layoutY="141.0" prefHeight="26.0" prefWidth="326.0" promptText="Confirmer votre mot de passe" styleClass="input_field" />
-   <Label fx:id="errormdc" layoutX="209.0" layoutY="191.0" prefHeight="26.0" prefWidth="258.0" textFill="#fa0c0c" />
+   <Label fx:id="errormdc" layoutX="225.0" layoutY="292.0" prefHeight="26.0" prefWidth="258.0" textFill="#fa0c0c" />
 </AnchorPane>

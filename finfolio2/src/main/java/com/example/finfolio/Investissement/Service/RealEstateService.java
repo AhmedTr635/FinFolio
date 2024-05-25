@@ -21,7 +21,7 @@ public class RealEstateService implements IService<RealEstate>{
     @Override
     public void add(RealEstate re) {
         try {
-            String query = "INSERT INTO real_estate (id,emplacement, ROI, valeur, nbChambres, superficie,name) VALUES (?,?,?, ?, ?, ?, ?)";
+            String query = "INSERT INTO real_estate (id,emplacement, roi, valeur, nbrchambres, superficie,name) VALUES (?,?,?, ?, ?, ?, ?)";
             PreparedStatement pst = cnx.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1,re.getId());
             pst.setString(2, re.getEmplacement());
@@ -54,7 +54,7 @@ public class RealEstateService implements IService<RealEstate>{
     }
     public void addWImg(RealEstate re) {
         try {
-            String query = "INSERT INTO real_estate (id,emplacement, ROI, valeur, nbChambres, superficie,name,image_data) VALUES (?,?,?,?, ?, ?, ?, ?)";
+            String query = "INSERT INTO real_estate (id,emplacement, roi, valeur, nbrchambres, superficie,name,image_data) VALUES (?,?,?,?, ?, ?, ?, ?)";
             PreparedStatement pst = cnx.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1,re.getId());
             pst.setString(2, re.getEmplacement());
@@ -103,12 +103,12 @@ public class RealEstateService implements IService<RealEstate>{
     public Map<User, Double> fetchUserParticipation(int realEstateId) {
         Map<User, Double> userParticipation = new HashMap<>();
         try {
-            String query = "SELECT idUser, montant FROM investissement WHERE idRE = ?";
+            String query = "SELECT user_id, montant FROM investissement WHERE re_id = ?";
             PreparedStatement pst = cnx.prepareStatement(query);
             pst.setInt(1, realEstateId);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                int userId = rs.getInt("idUser");
+                int userId = rs.getInt("user_id");
                 double participation = rs.getDouble("montant");
                 UserService usS=new UserService();
                 User user = usS.readById(userId);
@@ -126,7 +126,7 @@ public class RealEstateService implements IService<RealEstate>{
     public Map<User, Double> fetchUserParticipation2(int realEstateId) {
         Map<User, Double> userParticipations = new HashMap<>();
         try {
-            String query = "SELECT u.*, i.montant FROM user u JOIN investissement i ON u.id = i.idUser WHERE i.idRE = ?";
+            String query = "SELECT u.*, i.montant FROM user u JOIN investissement i ON u.id = i.user_id WHERE i.re_id = ?";
             PreparedStatement pst = cnx.prepareStatement(query);
             pst.setInt(1, realEstateId);
             ResultSet rs = pst.executeQuery();
@@ -163,7 +163,7 @@ public class RealEstateService implements IService<RealEstate>{
                 String montant = rs.getString("emplacement");
                 double valeur = rs.getInt("valeur");
                 //LocalDate dateAchat = rs.getDate("dateAchat").toLocalDate();
-                float ROI = rs.getFloat("ROI");
+                float ROI = rs.getFloat("roi");
                 double totalPart=calculateTotalParticipation(readById(id));
 
                 // Get other fields as needed
@@ -195,7 +195,7 @@ public class RealEstateService implements IService<RealEstate>{
     @Override
     public void update(RealEstate re, int id) {
         try {
-            String query = "UPDATE real_estate SET emplacement=?, ROI=?, valeur=?, nbChambres=?, superficie=?,name=?,image_data=? WHERE id = ?";
+            String query = "UPDATE real_estate SET emplacement=?, roi=?, valeur=?, nbrchambres=?, superficie=?,name=?,image_data=? WHERE id = ?";
             PreparedStatement pst = cnx.prepareStatement(query);
 
             pst.setString(1, re.getEmplacement());
@@ -254,7 +254,7 @@ public class RealEstateService implements IService<RealEstate>{
                 String emplacement = rs.getString("emplacement");
                 float ROI = rs.getFloat("ROI");
                 double valeur = rs.getDouble("valeur");
-                int nbChambres = rs.getInt("nbchambres");
+                int nbChambres = rs.getInt("nbrchambres");
                 float superficie = rs.getFloat("superficie");
 
                 Map<User, Double> userParticipation = fetchUserParticipation(id);
@@ -292,9 +292,9 @@ public class RealEstateService implements IService<RealEstate>{
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String emplacement = rs.getString("emplacement");
-                float ROI = rs.getFloat("ROI");
+                float ROI = rs.getFloat("roi");
                 double valeur = rs.getDouble("valeur");
-                int nbChambres = rs.getInt("nbChambres");
+                int nbChambres = rs.getInt("nbrchambres");
                 float superficie = rs.getFloat("superficie");
                 //Fetch user participation information from another table if needed
                 Map<User, Double> userParticipation = fetchUserParticipation(id);
@@ -334,9 +334,9 @@ public class RealEstateService implements IService<RealEstate>{
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String emplacement = rs.getString("emplacement");
-                float ROI = rs.getFloat("ROI");
+                float ROI = rs.getFloat("roi");
                 double valeur = rs.getDouble("valeur");
-                int nbChambres = rs.getInt("nbChambres");
+                int nbChambres = rs.getInt("nbrchambres");
                 float superficie = rs.getFloat("superficie");
                 int nbrclick = rs.getInt("nbrclick");
                 String name = rs.getString("name");
@@ -372,9 +372,9 @@ public class RealEstateService implements IService<RealEstate>{
                 while (rs.next()) {
                     int id = rs.getInt("id");
                     String emplacement = rs.getString("emplacement");
-                    float ROI = rs.getFloat("ROI");
+                    float ROI = rs.getFloat("roi");
                     double valeur = rs.getDouble("valeur");
-                    int nbChambres = rs.getInt("nbChambres");
+                    int nbChambres = rs.getInt("nbrchambres");
                     float superficie = rs.getFloat("superficie");
                     int nbrclick = rs.getInt("nbrclick");
                     String name = rs.getString("name");
